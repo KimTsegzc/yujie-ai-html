@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLAW 演示目录</title>
+<script src="theme-config.js"></script>
+<style>
+  :root {
+    --bg: #031E36;
+    --bg2: #04335A;
+    --bg3: #4474A3;
+    --gold: #9ABCE0;
+    --gold-bright: #C4D4E6;
+    --gold-dim: rgba(154,188,224,0.15);
+    --text: #C4D4E6;
+    --text-dim: #9ABCE0;
+    --border: rgba(154,188,224,0.2);
+    --card-bg: #04335A;
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    --text-hero: 75.9px;
+    --text-3xl: 56.9px;
+    --text-2xl: 42.7px;
+    --text-xl: 32px;
+    --text-lg: 24px;
+    --text-base: 18px;
+    --text-sm: 14px;
+    --text-xs: 13.5px;
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(154, 188, 224, 0.18), transparent 28%),
+      radial-gradient(circle at 85% 12%, rgba(154, 188, 224, 0.08), transparent 24%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 78%, #000 22%), var(--bg));
+    overflow-x: hidden;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: auto;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 999px;
+    filter: blur(18px);
+    opacity: 0.4;
+  }
+
+  body::before {
+    width: 360px;
+    height: 360px;
+    top: -80px;
+    right: -60px;
+    background: color-mix(in srgb, var(--gold) 28%, transparent);
+  }
+
+  body::after {
+    width: 280px;
+    height: 280px;
+    bottom: 8%;
+    left: -100px;
+    background: color-mix(in srgb, var(--gold-bright) 20%, transparent);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .shell {
+    position: relative;
+    z-index: 1;
+    width: min(1280px, calc(100vw - 40px));
+    margin: 0 auto;
+    padding: 28px 0 56px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--card-bg) 82%, transparent);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 18px;
+    z-index: 10;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bg);
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--gold) 22%, transparent);
+  }
+
+  .brand-copy small {
+    display: block;
+    color: var(--text-dim);
+    font-size: var(--text-xs);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .brand-copy strong {
+    font-size: var(--text-lg);
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 280px;
+    padding: 0 14px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.14);
+  }
+
+  .search-wrap span {
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: var(--text-sm);
+  }
+
+  .search-wrap input::placeholder {
+    color: color-mix(in srgb, var(--text-dim) 80%, transparent);
+  }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px 4px 4px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .theme-label {
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 4px;
+    user-select: none;
+  }
+
+  .theme-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .theme-swatch:hover {
+    transform: scale(1.16);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  .theme-swatch.active {
+    border-color: var(--text);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.9fr);
+    gap: 22px;
+    margin-top: 24px;
+  }
+
+  .hero-panel,
+  .hero-side,
+  .section-panel {
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--card-bg) 92%, transparent), color-mix(in srgb, var(--bg2) 72%, transparent));
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .hero-panel {
+    padding: 34px 34px 28px;
+    position: relative;
+  }
+
+  .hero-panel::after {
+    content: "";
+    position: absolute;
+    inset: auto -80px -90px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--gold) 12%, transparent);
+    filter: blur(16px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid color-mix(in srgb, var(--gold) 38%, transparent);
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    margin: 18px 0 12px;
+    font-size: clamp(36px, 4vw, var(--text-3xl));
+    line-height: var(--leading-tight);
+    color: var(--gold);
+  }
+
+  .hero p {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text);
+    max-width: 52ch;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .stat-card {
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.16);
+    border: 1px solid var(--border);
+  }
+
+  .stat-card strong {
+    display: block;
+    font-size: clamp(28px, 3vw, var(--text-2xl));
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .stat-card span {
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+  }
+
+  .hero-side {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    padding: 28px;
+    gap: 18px;
+  }
+
+  .mini-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    color: var(--gold);
+  }
+
+  .mini-sub {
+    margin: 8px 0 0;
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--text-dim);
+    padding: 10px 14px;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .chip:hover {
+    border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+    color: var(--text);
+  }
+
+  .chip.active {
+    background: var(--gold-dim);
+    color: var(--gold);
+    border-color: color-mix(in srgb, var(--gold) 42%, transparent);
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .legend-item {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.14);
+    border: 1px solid var(--border);
+  }
+
+  .legend-item strong {
+    display: block;
+    color: var(--text);
+    font-size: var(--text-sm);
+    margin-bottom: 4px;
+  }
+
+  .legend-item span {
+    color: var(--text-dim);
+    font-size: var(--text-xs);
+    line-height: 1.55;
+  }
+
+  .sections {
+    margin-top: 22px;
+    display: grid;
+    gap: 22px;
+  }
+
+  .section-panel {
+    padding: 28px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    font-size: var(--text-xl);
+    color: var(--gold);
+  }
+
+  .section-head p {
+    margin: 6px 0 0;
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+  }
+
+  .section-count {
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .file-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    opacity: 1;
+  }
+
+  .file-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--gold) 48%, transparent);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  }
+
+  .file-card[hidden] {
+    display: none;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .meta {
+    color: var(--text-dim);
+    font-size: var(--text-xs);
+  }
+
+  .file-card h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    line-height: 1.32;
+    color: var(--text);
+  }
+
+  .file-card p {
+    margin: 0 0 16px;
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    flex: 1;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--gold) 46%, transparent);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 28%, transparent), color-mix(in srgb, var(--gold-bright) 14%, transparent));
+    color: var(--gold);
+  }
+
+  .btn-secondary {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text);
+  }
+
+  .empty-state {
+    display: none;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px dashed var(--border);
+    color: var(--text-dim);
+    text-align: center;
+    font-size: var(--text-base);
+  }
+
+  .footer-note {
+    margin-top: 18px;
+    color: var(--text-dim);
+    text-align: center;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .swatch-black-gold { background: linear-gradient(135deg, #0A0A0F 50%, #C9A84C 50%); }
+  .swatch-deep-ocean { background: linear-gradient(135deg, #031E36 50%, #9ABCE0 50%); }
+  .swatch-warm-parchment { background: linear-gradient(135deg, #F5F0E8 50%, #8B6914 50%); }
+  .swatch-forest-night { background: linear-gradient(135deg, #0D1F1A 50%, #7ECBA1 50%); }
+  .swatch-dusk-rose { background: linear-gradient(135deg, #1A0F14 50%, #E8A0B0 50%); }
+  .swatch-nebula-purple { background: linear-gradient(135deg, #0C0A1A 50%, #A78BFA 50%); }
+
+  @media (max-width: 1120px) {
+    .hero,
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .topbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .shell {
+      width: min(100vw - 24px, 100%);
+      padding-top: 16px;
+    }
+
+    .hero-panel,
+    .hero-side,
+    .section-panel {
+      border-radius: 22px;
+    }
+
+    .hero-panel,
+    .hero-side,
+    .section-panel {
+      padding: 22px;
+    }
+
+    .hero-stats,
+    .legend,
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .search-wrap {
+      min-width: 100%;
+    }
+
+    .actions {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  @supports not (background: color-mix(in srgb, white, black)) {
+    body {
+      background: linear-gradient(180deg, #082642, var(--bg));
+    }
+
+    .topbar,
+    .hero-panel,
+    .hero-side,
+    .section-panel {
+      background: rgba(4, 51, 90, 0.94);
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">AI</div>
+        <div class="brand-copy">
+          <small>CLAW Demo Library</small>
+          <strong>项目目录总览</strong>
+        </div>
+      </div>
+      <div class="toolbar">
+        <label class="search-wrap" aria-label="搜索文件">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="搜索页面、说明文档、脚本或关键词">
+        </label>
+        <div class="theme-toggle" id="themeToggle">
+          <span class="theme-label">Theme</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <article class="hero-panel">
+        <div class="eyebrow">统一入口 · 本地浏览</div>
+        <h1>把全部演示页、说明文件和脚本整理成一个统一目录。</h1>
+        <p>这个入口页直接复用现有的主题系统与视觉语言，默认读取你的已保存配色。你可以按主题模块浏览，也可以直接搜索文件名、业务关键词或版本号。</p>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <strong id="htmlCount">0</strong>
+            <span>HTML 页面</span>
+          </div>
+          <div class="stat-card">
+            <strong id="utilityCount">0</strong>
+            <span>脚本 / 配置 / 文档</span>
+          </div>
+          <div class="stat-card">
+            <strong id="allCount">0</strong>
+            <span>目录收录文件</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="hero-side">
+        <div>
+          <h2 class="mini-title">快速筛选</h2>
+          <p class="mini-sub">按模块切换目录视图，适合演示前快速定位页面。</p>
+        </div>
+        <div class="filter-row" id="categoryFilters"></div>
+        <div class="legend">
+          <div class="legend-item">
+            <strong>完整演示版</strong>
+            <span>总控页面与版本迭代主入口。</span>
+          </div>
+          <div class="legend-item">
+            <strong>动画分场景页面</strong>
+            <span>技术解读、广州实践、智能情报、数据智能。</span>
+          </div>
+          <div class="legend-item">
+            <strong>配置与说明</strong>
+            <span>主题配置、字体说明、颜色手册。</span>
+          </div>
+          <div class="legend-item">
+            <strong>工具与素材</strong>
+            <span>字体修正脚本和本地媒体文件。</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main class="sections" id="sections"></main>
+    <div class="empty-state" id="emptyState">没有匹配结果。可以换个关键词，或切回“全部文件”。</div>
+    <div class="footer-note">本目录页为静态入口，直接链接到当前工作区内文件。</div>
+  </div>
+
+  <script>
+  const catalog = [
+    {
+      id: 'demo-main',
+      label: '完整演示版',
+      description: '主入口和不同版本的完整演示文件。',
+      items: [
+        { file: '完整演示版v9.1.html', title: '完整演示版 v9.1', type: 'html', desc: '当前较新的完整演示主页面，含主题系统与 4:3 固定画布。', tags: ['主入口', '4:3', 'v9.1'] },
+        { file: '完整演示版v9.html', title: '完整演示版 v9', type: 'html', desc: '完整演示版 v9 迭代版本。', tags: ['主入口', '版本页', 'v9'] },
+        { file: '完整演示版v8.html', title: '完整演示版 v8', type: 'html', desc: '完整演示版 v8，适合对比主题系统早期版本。', tags: ['主入口', '历史版本', 'v8'] }
+      ]
+    },
+    {
+      id: 'transition',
+      label: '过渡页',
+      description: '独立的概念引导或章节过渡页面。',
+      items: [
+        { file: 'p2a-1_智能体是什么_过渡页_v3.html', title: '智能体是什么 · 过渡页 v3', type: 'html', desc: '用于章节衔接的过渡页。', tags: ['过渡页', '智能体', 'v3'] }
+      ]
+    },
+    {
+      id: 'tech',
+      label: '技术解读',
+      description: '面向概念解释和机制拆解的动画页面。',
+      items: [
+        { file: '02_技术解读_LLM原理_动画版.html', title: 'LLM 原理 · 动画版', type: 'html', desc: '面向大模型基础原理的动画化讲解页面。', tags: ['技术解读', 'LLM', '动画版'] },
+        { file: '02_技术解读_多智能体协同_动画版_20260401_151600.html', title: '多智能体协同 · 动画版', type: 'html', desc: '讲解多智能体协同机制的动画页面。', tags: ['技术解读', '多智能体', '动画版'] }
+      ]
+    },
+    {
+      id: 'gz-practice',
+      label: '广州实践',
+      description: '围绕业务场景的实践型演示页面。',
+      items: [
+        { file: '03_广州实践_SOP智能升级_动画版.html', title: 'SOP 智能升级', type: 'html', desc: '展示 SOP 流程智能升级的场景动画。', tags: ['广州实践', 'SOP', '运营'] },
+        { file: '03_广州实践_智能客户运营_动画版.html', title: '智能客户运营', type: 'html', desc: '客户经营与触达自动化场景。', tags: ['广州实践', '客户运营', '业务场景'] },
+        { file: '03_广州实践_李东明Skills_v3.html', title: '李东明 Skills v3', type: 'html', desc: 'Skills 能力展示页面。', tags: ['广州实践', 'Skills', 'v3'] },
+        { file: '03_广州实践_跨部门协同_动画版_v2.html', title: '跨部门协同 v2', type: 'html', desc: '跨团队任务协同流程的动画展示。', tags: ['广州实践', '协同', 'v2'] },
+        { file: '03_广州实践_邮件自动处理_动画版.html', title: '邮件自动处理', type: 'html', desc: '邮件分类、处理与自动流转场景。', tags: ['广州实践', '邮件', '自动化'] }
+      ]
+    },
+    {
+      id: 'intel',
+      label: '智能情报',
+      description: '情报采集与市场分析相关页面。',
+      items: [
+        { file: '04_智能情报_每日市场情报官_动画版.html', title: '每日市场情报官', type: 'html', desc: '市场情报收集、洞察和输出的演示页面。', tags: ['智能情报', '市场情报', '动画版'] }
+      ]
+    },
+    {
+      id: 'data',
+      label: '数据智能',
+      description: '数据分析与自动简报类页面。',
+      items: [
+        { file: '05_数据智能_自动分析简报_动画版_v2.html', title: '自动分析简报 v2', type: 'html', desc: '数据智能主题的新版自动分析简报。', tags: ['数据智能', '简报', 'v2'] },
+        { file: '05_数据智能_自动分析简报_动画版.html', title: '自动分析简报', type: 'html', desc: '数据智能主题的自动分析简报页面。', tags: ['数据智能', '简报', '动画版'] }
+      ]
+    },
+    {
+      id: 'docs-config',
+      label: '配置与说明',
+      description: '主题、字体和设计规范说明。',
+      items: [
+        { file: 'theme-config.js', title: '主题配置中心', type: 'js', desc: '统一管理 6 套主题配色，并提供主题应用函数。', tags: ['配置', '主题', 'JavaScript'] },
+        { file: '颜色主题设计手册.md', title: '颜色主题设计手册', type: 'md', desc: '记录主题变量、颜色原则和扩展方法。', tags: ['文档', '颜色系统', 'Markdown'] },
+        { file: '字体系统配置说明.md', title: '字体系统配置说明', type: 'md', desc: '说明 Type Scale 字体体系与字号映射。', tags: ['文档', '字体系统', 'Markdown'] }
+      ]
+    },
+    {
+      id: 'tools-assets',
+      label: '工具与素材',
+      description: '辅助脚本与本地素材文件。',
+      items: [
+        { file: 'fix_font_system.py', title: '字体系统修正脚本', type: 'py', desc: '用于批量修正页面内字体系统设置。', tags: ['工具脚本', 'Python', '字体'] },
+        { file: 'replace_font_sizes.py', title: '字号替换脚本', type: 'py', desc: '用于批量调整或替换字号配置。', tags: ['工具脚本', 'Python', '字号'] },
+        { file: '977DB301-DB67-4F92-9122-6BB2121F00E9_meta.MOV', title: '本地视频素材', type: 'mov', desc: '项目目录中的本地媒体素材文件。', tags: ['素材', '视频', 'MOV'] }
+      ]
+    }
+  ];
+
+  const sectionsEl = document.getElementById('sections');
+  const emptyStateEl = document.getElementById('emptyState');
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilters = document.getElementById('categoryFilters');
+
+  let activeCategory = 'all';
+  let keyword = '';
+
+  function summarizeCounts() {
+    const allItems = catalog.flatMap(section => section.items);
+    const htmlCount = allItems.filter(item => item.type === 'html').length;
+    const utilityCount = allItems.length - htmlCount;
+    document.getElementById('htmlCount').textContent = htmlCount;
+    document.getElementById('utilityCount').textContent = utilityCount;
+    document.getElementById('allCount').textContent = allItems.length;
+  }
+
+  function renderFilters() {
+    const buttons = [{ id: 'all', label: '全部文件' }].concat(
+      catalog.map(section => ({ id: section.id, label: section.label }))
+    );
+
+    categoryFilters.innerHTML = buttons.map(button => {
+      const active = button.id === activeCategory ? ' active' : '';
+      return '<button class="chip' + active + '" data-filter="' + button.id + '">' + button.label + '</button>';
+    }).join('');
+  }
+
+  function createCard(item) {
+    const tags = item.tags.map(tag => '<span class="tag">' + tag + '</span>').join('');
+    const previewLabel = item.type === 'html' || item.type === 'mov' ? '打开文件' : '查看文件';
+    return [
+      '<article class="file-card" data-search="',
+      [item.title, item.file, item.desc].concat(item.tags).join(' ').toLowerCase(),
+      '">',
+      '<div class="card-top"><span class="badge">', item.type, '</span><span class="meta">', item.file, '</span></div>',
+      '<h3>', item.title, '</h3>',
+      '<p>', item.desc, '</p>',
+      '<div class="tag-row">', tags, '</div>',
+      '<div class="actions">',
+      '<a class="btn btn-primary" href="', encodeURI(item.file), '" target="_blank" rel="noopener noreferrer">', previewLabel, '</a>',
+      '<a class="btn btn-secondary" href="', encodeURI(item.file), '" download>下载</a>',
+      '</div>',
+      '</article>'
+    ].join('');
+  }
+
+  function renderSections() {
+    let visibleCount = 0;
+
+    const sectionMarkup = catalog.map(section => {
+      if (activeCategory !== 'all' && activeCategory !== section.id) {
+        return '';
+      }
+
+      const filteredItems = section.items.filter(item => {
+        if (!keyword) {
+          return true;
+        }
+        const haystack = [item.title, item.file, item.desc].concat(item.tags).join(' ').toLowerCase();
+        return haystack.includes(keyword);
+      });
+
+      if (!filteredItems.length) {
+        return '';
+      }
+
+      visibleCount += filteredItems.length;
+
+      return [
+        '<section class="section-panel">',
+        '<div class="section-head">',
+        '<div><h2>', section.label, '</h2><p>', section.description, '</p></div>',
+        '<div class="section-count">', filteredItems.length, ' 个文件</div>',
+        '</div>',
+        '<div class="card-grid">', filteredItems.map(createCard).join(''), '</div>',
+        '</section>'
+      ].join('');
+    }).join('');
+
+    sectionsEl.innerHTML = sectionMarkup;
+    emptyStateEl.style.display = visibleCount ? 'none' : 'block';
+  }
+
+  function setupEvents() {
+    categoryFilters.addEventListener('click', event => {
+      const target = event.target.closest('[data-filter]');
+      if (!target) {
+        return;
+      }
+      activeCategory = target.dataset.filter;
+      renderFilters();
+      renderSections();
+    });
+
+    searchInput.addEventListener('input', event => {
+      keyword = event.target.value.trim().toLowerCase();
+      renderSections();
+    });
+  }
+
+  function setupThemes() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeMeta = window.CLAW_THEME_META || {};
+    const themeIds = Object.keys(themeMeta);
+    const defaultTheme = document.documentElement.getAttribute('data-theme') || 'deep-ocean';
+
+    themeToggle.insertAdjacentHTML(
+      'beforeend',
+      themeIds.map(themeId => {
+        const meta = themeMeta[themeId];
+        const active = themeId === defaultTheme ? ' active' : '';
+        return '<button class="theme-swatch swatch-' + themeId + active + '" type="button" data-theme="' + themeId + '" title="' + meta.label + '"></button>';
+      }).join('')
+    );
+
+    themeToggle.addEventListener('click', event => {
+      const button = event.target.closest('[data-theme]');
+      if (!button) {
+        return;
+      }
+      window.CLAW_applyTheme(button.dataset.theme);
+      syncActiveTheme(button.dataset.theme);
+    });
+
+    syncActiveTheme(defaultTheme);
+  }
+
+  function syncActiveTheme(themeId) {
+    document.querySelectorAll('.theme-swatch').forEach(node => {
+      node.classList.toggle('active', node.dataset.theme === themeId);
+    });
+  }
+
+  summarizeCounts();
+  renderFilters();
+  renderSections();
+  setupEvents();
+  setupThemes();
+  </script>
+</body>
+</html>

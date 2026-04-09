@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多智能体协同演示</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+  overflow:hidden; height:100vh; width:100vw;
+}
+
+/* starfield */
+#starCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* scanline effect */
+.scanline {
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+}
+
+.page {
+  position:relative; z-index:10;
+  width: 1440px; height: 1080px;
+  display:grid;
+  grid-template-rows: 72px 1fr 60px;
+}
+
+/* HEADER */
+.header {
+  display:flex; align-items:center;
+  padding:0 50px;
+  background: rgba(0,0,0,0.4);
+  border-bottom:1px solid rgba(201,168,76,0.15);
+  backdrop-filter:blur(10px);
+}
+.h-logo {
+  font-size:var(--text-body); letter-spacing:4px; color: var(--gold);
+  margin-right:28px;
+}
+.h-title { font-size:var(--text-h3); font-weight:200; flex:1; }
+.h-title em { color: var(--gold); font-style:normal; }
+.h-live {
+  display:flex; align-items:center; gap:10px;
+  font-size:var(--text-body); color:var(--green);
+  background:rgba(76,175,80,0.08); border:1px solid rgba(76,175,80,0.3);
+  padding:6px 18px; border-radius:20px;
+}
+.live-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--green);
+  animation:livePulse 1s infinite;
+}
+@keyframes livePulse {
+  0%,100%{box-shadow:0 0 0 0 rgba(76,175,80,0.6);}
+  50%{box-shadow:0 0 0 6px rgba(76,175,80,0);}
+}
+
+/* MAIN: 四个智能体 + 中央协调区 */
+.main {
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  overflow:hidden;
+}
+
+/* ===== LEFT: 所有智能体（1x4纵向排列） ===== */
+.agent-col-left {
+  display:flex; flex-direction:column;
+  gap:10px;
+  padding:16px;
+  border-right:1px solid rgba(201,168,76,0.08);
+  background: rgba(0,0,0,0.2);
+  overflow-y:auto;
+}
+.agent-card {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px; padding:14px;
+  transition:all 0.3s;
+  display:flex; flex-direction:column;
+}
+.agent-card.active {
+  border-color:rgba(201,168,76,0.3);
+  background:rgba(201,168,76,0.05);
+  box-shadow:0 0 20px rgba(201,168,76,0.1);
+}
+.agent-card.thinking {
+  border-color:rgba(91,141,239,0.3);
+  background:rgba(91,141,239,0.05);
+}
+.agent-card.error {
+  border-color:rgba(255,107,107,0.3);
+  background:rgba(255,107,107,0.05);
+}
+.agent-header {
+  display:flex; align-items:center; gap:10px; margin-bottom:10px;
+}
+.agent-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:var(--text-body); flex-shrink:0;
+}
+.agent-info { flex:1; min-width:0; }
+.agent-name { font-size:var(--text-body); font-weight:500; color: var(--gold); line-height:1.3; }
+.agent-role { font-size: var(--text-sm); color:#999; }
+.agent-status {
+  font-size:var(--text-sm); padding:4px 12px; border-radius:10px;
+  background:rgba(255,255,255,0.05); color:#888; flex-shrink:0;
+}
+.agent-status.working { color: var(--gold); background:rgba(201,168,76,0.1); }
+.agent-status.done { color:var(--green); background:rgba(76,175,80,0.1); }
+.agent-status.error { color:var(--red); background:rgba(255,107,107,0.1); }
+
+/* AI 标识徽章 */
+.ai-badge {
+  font-size: var(--text-sm); padding:2px 8px; border-radius:10px;
+  background:linear-gradient(135deg, rgba(91,141,239,0.3), rgba(156,39,176,0.3));
+  color:#fff; font-weight:500; letter-spacing:1px;
+  border:1px solid rgba(91,141,239,0.5);
+  text-shadow:0 0 4px rgba(91,141,239,0.5);
+}
+
+.agent-log {
+  flex:1; overflow-y:auto; scrollbar-width:none;
+  display:flex; flex-direction:column; gap:6px;
+  min-height:60px; max-height:90px;
+}
+.agent-log::-webkit-scrollbar { display:none; }
+.log-entry {
+  font-size:var(--text-sm); padding:10px 12px;
+  background:rgba(255,255,255,0.03);
+  border-radius:6px; border-left:2px solid transparent;
+  animation:logIn 0.2s both;
+}
+@keyframes logIn { from{opacity:0;transform:translateX(-8px);} to{opacity:1;transform:translateX(0);} }
+.log-entry.send { border-left-color: var(--gold); }
+.log-entry.receive { border-left-color:#5B8DEF; }
+.log-entry.error { border-left-color:var(--red); background:rgba(255,107,107,0.05); }
+.log-entry.retry { border-left-color:#febc2e; }
+.log-time { font-size: var(--text-sm); color:#777; margin-bottom:4px; }
+.log-content { color:#ccc; line-height:1.6; font-size:var(--text-sm); }
+.log-content strong { color: var(--gold); }
+
+/* ===== CENTER: 协调中枢 ===== */
+.coord-col {
+  display:flex; flex-direction:column;
+  padding:20px 28px; gap:16px;
+  overflow:hidden;
+  background: rgba(0,0,0,0.1);
+}
+.coord-title {
+  font-size:var(--text-body); letter-spacing:2px; color: var(--gold);
+  padding-bottom:14px; border-bottom:1px solid rgba(201,168,76,0.1);
+  display:flex; align-items:center; gap:10px;
+}
+.live-tag {
+  display:flex; align-items:center; gap:6px;
+  font-size: var(--text-sm); padding:4px 10px;
+  background:rgba(76,175,80,0.15); color:var(--green);
+  border:1px solid rgba(76,175,80,0.3); border-radius:20px;
+}
+.live-tag::before {
+  content:'';
+  width:6px; height:6px; border-radius:50%;
+  background:var(--green);
+  animation: livePulse 1.5s infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.8); }
+}
+
+/* 场景标题展示 */
+.scene-title {
+  background:linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+  border:1px solid rgba(201,168,76,0.3);
+  border-radius:12px; padding:16px 20px;
+  text-align:center;
+  margin-bottom:12px;
+  position:relative;
+  overflow:hidden;
+}
+.scene-title::before {
+  content:'';
+  position:absolute;
+  top:0; left:-100%;
+  width:100%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(201,168,76,0.1), transparent);
+  animation: titleShine 3s infinite;
+}
+@keyframes titleShine {
+  0%{left:-100%;}
+  50%,100%{left:100%;}
+}
+.scene-title-label {
+  font-size:var(--text-sm); color:#888; letter-spacing:2px;
+  margin-bottom:8px; text-transform:uppercase;
+}
+.scene-title-text {
+  font-size:var(--text-h4); color: var(--gold); font-weight:600;
+  line-height:1.4;
+}
+.scene-title-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(201,168,76,0.2); border:1px solid rgba(201,168,76,0.4);
+  color: var(--gold); font-size:var(--text-sm); font-weight:600;
+  margin-right:10px; vertical-align:middle;
+}
+
+/* 任务进度 */
+.task-progress {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px; padding:16px;
+}
+.tp-title { font-size:var(--text-body); color:#aaa; margin-bottom:12px; }
+.tp-bar {
+  height:6px; background:rgba(255,255,255,0.05);
+  border-radius:3px; overflow:hidden;
+}
+.tp-fill {
+  height:100%; background:linear-gradient(90deg, var(--gold), var(--gold));
+  border-radius:3px; transition:width 0.6s;
+}
+.tp-steps {
+  display:flex; justify-content:space-between;
+  margin-top:10px; font-size:var(--text-sm); color:#888;
+}
+.tp-step.active { color: var(--gold); }
+.tp-step.done { color:var(--green); }
+
+/* 对话记录区 */
+.dialogue-area {
+  flex:1; background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px; padding:14px;
+  overflow-y:auto; scrollbar-width:none;
+}
+.dialogue-area::-webkit-scrollbar { display:none; }
+
+.dialogue-msg {
+  display:flex; gap:10px; margin-bottom:12px;
+  animation:msgIn 0.4s both;
+}
+@keyframes msgIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.dialogue-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size: var(--text-sm); flex-shrink:0;
+}
+.dialogue-avatar.analyst { background:rgba(91,141,239,0.15); border-color:rgba(91,141,239,0.3); }
+.dialogue-avatar.planner { background:rgba(201,168,76,0.15); border-color:rgba(201,168,76,0.3); }
+.dialogue-avatar.executor { background:rgba(76,175,80,0.15); border-color:rgba(76,175,80,0.3); }
+.dialogue-avatar.coordinator { background:rgba(156,39,176,0.15); border-color:rgba(156,39,176,0.3); }
+
+.dialogue-content { flex:1; }
+.dialogue-header {
+  display:flex; align-items:center; gap:8px; margin-bottom:4px;
+}
+.dialogue-name { font-size:var(--text-body); font-weight:500; }
+.dialogue-name.analyst { color:#5B8DEF; }
+.dialogue-name.planner { color: var(--gold); }
+.dialogue-name.executor { color:var(--green); }
+.dialogue-name.coordinator { color:#9C27B0; }
+.dialogue-time { font-size:var(--text-sm); color:#777; }
+.dialogue-text {
+  font-size:var(--text-body); color:#ccc; line-height:1.8;
+  padding:12px 16px; background:rgba(255,255,255,0.03);
+  border-radius:8px;
+}
+.dialogue-text strong { color: var(--gold); }
+.dialogue-text em { color:#888; font-style:normal; }
+
+/* 错误与重试样式 */
+.error-notice {
+  background:rgba(255,107,107,0.08);
+  border:1px solid rgba(255,107,107,0.2);
+  border-radius:8px; padding:10px 12px;
+  margin:8px 0; font-size: var(--text-sm); color:var(--red);
+}
+.retry-notice {
+  background:rgba(254,188,46,0.08);
+  border:1px solid rgba(254,188,46,0.2);
+  border-radius:8px; padding:10px 12px;
+  margin:8px 0; font-size: var(--text-sm); color:#febc2e;
+}
+.apology-msg {
+  background:rgba(76,175,80,0.08);
+  border:1px solid rgba(76,175,80,0.2);
+  border-radius:8px; padding:10px 12px;
+  margin:8px 0; font-size: var(--text-sm); color:var(--green);
+}
+
+/* ===== 协调中枢特殊样式 ===== */
+.coordinator-card .agent-avatar {
+  background:rgba(156,39,176,0.15); border-color:rgba(156,39,176,0.3);
+}
+.coordinator-card .agent-name { color:#BA68C8; }
+
+/* FOOTER */
+.footer {
+  background:rgba(0,0,0,0.5); backdrop-filter:blur(8px);
+  border-top:1px solid rgba(201,168,76,0.1);
+  padding:0 50px; display:flex; align-items:center; gap:14px;
+}
+.ctrl-btn {
+  padding:10px 24px; border-radius:20px;
+  border:1px solid rgba(201,168,76,0.3);
+  background:transparent; color: var(--gold); font-size:var(--text-body);
+  cursor:pointer; transition:all 0.3s; font-family:inherit;
+}
+.ctrl-btn:hover { background:rgba(201,168,76,0.1); }
+.ctrl-btn.primary { background:rgba(201,168,76,0.12); border-color: var(--gold); }
+.demo-num { font-size:var(--text-body); color:#777; }
+.footer-msg { margin-left:auto; font-size:var(--text-body); color:#999; }
+.demo-dots { display:flex; gap:6px; }
+.demo-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(201,168,76,0.2); cursor:pointer; transition:all 0.3s;
+}
+.demo-dot.active { background:var(--gold); box-shadow:0 0 6px var(--gold); }
+
+/* 连接线动画 */
+.connection-line {
+  position:absolute;
+  height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:0.3;
+  animation:linePulse 2s infinite;
+}
+@keyframes linePulse {
+  0%,100%{opacity:0.2;}
+  50%{opacity:0.5;}
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  body { overflow-y: auto !important; height: auto !important; }
+  .page { height: auto !important; min-height: 1080px; }
+  .main { grid-template-columns: 1fr !important; overflow-y: auto !important; }
+  .agent-col-left { 
+    grid-template-columns: 1fr 1fr !important; 
+    border: none !important; 
+    border-bottom: 1px solid rgba(201,168,76,0.08); 
+  }
+  .coord-col { min-height: 400px; }
+}
+@media (max-width: 600px) {
+  .agent-col-left { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+<canvas id="starCanvas"></canvas>
+<div class="scanline"></div>
+
+<div class="page">
+  <div class="header">
+    <div class="h-logo">多智能体</div>
+  </div>
+
+  <div class="main">
+    <!-- LEFT: 四个智能体（2x2网格） -->
+    <div class="agent-col-left">
+      <!-- 第一行 -->
+      <div class="agent-card" id="agentAnalyst">
+        <div class="agent-header">
+          <div class="agent-avatar">📊</div>
+          <div class="agent-info">
+            <div class="agent-name">数据分析师智能体 <span class="ai-badge">AI</span></div>
+          </div>
+          <div class="agent-status" id="statusAnalyst">待命</div>
+        </div>
+        <div class="agent-log" id="logAnalyst"></div>
+      </div>
+      
+      <div class="agent-card" id="agentPlanner">
+        <div class="agent-header">
+          <div class="agent-avatar">🎯</div>
+          <div class="agent-info">
+            <div class="agent-name">任务规划智能体 <span class="ai-badge">AI</span></div>
+          </div>
+          <div class="agent-status" id="statusPlanner">待命</div>
+        </div>
+        <div class="agent-log" id="logPlanner"></div>
+      </div>
+      
+      <!-- 第二行 -->
+      <div class="agent-card coordinator-card" id="agentCoordinator">
+        <div class="agent-header">
+          <div class="agent-avatar">🎛️</div>
+          <div class="agent-info">
+            <div class="agent-name" style="color:#BA68C8;">协调中枢智能体 <span class="ai-badge">AI</span></div>
+          </div>
+          <div class="agent-status" id="statusCoordinator">监控中</div>
+        </div>
+        <div class="agent-log" id="logCoordinator"></div>
+      </div>
+      
+      <div class="agent-card" id="agentExecutor">
+        <div class="agent-header">
+          <div class="agent-avatar">⚡</div>
+          <div class="agent-info">
+            <div class="agent-name">执行智能体 <span class="ai-badge">AI</span></div>
+          </div>
+          <div class="agent-status" id="statusExecutor">待命</div>
+        </div>
+        <div class="agent-log" id="logExecutor"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: 对话记录 -->
+    <div class="coord-col">
+      <div class="coord-title">
+        💬 协作对话记录
+        <span class="live-tag" style="margin-left:auto;">实时协作中</span>
+      </div>
+      
+      <!-- 场景标题展示 -->
+      <div class="scene-title" id="sceneTitle">
+        <div class="scene-title-label">当前场景</div>
+        <div class="scene-title-text">
+          <span class="scene-title-num" id="sceneNum">1</span>
+          <span id="sceneName">多智能体协同完成客户画像分析</span>
+        </div>
+      </div>
+      
+      <div class="task-progress">
+        <div class="tp-title">整体任务进度</div>
+        <div class="tp-bar"><div class="tp-fill" id="tpFill" style="width:0%"></div></div>
+        <div class="tp-steps">
+          <span class="tp-step" id="ts0">任务分配</span>
+          <span class="tp-step" id="ts1">数据分析</span>
+          <span class="tp-step" id="ts2">方案规划</span>
+          <span class="tp-step" id="ts3">执行验证</span>
+          <span class="tp-step" id="ts4">完成</span>
+        </div>
+      </div>
+      
+      <div class="dialogue-area" id="dialogueArea">
+        <!-- 对话消息将动态插入 -->
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="ctrl-btn" onclick="prevDemo()">← 上一轮</button>
+    <button class="ctrl-btn primary" id="playBtn" onclick="togglePlay()">▶ 开始演示</button>
+    <button class="ctrl-btn" onclick="nextDemo()">下一轮 →</button>
+    <div class="demo-dots">
+      <div class="demo-dot active" id="dd0" onclick="runDemo(0)"></div>
+      <div class="demo-dot" id="dd1" onclick="runDemo(1)"></div>
+      <div class="demo-dot" id="dd2" onclick="runDemo(2)"></div>
+    </div>
+    <div class="demo-num" id="demoNum">演示 1 / 3</div>
+    <div class="footer-msg" id="footerMsg">多智能体协同完成客户画像分析</div>
+  </div>
+</div>
+
+<script>
+// ===== STARS =====
+const sc=document.getElementById('starCanvas');
+const sx=sc.getContext('2d');
+function resizeStar(){sc.width=window.innerWidth;sc.height=window.innerHeight;}
+resizeStar(); window.addEventListener('resize',resizeStar);
+const stars=[];
+for(let i=0;i<150;i++) stars.push({
+  x:Math.random()*sc.width, y:Math.random()*sc.height,
+  r:Math.random()*1.2+0.2,
+  a:Math.random()*.6+.1,
+  ta:Math.random()*.6+.1,
+  speed:(Math.random()*.5+.5)*0.015
+});
+function animStars(){
+  sx.clearRect(0,0,sc.width,sc.height);
+  stars.forEach(s=>{
+    s.a+=(s.ta-s.a)*s.speed;
+    if(Math.abs(s.a-s.ta)<0.01){s.ta=Math.random()*.6+.1;}
+    sx.globalAlpha=s.a; sx.fillStyle='var(--gold)';
+    sx.beginPath(); sx.arc(s.x,s.y,s.r,0,Math.PI*2); sx.fill();
+  });
+  sx.globalAlpha=1;
+  requestAnimationFrame(animStars);
+}
+animStars();
+
+// ===== DEMO DATA: 多智能体协同场景 =====
+const demos = [
+  {
+    label: '多智能体协同完成客户画像分析',
+    steps: [
+      // 阶段1: 任务分配
+      {type:'coord', agent:'coordinator', text:'收到任务：为VIP客户"王总"生成完整画像报告。启动多智能体协作流程。', time:'09:00:01'},
+      {type:'coord', agent:'coordinator', text:'@数据分析师 请查询客户资产数据；@任务规划师 请制定分析框架', time:'09:00:02'},
+      {type:'log', agent:'analyst', text:'收到指令，开始查询客户资产数据'},
+      {type:'log', agent:'planner', text:'收到指令，开始制定分析框架'},
+      
+      // 阶段2: 数据分析（出错与纠正）
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'正在查询王总的资产数据...', time:'09:00:05'},
+      {type:'status', agent:'analyst', status:'working'},
+      {type:'log', agent:'analyst', text:'调用 CRM 系统查询客户持仓...'},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'<strong>错误！</strong> CRM系统返回："查询超时，无法获取完整持仓数据"', time:'09:00:08', isError:true},
+      {type:'status', agent:'analyst', status:'error'},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'抱歉，初次查询失败。让我尝试从备份数据源获取...', time:'09:00:10', isRetry:true},
+      {type:'log', agent:'analyst', text:'切换至数据仓库备用接口...'},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'✓ 成功获取！王总总资产 <strong>¥1,280万</strong>，持仓分布：理财35%、基金28%、股票22%、存款15%', time:'09:00:15'},
+      {type:'status', agent:'analyst', status:'done'},
+      {type:'coord', agent:'coordinator', text:'数据分析师已完成资产分析，数据已同步至所有智能体'},
+      
+      // 阶段3: 方案规划
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'收到资产数据。基于王总的稳健型风险偏好，我正在生成个性化服务方案...', time:'09:00:18'},
+      {type:'status', agent:'planner', status:'working'},
+      {type:'log', agent:'planner', text:'分析风险画像：保守型，厌恶波动'},
+      {type:'log', agent:'planner', text:'匹配产品策略：中低风险固收+'},
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'方案已生成：<strong>"稳健增值计划"</strong> - 建议配置：60%固收理财 + 30%债券基金 + 10%货币基金', time:'09:00:25'},
+      {type:'status', agent:'planner', status:'done'},
+      
+      // 阶段4: 执行与验证
+      {type:'coord', agent:'coordinator', text:'@执行者 请生成最终报告并发送给客户经理', time:'09:00:26'},
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'收到指令，正在生成PDF报告...', time:'09:00:27'},
+      {type:'status', agent:'executor', status:'working'},
+      {type:'log', agent:'executor', text:'渲染报告模板...'},
+      {type:'log', agent:'executor', text:'插入图表和数据...'},
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'✓ 报告生成完成！已发送至客户经理邮箱，耗时 <strong>32秒</strong>', time:'09:00:32'},
+      {type:'status', agent:'executor', status:'done'},
+      
+      // 完成
+      {type:'coord', agent:'coordinator', text:'任务完成！所有智能体协作成功，客户画像报告已交付。', time:'09:00:33'},
+      {type:'progress', value:100}
+    ]
+  },
+  {
+    label: '智能体协同处理客户投诉',
+    steps: [
+      {type:'coord', agent:'coordinator', text:'收到紧急任务：客户投诉工资代发延迟，需立即排查。启动应急响应。', time:'14:23:01'},
+      
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'我先查一下代发批次状态...', time:'14:23:03'},
+      {type:'status', agent:'analyst', status:'working'},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'发现异常！批次#20240326状态显示<strong>"部分失败"</strong>，涉及156笔交易', time:'14:23:08'},
+      {type:'status', agent:'analyst', status:'done'},
+      
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'等等，数据分析师，你确定是156笔？我刚查到的记录显示只有89笔异常。', time:'14:23:10', isConflict:true},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'让我重新核实一下...抱歉！我刚才看错了日期范围。正确数字是<strong>89笔</strong>，我的失误。', time:'14:23:14', isApology:true},
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'没关系，数据核实很重要。基于89笔异常，我建议按以下优先级处理：①VIP客户 ②大额交易 ③普通客户', time:'14:23:18'},
+      {type:'status', agent:'planner', status:'done'},
+      
+      {type:'coord', agent:'coordinator', text:'确认处理方案。数据分析师，请重新生成准确的数据清单；执行者，准备批量通知模板。', time:'14:23:20'},
+      
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'通知模板准备中... <strong>错误！</strong> 邮件服务API返回500错误', time:'14:23:25', isError:true},
+      {type:'status', agent:'executor', status:'error'},
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'抱歉各位，邮件服务暂时不可用。我切换到短信通道作为备用方案。', time:'14:23:28', isRetry:true},
+      {type:'log', agent:'executor', text:'切换至SMS网关...'},
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'✓ 短信发送成功！89位客户已全部收到解释通知，预计2小时内问题解决', time:'14:23:35'},
+      {type:'status', agent:'executor', status:'done'},
+      
+      {type:'coord', agent:'coordinator', text:'危机处理完成！感谢各位的协作，特别是及时发现数据差异并纠正。', time:'14:23:36'},
+      {type:'progress', value:100}
+    ]
+  },
+  {
+    label: '多智能体协同生成营销方案',
+    steps: [
+      {type:'coord', agent:'coordinator', text:'新任务：为季度营销活动"春季理财节"制定全渠道推广方案。', time:'10:00:01'},
+      
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'我先来制定整体策略框架。目标客群：25-45岁中产阶层；核心卖点：稳健收益+限时加息', time:'10:00:05'},
+      {type:'status', agent:'planner', status:'working'},
+      
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'@任务规划师 建议先看一下历史数据。我拉取了去年同期活动数据...', time:'10:00:08'},
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'数据显示：短信渠道转化率仅0.8%，但APP推送转化率达4.2%。建议<strong>重点投入APP渠道</strong>', time:'10:00:12'},
+      {type:'status', agent:'analyst', status:'done'},
+      
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'收到！调整策略：APP为主渠道（预算60%），微信生态为辅（30%），短信仅作提醒（10%）', time:'10:00:15'},
+      {type:'status', agent:'planner', status:'done'},
+      
+      {type:'coord', agent:'coordinator', text:'策略已确认。@执行者 请生成具体执行方案和时间表', time:'10:00:16'},
+      
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'正在生成执行方案...', time:'10:00:18'},
+      {type:'status', agent:'executor', status:'working'},
+      {type:'log', agent:'executor', text:'生成活动时间线...'},
+      {type:'log', agent:'executor', text:'分配预算至各渠道...'},
+      {type:'log', agent:'executor', text:'创建任务清单...'},
+      
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'方案生成完成！但我发现一个问题：预算分配后，设计人力可能不足。', time:'10:00:28', isWarning:true},
+      {type:'dialogue', agent:'planner', name:'任务规划师', avatar:'🎯', text:'@执行者 好发现！建议将部分设计工作外包，或简化部分物料规格。你觉得呢？', time:'10:00:31'},
+      {type:'dialogue', agent:'executor', name:'执行者', avatar:'⚡', text:'同意简化方案。我已调整：主视觉1套+变体3套，而非原计划的5套独立设计。可节省40%设计工时。', time:'10:00:35'},
+      
+      {type:'dialogue', agent:'analyst', name:'数据分析师', avatar:'📊', text:'补充一下：根据历史数据，简化设计对转化率影响很小（<0.3%），这个调整是合理的。', time:'10:00:38'},
+      
+      {type:'status', agent:'executor', status:'done'},
+      {type:'coord', agent:'coordinator', text:'完美协作！方案已优化并通过多智能体验证。准备提交审批。', time:'10:00:40'},
+      {type:'progress', value:100}
+    ]
+  }
+];
+
+// ===== STATE =====
+let currentDemo=0;
+let autoPlay=false;
+let demoTimer=null;
+let stepTimers=[];
+
+function addDialogue(agent, name, avatar, text, time, options={}) {
+  const area = document.getElementById('dialogueArea');
+  const div = document.createElement('div');
+  div.className = 'dialogue-msg';
+  
+  let extraClass = '';
+  let extraStyle = '';
+  if(options.isError) {
+    extraClass = 'error';
+    extraStyle = 'style="border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.05);"';
+  } else if(options.isRetry) {
+    extraClass = 'retry';
+    extraStyle = 'style="border:1px solid rgba(254,188,46,0.3);background:rgba(254,188,46,0.05);"';
+  } else if(options.isApology) {
+    extraClass = 'apology';
+    extraStyle = 'style="border:1px solid rgba(76,175,80,0.3);background:rgba(76,175,80,0.05);"';
+  } else if(options.isConflict) {
+    extraClass = 'conflict';
+    extraStyle = 'style="border:1px solid rgba(255,152,0,0.3);background:rgba(255,152,0,0.05);"';
+  } else if(options.isWarning) {
+    extraClass = 'warning';
+    extraStyle = 'style="border:1px solid rgba(255,152,0,0.3);background:rgba(255,152,0,0.05);"';
+  }
+  
+  div.innerHTML = `
+    <div class="dialogue-avatar ${agent}">${avatar}</div>
+    <div class="dialogue-content">
+      <div class="dialogue-header">
+        <span class="dialogue-name ${agent}">${name} <span class="ai-badge" style="font-size: var(--text-sm);padding:1px 6px;">AI</span></span>
+        <span class="dialogue-time">${time}</span>
+      </div>
+      <div class="dialogue-text ${extraClass}" ${extraStyle}>${text}</div>
+    </div>
+  `;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+function addLog(agent, text) {
+  const logMap = {
+    'analyst': 'logAnalyst',
+    'planner': 'logPlanner',
+    'executor': 'logExecutor',
+    'coordinator': 'logCoordinator'
+  };
+  const el = document.getElementById(logMap[agent]);
+  if(!el) return;
+  
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `
+    <div class="log-time">${new Date().toLocaleTimeString('zh-CN', {hour12:false})}</div>
+    <div class="log-content">${text}</div>
+  `;
+  el.appendChild(entry);
+  el.scrollTop = el.scrollHeight;
+}
+
+function addCoordLog(text, time) {
+  const el = document.getElementById('logCoordinator');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `
+    <div class="log-time">${time}</div>
+    <div class="log-content"><strong>协调中枢:</strong> ${text}</div>
+  `;
+  el.appendChild(entry);
+  el.scrollTop = el.scrollHeight;
+}
+
+function setAgentStatus(agent, status) {
+  const statusMap = {
+    'analyst': 'statusAnalyst',
+    'planner': 'statusPlanner',
+    'executor': 'statusExecutor',
+    'coordinator': 'statusCoordinator'
+  };
+  const cardMap = {
+    'analyst': 'agentAnalyst',
+    'planner': 'agentPlanner',
+    'executor': 'agentExecutor',
+    'coordinator': 'agentCoordinator'
+  };
+  
+  const statusEl = document.getElementById(statusMap[agent]);
+  const cardEl = document.getElementById(cardMap[agent]);
+  
+  const statusText = {
+    'working': '执行中',
+    'done': '已完成',
+    'error': '出错',
+    'waiting': '待命'
+  };
+  
+  statusEl.textContent = statusText[status] || status;
+  statusEl.className = 'agent-status ' + status;
+  
+  cardEl.classList.remove('active', 'thinking', 'error');
+  if(status === 'working') cardEl.classList.add('thinking');
+  else if(status === 'done') cardEl.classList.add('active');
+  else if(status === 'error') cardEl.classList.add('error');
+}
+
+function setProgress(value) {
+  document.getElementById('tpFill').style.width = value + '%';
+  const stepIdx = Math.floor(value / 25);
+  for(let i=0; i<5; i++) {
+    const el = document.getElementById('ts'+i);
+    el.classList.remove('active', 'done');
+    if(i < stepIdx) el.classList.add('done');
+    else if(i === stepIdx) el.classList.add('active');
+  }
+}
+
+function clearDemo() {
+  stepTimers.forEach(t=>clearTimeout(t));
+  stepTimers=[];
+  document.getElementById('dialogueArea').innerHTML='';
+  document.getElementById('logAnalyst').innerHTML='';
+  document.getElementById('logPlanner').innerHTML='';
+  document.getElementById('logExecutor').innerHTML='';
+  document.getElementById('logCoordinator').innerHTML='';
+  ['analyst','planner','executor','coordinator'].forEach(a=>setAgentStatus(a,'waiting'));
+  setProgress(0);
+}
+
+function updateSceneTitle(n) {
+  const sceneNum = document.getElementById('sceneNum');
+  const sceneName = document.getElementById('sceneName');
+  const sceneTitle = document.getElementById('sceneTitle');
+  
+  sceneNum.textContent = n + 1;
+  sceneName.textContent = demos[n].label;
+  
+  // 添加动画效果
+  sceneTitle.style.animation = 'none';
+  sceneTitle.offsetHeight; // 触发重绘
+  sceneTitle.style.animation = 'titleShine 0.5s ease-out';
+}
+
+function runDemo(n) {
+  clearDemo();
+  currentDemo=n;
+  ['dd0','dd1','dd2'].forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('active',i===n);
+  });
+  document.getElementById('demoNum').textContent=`演示 ${n+1} / 3`;
+  document.getElementById('footerMsg').textContent=demos[n].label;
+  
+  // 更新中央场景标题
+  updateSceneTitle(n);
+  
+  const demo=demos[n];
+  let delay=600;
+  
+  demo.steps.forEach((step,i)=>{
+    const t=setTimeout(()=>{
+      if(step.type==='dialogue'){
+        addDialogue(step.agent, step.name, step.avatar, step.text, step.time, {
+          isError: step.isError,
+          isRetry: step.isRetry,
+          isApology: step.isApology,
+          isConflict: step.isConflict,
+          isWarning: step.isWarning
+        });
+      }else if(step.type==='log'){
+        addLog(step.agent, step.text);
+      }else if(step.type==='coord'){
+        addCoordLog(step.text, step.time);
+      }else if(step.type==='status'){
+        setAgentStatus(step.agent, step.status);
+      }else if(step.type==='progress'){
+        setProgress(step.value);
+      }
+    },delay);
+    stepTimers.push(t);
+    delay+=1400;
+  });
+}
+
+// 快速跳转到当前演示的结束状态
+function jumpToEnd() {
+  clearDemo();
+  const demo = demos[currentDemo];
+  // 立即显示所有内容
+  demo.steps.forEach(step => {
+    if(step.type==='dialogue'){
+      addDialogue(step.agent, step.name, step.avatar, step.text, step.time, {
+        isError: step.isError,
+        isRetry: step.isRetry,
+        isApology: step.isApology,
+        isConflict: step.isConflict,
+        isWarning: step.isWarning
+      });
+    }else if(step.type==='log'){
+      addLog(step.agent, step.text);
+    }else if(step.type==='coord'){
+      addCoordLog(step.text, step.time);
+    }else if(step.type==='status'){
+      setAgentStatus(step.agent, step.status);
+    }else if(step.type==='progress'){
+      setProgress(step.value);
+    }
+  });
+}
+
+function nextDemo(){
+  // 先快速展示当前演示的完成状态
+  jumpToEnd();
+  // 2秒后切换到下一个演示，给观众更多时间看完
+  setTimeout(()=>runDemo((currentDemo+1)%3), 2000);
+}
+function prevDemo(){ runDemo((currentDemo+2)%3); }
+
+function togglePlay(){
+  autoPlay=!autoPlay;
+  document.getElementById('playBtn').textContent=autoPlay?'⏸ 暂停':'▶ 开始演示';
+  if(autoPlay){
+    runDemo(0);
+    scheduleNext();
+  }else{
+    clearDemo();
+  }
+}
+function scheduleNext(){
+  if(!autoPlay) return;
+  demoTimer=setTimeout(()=>{
+    if(!autoPlay) return;
+    const next=(currentDemo+1)%3;
+    runDemo(next);
+    scheduleNext();
+  }, 15000);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')nextDemo();
+  if(e.key==='ArrowLeft')prevDemo();
+  if(e.key===' '){e.preventDefault();togglePlay();}
+});
+
+// 字体大小同步
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+});
+
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>

@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邮件自动处理 · 智能邮件中枢</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  background: linear-gradient(135deg, #070709 0%, #0d0d10 100%);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+  font-size: var(--current-md);
+}
+
+/* 科幻扫描线背景 */
+.scanlines {
+  position: fixed; inset: 0; z-index: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,168,76,0.012) 2px, rgba(201,168,76,0.012) 4px);
+  pointer-events: none;
+}
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+.page {
+  position: relative; z-index: 1;
+  width: 1440px; height: 1080px;
+  display: flex; flex-direction: column;
+}
+
+/* ===== 系统头 ===== */
+.sys-header {
+  height: clamp(48px, 6vh, 60px); flex-shrink: 0;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  background: rgba(7,7,9,0.92);
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(16px, 3vw, 44px);
+}
+.sh-left { display: flex; align-items: center; gap: 14px; }
+.sh-badge { font-size: var(--current-sm); letter-spacing: 2px; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 3px 10px; border-radius: 3px; }
+.sh-title { font-size: var(--current-md); font-weight: 300; }
+.sh-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.sh-right { display: flex; align-items: center; gap: 16px; font-size: 14px; }
+.sh-metric { color: #666; display: flex; align-items: center; gap: 6px; }
+.sh-metric .val { color: var(--gold); font-size: var(--text-base); /* 18px */ font-weight: 500; }
+.sh-status { display: flex; align-items: center; gap: 6px; font-size: var(--current-sm); color: var(--green); }
+.sh-status::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); animation:lp 1.5s infinite; }
+@keyframes lp { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* ===== 三栏布局 ===== */
+.main { flex:1; display:grid; grid-template-columns: clamp(200px,22vw,280px) 1fr clamp(200px,22vw,280px); overflow:hidden; min-height:0; }
+
+/* ===== 左：收件箱 ===== */
+.inbox {
+  border-right: 1px solid rgba(201,168,76,0.07);
+  display: flex; flex-direction: column;
+  background: rgba(255,255,255,0.01);
+}
+.inbox-header {
+  padding: clamp(10px,1.5vh,14px) clamp(12px,1.5vw,18px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ih-title { font-size: var(--current-sm); letter-spacing: 2px; color: #555; }
+.ih-count { font-size: var(--current-sm); color: var(--gold); padding: 2px 8px; background: rgba(201,168,76,0.1); border-radius: 10px; }
+.mail-list { flex:1; overflow-y:auto; padding: 6px 0; }
+.mail-item {
+  padding: clamp(8px,1vh,12px) clamp(12px,1.5vw,18px);
+  border-left: 3px solid transparent;
+  display: flex; flex-direction: column; gap: 4px;
+  cursor: default;
+  transition: all 0.35s;
+  position: relative;
+}
+.mail-item.waiting { opacity: 0.7; }
+.mail-item.processing { border-left-color: var(--gold); background: rgba(201,168,76,0.05); }
+.mail-item.done-ok { border-left-color: var(--green); background: rgba(74,222,128,0.03); }
+.mail-item.done-skip { border-left-color: #555; background: rgba(255,255,255,0.01); opacity: 0.45; }
+.mi-from { font-size: var(--current-base); font-weight: 500; color: #ddd; }
+.mi-subject { font-size: 14px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mail-item.processing .mi-subject { color: var(--gold); }
+.mail-item.done-ok .mi-subject { color: var(--green); }
+.mi-meta { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.mi-type { font-size: var(--current-sm); padding: 2px 8px; border-radius: 8px; }
+.type-urgent { background: rgba(248,113,113,0.15); color: var(--red); }
+.type-report { background: rgba(201,168,76,0.12); color: var(--gold); }
+.type-meeting { background: rgba(139,92,246,0.12); color: #a78bfa; }
+.type-info { background: rgba(74,222,128,0.1); color: var(--green); }
+.type-spam { background: rgba(100,100,100,0.15); color: #666; }
+.mi-time { font-size: var(--current-sm); color: #555; margin-left: auto; }
+
+/* ===== 中：AI处理面板 ===== */
+.center {
+  display: flex; flex-direction: column;
+  padding: clamp(14px,2vh,20px) clamp(16px,2vw,28px);
+  gap: clamp(10px,1.5vh,16px);
+  overflow: hidden;
+  position: relative;
+}
+
+/* AI大脑 */
+.ai-brain { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.brain-orb {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(201,168,76,0.3), rgba(201,168,76,0.05) 70%);
+  border: 1.5px solid rgba(201,168,76,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-xl); /* 32px */ position: relative;
+  animation: brainPulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes brainPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,0), 0 0 20px rgba(201,168,76,0.15); }
+  50% { box-shadow: 0 0 0 10px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.25); }
+}
+.brain-info { flex: 1; min-width: 0; }
+.bi-status { font-size: var(--current-sm); letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px; }
+.bi-task { font-size: var(--text-base); /* 18px */ color: #eee; line-height: 1.6; }
+.bi-task .hl { color: var(--gold); }
+
+/* 邮件查看器 */
+.email-viewer {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px; overflow: hidden; flex-shrink: 0;
+  transition: all 0.4s;
+}
+.email-viewer.sending {
+  animation: sendPulse 0.6s ease;
+}
+@keyframes sendPulse {
+  0% { transform: scale(1); } 30% { transform: scale(0.97); border-color: rgba(74,222,128,0.4); } 100% { transform: scale(1); }
+}
+.email-viewer.archiving {
+  animation: archiveSlide 0.6s ease;
+}
+@keyframes archiveSlide {
+  0% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(20px); opacity: 0.5; } 100% { transform: translateX(0); opacity: 1; }
+}
+.email-viewer.rejecting {
+  animation: rejectShake 0.5s ease;
+}
+@keyframes rejectShake {
+  0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); }
+}
+
+/* ===== 操作具象化浮层 ===== */
+.action-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.action-overlay.show { opacity: 1; pointer-events: auto; }
+/* 无遮罩提示模式 - 背景透明，让观众看到背后的邮件内容 */
+.action-overlay.show-hint {
+  opacity: 1;
+  pointer-events: auto;
+  background: transparent;
+  backdrop-filter: none;
+}
+.action-overlay.show-hint .action-anim-box {
+  width: auto;
+  height: auto;
+  background: transparent;
+}
+.action-anim-box {
+  width: 70vw; height: 70vh;
+  max-width: 800px; max-height: 600px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* --- 动画容器基础样式 --- */
+.ao-notify, .ao-archive, .ao-calendar, .ao-block, .ao-dispatch {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* --- 点击提示样式（无遮罩版） --- */
+.ao-click-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  animation: hintPulse 2s ease-in-out infinite;
+  background: transparent;
+  padding: 30px;
+}
+.ao-hint-icon {
+  font-size: var(--text-3xl); /* 56.9px */
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+.ao-hint-text {
+  font-size: var(--current-xl);
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  font-weight: 600;
+}
+.ao-hint-action {
+  font-size: var(--current-lg);
+  color: var(--text);
+  padding: 10px 28px;
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  background: rgba(10,10,12,0.85);
+  backdrop-filter: blur(4px);
+  font-weight: 500;
+}
+@keyframes hintPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* --- 通知动效：手机+通知横幅 --- */
+.ao-notify .ao-phone {
+  width: 220px;
+  height: 90%;
+  border: 4px solid rgba(255,255,255,0.25);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.ao-notify .ao-notch {
+  width: 60px; height: 8px; background: rgba(255,255,255,0.15);
+  border-radius: 4px; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+}
+.ao-notify .ao-banner {
+  position: absolute; top: 40px; left: 12px; right: 12px;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 14px;
+  padding: 20px;
+  opacity: 0; transform: translateY(-20px);
+  animation: bannerSlide 1.2s 0.2s ease forwards;
+}
+.ao-notify .ao-banner-from { font-size: var(--current-md); color: var(--gold); margin-bottom: 6px; }
+.ao-notify .ao-banner-text { font-size: var(--current-lg); color: #eee; font-weight: 500; }
+.ao-notify .ao-banner-icon { position: absolute; top: 16px; right: 16px; font-size: var(--current-3xl); }
+.ao-notify .ao-label {
+  position: absolute; bottom: -50px;
+  font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
+  opacity: 0; animation: fadeUp 0.5s 0.8s forwards;
+}
+@keyframes bannerSlide { to { opacity: 1; transform: translateY(0); } }
+
+/* --- 归档动效：文件夹 --- */
+.ao-archive .ao-folder {
+  width: 280px; height: 190px;
+  position: relative;
+}
+.ao-archive .ao-folder-back {
+  width: 280px; height: 160px;
+  background: rgba(201,168,76,0.15);
+  border: 3px solid rgba(201,168,76,0.3);
+  border-radius: 0 0 12px 12px;
+  position: absolute; bottom: 0;
+}
+.ao-archive .ao-folder-tab {
+  width: 100px; height: 26px;
+  background: rgba(201,168,76,0.15);
+  border: 3px solid rgba(201,168,76,0.3);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  position: absolute; top: 7px; left: 24px;
+}
+.ao-archive .ao-file {
+  width: 80px; height: 105px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  position: absolute; top: -90px; left: 95px;
+  opacity: 0;
+  animation: fileFly 1s 0.3s ease forwards;
+}
+.ao-archive .ao-file::before {
+  content: ''; position: absolute; top: 12px; left: 10px; right: 10px;
+  height: 4px; background: rgba(255,255,255,0.15); border-radius: 2px;
+  box-shadow: 0 12px 0 rgba(255,255,255,0.1), 0 24px 0 rgba(255,255,255,0.1);
+}
+.ao-archive .ao-folder-label {
+  position: absolute; bottom: 18px; left: 0; right: 0; text-align: center;
+  font-size: var(--current-md); color: var(--gold); letter-spacing: 1px;
+  opacity: 0; animation: fadeUp 0.5s 0.9s forwards;
+}
+.ao-archive .ao-label {
+  position: absolute; bottom: -52px; left: 0; right: 0; text-align: center;
+  font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
+  opacity: 0; animation: fadeUp 0.5s 1s forwards;
+}
+@keyframes fileFly { 0%{opacity:1;top:-60px;} 60%{opacity:1;top:10px;} 80%{opacity:0.5;top:15px;} 100%{opacity:0;top:15px;} }
+
+/* --- 日历动效 --- */
+.ao-calendar .ao-cal-box {
+  width: 280px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; overflow: hidden;
+}
+.ao-calendar .ao-cal-header {
+  background: rgba(139,92,246,0.15); color: #a78bfa;
+  padding: 10px 14px; font-size: var(--text-base); /* 18px */ font-weight: 500;
+  text-align: center; letter-spacing: 1px;
+}
+.ao-calendar .ao-cal-grid {
+  display: grid; grid-template-columns: repeat(7,1fr);
+  gap: 2px; padding: 10px;
+}
+.ao-calendar .ao-cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-base); color: #666; border-radius: 50%;
+}
+.ao-calendar .ao-cal-day.head { color: #888; font-size: 14px; }
+.ao-calendar .ao-cal-day.today { color: var(--gold); font-weight: 600; }
+.ao-calendar .ao-cal-day.event {
+  background: rgba(139,92,246,0.25); color: #c4b5fd; font-weight: 600;
+  border: 1px solid rgba(139,92,246,0.5);
+  opacity: 0; animation: calPop 0.5s 0.6s forwards;
+}
+.ao-calendar .ao-cal-event-bar {
+  margin: 8px 16px 16px; padding: 12px 14px;
+  background: rgba(139,92,246,0.12);
+  border-left: 4px solid #a78bfa;
+  border-radius: 0 8px 8px 0;
+  opacity: 0; animation: fadeUp 0.5s 0.9s forwards;
+}
+.ao-calendar .ao-cal-event-title { font-size: var(--text-lg); /* 24px */ color: #c4b5fd; font-weight: 500; }
+.ao-calendar .ao-cal-event-time { font-size: var(--current-base); color: #888; margin-top: 4px; }
+@keyframes calPop { 0%{transform:scale(0);opacity:0;} 60%{transform:scale(1.2);} 100%{transform:scale(1);opacity:1;} }
+
+/* --- 拦截动效：盾牌+碎裂 --- */
+.ao-block .ao-shield {
+  width: 140px; height: 155px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.ao-block .ao-shield-icon {
+  font-size: 84px; position: relative; z-index: 2;
+  animation: shieldUp 0.6s 0.1s forwards;
+  opacity: 0;
+}
+.ao-block .ao-shield-bg {
+  position: absolute; inset: 0;
+  background: rgba(248,113,113,0.1);
+  border: 3px solid rgba(248,113,113,0.3);
+  border-radius: 50%;
+  opacity: 0; animation: shieldRing 0.8s 0.3s forwards;
+}
+.ao-block .ao-shatter {
+  position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+  font-size: var(--text-3xl); /* 56.9px */ opacity: 0;
+  animation: shatterFly 0.8s 0.5s forwards;
+}
+.ao-block .ao-label {
+  position: absolute; bottom: -56px;
+  font-size: var(--current-lg); color: var(--red); font-weight: 500; letter-spacing: 1px;
+  opacity: 0; animation: fadeUp 0.5s 0.8s forwards;
+}
+@keyframes shieldUp { 0%{opacity:0;transform:translateY(20px);} 100%{opacity:1;transform:translateY(0);} }
+@keyframes shieldRing { 0%{opacity:0;transform:scale(0.5);} 100%{opacity:1;transform:scale(1);} }
+@keyframes shatterFly {
+  0%{opacity:1;transform:translateX(-50%) translateY(0) rotate(0deg);}
+  100%{opacity:0;transform:translateX(-50%) translateY(-40px) rotate(30deg) scale(0.3);}
+}
+
+/* --- 分发动效：中心+连线 --- */
+.ao-dispatch .ao-center {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(201,168,76,0.2); border: 3px solid rgba(201,168,76,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-2xl); /* 42.7px */ z-index: 2; position: relative;
+}
+.ao-dispatch .ao-node {
+  position: absolute; width: 62px; height: 62px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 2px solid rgba(201,168,76,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-xl); /* 32px */ opacity: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+/* 节点位置 - 使用固定的transform避免动画冲突 */
+.ao-dispatch .ao-node.n1 { top: 5%; left: 50%; margin-left: -31px; animation: nodePopIn 0.4s 0.4s forwards; }
+.ao-dispatch .ao-node.n2 { top: 25%; right: 15%; animation: nodePopIn 0.4s 0.55s forwards; }
+.ao-dispatch .ao-node.n3 { bottom: 25%; right: 15%; animation: nodePopIn 0.4s 0.7s forwards; }
+.ao-dispatch .ao-node.n4 { bottom: 5%; left: 50%; margin-left: -31px; animation: nodePopIn 0.4s 0.85s forwards; }
+.ao-dispatch .ao-node.n5 { bottom: 25%; left: 15%; animation: nodePopIn 0.4s 1s forwards; }
+
+.ao-dispatch .ao-line {
+  position: absolute; top: 50%; left: 50%;
+  height: 2px; background: linear-gradient(90deg, rgba(201,168,76,0.6), rgba(201,168,76,0.2));
+  transform-origin: left center;
+  opacity: 0;
+  border-radius: 1px;
+}
+/* 连线角度和长度 - 指向各个节点 */
+.ao-dispatch .ao-line.l1 { width: 120px; transform: translateY(-50%) rotate(-90deg); animation: lineGrowIn 0.3s 0.3s forwards; }
+.ao-dispatch .ao-line.l2 { width: 140px; transform: translateY(-50%) rotate(-45deg); animation: lineGrowIn 0.3s 0.45s forwards; }
+.ao-dispatch .ao-line.l3 { width: 140px; transform: translateY(-50%) rotate(45deg); animation: lineGrowIn 0.3s 0.6s forwards; }
+.ao-dispatch .ao-line.l4 { width: 120px; transform: translateY(-50%) rotate(90deg); animation: lineGrowIn 0.3s 0.75s forwards; }
+.ao-dispatch .ao-line.l5 { width: 140px; transform: translateY(-50%) rotate(135deg); animation: lineGrowIn 0.3s 0.9s forwards; }
+
+.ao-dispatch .ao-label {
+  position: absolute; bottom: -60px;
+  font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
+  opacity: 0; animation: fadeUp 0.5s 1.1s forwards;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 修复后的动画关键帧 */
+@keyframes nodePopIn { 
+  0% { opacity: 0; transform: scale(0); } 
+  60% { transform: scale(1.1); } 
+  100% { opacity: 1; transform: scale(1); } 
+}
+@keyframes lineGrowIn { 
+  0% { opacity: 0; width: 0; } 
+  100% { opacity: 1; } 
+}
+
+@keyframes fadeUp { 0%{opacity:0;transform:translateY(8px);} 100%{opacity:1;transform:translateY(0);} }
+
+.ev-header {
+  padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  background: rgba(201,168,76,0.04);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.ev-icon { font-size: var(--text-xl); /* 32px */ margin-top: 2px; }
+.ev-meta { flex: 1; min-width: 0; }
+.ev-from { font-size: var(--current-base); color: #aaa; }
+.ev-subject { font-size: var(--current-md); font-weight: 500; margin-top: 3px; }
+.ev-time { font-size: 14px; color: #555; margin-top: 2px; }
+.ev-body {
+  padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  font-size: var(--text-base); /* 18px */ color: #999; line-height: 1.8;
+}
+.ev-body .hl { color: var(--gold); font-weight: 500; }
+
+/* AI回复区 */
+.ai-reply-area {
+  background: rgba(74,222,128,0.03);
+  border: 1px solid rgba(74,222,128,0.12);
+  border-radius: 10px; padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  flex-shrink: 0;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.5s;
+}
+.ai-reply-area.show { opacity: 1; transform: translateY(0); }
+.ara-label { font-size: var(--current-sm); color: var(--green); letter-spacing: 1.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.ara-label::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); }
+.ara-text { font-size: var(--text-base); /* 18px */ color: #ccc; line-height: 1.8; }
+.ara-text .hl { color: var(--green); font-weight: 500; }
+
+/* 分析步骤 */
+.analysis-flow { flex:1; display: flex; flex-direction: column; gap: 8px; overflow: hidden; min-height: 0; }
+.af-title { font-size: var(--current-sm); letter-spacing: 2px; color: #444; flex-shrink: 0; }
+.analysis-steps { flex:1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.as-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: clamp(8px,1vh,12px) clamp(10px,1.2vw,14px);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px; background: rgba(255,255,255,0.02);
+  opacity: 0.25; transition: all 0.4s;
+}
+.as-item.active { opacity: 1; border-color: rgba(201,168,76,0.25); background: rgba(201,168,76,0.04); }
+.as-item.done { opacity: 1; border-color: rgba(74,222,128,0.15); background: rgba(74,222,128,0.02); }
+.as-icon { font-size: var(--current-lg); flex-shrink: 0; }
+.as-body { flex: 1; min-width: 0; }
+.as-name { font-size: var(--current-base); font-weight: 500; margin-bottom: 2px; }
+.as-detail { font-size: 14px; color: #666; line-height: 1.5; }
+.as-item.active .as-detail { color: var(--gold); }
+.as-item.done .as-detail { color: var(--green); }
+.as-badge {
+  font-size: var(--current-sm); padding: 2px 8px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(255,255,255,0.04); color: #555;
+}
+.as-item.active .as-badge { background: rgba(201,168,76,0.15); color: var(--gold); animation: blink2 0.8s infinite; }
+.as-item.done .as-badge { background: rgba(74,222,128,0.1); color: var(--green); }
+@keyframes blink2 { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+/* ===== 右：结果+统计 ===== */
+.panel-right {
+  border-left: 1px solid rgba(201,168,76,0.07);
+  display: flex; flex-direction: column;
+  background: rgba(255,255,255,0.01);
+  overflow-y: auto;
+}
+.pr-section { padding: clamp(12px,1.5vh,16px) clamp(12px,1.5vw,18px); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.prs-title { font-size: var(--current-sm); letter-spacing: 2px; color: #444; margin-bottom: 12px; }
+
+.action-card {
+  background: rgba(74,222,128,0.04);
+  border: 1px solid rgba(74,222,128,0.15);
+  border-radius: 12px; padding: clamp(16px,2vh,22px) clamp(16px,2vw,22px);
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.5s;
+}
+.action-card.show { opacity: 1; transform: translateY(0); }
+.ac-type {
+  font-size: 14px; letter-spacing: 2px; color: var(--green);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.ac-type::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); }
+.ac-title { font-size: var(--current-lg); font-weight: 600; margin-bottom: 8px; color: #eee; }
+.ac-detail { font-size: var(--text-base); /* 18px */ color: #999; line-height: 1.8; }
+.ac-detail .hl { color: var(--gold); }
+.ac-tag {
+  display: inline-block; margin-top: 8px;
+  padding: 3px 10px; border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 10px; font-size: var(--current-sm); color: var(--green);
+}
+
+/* 处理记录流 */
+.action-log { display: flex; flex-direction: column; gap: 7px; max-height: 220px; overflow-y: auto; }
+.log-entry {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 14px; opacity: 0; transform: translateX(-6px);
+  transition: all 0.3s; line-height: 1.5;
+}
+.log-entry.show { opacity: 1; transform: translateX(0); }
+.le-icon { flex-shrink: 0; font-size: var(--text-base); /* 18px */ }
+.le-text { color: #888; }
+.le-text .act { color: var(--green); }
+.le-text .skip { color: #555; }
+.le-text .hl { color: var(--gold); }
+
+/* 统计 */
+.today-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ts-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px; padding: 10px 12px;
+  text-align: center; transition: all 0.4s;
+}
+.ts-box.lit { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.04); }
+.ts-val { font-size: var(--current-2xl); font-weight: 200; color: var(--gold); }
+.ts-key { font-size: var(--current-sm); color: #555; margin-top: 4px; }
+
+/* ===== 开场处理按钮 ===== */
+.start-overlay {
+  position: absolute; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.5s;
+}
+.start-overlay.hidden { opacity: 0; pointer-events: none; }
+.start-icon { font-size: var(--current-hero); animation: floatY 3s ease-in-out infinite; }
+@keyframes floatY { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+.start-text { font-size: var(--current-xl); font-weight: 300; color: #ccc; text-align: center; line-height: 1.8; }
+.start-text em { color: var(--gold); font-style: normal; }
+.start-btn {
+  padding: 14px 48px;
+  background: var(--gold); color: var(--bg);
+  border: none; border-radius: 8px;
+  font-size: var(--current-md); font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(201,168,76,0.3);
+}
+.start-btn:hover { background: var(--gold); transform: scale(1.05); box-shadow: 0 0 40px rgba(201,168,76,0.4); }
+.start-hint { font-size: var(--current-base); color: #555; }
+
+/* ===== 结尾聊天窗口 ===== */
+.chat-popup {
+  position: absolute; bottom: 80px; right: clamp(20px,3vw,60px);
+  width: clamp(320px, 30vw, 420px);
+  background: rgba(10,10,14,0.96);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(201,168,76,0.08);
+  z-index: 200;
+  opacity: 0; transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  overflow: hidden;
+}
+.chat-popup.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.chat-header {
+  padding: 12px 16px;
+  background: rgba(201,168,76,0.08);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  display: flex; align-items: center; gap: 10px;
+}
+.chat-avatar { font-size: var(--current-2xl); }
+.chat-name { font-size: var(--text-base); /* 18px */ font-weight: 500; }
+.chat-status { font-size: var(--current-sm); color: var(--green); margin-left: auto; }
+.chat-messages {
+  padding: 16px;
+  max-height: 280px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
+.chat-msg {
+  display: flex; gap: 10px; max-width: 88%;
+  opacity: 0; transform: translateY(8px);
+  animation: chatMsgIn 0.35s forwards;
+}
+@keyframes chatMsgIn { to { opacity: 1; transform: translateY(0); } }
+.chat-msg.bot { align-self: flex-start; }
+.chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.chat-msg-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: var(--current-md); flex-shrink: 0; }
+.chat-msg.bot .chat-msg-av { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
+.chat-msg.user .chat-msg-av { background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3); }
+.chat-msg-body {
+  padding: 10px 14px; border-radius: 12px;
+  font-size: var(--text-base); /* 18px */ line-height: 1.7;
+}
+.chat-msg.bot .chat-msg-body {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-bottom-left-radius: 4px; color: #ddd;
+}
+.chat-msg.user .chat-msg-body {
+  background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.15);
+  border-bottom-right-radius: 4px; color: #b8f0d0;
+}
+.chat-msg-body .hl { color: var(--gold); font-weight: 500; }
+.chat-msg-body .green { color: var(--green); }
+
+/* 聊天输入区 */
+.chat-input-area {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chat-emoji-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.chat-emoji-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  font-size: var(--text-xl); /* 32px */
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.chat-emoji-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); transform: scale(1.1); }
+.chat-emoji-btn.pop {
+  animation: emojiPop 0.6s ease forwards;
+}
+@keyframes emojiPop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.6) rotate(10deg); }
+  60% { transform: scale(1.3) rotate(-5deg); }
+  100% { transform: scale(0); opacity: 0; }
+}
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input {
+  flex: 1; padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; color: #fff;
+  font-size: var(--text-base); /* 18px */ font-family: inherit;
+  outline: none;
+}
+.chat-input:focus { border-color: rgba(201,168,76,0.3); }
+.chat-input::placeholder { color: #555; }
+.chat-send-btn {
+  padding: 10px 16px;
+  background: var(--gold); color: var(--bg);
+  border: none; border-radius: 10px;
+  font-size: var(--text-base); /* 18px */ font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.2s;
+}
+.chat-send-btn:hover { background: var(--gold); }
+
+/* 飞出的表情包动效 */
+.floating-emoji {
+  position: fixed; z-index: 9999;
+  font-size: var(--text-hero); /* 75.9px */
+  pointer-events: none;
+  animation: emojiFloat 2s ease-out forwards;
+}
+@keyframes emojiFloat {
+  0% { opacity: 1; transform: scale(0.5) translateY(0); }
+  30% { opacity: 1; transform: scale(1.2) translateY(-40px); }
+  100% { opacity: 0; transform: scale(1.5) translateY(-200px); }
+}
+
+/* ===== 控制栏 ===== */
+.controls {
+  height: clamp(56px, 7vh, 72px); flex-shrink: 0;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  background: rgba(5,5,7,0.95);
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(8px, 1.5vw, 16px);
+  padding: 0 clamp(12px, 2vw, 24px);
+}
+.c-dots { display: flex; gap: 8px; align-items: center; }
+.c-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer; transition: all 0.3s; border: none;
+}
+.c-dot.active { background: var(--gold); box-shadow: 0 0 8px rgba(201,168,76,0.4); transform: scale(1.2); }
+.c-dot.done { background: rgba(201,168,76,0.4); }
+.c-dot:hover { background: rgba(201,168,76,0.5); }
+.sep { width:1px; height:24px; background:rgba(255,255,255,0.06); }
+.cbtn {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.04); color: var(--gold);
+  font-size: var(--current-md); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-family: inherit; flex-shrink: 0;
+}
+.cbtn:hover { background: rgba(201,168,76,0.15); transform: scale(1.05); }
+.cbtn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.cbtn.play {
+  width: 52px; height: 52px;
+  background: var(--gold); color: var(--bg);
+  font-size: var(--current-lg); border: none;
+  box-shadow: 0 0 20px rgba(201,168,76,0.3);
+}
+.cbtn.play:hover { background: var(--gold); }
+.cbtn.reset { border-color: rgba(255,255,255,0.12); color: #666; }
+.cbtn.reset:hover { background: rgba(255,255,255,0.08); color: #aaa; }
+.st-txt {
+  font-size: 14px; color: #444;
+  min-width: 0; flex: 1;
+  text-align: center; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  max-width: 320px;
+}
+.prog-w { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.prog-t { width: 100px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.prog-f { height: 100%; background: linear-gradient(90deg,var(--gold),var(--gold)); transition: width 0.4s; width: 0; }
+.prog-n { font-size: 14px; color: #444; white-space: nowrap; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr !important; }
+  .inbox { border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.07); max-height: 200px; }
+  .panel-right { border-left: none !important; border-top: 1px solid rgba(201,168,76,0.07); max-height: 220px; }
+}
+@media (max-width: 600px) {
+  html { height: auto !important; overflow: visible !important; }
+  body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; font-size: var(--current-md) !important; }
+  .page { height: auto !important; min-height: 1080px; }
+  .main { min-height: 80vh; }
+  .inbox { max-height: none !important; overflow: visible !important; border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.07); }
+  .panel-right { max-height: none !important; overflow: visible !important; border-left: none !important; border-top: 1px solid rgba(201,168,76,0.07); }
+  .chat-popup { right: 10px !important; left: 10px !important; width: auto !important; bottom: 90px !important; }
+  .controls { gap: 8px; padding: 12px 16px; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="grid-bg"></div>
+<canvas id="starfield"></canvas>
+
+<div class="page">
+  <div class="sys-header">
+    <div class="sh-left">
+      <div class="sh-badge">MAIL CENTER</div>
+      <div class="sh-title">智能邮件中枢 · <em>AI 全自动分类处理</em></div>
+    </div>
+    <div class="sh-right">
+      <div class="sh-metric">今日已处: <span class="val" id="totalCount">0</span></div>
+      <div class="sh-metric">节省: <span class="val" id="savedTime">0</span> min</div>
+      <div class="sh-status" id="sysStatus">处理引擎就绪</div>
+    </div>
+  </div>
+
+  <div class="main" style="position:relative;">
+    <!-- 开场覆盖层 -->
+    <div class="start-overlay" id="startOverlay">
+      <div class="start-icon">📧</div>
+      <div class="start-text">收件箱 <em>5 封</em> 待处理邮件<br>AI智能分类引擎已就绪</div>
+      <button class="start-btn" id="startBtn">开始处理</button>
+      <div class="start-hint">点击按钮，AI将自动处理所有邮件</div>
+    </div>
+
+    <!-- 左：收件箱队列 -->
+    <div class="inbox">
+      <div class="inbox-header">
+        <div class="ih-title">INBOX · 待处理</div>
+        <div class="ih-count" id="ihCount">5 封</div>
+      </div>
+      <div class="mail-list">
+        <div class="mail-item waiting" id="mi1">
+          <div class="mi-from">张总 · 对公业务</div>
+          <div class="mi-subject">【紧急】大额转账授权确认</div>
+          <div class="mi-meta"><span class="mi-type type-urgent">紧急</span><span class="mi-time">09:02</span></div>
+        </div>
+        <div class="mail-item waiting" id="mi2">
+          <div class="mi-from">数据组 · 运营部</div>
+          <div class="mi-subject">每日客户资产变动报告</div>
+          <div class="mi-meta"><span class="mi-type type-report">报告</span><span class="mi-time">09:05</span></div>
+        </div>
+        <div class="mail-item waiting" id="mi3">
+          <div class="mi-from">行政部</div>
+          <div class="mi-subject">本周四全行会议通知</div>
+          <div class="mi-meta"><span class="mi-type type-meeting">会议</span><span class="mi-time">09:08</span></div>
+        </div>
+        <div class="mail-item waiting" id="mi4">
+          <div class="mi-from">marketing@free888.xyz</div>
+          <div class="mi-subject">恭喜您中奖100万！！！</div>
+          <div class="mi-meta"><span class="mi-type type-spam">垃圾</span><span class="mi-time">09:11</span></div>
+        </div>
+        <div class="mail-item waiting" id="mi5">
+          <div class="mi-from">合规部 · 风控中心</div>
+          <div class="mi-subject">Q4客户风险评级更新通知</div>
+          <div class="mi-meta"><span class="mi-type type-info">通知</span><span class="mi-time">09:14</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中：AI处理面板 -->
+    <div class="center">
+      <div class="ai-brain">
+        <div class="brain-orb">🧠</div>
+        <div class="brain-info">
+          <div class="bi-status" id="biStatus">AI ENGINE READY</div>
+          <div class="bi-task" id="biTask">分析引擎就绪，等待邮件输入…<br>支持：分类识别 · 优先级判断 · 自动执行</div>
+        </div>
+      </div>
+
+      <div class="email-viewer" id="emailViewer">
+        <div class="ev-header">
+          <div class="ev-icon" id="evIcon">📧</div>
+          <div class="ev-meta">
+            <div class="ev-from" id="evFrom">—</div>
+            <div class="ev-subject" id="evSubject">等待邮件处理...</div>
+            <div class="ev-time" id="evTime">—</div>
+          </div>
+        </div>
+        <div class="ev-body" id="evBody">点击下方「开始处理」按钮，AI将逐一处理待处理邮件</div>
+      </div>
+
+      <div class="ai-reply-area" id="aiReplyArea">
+        <div class="ara-label">AI 正在生成回复</div>
+        <div class="ara-text" id="araText"></div>
+      </div>
+
+      <!-- 操作具象化浮层 -->
+      <div class="action-overlay" id="actionOverlay">
+        <div class="action-anim-box" id="actionAnimBox"></div>
+      </div>
+
+      <div class="analysis-flow">
+        <div class="af-title">ANALYSIS PIPELINE</div>
+        <div class="analysis-steps">
+          <div class="as-item" id="as1"><div class="as-icon">🔍</div><div class="as-body"><div class="as-name">发件人识别</div><div class="as-detail" id="as1d">待机</div></div><div class="as-badge" id="as1b">待机</div></div>
+          <div class="as-item" id="as2"><div class="as-icon">📊</div><div class="as-body"><div class="as-name">内容分析</div><div class="as-detail" id="as2d">待机</div></div><div class="as-badge" id="as2b">待机</div></div>
+          <div class="as-item" id="as3"><div class="as-icon">⚡</div><div class="as-body"><div class="as-name">优先级判定</div><div class="as-detail" id="as3d">待机</div></div><div class="as-badge" id="as3b">待机</div></div>
+          <div class="as-item" id="as4"><div class="as-icon">🚀</div><div class="as-body"><div class="as-name">自动执行</div><div class="as-detail" id="as4d">待机</div></div><div class="as-badge" id="as4b">待机</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：结果+统计 -->
+    <div class="panel-right">
+      <div class="pr-section">
+        <div class="prs-title">处理结果</div>
+        <div class="action-card" id="actionCard">
+          <div class="ac-type" id="acType">等待中</div>
+          <div class="ac-title" id="acTitle">暂无处理结果</div>
+          <div class="ac-detail" id="acDetail">AI引擎待命中</div>
+          <div class="ac-tag" id="acTag" style="display:none;"></div>
+        </div>
+      </div>
+      <div class="pr-section" style="flex:1; min-height:0;">
+        <div class="prs-title">处理记录</div>
+        <div class="action-log" id="actionLog">
+          <div class="log-entry show"><div class="le-icon">⏳</div><div class="le-text">等待处理...</div></div>
+        </div>
+      </div>
+      <div class="pr-section">
+        <div class="prs-title">今日统计</div>
+        <div class="today-stats">
+          <div class="ts-box" id="tsb1"><div class="ts-val" id="tsv1">0</div><div class="ts-key">处理数</div></div>
+          <div class="ts-box" id="tsb2"><div class="ts-val" id="tsv2">0%</div><div class="ts-key">自动化率</div></div>
+          <div class="ts-box" id="tsb3"><div class="ts-val" id="tsv3">0</div><div class="ts-key">节省分钟</div></div>
+          <div class="ts-box" id="tsb4"><div class="ts-val" id="tsv4">0</div><div class="ts-key">人工介入</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 结尾聊天弹窗 -->
+    <div class="chat-popup" id="chatPopup">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-name">AI 邮件助手</div>
+        <div class="chat-status" id="chatStatus">在线</div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-area">
+        <div class="chat-emoji-row">
+          <button class="chat-emoji-btn" data-emoji="👍">👍</button>
+          <button class="chat-emoji-btn" data-emoji="🎉">🎉</button>
+          <button class="chat-emoji-btn" data-emoji="😂">😂</button>
+          <button class="chat-emoji-btn" data-emoji="❤️">❤️</button>
+          <button class="chat-emoji-btn" data-emoji="🔥">🔥</button>
+          <button class="chat-emoji-btn" data-emoji="👏">👏</button>
+        </div>
+        <div class="chat-input-row">
+          <input class="chat-input" id="chatInput" placeholder="回复助手..." />
+          <button class="chat-send-btn" id="chatSendBtn">发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 控制栏 -->
+  <div class="controls">
+    <div class="c-dots" id="cDots">
+      <button class="c-dot" data-step="0" title="开始"></button>
+      <button class="c-dot" data-step="1" title="邮件1"></button>
+      <button class="c-dot" data-step="2" title="邮件2"></button>
+      <button class="c-dot" data-step="3" title="邮件3"></button>
+      <button class="c-dot" data-step="4" title="邮件4"></button>
+      <button class="c-dot" data-step="5" title="邮件5"></button>
+      <button class="c-dot" data-step="6" title="汇报"></button>
+    </div>
+    <div class="sep"></div>
+    <button class="cbtn" id="prevBtn" disabled title="上一步 (←)">◀</button>
+    <button class="cbtn play" id="playBtn" title="播放/暂停 (Space)">▶</button>
+    <button class="cbtn" id="nextBtn" title="下一步 (→)">▶</button>
+    <button class="cbtn reset" id="resetBtn" title="重置 (R)">↺</button>
+    <div class="sep"></div>
+    <div class="st-txt" id="stTxt">就绪 — 点击开始处理邮件</div>
+    <div class="sep"></div>
+    <div class="prog-w">
+      <div class="prog-t"><div class="prog-f" id="progF"></div></div>
+      <span class="prog-n" id="progN">0/7</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== 星空背景 =====
+const cvs = document.getElementById('starfield');
+const ctx = cvs.getContext('2d');
+function resizeCvs() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
+resizeCvs();
+window.addEventListener('resize', resizeCvs);
+const stars = Array.from({length:60}, () => ({
+  x: Math.random()*window.innerWidth, y: Math.random()*window.innerHeight,
+  r: Math.random()*1.2+.2, a: Math.random()*.3+.05,
+  vx: (Math.random()-.5)*.1, vy: (Math.random()-.5)*.1
+}));
+let isPaused=false;
+let rafId=null;
+function loop() {
+  if(!isPaused){
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    stars.forEach(s => {
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${s.a})`; ctx.fill();
+      s.x+=s.vx; s.y+=s.vy;
+      if(s.x<0||s.x>cvs.width)s.vx*=-1;
+      if(s.y<0||s.y>cvs.height)s.vy*=-1;
+    });
+  }
+  rafId=requestAnimationFrame(loop);
+}
+function pauseAnimations(){isPaused=true;}
+function resumeAnimations(){isPaused=false;}
+loop();
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// ===== 邮件数据 =====
+const emails = [
+  {
+    id: 1, icon: '🚨', from: '张总 · 对公业务部', subject: '【紧急】大额转账授权确认',
+    time: '09:02',
+    body: '需要确认一笔 <span class="hl">500万元</span> 的大额转账授权，客户已在柜台等候，请尽快处理。',
+    type: '紧急', analysis: ['发件人：张总（对公部）', '关键词：紧急/大额授权', '紧急度：9.8/10', '判定：立即人工处理'],
+    action: '通知', actionType: '🔔 立即通知', actionTitle: '推送紧急提醒',
+    actionDetail: '已发送手机推送通知，标记为 <span class="hl">最高优先级</span>，同时转发直属上级。',
+    actionTag: '⚡ 高优先级', doneClass: 'done-ok',
+    logText: '<span class="act">⚡ 推送紧急提醒 → 张总</span>',
+    reply: '已将此邮件标记为<span class="hl">最高优先级</span>，并通过手机推送、企微双通道通知张总。建议 <span class="green">10分钟内</span> 完成授权确认，避免客户长时间等候。',
+    saved: 5, anim: 'sending'
+  },
+  {
+    id: 2, icon: '📊', from: '数据组 · 运营部', subject: '每日客户资产变动报告',
+    time: '09:05',
+    body: '附件包含今日 <span class="hl">1.2万名客户</span> 的资产变动数据，含持仓分析、风险预警。',
+    type: '报告', analysis: ['发件人：数据组（运营部）', '类型：定期报告邮件', '附件：Excel 1份', '判定：自动归档+摘要'],
+    action: '归档', actionType: '📁 自动归档', actionTitle: '智能归档 + 摘要提取',
+    actionDetail: '已归档至「日报」文件夹，AI提取关键指标：<span class="hl">今日资产波动+0.3%</span>，3个风险预警。',
+    actionTag: '📊 已归档', doneClass: 'done-ok',
+    logText: '<span class="act">📁 归档至日报文件夹</span>',
+    reply: '报告已自动归档至「<span class="hl">日报/2026-03</span>」文件夹。关键摘要：客户资产波动 <span class="green">+0.3%</span>，3个风险预警客户已标记提醒。',
+    saved: 8, anim: 'archiving'
+  },
+  {
+    id: 3, icon: '📅', from: '行政部', subject: '本周四全行会议通知',
+    time: '09:08',
+    body: '本周四下午 <span class="hl">14:00</span> 举行全行季度工作会议，地点：5楼会议室，请提前确认出席。',
+    type: '会议', analysis: ['发件人：行政部', '类型：会议通知', '时间：周四14:00', '判定：自动加入日历'],
+    action: '日历', actionType: '📅 日历同步', actionTitle: '自动添加日历提醒',
+    actionDetail: '已添加至日历：<span class="hl">周四 14:00-16:00</span>，地点5楼会议室，并发送确认出席回执。',
+    actionTag: '📅 已同步日历', doneClass: 'done-ok',
+    logText: '<span class="act">📅 添加日历 → 周四 14:00</span>',
+    reply: '会议已自动加入日历：<span class="hl">周四 14:00-16:00</span>，5楼会议室。已自动回复行政部确认出席，并设置提前 <span class="green">30分钟</span> 提醒。',
+    saved: 6, anim: 'sending'
+  },
+  {
+    id: 4, icon: '⚠️', from: 'marketing@free888.xyz', subject: '恭喜您中奖100万！！！',
+    time: '09:11',
+    body: '亲爱的用户，恭喜您被随机抽中为 <span class="hl">特等奖</span>！请点击链接领取100万奖金...',
+    type: '垃圾', analysis: ['发件人：free888.xyz（可疑）', '关键词：中奖/点击链接', '欺诈概率：99.7%', '判定：垃圾邮件拦截'],
+    action: '拦截', actionType: '🛡️ 自动拦截', actionTitle: '垃圾邮件识别',
+    actionDetail: '发件域名可疑 + 欺诈关键词命中，已 <span class="hl">自动拦截删除</span>，无需人工干预。',
+    actionTag: '🛡️ 已拦截', doneClass: 'done-skip',
+    logText: '<span class="skip">🗑️ 垃圾邮件 → 已拦截</span>',
+    reply: '已识别为 <span class="hl">钓鱼/欺诈邮件</span>（可信度99.7%）。发件域名 free888.xyz 在黑名单中，已自动拦截并删除，<span class="green">无需人工干预</span>。',
+    saved: 3, anim: 'rejecting'
+  },
+  {
+    id: 5, icon: '📨', from: '合规部 · 风控中心', subject: 'Q4客户风险评级更新通知',
+    time: '09:14',
+    body: 'Q4风险评级更新涉及 <span class="hl">328名客户</span>，其中高风险新增12名，请相关经理及时跟进。',
+    type: '通知', analysis: ['发件人：合规部（风控中心）', '类型：合规风控通知', '关键数据：328客户/12高风险', '判定：智能分发'],
+    action: '分发', actionType: '📨 智能分发', actionTitle: '自动分发至相关经理',
+    actionDetail: '提取 <span class="hl">328名客户</span> 对应经理，自动推送个性化提醒至各经理企微。',
+    actionTag: '📨 已分发12人', doneClass: 'done-ok',
+    logText: '<span class="act">📨 分发通知 → 12名经理</span>',
+    reply: '已提取 <span class="hl">328名客户</span> 与对应经理的匹配关系，向 <span class="green">12名客户经理</span> 推送了个性化跟进提醒，每条提醒包含具体客户名单和风险标签。',
+    saved: 15, anim: 'sending'
+  }
+];
+
+// ===== 状态 =====
+const TOTAL_STEPS = 7;
+let currentStep = 0;
+let currentEmailIdx = -1;
+let autoPlay = false;
+let autoTimer = null;
+let savedMinutes = 0;
+let processedCount = 0;
+let processing = false;
+let chatFinished = false;
+
+// ===== 工具函数 =====
+function setStatus(txt) {
+  document.getElementById('stTxt').textContent = txt;
+}
+
+function setProgress(n) {
+  document.getElementById('progF').style.width = (n / TOTAL_STEPS * 100) + '%';
+  document.getElementById('progN').textContent = n + '/' + TOTAL_STEPS;
+  document.querySelectorAll('.c-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === n);
+    d.classList.toggle('done', i < n);
+  });
+  document.getElementById('prevBtn').disabled = n === 0;
+  document.getElementById('nextBtn').disabled = n >= TOTAL_STEPS;
+}
+
+function resetAnalysis() {
+  [1,2,3,4].forEach(i => {
+    document.getElementById('as'+i).classList.remove('active','done');
+    document.getElementById('as'+i+'b').textContent = '待机';
+    document.getElementById('as'+i+'d').textContent = '待机';
+  });
+}
+
+// ===== 操作具象化动效 =====
+function getActionAnimHTML(email) {
+  const a = email.action;
+  if (a === '通知') {
+    return `<div class="ao-notify">
+      <div class="ao-phone">
+        <div class="ao-notch"></div>
+        <div class="ao-banner">
+          <div class="ao-banner-icon">🔔</div>
+          <div class="ao-banner-from">AI 邮件助手</div>
+          <div class="ao-banner-text">${email.subject}</div>
+        </div>
+      </div>
+      <div class="ao-label">推送已发送</div>
+    </div>`;
+  }
+  if (a === '归档') {
+    return `<div class="ao-archive">
+      <div class="ao-folder">
+        <div class="ao-folder-tab"></div>
+        <div class="ao-folder-back">
+          <div class="ao-folder-label">📁 日报 / 2026-03</div>
+        </div>
+        <div class="ao-file"></div>
+      </div>
+      <div class="ao-label">归档完成</div>
+    </div>`;
+  }
+  if (a === '日历') {
+    // 生成迷你日历（3月某周，周四高亮）
+    const days = ['一','二','三','四','五','六','日'];
+    const nums = [24,25,26,27,28,29,30];
+    let grid = days.map((d,i) => `<div class="ao-cal-day head">${d}</div>`).join('');
+    nums.forEach((n,i) => {
+      const cls = i === 3 ? 'event' : (i === 2 ? 'today' : '');
+      grid += `<div class="ao-cal-day ${cls}">${n}</div>`;
+    });
+    return `<div class="ao-calendar">
+      <div class="ao-cal-box">
+        <div class="ao-cal-header">2026年3月</div>
+        <div class="ao-cal-grid">${grid}</div>
+        <div class="ao-cal-event-bar">
+          <div class="ao-cal-event-title">全行季度工作会议</div>
+          <div class="ao-cal-event-time">周四 14:00-16:00 · 5楼会议室</div>
+        </div>
+      </div>
+    </div>`;
+  }
+  if (a === '拦截') {
+    return `<div class="ao-block">
+      <div class="ao-shield">
+        <div class="ao-shield-bg"></div>
+        <div class="ao-shield-icon">🛡️</div>
+        <div class="ao-shatter">📧</div>
+      </div>
+      <div class="ao-label">已拦截删除</div>
+    </div>`;
+  }
+  if (a === '分发') {
+    return `<div class="ao-dispatch">
+      <div class="ao-center">📨</div>
+      <div class="ao-line l1"></div>
+      <div class="ao-line l2"></div>
+      <div class="ao-line l3"></div>
+      <div class="ao-line l4"></div>
+      <div class="ao-line l5"></div>
+      <div class="ao-node n1">👤</div>
+      <div class="ao-node n2">👤</div>
+      <div class="ao-node n3">👤</div>
+      <div class="ao-node n4">👤</div>
+      <div class="ao-node n5">👤</div>
+      <div class="ao-label">已分发至 12 名经理</div>
+    </div>`;
+  }
+  return '';
+}
+
+// 等待点击的Promise
+function waitForClick(element) {
+  return new Promise(resolve => {
+    const handler = () => {
+      element.removeEventListener('click', handler);
+      resolve();
+    };
+    element.addEventListener('click', handler);
+  });
+}
+
+async function showActionAnim(email) {
+  const overlay = document.getElementById('actionOverlay');
+  const box = document.getElementById('actionAnimBox');
+  const viewer = document.getElementById('emailViewer');
+  
+  // 第一步：显示透明提示在邮件内容上方，等待点击
+  box.innerHTML = `<div class="ao-click-hint">
+    <div class="ao-hint-icon">👆</div>
+    <div class="ao-hint-text">点击查看处理结果</div>
+    <div class="ao-hint-action">${email.action}</div>
+  </div>`;
+  box.className = 'action-anim-box hint-mode';
+  overlay.classList.add('show-hint'); // 使用新的无遮罩显示方式
+  
+  // 等待用户点击
+  await waitForClick(overlay);
+  
+  // 第二步：显示动画（带遮罩）
+  box.className = 'action-anim-box';
+  overlay.classList.remove('show-hint');
+  overlay.classList.add('show');
+  box.innerHTML = getActionAnimHTML(email);
+  await sleep(1600);
+  overlay.classList.remove('show');
+  await sleep(300);
+}
+
+// ===== 邮件处理 =====
+async function processEmail(idx) {
+  if (processing) return;
+  processing = true;
+  const email = emails[idx];
+  currentStep = idx + 1;
+  setProgress(idx + 1);
+  setStatus('正在处理：' + email.subject);
+
+  // 邮件列表状态
+  document.getElementById('mi'+(idx+1)).classList.remove('waiting');
+  document.getElementById('mi'+(idx+1)).classList.add('processing');
+
+  // AI大脑
+  document.getElementById('biStatus').textContent = 'ANALYZING...';
+  document.getElementById('biTask').innerHTML = '正在分析邮件 <span class="hl">' + (idx+1) + '/5</span>：' + email.subject;
+
+  // 邮件查看器
+  const viewer = document.getElementById('emailViewer');
+  viewer.classList.remove('sending','archiving','rejecting');
+  document.getElementById('evIcon').textContent = email.icon;
+  document.getElementById('evFrom').textContent = email.from;
+  document.getElementById('evSubject').textContent = email.subject;
+  document.getElementById('evTime').textContent = email.time;
+  document.getElementById('evBody').innerHTML = email.body;
+
+  // 隐藏AI回复
+  document.getElementById('aiReplyArea').classList.remove('show');
+
+  // 分析步骤动画
+  resetAnalysis();
+  for (let i = 0; i < 4; i++) {
+    if (i > 0) {
+      document.getElementById('as'+i).classList.remove('active');
+      document.getElementById('as'+i).classList.add('done');
+      document.getElementById('as'+i+'b').textContent = '✓';
+    }
+    document.getElementById('as'+(i+1)).classList.add('active');
+    document.getElementById('as'+(i+1)+'d').textContent = email.analysis[i];
+    document.getElementById('as'+(i+1)+'b').textContent = '处理中';
+    await sleep(500);
+  }
+  document.getElementById('as4').classList.remove('active');
+  document.getElementById('as4').classList.add('done');
+  document.getElementById('as4b').textContent = '✓';
+
+  // AI回复区——具象化的"编写回复"过程
+  await sleep(300);
+  const replyArea = document.getElementById('aiReplyArea');
+  const replyText = document.getElementById('araText');
+  replyArea.classList.add('show');
+  // 打字机效果
+  const plainText = email.reply.replace(/<[^>]+>/g, '');
+  replyText.textContent = '';
+  for (let i = 0; i < plainText.length; i++) {
+    replyText.textContent += plainText[i];
+    if (i % 3 === 0) await sleep(30);
+  }
+  replyText.innerHTML = email.reply;
+  await sleep(400);
+
+  // 操作具象化动效
+  await showActionAnim(email);
+
+  // 操作结果
+  document.getElementById('actionCard').classList.add('show');
+  document.getElementById('acType').textContent = email.actionType;
+  document.getElementById('acTitle').textContent = email.actionTitle;
+  document.getElementById('acDetail').innerHTML = email.actionDetail;
+  document.getElementById('acTag').textContent = email.actionTag;
+  document.getElementById('acTag').style.display = 'inline-block';
+
+  // 邮件列表状态
+  document.getElementById('mi'+(idx+1)).classList.remove('processing');
+  document.getElementById('mi'+(idx+1)).classList.add(email.doneClass);
+
+  // 日志
+  const logDiv = document.createElement('div');
+  logDiv.className = 'log-entry';
+  logDiv.innerHTML = '<div class="le-icon">' + email.icon + '</div><div class="le-text">' + email.logText + ' · <span class="hl">' + email.time + '</span></div>';
+  const logContainer = document.getElementById('actionLog');
+  const placeholder = logContainer.querySelector('.le-text');
+  if (placeholder && placeholder.textContent === '等待处理...') {
+    placeholder.closest('.log-entry').remove();
+  }
+  logContainer.prepend(logDiv);
+  setTimeout(() => logDiv.classList.add('show'), 50);
+
+  // 统计更新
+  processedCount++;
+  savedMinutes += email.saved;
+  document.getElementById('totalCount').textContent = processedCount;
+  document.getElementById('savedTime').textContent = savedMinutes;
+  document.getElementById('tsv1').textContent = processedCount;
+  document.getElementById('tsv2').textContent = Math.round(processedCount / 5 * 100) + '%';
+  document.getElementById('tsv3').textContent = savedMinutes;
+  document.getElementById('tsv4').textContent = email.type === '紧急' ? '1' : '0';
+  ['tsb1','tsb2','tsb3','tsb4'].forEach(id => document.getElementById(id).classList.add('lit'));
+
+  // AI状态
+  document.getElementById('biStatus').textContent = '✓ PROCESSED';
+  document.getElementById('biTask').innerHTML = '邮件 ' + (idx+1) + '/5 完成：<span class="hl">' + email.action + '</span>';
+  setStatus('✓ 完成：' + email.subject + ' → ' + email.action);
+  document.getElementById('ihCount').textContent = (5 - processedCount) + ' 封';
+
+  currentEmailIdx = idx;
+  processing = false;
+}
+
+// ===== 结尾聊天场景 =====
+async function showChatReport() {
+  currentStep = 6;
+  setProgress(6);
+  setStatus('处理汇报');
+  chatFinished = false;
+
+  const popup = document.getElementById('chatPopup');
+  const msgs = document.getElementById('chatMessages');
+  msgs.innerHTML = '';
+
+  popup.classList.add('show');
+
+  // 助手发汇报
+  await sleep(500);
+  await addBotMessage('今日邮件处理已完成！');
+  await sleep(600);
+  await addBotMessage('处理 <span class="hl">5封</span> 邮件，自动分类率 <span class="green">100%</span>，累计节省 <span class="hl">' + savedMinutes + '分钟</span> 人工操作。');
+  await sleep(400);
+  await addBotMessage('其中 1 封紧急邮件已推送提醒，1 封垃圾邮件已拦截，3 封常规邮件已完成归档/分发。');
+  await sleep(300);
+  await addBotMessage('以上为本次邮件处理的完整汇报，请审阅。如需进一步处理可随时告知。');
+
+  document.getElementById('chatInput').disabled = false;
+  document.getElementById('chatSendBtn').disabled = false;
+  document.querySelectorAll('.chat-emoji-btn').forEach(b => b.disabled = false);
+  chatFinished = true;
+}
+
+function addBotMessage(html) {
+  return new Promise(resolve => {
+    const msgs = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.innerHTML = '<div class="chat-msg-av">🤖</div><div class="chat-msg-body">' + html + '</div>';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(resolve, 400);
+  });
+}
+
+function addUserMessage(text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg user';
+  div.innerHTML = '<div class="chat-msg-av">👤</div><div class="chat-msg-body">' + text + '</div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// 飞出表情包动效
+function launchEmoji(emoji) {
+  const el = document.createElement('div');
+  el.className = 'floating-emoji';
+  el.textContent = emoji;
+  // 从聊天窗口位置发射
+  const chatPopup = document.getElementById('chatPopup');
+  const rect = chatPopup.getBoundingClientRect();
+  el.style.left = (rect.left + rect.width / 2 - 30) + 'px';
+  el.style.top = (rect.top - 20) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2000);
+}
+
+// ===== 自动播放 =====
+async function doAutoPlay() {
+  autoPlay = true;
+  document.getElementById('playBtn').textContent = '⏸';
+
+  // Step 0: 如果还在开始页，点击开始
+  if (currentStep === 0) {
+    document.getElementById('startOverlay').classList.add('hidden');
+    await sleep(300);
+  }
+
+  // Step 1-5: 处理5封邮件
+  for (let i = Math.max(0, currentEmailIdx + 1); i < emails.length; i++) {
+    if (!autoPlay) break;
+    await processEmail(i);
+    if (!autoPlay) break;
+    if (i < emails.length - 1) await sleep(1500);
+  }
+
+  // Step 6: 聊天汇报
+  if (autoPlay) {
+    await sleep(800);
+    await showChatReport();
+  }
+
+  autoPlay = false;
+  document.getElementById('playBtn').textContent = '▶';
+}
+
+function stopPlay() {
+  autoPlay = false;
+  document.getElementById('playBtn').textContent = '▶';
+}
+
+// ===== 手动下一步 =====
+async function nextStep() {
+  stopPlay();
+  if (processing) return;
+
+  if (currentStep === 0) {
+    // 开始处理
+    document.getElementById('startOverlay').classList.add('hidden');
+    currentStep = 0;
+    await processEmail(0);
+  } else if (currentStep >= 1 && currentStep <= 5) {
+    // 下一封邮件
+    const nextIdx = currentStep; // step 1=email0, step 5=email4
+    if (nextIdx < emails.length) {
+      await processEmail(nextIdx);
+    }
+  } else if (currentStep === 5) {
+    // 显示聊天
+    await showChatReport();
+  }
+}
+
+async function prevStep() {
+  stopPlay();
+  // 简单的视觉回退
+  if (currentEmailIdx > 0) {
+    document.getElementById('mi'+(currentEmailIdx+1)).classList.remove('processing', 'done-ok', 'done-skip');
+    document.getElementById('mi'+(currentEmailIdx+1)).classList.add('waiting');
+    setProgress(currentEmailIdx);
+    currentStep = currentEmailIdx;
+    currentEmailIdx--;
+  }
+}
+
+// ===== 重置 =====
+function resetAll() {
+  stopPlay();
+  processing = false;
+  chatFinished = false;
+  currentStep = 0;
+  currentEmailIdx = -1;
+  processedCount = 0;
+  savedMinutes = 0;
+
+  // 开场层
+  document.getElementById('startOverlay').classList.remove('hidden');
+
+  // 邮件列表
+  [1,2,3,4,5].forEach(i => {
+    const el = document.getElementById('mi'+i);
+    el.classList.remove('processing','done-ok','done-skip');
+    el.classList.add('waiting');
+  });
+  document.getElementById('ihCount').textContent = '5 封';
+
+  // 分析
+  resetAnalysis();
+
+  // 邮件查看器
+  document.getElementById('emailViewer').classList.remove('sending','archiving','rejecting');
+  document.getElementById('actionOverlay').classList.remove('show');
+  document.getElementById('evIcon').textContent = '📧';
+  document.getElementById('evFrom').textContent = '—';
+  document.getElementById('evSubject').textContent = '等待邮件处理...';
+  document.getElementById('evTime').textContent = '—';
+  document.getElementById('evBody').textContent = '点击下方「开始处理」按钮，AI将逐一处理待处理邮件';
+
+  // AI回复
+  document.getElementById('aiReplyArea').classList.remove('show');
+  document.getElementById('araText').textContent = '';
+
+  // 操作结果
+  document.getElementById('actionCard').classList.remove('show');
+  document.getElementById('biStatus').textContent = 'AI ENGINE READY';
+  document.getElementById('biTask').innerHTML = '分析引擎就绪，等待邮件输入…<br>支持：分类识别 · 优先级判断 · 自动执行';
+
+  // 统计
+  document.getElementById('totalCount').textContent = '0';
+  document.getElementById('savedTime').textContent = '0';
+  ['tsv1','tsv2','tsv3','tsv4'].forEach((id,i) => {
+    document.getElementById(id).textContent = ['0','0%','0','0'][i];
+  });
+  ['tsb1','tsb2','tsb3','tsb4'].forEach(id => document.getElementById(id).classList.remove('lit'));
+
+  // 日志
+  document.getElementById('actionLog').innerHTML = '<div class="log-entry show"><div class="le-icon">⏳</div><div class="le-text">等待处理...</div></div>';
+
+  // 聊天
+  document.getElementById('chatPopup').classList.remove('show');
+  document.getElementById('chatMessages').innerHTML = '';
+  document.getElementById('chatInput').value = '';
+  document.getElementById('chatInput').disabled = true;
+  document.getElementById('chatSendBtn').disabled = true;
+  document.querySelectorAll('.chat-emoji-btn').forEach(b => b.disabled = true);
+
+  // 进度
+  setProgress(0);
+  setStatus('就绪 — 点击开始处理邮件');
+}
+
+// ===== 事件绑定 =====
+document.getElementById('startBtn').addEventListener('click', () => {
+  document.getElementById('startOverlay').classList.add('hidden');
+  // 直接开始自动播放
+  doAutoPlay();
+});
+
+document.getElementById('playBtn').addEventListener('click', () => {
+  if (autoPlay) stopPlay();
+  else doAutoPlay();
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  nextStep();
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  prevStep();
+});
+
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+document.querySelectorAll('.c-dot').forEach(d => {
+  d.addEventListener('click', () => {
+    const step = parseInt(d.dataset.step);
+    if (step === 0) { resetAll(); return; }
+    stopPlay();
+    // 快进到指定步骤
+    if (step === 6 && currentEmailIdx >= emails.length - 1) {
+      showChatReport();
+    }
+  });
+});
+
+document.addEventListener('keydown', e => {
+  // 只转发上下翻页键给父窗口
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
+    try { window.parent.postMessage({ type: 'iframeKeydown', key: e.key }, '*'); } catch(err) {}
+  }
+  // 左右箭头在内部处理场景切换
+  if (document.activeElement !== document.getElementById('chatInput')) {
+    if (e.code === 'Space') { e.preventDefault(); document.getElementById('playBtn').click(); }
+    else if (e.code === 'ArrowRight') { e.preventDefault(); document.getElementById('nextBtn').click(); }
+    else if (e.code === 'ArrowLeft') { e.preventDefault(); document.getElementById('prevBtn').click(); }
+  }
+  if (e.code === 'KeyR') resetAll();
+});
+
+// 聊天输入
+document.getElementById('chatSendBtn').addEventListener('click', sendChatMessage);
+document.getElementById('chatInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendChatMessage();
+});
+
+async function sendChatMessage() {
+  if (!chatFinished) return;
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMessage(text);
+  await sleep(500);
+
+  // 助手回复
+  let reply = '';
+  if (text.includes('棒') || text.includes('好') || text.includes('厉害') || text.includes('不错')) {
+    reply = '谢谢认可！AI会继续学习优化，争取处理得更快更准 😄';
+  } else if (text.includes('拦截') || text.includes('垃圾')) {
+    reply = '是的！垃圾邮件拦截准确率已达 <span class="green">99.7%</span>，每天都在提升中 🛡️';
+  } else if (text.includes('效率') || text.includes('速度')) {
+    reply = '平均每封邮件处理时间 <span class="hl">不到3秒</span>，比人工快了 <span class="green">40倍</span> ⚡';
+  } else {
+    reply = '收到！有任何问题随时找我 🤖';
+  }
+  await addBotMessage(reply);
+}
+
+// 表情包按钮
+document.querySelectorAll('.chat-emoji-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (!chatFinished) return;
+    const emoji = btn.dataset.emoji;
+    // 按钮弹跳动效
+    btn.classList.add('pop');
+    setTimeout(() => {
+      btn.classList.remove('pop');
+      btn.style.opacity = '1';
+      btn.style.transform = 'scale(1)';
+    }, 600);
+    // 飞出大表情
+    launchEmoji(emoji);
+    // 显示在聊天中
+    addUserMessage(emoji);
+    // 助手回复
+    setTimeout(async () => {
+      const replies = {
+        '👍': '谢谢鼓励！继续加油 💪',
+        '🎉': '一起庆祝高效的一天！🥳',
+        '😂': '哈哈，有什么好笑的？😄',
+        '❤️': '收到满满的爱！我会更努力工作的 ❤️',
+        '🔥': '今天的处理效率确实很燃！🔥',
+        '👏': '感谢认可！这是AI应该做的 👏'
+      };
+      await addBotMessage(replies[emoji] || '谢谢！🤖');
+    }, 600);
+  });
+});
+
+// 字体大小同步
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+  // 可见性控制
+  if (e.data && e.data.type === 'visibility') {
+    if (e.data.visible) { resumeAnimations(); }
+    else { pauseAnimations(); }
+  }
+});
+parent.postMessage({ type: 'iframeReady' }, '*');
+
+// 初始化
+document.getElementById('chatInput').disabled = true;
+document.getElementById('chatSendBtn').disabled = true;
+document.querySelectorAll('.chat-emoji-btn').forEach(b => b.disabled = true);
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>

@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>数据智能 · 自动分析简报</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+/* ========== v17 等比缩放字体系统 ========== */
+:root{
+  --base-size:18px;
+  --scale:1.333;
+  --text-sm:calc(var(--base-size)/1.333);         /* 13.5 辅助标注 */
+  --current-base:var(--base-size);                  /* 18 标准正文 */
+  --text-body:var(--base-size);                     /* 18 正文 */
+  --text-lead:calc(var(--base-size)*1.111);         /* 20 引导文字 */
+  --text-h4:calc(var(--base-size)*1.333^1);         /* 24 小标题 */
+  --text-h3:calc(var(--base-size)*1.333^2);         /* 32 标题 */
+  --text-h2:calc(var(--base-size)*1.333^3);         /* 42 大标题 */
+  --text-h1:calc(var(--base-size)*1.333^4);         /* 56 主标题 */
+
+  /* ===== 主题色变量别名（映射到 theme-config.js 标准变量） ===== */
+  /* theme-config.js 会通过 html[data-theme] 切换 --bg/--bg2/--gold 等标准变量 */
+  /* 以下别名确保本页所有 CSS 属性跟随主题切换 */
+  --bg-primary:var(--bg, #0a0e1a);
+  --bg-secondary:var(--bg2, #111827);
+  --bg-card:var(--bg3, #1a2236);
+  --bg-hover:var(--bg3, #243049);
+  --text-primary:var(--text, #e8e8e8);
+  --text-secondary:var(--text-dim, #9ca3af);
+  --accent:var(--gold, #c9a84c);
+  --accent-light:var(--gold-bright, #e8c97a);
+  --accent-bg:var(--gold-dim, rgba(201,168,76,0.1));
+  --danger:var(--red, #ef4444);
+  --success:var(--green, #22c55e);
+  --border:var(--border, rgba(255,255,255,0.08));
+  --border-accent:var(--border, rgba(201,168,76,0.3));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:var(--base-size);}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  background:var(--bg-primary);color:var(--text-primary);
+  height:100vh;overflow:hidden;
+}
+/* ========== 页面容器 ========== */
+.page{display:flex;flex-direction:column;height:100vh;}
+/* Header */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;background:var(--bg-secondary);
+  border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.header-title{font-size:var(--text-h3);font-weight:700;color:var(--accent);letter-spacing:2px;}
+.header-badge{
+  font-size:var(--text-sm);color:var(--text-secondary);
+  background:var(--accent-bg);padding:4px 12px;border-radius:20px;
+  border:1px solid var(--border-accent);
+}
+.header-reset-btn{
+  padding:4px 14px;border-radius:6px;font-size:var(--text-sm);
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  color:var(--text-dim);cursor:pointer;transition:all .3s;
+  margin-left:auto;
+}
+.header-reset-btn:hover{background:rgba(255,255,255,0.08);color:var(--text);}
+/* 主内容区 */
+.main{display:flex;flex:1;overflow:hidden;}
+
+/* ========== 对话区 (30%) ========== */
+.chat-panel{
+  width:30%;min-width:320px;display:flex;flex-direction:column;
+  border-right:1px solid var(--border);background:var(--bg-secondary);
+}
+.chat-msgs{
+  flex:1;overflow-y:auto;padding:16px;
+  scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.3) transparent;
+}
+.chat-msgs::-webkit-scrollbar{width:4px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:2px;}
+.chat-msgs::-webkit-scrollbar-track{background:transparent;}
+
+.msg{margin-bottom:14px;animation:fadeIn .4s ease;}
+.msg-user{
+  text-align:right;
+}
+.msg-bubble{
+  display:inline-block;max-width:88%;padding:10px 14px;border-radius:14px;
+  font-size:var(--current-base);line-height:1.7;word-break:break-word;
+}
+.msg-ai .msg-bubble{
+  background:rgba(255,255,255,0.04);color:var(--text-primary);
+  border:1px solid var(--border);text-align:left;
+}
+.msg-user .msg-bubble{
+  background:rgba(201,168,76,0.12);color:var(--accent-light);
+  border:1px solid var(--border-accent);
+}
+.msg-system{font-size:var(--text-sm);color:var(--text-secondary);text-align:center;margin:8px 0;}
+
+/* 推荐问题 */
+.suggest-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding:0 4px;}
+.suggest-btn{
+  font-size:var(--text-sm);padding:5px 10px;border-radius:8px;
+  background:var(--accent-bg);color:var(--accent);border:1px solid var(--border-accent);
+  cursor:pointer;transition:all .2s;
+}
+.suggest-btn:hover{background:rgba(201,168,76,0.2);transform:translateY(-1px);}
+
+/* 输入区 */
+.chat-input{
+  padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0;
+}
+.input-box{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  border-radius:12px;padding:8px 12px;cursor:pointer;transition:all .3s;
+}
+.input-box:hover{border-color:var(--border-accent);}
+.input-box.active{border-color:rgba(201,168,76,0.6);box-shadow:0 0 12px rgba(201,168,76,0.15);}
+.input-preview{
+  flex:1;font-size:var(--current-base);color:var(--text-secondary);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.send-btn{
+  width:32px;height:32px;border-radius:8px;border:none;
+  background:var(--accent);color:#000;font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.send-btn:hover{background:var(--accent-light);transform:scale(1.05);}
+
+/* ========== 工作区 (70%) ========== */
+.work-panel{
+  flex:1;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--bg-primary);
+}
+/* 步骤指示器 */
+.steps-bar{
+  display:flex;align-items:center;gap:4px;
+  padding:10px 24px;background:rgba(0,0,0,0.2);
+  border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.step-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:var(--text-sm);color:var(--text-secondary);
+  padding:4px 12px;border-radius:20px;transition:all .3s;
+}
+.step-item.active{color:var(--accent);background:var(--accent-bg);border:1px solid var(--border-accent);}
+.step-item.done{color:var(--success);}
+.step-num{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;
+  background:rgba(255,255,255,0.08);color:var(--text-secondary);
+}
+.step-item.active .step-num{background:var(--accent);color:#000;}
+.step-item.done .step-num{background:var(--success);color:#fff;}
+.step-arrow{color:var(--text-secondary);font-size:10px;margin:0 2px;}
+
+/* 工作区内容 */
+.work-content{
+  flex:1;display:flex;overflow:hidden;padding:16px 20px;gap:16px;
+}
+
+/* 左栏·文字简报 */
+.brief-panel{
+  flex:1;display:flex;flex-direction:column;
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+}
+.brief-header{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  font-size:var(--text-h4);font-weight:700;color:var(--accent);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.brief-body{
+  flex:1;overflow-y:auto;padding:16px 20px;
+  scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.35) transparent;
+}
+.brief-body::-webkit-scrollbar{width:6px;}
+.brief-body::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.35);border-radius:3px;}
+.brief-body::-webkit-scrollbar-track{background:transparent;}
+
+.brief-section{margin-bottom:18px;animation:fadeIn .6s ease;}
+.brief-section-title{
+  font-size:var(--text-lead);font-weight:700;color:var(--accent);
+  margin-bottom:8px;padding-left:10px;border-left:3px solid var(--accent);
+}
+.brief-text{
+  font-size:var(--current-base);line-height:2;color:#ccc;
+}
+.brief-text .highlight{color:var(--accent);font-weight:600;}
+.brief-text .danger{color:var(--danger);font-weight:600;}
+.brief-text .success{color:var(--success);font-weight:600;}
+.brief-divider{border:none;border-top:1px solid var(--border);margin:14px 0;}
+
+/* 右栏·可视化图表 */
+.chart-panel{
+  flex:1;display:flex;flex-direction:column;gap:12px;
+  overflow-y:auto;padding-right:4px;
+  scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.3) transparent;
+}
+.chart-panel::-webkit-scrollbar{width:5px;}
+.chart-panel::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+.chart-card{
+  background:rgba(0,0,0,0.3);border:1px solid var(--border);
+  border-radius:12px;padding:12px 16px;flex-shrink:0;
+  animation:chartIn .8s ease;
+}
+.chart-title{
+  font-size:var(--text-sm);color:var(--text-secondary);
+  margin-bottom:8px;font-weight:600;
+}
+.chart-box{width:100%;height:240px;}
+
+/* ========== 上传区（步骤1展示） ========== */
+.upload-zone{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;padding:40px;
+}
+.upload-box{
+  width:100%;max-width:480px;
+  border:2px dashed var(--border-accent);border-radius:16px;
+  padding:40px 30px;text-align:center;cursor:pointer;
+  transition:all .3s;background:rgba(201,168,76,0.03);
+}
+.upload-box:hover{border-color:var(--accent);background:rgba(201,168,76,0.06);}
+.upload-icon{font-size:42px;margin-bottom:12px;}
+.upload-title{font-size:var(--text-h4);color:var(--accent);margin-bottom:6px;}
+.upload-hint{font-size:var(--text-sm);color:var(--text-secondary);}
+
+/* 数据预览 */
+.data-preview{
+  width:100%;max-width:640px;margin-top:8px;
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;animation:fadeIn .5s ease;
+}
+.preview-header{
+  padding:10px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:var(--text-sm);color:var(--text-secondary);
+}
+.preview-table{
+  width:100%;font-size:var(--text-sm);
+}
+.preview-table th{
+  padding:6px 10px;text-align:left;color:var(--accent);
+  border-bottom:1px solid var(--border);font-weight:600;
+}
+.preview-table td{
+  padding:5px 10px;color:var(--text-secondary);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.field-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.field-tag{
+  font-size:11px;padding:2px 8px;border-radius:4px;
+  background:rgba(201,168,76,0.1);color:var(--accent);border:1px solid var(--border-accent);
+}
+
+/* 导出操作栏 */
+.export-bar{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:12px 20px;border-top:1px solid var(--border);flex-shrink:0;
+  background:rgba(0,0,0,0.2);
+}
+.export-btn{
+  font-size:var(--text-sm);padding:8px 18px;border-radius:8px;
+  border:1px solid var(--border-accent);background:var(--accent-bg);
+  color:var(--accent);cursor:pointer;transition:all .2s;
+}
+.export-btn:hover{background:rgba(201,168,76,0.2);transform:translateY(-1px);}
+.export-btn.primary{background:var(--accent);color:#000;font-weight:600;border:none;}
+.export-btn.primary:hover{background:var(--accent-light);}
+
+/* ========== 动画 ========== */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes chartIn{from{opacity:0;transform:translateY(16px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.typing-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:pulse 1s infinite;margin-left:2px;vertical-align:middle;}
+
+/* ========== 步骤内容容器 ========== */
+.step-content{display:none;flex:1;overflow:hidden;}
+.step-content.visible{display:flex;flex-direction:column;}
+</style>
+</head>
+<body>
+<div class="page" id="pageRoot">
+  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:12px;color:#c9a84c;font-weight:bold;opacity:0.7;pointer-events:none;letter-spacing:2px;">v3.19.5</div>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-title">数据智能 · 自动分析简报</div>
+    <div class="header-badge">中后台数据组</div>
+    <button class="header-reset-btn" onclick="resetAll()" title="重置演示">↺ 重置</button>
+  </div>
+
+  <!-- 主内容 -->
+  <div class="main">
+    <!-- 对话区 -->
+    <div class="chat-panel">
+      <div class="chat-msgs" id="chatMsgs"></div>
+      <div class="chat-input">
+        <div class="input-box" id="chatInputBox">
+          <span class="input-preview" id="chatInputPreview">上传Excel/CSV开始分析</span>
+          <button class="send-btn" onclick="sendChat()">↑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 工作区 -->
+    <div class="work-panel">
+      <!-- 步骤指示器 -->
+      <div class="steps-bar">
+        <div class="step-item active" id="step0"><span class="step-num">1</span>上传数据</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step1"><span class="step-num">2</span>生成简报</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step2"><span class="step-num">3</span>专项追问</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step3"><span class="step-num">4</span>简报定稿</div>
+      </div>
+
+      <!-- 步骤0：上传区 -->
+      <div class="step-content visible" id="sc0">
+        <div class="upload-zone">
+          <div class="upload-box" id="uploadBox" onclick="simulateUpload()">
+            <div class="upload-icon">📊</div>
+            <div class="upload-title">拖拽Excel/CSV文件至此处</div>
+            <div class="upload-hint">或点击选择文件 · 支持 .xlsx .xls .csv · 演示模式点击即可</div>
+          </div>
+          <div class="data-preview" id="dataPreview" style="display:none;"></div>
+          <div class="suggest-btns" id="suggestBtns" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- 步骤1-3：简报+图表 双栏 -->
+      <div class="step-content" id="sc1">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 分析简报</div>
+            <div class="brief-body" id="briefBody1"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel1"></div>
+        </div>
+      </div>
+      <div class="step-content" id="sc2">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 不良率专项分析</div>
+            <div class="brief-body" id="briefBody2"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel2"></div>
+        </div>
+      </div>
+      <div class="step-content" id="sc3">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 完整分析简报</div>
+            <div class="brief-body" id="briefBody3"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel3"></div>
+        </div>
+        <div class="export-bar" id="exportBar" style="display:none;">
+          <button class="export-btn primary" onclick="alert('演示模式：已生成Word文档')">导出 Word</button>
+          <button class="export-btn" onclick="alert('演示模式：已生成PDF文档')">导出 PDF</button>
+          <button class="export-btn" onclick="alert('演示模式：已推送至管理层工作台')">推送至管理层</button>
+          <button class="export-btn" onclick="alert('演示模式：已保存至简报库')">保存至简报库</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== 数据 ====================
+// 内嵌演示数据（某银行Q1经营数据）
+const DEMO_DATA = {
+  fields: ['机构名称','月份','存款余额(亿)','贷款余额(亿)','不良率(%)','利润(万)','客户数','产品数','定期占比(%)','对公存款(亿)','个人存款(亿)','中收占比(%)'],
+  types:  ['分类','日期','数值','数值','数值','数值','数值','数值','数值','数值','数值','数值'],
+  rows: [
+    ['总行营业部','2026-01',486.2,312.8,1.21,4280,12850,45,52.3,298.6,187.6,24.1],
+    ['总行营业部','2026-02',491.5,315.6,1.19,4120,12920,46,53.1,301.2,190.3,23.8],
+    ['总行营业部','2026-03',498.3,319.2,1.15,4450,13010,47,54.2,305.8,192.5,24.5],
+    ['开发区支行','2026-01',128.6,96.3,1.15,1280,3240,28,55.1,82.4,46.2,19.3],
+    ['开发区支行','2026-02',131.2,98.7,1.21,1150,3280,29,56.8,84.1,47.1,18.8],
+    ['开发区支行','2026-03',129.8,101.5,1.47,980,3310,30,58.2,83.6,46.2,17.5],
+    ['科技园支行','2026-01',86.4,62.1,0.98,860,2180,22,48.6,52.8,33.6,21.2],
+    ['科技园支行','2026-02',88.1,64.3,1.05,820,2210,23,49.3,53.5,34.6,20.8],
+    ['科技园支行','2026-03',87.2,66.8,1.26,690,2240,24,50.1,52.9,34.3,19.6],
+    ['城东支行','2026-01',156.3,108.2,1.32,1620,4560,32,54.8,98.5,57.8,22.5],
+    ['城东支行','2026-02',158.9,110.6,1.38,1540,4610,33,55.6,100.2,58.7,21.9],
+    ['城东支行','2026-03',160.2,113.1,1.53,1380,4650,34,56.3,101.8,58.4,20.6],
+    ['河西支行','2026-01',142.8,95.6,1.08,1480,3890,30,51.2,88.3,54.5,23.1],
+    ['河西支行','2026-02',145.6,97.8,1.05,1520,3940,31,52.1,90.1,55.5,23.5],
+    ['河西支行','2026-03',148.2,100.3,1.02,1610,3980,32,53.4,91.8,56.4,24.2],
+    ['南湖支行','2026-01',112.5,78.4,1.18,1120,2980,26,53.6,70.2,42.3,20.8],
+    ['南湖支行','2026-02',114.8,80.2,1.15,1150,3020,27,54.2,71.8,43.0,21.3],
+    ['南湖支行','2026-03',116.3,82.1,1.12,1200,3060,28,55.1,72.5,43.8,22.1],
+    ['新城支行','2026-01',98.6,72.3,0.95,980,2580,24,49.8,60.5,38.1,22.6],
+    ['新城支行','2026-02',100.3,74.1,0.92,1010,2620,25,50.4,61.8,38.5,23.2],
+    ['新城支行','2026-03',102.1,76.2,0.88,1060,2660,26,51.2,62.4,39.7,24.1],
+    ['高新区支行','2026-01',135.2,92.8,1.12,1380,3680,29,52.8,84.6,50.6,21.5],
+    ['高新区支行','2026-02',138.1,94.6,1.08,1420,3720,30,53.5,86.2,51.9,22.0],
+    ['高新区支行','2026-03',140.5,96.8,1.05,1480,3760,31,54.3,87.1,53.4,22.8],
+  ]
+};
+
+// 对话内容
+const chatConvos = [
+  {
+    user:'上传了「Q1经营数据.xlsx」',
+    ai:`已成功解析您的数据文件。\n\n检测到12个字段、2,856条记录，时间范围2026年1月至3月。包括：机构名称、月份、存款余额、贷款余额、不良率、利润等核心指标。\n\n我已为您推荐3个分析方向，也可以一键生成完整简报。`,
+    pendingHint:'✨ 生成分析简报',
+    suggests:['各机构存款趋势对比','不良率异动分析','利润贡献排名']
+  },
+  {
+    user:'生成分析简报',
+    ai:`好的，我已基于数据特征自动规划了分析框架：\n\n① 整体经营概览：存款3,286亿(+2.3%)，贷款2,158亿(+1.8%)，净利润18.6亿(+4.2%)\n② 存贷款趋势分析：个人存款稳步增长，对公存款季末冲量；定期占比升至58.3%\n③ 资产质量监控：不良率1.42%较上季下降0.05%，但3家机构异动需关注\n④ 利润贡献归因：利差收窄0.08%，中收占比提升至22.7%\n\n右侧图表已同步生成，您可以继续追问或导出完整简报。`,
+    pendingHint:'深入分析不良率异动',
+    suggests:['不良率归因分析','存款结构对比','利润驱动因素']
+  },
+  {
+    user:'深入分析不良率异动',
+    ai:`已完成不良率专项分析。\n\n开发区支行不良率从1.15%升至1.47%(+0.32%)，主要受2笔大额对公贷款违约影响，涉及制造业客户；科技园支行从0.98%升至1.26%(+0.28%)，新增3笔小微贷款逾期；城东支行从1.32%升至1.53%(+0.21%)，零售贷款逾期率上升。\n\n建议措施：①对开发区支行制造业贷款进行压力测试 ②科技园小微贷款加强贷后巡查频次 ③城东零售贷款优化准入模型\n\n右侧已追加归因图表，可继续追问或生成完整简报。`,
+    pendingHint:'✨ 生成完整简报',
+    suggests:['对比正常机构','预测下季不良率','生成风险报告']
+  },
+  {
+    user:'生成完整简报',
+    ai:`完整分析简报已生成！\n\n包含4个分析模块、6张可视化图表和8条行动建议。简报摘要：一季度全行经营总体平稳，存贷款稳步增长，资产质量总体可控但局部需关注。净利润同比增长4.2%，利差收窄但中收结构优化。\n\n您可以通过右侧按钮导出Word/PDF，或直接推送至管理层工作台。`,
+    pendingHint:null,
+    suggests:[]
+  }
+];
+
+// 简报文字内容（各步骤）
+const briefContents = {
+  1: [
+    {title:'核心摘要', text:`一季度全行存款余额<span class="highlight">3,286亿元</span>，环比增长<span class="highlight">2.3%</span>；贷款余额<span class="highlight">2,158亿元</span>，环比增长1.8%；不良率<span class="success">1.42%</span>，较上季度下降0.05个百分点；实现净利润<span class="highlight">18.6亿元</span>，同比增长4.2%。`},
+    {title:'存贷款趋势', text:`个人存款稳步增长，对公存款季度末冲量明显。3月对公存款新增87亿元，占季度增量的62%。定期存款占比持续提升至<span class="highlight">58.3%</span>，需关注负债成本压力。贷款增速放缓，Q1环比1.8%低于去年同期2.4%。`},
+    {title:'资产质量', text:`不良率1.42%总体可控，但需关注<span class="danger">3家机构不良率显著上升</span>：开发区支行+0.32%、科技园支行+0.28%、城东支行+0.21%。新城支行和高新区支行不良率持续下降，表现优异。`},
+    {title:'利润归因', text:`净利润同比增长4.2%，主要驱动力来自中收占比提升至<span class="highlight">22.7%</span>(+1.6pp)。净息差收窄0.08个百分点至1.82%，但规模增长部分对冲了息差下行影响。成本收入比36.2%，同比优化0.8个百分点。`}
+  ],
+  2: [
+    {title:'不良率异动分析', text:`全行不良率从Q4的1.47%下降至Q1的1.42%，但内部分化严重。<span class="danger">开发区支行</span>不良率从1.15%飙升至1.47%(+0.32%)，主要受2笔制造业大额对公贷款违约影响，合计金额1.8亿元。`},
+    {title:'机构归因', text:`<span class="danger">科技园支行</span>不良率从0.98%升至1.26%(+0.28%)，新增3笔小微贷款逾期，涉及科技型企业；<span class="danger">城东支行</span>从1.32%升至1.53%(+0.21%)，零售消费贷和信用卡逾期率双升。`},
+    {title:'对标分析', text:`表现优异的机构：<span class="success">新城支行</span>不良率从0.95%降至0.88%，<span class="success">高新区支行</span>从1.12%降至1.05%，<span class="success">河西支行</span>从1.08%降至1.02%。这些机构贷前审查严格、贷后管理到位。`},
+    {title:'行动建议', text:`① 开发区支行：对制造业贷款进行压力测试，评估行业集中度风险，建议制造业敞口不超过贷款总额15%\n② 科技园支行：加强小微企业贷后巡查频次至月度，建立科技企业专项风险监测模型\n③ 城东支行：优化零售贷款准入模型，收紧信用卡额度审批标准，强化早期预警机制\n④ 全行层面：建立不良率异动周报机制，阈值设定为单月上升超过0.1%即触发预警`}
+  ],
+  3: [
+    {title:'封面', text:`<div style="text-align:center;padding:20px 0;"><span style="font-size:var(--text-h2);font-weight:800;color:var(--accent);">2026年Q1经营分析简报</span><br><span style="font-size:var(--text-lead);color:var(--text-secondary);margin-top:8px;display:inline-block;">数据智能自动生成 · 数据分析组</span></div>`},
+    {title:'核心摘要', text:`一季度全行经营总体平稳。存款余额<span class="highlight">3,286亿元</span>(+2.3%)，贷款余额<span class="highlight">2,158亿元</span>(+1.8%)，净利润<span class="highlight">18.6亿元</span>(+4.2%)。不良率<span class="success">1.42%</span>(-0.05pp)，资产质量总体可控。中收占比提升至<span class="highlight">22.7%</span>，收入结构持续优化。`},
+    {title:'存贷款分析', text:`存款端：个人存款稳步增长，对公存款季末冲量。3月对公新增87亿占季度增量62%。定期占比58.3%需关注成本。\n贷款端：增速1.8%低于同期2.4%，投放节奏偏谨慎。对公贷款增量主要流向基建和制造业。`},
+    {title:'风险监控', text:`不良率1.42%总体可控，但开发区(+0.32%)、科技园(+0.28%)、城东(+0.21%)三家支行异动需重点关注。新城(-0.07%)和高新区(-0.07%)表现优异。`},
+    {title:'利润归因', text:`净利润+4.2%主要靠中收提升(+1.6pp)和成本管控(成本收入比-0.8pp)。净息差收窄0.08pp至1.82%，规模增长部分对冲。`},
+    {title:'八项建议', text:`1. 建立不良率异动周报机制(阈值0.1%/月)\n2. 开发区支行制造业贷款压力测试\n3. 科技园小微贷后巡查提至月度\n4. 城东支行零售准入模型优化\n5. 定期存款成本管控方案(目标降5BP)\n6. 对公存款季末冲量可持续性评估\n7. 中收业务扩容计划(目标25%)\n8. 优秀机构风控经验全行推广`}
+  ]
+};
+
+// ==================== 状态 ====================
+let currentStep = 0; // 0=上传, 1=生成, 2=追问, 3=定稿
+let chatAnimating = false;
+let pendingTransition = null;
+let uploaded = false;
+let chartInstances = [];
+
+// ==================== 工具函数 ====================
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+async function typeText(el, html, speed=18){
+  // 简化打字机：直接设置innerHTML后逐字显示
+  el.innerHTML = html;
+  const fullText = el.innerText;
+  el.innerText = '';
+  for(let i=0;i<fullText.length;i++){
+    el.innerText = fullText.slice(0,i+1);
+    await sleep(speed);
+    if(el.classList.contains('skip-typing')){el.innerText=fullText;break;}
+  }
+}
+
+async function typeAIMsg(text, speed=22){
+  const msgs = document.getElementById('chatMsgs');
+  const div = document.createElement('div');
+  div.className='msg msg-ai';
+  div.innerHTML=`<div class="msg-bubble"></div>`;
+  msgs.appendChild(div);
+  const bubble = div.querySelector('.msg-bubble');
+  
+  // 处理换行
+  const lines = text.split('\n');
+  for(let li=0;li<lines.length;li++){
+    const span = document.createElement('span');
+    span.style.display='block';
+    if(lines[li]==='') span.style.height='8px';
+    else span.textContent = lines[li];
+    bubble.appendChild(span);
+    // 打字效果
+    if(lines[li]){
+      const full = lines[li];
+      span.textContent='';
+      for(let i=0;i<full.length;i++){
+        span.textContent=full.slice(0,i+1);
+        msgs.scrollTop=msgs.scrollHeight;
+        await sleep(speed);
+      }
+    }
+    msgs.scrollTop=msgs.scrollHeight;
+    await sleep(80);
+  }
+}
+
+function addUserMsg(text){
+  const msgs = document.getElementById('chatMsgs');
+  const div = document.createElement('div');
+  div.className='msg msg-user';
+  div.innerHTML=`<div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function addSystemMsg(text){
+  const msgs = document.getElementById('chatMsgs');
+  const div = document.createElement('div');
+  div.className='msg-system';
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function setInputHint(text){
+  const el = document.getElementById('chatInputPreview');
+  el.textContent = text || '输入追问...';
+  if(text && text.startsWith('✨')){
+    el.style.color='#c9a84c';
+    el.style.fontWeight='600';
+    const box = document.getElementById('chatInputBox');
+    box.classList.add('active');
+  } else {
+    el.style.color='';
+    el.style.fontWeight='';
+    document.getElementById('chatInputBox').classList.remove('active');
+  }
+}
+
+function showSuggests(items){
+  const el = document.getElementById('suggestBtns');
+  if(!items||!items.length){el.style.display='none';return;}
+  el.innerHTML = items.map(s=>`<button class="suggest-btn" onclick="suggestClick('${s}')">${s}</button>`).join('');
+  el.style.display='flex';
+}
+
+function suggestClick(text){
+  document.getElementById('chatInputPreview').textContent = text;
+  sendChat();
+}
+
+function updateSteps(){
+  for(let i=0;i<4;i++){
+    const el = document.getElementById('step'+i);
+    el.classList.remove('active','done');
+    if(i<currentStep) el.classList.add('done');
+    else if(i===currentStep) el.classList.add('active');
+  }
+  // 显示对应步骤内容
+  for(let i=0;i<4;i++){
+    const sc = document.getElementById('sc'+i);
+    sc.classList.toggle('visible', i===currentStep);
+  }
+}
+
+// ★ 重置所有状态到初始
+function resetAll(){
+  // 停止所有动画
+  chatAnimating=false;
+  pendingTransition=null;
+  uploaded=false;
+  currentStep=0;
+
+  // 清空对话
+  document.getElementById('chatMsgs').innerHTML='';
+
+  // 销毁图表实例
+  chartInstances.forEach(c=>{try{c.dispose();}catch(e){}});
+  chartInstances=[];
+
+  // 清空简报内容
+  for(let i=1;i<=3;i++){
+    const bb=document.getElementById('briefBody'+i);
+    const cp=document.getElementById('chartPanel'+i);
+    if(bb) bb.innerHTML='';
+    if(cp) cp.innerHTML='';
+  }
+
+  // 重置上传区
+  const uploadBox=document.getElementById('uploadBox');
+  uploadBox.innerHTML='<div class="upload-icon">📊</div><div class="upload-title">拖拽Excel/CSV文件至此处</div><div class="upload-hint">或点击选择文件 · 支持 .xlsx .xls .csv · 演示模式点击即可</div>';
+  uploadBox.style.borderColor='';
+  uploadBox.onclick=simulateUpload;
+
+  // 隐藏数据预览和建议按钮
+  document.getElementById('dataPreview').style.display='none';
+  document.getElementById('suggestBtns').style.display='none';
+
+  // 隐藏导出栏
+  document.getElementById('exportBar').style.display='none';
+
+  // 重置步骤指示器
+  updateSteps();
+
+  // 重置输入框
+  setInputHint('上传Excel/CSV开始分析');
+  document.getElementById('chatInputBox').classList.remove('active');
+  document.getElementById('chatInputBox').style.borderColor='';
+  document.getElementById('chatInputBox').style.boxShadow='';
+}
+
+// ==================== 上传模拟 ====================
+async function simulateUpload(){
+  if(uploaded||chatAnimating) return;
+  chatAnimating=true;
+  
+  const box = document.getElementById('uploadBox');
+  box.innerHTML=`<div class="upload-icon">⏳</div><div class="upload-title">正在解析文件...</div><div class="upload-hint">读取字段 · 识别类型 · 校验数据</div>`;
+  
+  await sleep(1500);
+  
+  box.innerHTML=`<div class="upload-icon" style="color:var(--success);">✅</div><div class="upload-title" style="color:var(--success);">解析完成</div><div class="upload-hint">12个字段 · 2,856条记录 · 2026年Q1</div>`;
+  box.style.borderColor='var(--success)';
+  
+  // 显示数据预览
+  showDataPreview();
+  
+  uploaded=true;
+  chatAnimating=false;
+  
+  // 触发第一步对话
+  await sleep(500);
+  currentStep=0;
+  addUserMsg('上传了「Q1经营数据.xlsx」');
+  await sleep(300);
+  chatAnimating=true;
+  await typeAIMsg(chatConvos[0].ai);
+  chatAnimating=false;
+  
+  setInputHint(chatConvos[0].pendingHint);
+  showSuggests(chatConvos[0].suggests);
+  
+  // 脉冲效果
+  const inputBox = document.getElementById('chatInputBox');
+  inputBox.classList.add('active');
+  let flashes=0;
+  const pi=setInterval(()=>{
+    flashes++;
+    inputBox.style.borderColor=flashes%2===0?'rgba(201,168,76,0.3)':'rgba(201,168,76,0.8)';
+    if(flashes>=5){clearInterval(pi);inputBox.style.borderColor='';}
+  },400);
+}
+
+function showDataPreview(){
+  const el = document.getElementById('dataPreview');
+  let ths = DEMO_DATA.fields.slice(0,6).map(f=>`<th>${f}</th>`).join('');
+  let rows = DEMO_DATA.rows.slice(0,3).map(r=>`<tr>${r.slice(0,6).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+  el.innerHTML=`
+    <div class="preview-header">
+      <span>数据预览（前3行 / 共2,856条）</span>
+      <span style="color:var(--success);">✓ 格式校验通过</span>
+    </div>
+    <table class="preview-table"><tr>${ths}</tr>${rows}</table>
+    <div style="padding:8px 16px;">
+      <div class="field-tags">${DEMO_DATA.fields.map((f,i)=>`<span class="field-tag">${f}(${DEMO_DATA.types[i]})</span>`).join('')}</div>
+    </div>
+  `;
+  el.style.display='block';
+}
+
+// ==================== 发送对话 ====================
+async function sendChat(){
+  if(chatAnimating) return;
+  
+  const convIndex = currentStep; // 0,1,2,3
+  if(convIndex >= chatConvos.length) return;
+  
+  const conv = chatConvos[convIndex];
+  
+  // 步骤0已在上传时处理
+  if(convIndex === 0){
+    // 已处理，跳到步骤1
+    currentStep = 1;
+    updateSteps();
+    addUserMsg(conv.pendingHint.replace('✨ ',''));
+    chatAnimating=true;
+    await typeAIMsg(chatConvos[1].ai);
+    chatAnimating=false;
+    
+    // 生成简报和图表
+    await renderBriefAndCharts(1);
+    
+    setInputHint(chatConvos[1].pendingHint);
+    showSuggests(chatConvos[1].suggests);
+    pulseInput();
+    return;
+  }
+  
+  // 步骤1→2
+  if(convIndex === 1){
+    addUserMsg(conv.pendingHint);
+    currentStep = 2;
+    updateSteps();
+    chatAnimating=true;
+    await typeAIMsg(chatConvos[2].ai);
+    chatAnimating=false;
+    
+    await renderBriefAndCharts(2);
+    
+    setInputHint(chatConvos[2].pendingHint);
+    showSuggests(chatConvos[2].suggests);
+    pulseInput();
+    return;
+  }
+  
+  // 步骤2→3
+  if(convIndex === 2){
+    addUserMsg(conv.pendingHint.replace('✨ ',''));
+    currentStep = 3;
+    updateSteps();
+    chatAnimating=true;
+    await typeAIMsg(chatConvos[3].ai);
+    chatAnimating=false;
+    
+    await renderBriefAndCharts(3);
+    
+    setInputHint(null);
+    showSuggests([]);
+    
+    // 显示导出栏
+    document.getElementById('exportBar').style.display='flex';
+    return;
+  }
+}
+
+function pulseInput(){
+  const box = document.getElementById('chatInputBox');
+  box.classList.add('active');
+  let f=0;
+  const pi=setInterval(()=>{
+    f++;
+    box.style.borderColor=f%2===0?'rgba(201,168,76,0.3)':'rgba(201,168,76,0.8)';
+    box.style.boxShadow=f%2===0?'0 0 8px rgba(201,168,76,0.1)':'0 0 18px rgba(201,168,76,0.25)';
+    if(f>=5){clearInterval(pi);box.style.borderColor='';box.style.boxShadow='';}
+  },400);
+}
+
+// ==================== 简报+图表渲染 ====================
+async function renderBriefAndCharts(step){
+  const briefBody = document.getElementById('briefBody'+step);
+  const chartPanel = document.getElementById('chartPanel'+step);
+  
+  briefBody.innerHTML='';
+  chartPanel.innerHTML='';
+  
+  const sections = briefContents[step];
+  
+  for(let i=0;i<sections.length;i++){
+    const s = sections[i];
+    const div = document.createElement('div');
+    div.className='brief-section';
+    if(s.title==='封面'){
+      div.innerHTML=s.text;
+    } else {
+      div.innerHTML=`<div class="brief-section-title">▎${s.title}</div><div class="brief-text">${s.text}</div>`;
+    }
+    briefBody.appendChild(div);
+    await sleep(400);
+    briefBody.scrollTop=briefBody.scrollHeight;
+  }
+  
+  // 渲染图表
+  await sleep(300);
+  if(step===1) await renderStep1Charts(chartPanel);
+  if(step===2) await renderStep2Charts(chartPanel);
+  if(step===3) await renderStep3Charts(chartPanel);
+}
+
+// ECharts 深色主题配置
+const chartTheme = {
+  textStyle:{color:'#9ca3af',fontFamily:'PingFang SC,Microsoft YaHei'},
+  title:{textStyle:{color:'#e8e8e8'}},
+  legend:{textStyle:{color:'#9ca3af'}},
+  grid:{top:40,right:20,bottom:30,left:50},
+};
+
+function createChartCard(parent, title, id){
+  const card = document.createElement('div');
+  card.className='chart-card';
+  card.innerHTML=`<div class="chart-title">${title}</div><div class="chart-box" id="${id}"></div>`;
+  parent.appendChild(card);
+  const chart = echarts.init(document.getElementById(id), null, {renderer:'canvas'});
+  chartInstances.push(chart);
+  return chart;
+}
+
+async function renderStep1Charts(panel){
+  // 图1：存贷款趋势
+  const c1 = createChartCard(panel,'近6个月存贷款趋势(亿元)','c1_1');
+  c1.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    legend:{data:['存款余额','贷款余额'],textStyle:{color:'#9ca3af'}},
+    xAxis:{type:'category',data:['2025-10','2025-11','2025-12','2026-01','2026-02','2026-03'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[
+      {name:'存款余额',type:'line',data:[3120,3160,3210,3240,3265,3286],smooth:true,lineStyle:{color:'#c9a84c',width:3},itemStyle:{color:'#c9a84c'},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(201,168,76,0.3)'},{offset:1,color:'rgba(201,168,76,0)'}]}}},
+      {name:'贷款余额',type:'line',data:[2080,2105,2125,2140,2150,2158],smooth:true,lineStyle:{color:'#6ee7b7',width:3},itemStyle:{color:'#6ee7b7'},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(110,231,183,0.2)'},{offset:1,color:'rgba(110,231,183,0)'}]}}}
+    ],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+  
+  // 图2：各机构存款规模
+  const c2 = createChartCard(panel,'各分支机构Q1存款规模(亿元)','c1_2');
+  const orgs = ['总行营业部','开发区','科技园','城东','河西','南湖','新城','高新区'];
+  const deposits = [498.3,129.8,87.2,160.2,148.2,116.3,102.1,140.5];
+  c2.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    grid:{top:30,right:20,bottom:30,left:90},
+    xAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    yAxis:{type:'category',data:orgs,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    series:[{type:'bar',data:deposits.map((v,i)=>({value:v,itemStyle:{color:v>150?'#c9a84c':v>120?'rgba(201,168,76,0.6)':'rgba(201,168,76,0.35)'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+  
+  // 图3：不良率趋势+预警线
+  const c3 = createChartCard(panel,'不良率变化趋势(%)','c1_3');
+  const nplOrgs = ['开发区','科技园','城东','河西','南湖','新城','高新区'];
+  const nplChange = [0.32,0.28,0.21,-0.06,-0.03,-0.07,-0.07];
+  c3.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    grid:{top:30,right:20,bottom:30,left:90},
+    xAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    yAxis:{type:'category',data:nplOrgs,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    series:[{type:'bar',data:nplChange.map(v=>({value:v,itemStyle:{color:v>0?'#ef4444':'#22c55e'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
+    visualMap:{show:false,dimension:0,pieces:[{gt:0,color:'#ef4444'},{lte:0,color:'#22c55e'}]},
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+  
+  // 图4：利润贡献瀑布图
+  const c4 = createChartCard(panel,'利润增长归因分析','c1_4');
+  c4.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    xAxis:{type:'category',data:['基数','规模增长','息差收窄','中收提升','成本管控','其他','Q1净利润'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:{type:'value',name:'(亿元)',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[{
+      type:'bar',stack:'waterfall',
+      data:[
+        {value:17.85,itemStyle:{color:'rgba(201,168,76,0.5)'}},
+        {value:1.20,itemStyle:{color:'#22c55e'}},
+        {value:-0.45,itemStyle:{color:'#ef4444'}},
+        {value:0.68,itemStyle:{color:'#22c55e'}},
+        {value:0.32,itemStyle:{color:'#22c55e'}},
+        {value:-0.10,itemStyle:{color:'#ef4444'}},
+        {value:18.60,itemStyle:{color:'#c9a84c'}}
+      ],
+      barWidth:28,itemStyle:{borderRadius:[4,4,0,0]},
+      label:{show:true,position:'top',color:'#9ca3af',fontSize:11,formatter:function(p){return p.value>0?'+'+p.value:p.value;}}
+    }],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+async function renderStep2Charts(panel){
+  // 归因瀑布图
+  const c1 = createChartCard(panel,'不良率变动归因(百分点)','c2_1');
+  c1.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    xAxis:{type:'category',data:['开发区\n制造业违约','科技园\n小微逾期','城东\n零售逾期','河西\n改善','南湖\n改善','新城\n改善','高新区\n改善'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},axisLabel:{fontSize:10}},
+    yAxis:{type:'value',name:'(pp)',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[{type:'bar',data:[0.32,0.28,0.21,-0.06,-0.03,-0.07,-0.07].map(v=>({value:v,itemStyle:{color:v>0?'#ef4444':'#22c55e'},label:{show:true,position:v>0?'top':'bottom',color:'#9ca3af',fontSize:11,formatter:(v>0?'+':'')+v}})),barWidth:24,itemStyle:{borderRadius:[4,4,0,0]}}],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+  
+  // 机构对比雷达图
+  const c2 = createChartCard(panel,'异动机构 vs 优秀机构 风控能力对比','c2_2');
+  c2.setOption({
+    ...chartTheme,
+    radar:{
+      indicator:[{name:'贷前审查',max:100},{name:'贷后管理',max:100},{name:'风险预警',max:100},{name:'客户准入',max:100},{name:'资产分散度',max:100}],
+      shape:'polygon',
+      splitArea:{areaStyle:{color:['rgba(255,255,255,0.02)','rgba(255,255,255,0.04)']}},
+      axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},
+      splitLine:{lineStyle:{color:'rgba(255,255,255,0.08)'}}
+    },
+    legend:{data:['异动机构均值','优秀机构均值'],textStyle:{color:'#9ca3af'}},
+    series:[{type:'radar',data:[
+      {value:[58,52,45,62,48],name:'异动机构均值',lineStyle:{color:'#ef4444',width:2},areaStyle:{color:'rgba(239,68,68,0.15)'},itemStyle:{color:'#ef4444'}},
+      {value:[85,82,88,90,86],name:'优秀机构均值',lineStyle:{color:'#22c55e',width:2},areaStyle:{color:'rgba(34,197,94,0.15)'},itemStyle:{color:'#22c55e'}}
+    ]}],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+async function renderStep3Charts(panel){
+  // 存款结构饼图
+  const c1 = createChartCard(panel,'存款结构分布','c3_1');
+  c1.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'item'},
+    legend:{orient:'vertical',right:10,top:'center',textStyle:{color:'#9ca3af',fontSize:12}},
+    series:[{type:'pie',radius:['40%','70%'],center:['40%','50%'],
+      data:[
+        {value:58.3,name:'定期存款',itemStyle:{color:'#c9a84c'}},
+        {value:24.1,name:'活期对公',itemStyle:{color:'rgba(201,168,76,0.6)'}},
+        {value:17.6,name:'活期个人',itemStyle:{color:'rgba(201,168,76,0.35)'}}
+      ],
+      label:{color:'#9ca3af',fontSize:12},
+      emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}
+    }],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+  
+  // 利润构成对比
+  const c2 = createChartCard(panel,'收入结构同比变化','c3_2');
+  c2.setOption({
+    ...chartTheme,
+    tooltip:{trigger:'axis'},
+    legend:{data:['2025 Q1','2026 Q1'],textStyle:{color:'#9ca3af'}},
+    xAxis:{type:'category',data:['净利息收入','中间业务收入','投资收益','其他'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:{type:'value',name:'(亿元)',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[
+      {name:'2025 Q1',type:'bar',data:[13.2,3.8,1.2,0.5],barWidth:20,itemStyle:{color:'rgba(255,255,255,0.15)',borderRadius:[4,4,0,0]}},
+      {name:'2026 Q1',type:'bar',data:[12.9,4.2,1.1,0.4],barWidth:20,itemStyle:{color:'#c9a84c',borderRadius:[4,4,0,0]}}
+    ],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+// ==================== 输入框点击绑定 ====================
+document.getElementById('chatInputBox').addEventListener('click', function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  if(!uploaded){
+    simulateUpload();
+  } else {
+    sendChat();
+  }
+});
+
+// ==================== 窗口resize处理 ====================
+window.addEventListener('resize', function(){
+  chartInstances.forEach(c=>{try{c.resize();}catch(e){}});
+});
+
+// ==================== 初始化 ====================
+updateSteps();
+addSystemMsg('欢迎体验数据智能分析 · 上传Excel/CSV文件即可开始');
+</script>
+
+<!-- ★ v8：主题系统 - 必须在所有业务脚本之后引入 -->
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步 + 字体/可见性消息监听
+// theme-config.js 已自动监听 postMessage({ type:'themeChange', theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+window.addEventListener('message', (e) => {
+  if (!e.data || !e.data.type) return;
+  // 字体大小同步
+  if (e.data.type === 'fontSize') {
+    document.documentElement.setAttribute('data-font-level', e.data.size || 'medium');
+  }
+  // 可见性控制
+  if (e.data.type === 'visibility') {
+    // 可根据需要暂停/恢复动画
+  }
+});
+// 通知父页面已就绪，可接收主题消息
+try { parent.postMessage({ type: 'iframeReady' }, '*'); } catch(err) {}
+</script>
+</body>
+</html>

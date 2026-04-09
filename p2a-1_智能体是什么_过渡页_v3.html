@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能体是什么 - 过渡页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ========== 底层：视频背景 ========== */
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 视频暗角效果 */
+    .video-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, transparent 40%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    /* ========== 中层：6px模糊层（全屏基础） ========== */
+    .glass-layer-6 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background: rgba(10, 15, 30, 0.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 玻璃反光扫光效果 */
+    .glass-layer-6::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 60%
+      );
+      animation: glassShine 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glassShine {
+      0%, 100% { transform: translateX(-100%) rotate(45deg); }
+      50% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    /* ========== 追光层：额外10px模糊（中心挖空，外围叠加） ========== */
+    .glass-layer-extra {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      background: rgba(10, 15, 30, 0.1);
+      /* 只增加10px模糊，叠加后中心6px，外围16px */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      /* 使用 mask-image 挖空中心区域 - 只保留外围 */
+      -webkit-mask-image: radial-gradient(
+        circle 200px at var(--spotlight-x, -999px) var(--spotlight-y, -999px),
+        transparent 0%,
+        transparent 80px,
+        black 200px
+      );
+      mask-image: radial-gradient(
+        circle 200px at var(--spotlight-x, -999px) var(--spotlight-y, -999px),
+        transparent 0%,
+        transparent 80px,
+        black 200px
+      );
+      opacity: 0;
+      transition: opacity 0.1s;
+      pointer-events: none;
+    }
+    
+    /* 追光边框效果 - 金色圆环 */
+    .spotlight-ring {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      border: 3px solid rgba(201, 168, 76, 0.8);
+      box-shadow: 
+        0 0 40px rgba(201, 168, 76, 0.5),
+        0 0 80px rgba(201, 168, 76, 0.2),
+        inset 0 0 40px rgba(201, 168, 76, 0.1);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 4;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    /* ========== 顶层：内容面板 ========== */
+    .content-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    
+    .content-panel > * {
+      pointer-events: auto;
+    }
+
+    .content {
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* PART 标签 */
+    .part-tag {
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+
+    /* 主标题 */
+    .main-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.5);
+      letter-spacing: 8px;
+    }
+
+    /* 副标题/问题 */
+    .question-text {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      min-height: 2rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--gold);
+      margin-left: 5px;
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* ========== AI工作状态指示器 ========== */
+    .ai-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .ai-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--green);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .ai-label {
+      font-size: 0.9rem;
+      color: var(--green);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+
+    /* ========== 扫描线效果 ========== */
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(201, 168, 76, 0.8), 
+        rgba(0, 255, 136, 0.8), 
+        transparent
+      );
+      box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+      animation: scan 4s linear infinite;
+      z-index: 5;
+    }
+
+    @keyframes scan {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* ========== 数据粒子效果 ========== */
+    .particles-container {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: 0.7rem;
+      color: rgba(0, 255, 136, 0.4);
+      font-family: 'Courier New', monospace;
+      animation: float-up 8s linear infinite;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(100%) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 0.3; }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ========== 角落装饰 ========== */
+    .corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(201, 168, 76, 0.3);
+      z-index: 7;
+    }
+
+    .corner-tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+    .corner-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+    /* ========== 底部提示 ========== */
+    .hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+      z-index: 10;
+    }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 2rem;
+        letter-spacing: 4px;
+      }
+      .question-text {
+        font-size: 1rem;
+      }
+      .spotlight-ring {
+        width: 280px;
+        height: 280px;
+      }
+      .glass-layer-extra {
+        -webkit-mask-image: radial-gradient(
+          circle 160px at var(--spotlight-x, -999px) var(--spotlight-y, -999px),
+          transparent 0%,
+          transparent 60px,
+          black 160px
+        );
+        mask-image: radial-gradient(
+          circle 160px at var(--spotlight-x, -999px) var(--spotlight-y, -999px),
+          transparent 0%,
+          transparent 60px,
+          black 160px
+        );
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 底层：视频背景 -->
+    <div class="video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="977DB301-DB67-4F92-9122-6BB2121F00E9_meta.MOV" type="video/quicktime">
+        <source src="977DB301-DB67-4F92-9122-6BB2121F00E9_meta.MOV" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- 中层：6px模糊层（全屏基础） -->
+    <div class="glass-layer-6" id="glassLayer6"></div>
+    
+    <!-- 追光层：额外10px模糊（mask挖空中心，只显示外围） -->
+    <div class="glass-layer-extra" id="glassLayerExtra"></div>
+    
+    <!-- 追光边框 -->
+    <div class="spotlight-ring" id="spotlightRing"></div>
+
+    <!-- 顶层：内容面板 -->
+    <div class="content-panel" id="contentPanel">
+      <!-- 扫描线 -->
+      <div class="scan-line"></div>
+
+      <!-- 内容 -->
+      <div class="content">
+        <div class="part-tag">PART 02 · 技术解读</div>
+        <h1 class="main-title">智能体是什么</h1>
+        <div class="question-text">
+          <span id="typewriter"></span><span class="cursor"></span>
+        </div>
+        
+        <div class="ai-status">
+          <div class="ai-dot"></div>
+          <span class="ai-label">AI PROCESSING</span>
+        </div>
+      </div>
+
+      <!-- 角落装饰 -->
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+    </div>
+
+    <!-- 数据粒子容器 -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- 底部提示 -->
+    <div class="hint">移动鼠标探索玻璃后的世界</div>
+  </div>
+
+  <script>
+    // ========== 打字机效果 ==========
+    const questions = [
+      "它是一个程序？一个机器人？还是一种新的生命形式？",
+      "它能理解你的需求，还是只是执行命令？",
+      "它会思考吗？会学习吗？会进化吗？",
+      "它是工具，还是伙伴？"
+    ];
+    
+    let qIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriter = document.getElementById('typewriter');
+    
+    function typeEffect() {
+      const current = questions[qIndex];
+      
+      if (isDeleting) {
+        typewriter.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriter.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      let typeSpeed = isDeleting ? 30 : 80;
+      
+      if (!isDeleting && charIndex === current.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        qIndex = (qIndex + 1) % questions.length;
+        typeSpeed = 500;
+      }
+      
+      setTimeout(typeEffect, typeSpeed);
+    }
+    
+    typeEffect();
+
+    // ========== 追光效果 ==========
+    const glassLayerExtra = document.getElementById('glassLayerExtra');
+    const spotlightRing = document.getElementById('spotlightRing');
+    
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      // 更新CSS变量（用于mask-image定位）
+      glassLayerExtra.style.setProperty('--spotlight-x', x + 'px');
+      glassLayerExtra.style.setProperty('--spotlight-y', y + 'px');
+      glassLayerExtra.style.opacity = '1';
+      
+      // 更新边框位置
+      spotlightRing.style.left = x + 'px';
+      spotlightRing.style.top = y + 'px';
+      spotlightRing.style.opacity = '1';
+    });
+    
+    document.addEventListener('mouseleave', () => {
+      // 隐藏追光层
+      glassLayerExtra.style.opacity = '0';
+      glassLayerExtra.style.setProperty('--spotlight-x', '-999px');
+      glassLayerExtra.style.setProperty('--spotlight-y', '-999px');
+      spotlightRing.style.opacity = '0';
+    });
+
+    // ========== 生成数据粒子 ==========
+    const particlesContainer = document.getElementById('particles');
+    const codeSnippets = ['agent', 'LLM', 'tool', 'task', 'skill', 'AI', 'neural', 'data', 'flow'];
+    
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particlesContainer.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 12000);
+    }
+    
+    // 初始创建一些粒子
+    for (let i = 0; i < 15; i++) {
+      setTimeout(createParticle, i * 300);
+    }
+    
+    // 持续生成
+    setInterval(createParticle, 800);
+  </script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+
+// 接收父页面字体大小切换消息
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+});
+
+</script></body>
+</html>

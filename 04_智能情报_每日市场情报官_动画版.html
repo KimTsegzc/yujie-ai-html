@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） ===== */
+
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:#0A0A0F;--bg2:#111118;--bg3:#1C1C26;
+    --gold:#C9A84C;--gold-bright:#E8C97A;--gold-dim:rgba(201,168,76,0.15);
+    --text:#E8E4D8;--text-dim:#9A9080;--border:rgba(201,168,76,0.2);
+    --red:#FF5252;--green:#2ED573;
+    --sidebar-bg:#060608;--sidebar-text:#E8E4D8;--sidebar-active:rgba(201,168,76,0.12);--card-bg:#111118;
+  }
+
+  /* ─── 字体变量 v17 ─── */
+  :root {
+    --text-sm: 12.8px;
+    --current-base: 16px;
+    --text-lead: 20px;
+    --text-body: 16px;
+    --text-h4: 25px;
+    --text-h3: 31.3px;
+    --text-h2: 39.1px;
+    --text-h1: 48.8px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text);
+    overflow: hidden; height: 100vh; width: 100vw;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page {
+    display:flex; flex-direction:column; height:100vh;
+  }
+  .header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px 10px; border-bottom:1px solid var(--border);
+    flex-shrink:0;
+  }
+  .h-label { font-size:var(--text-sm); color:var(--text-dim); letter-spacing:2px; text-transform:uppercase; }
+  .h-title { font-size:var(--text-h3); color:var(--gold); font-weight:700; margin-top:2px; }
+  .h-title em { font-style:normal; color:var(--text); font-weight:400; }
+
+  /* 步骤Tab */
+  .step-tabs { display:flex; gap:6px; }
+  .step-tab {
+    padding:8px 18px; border-radius:8px; cursor:pointer;
+    font-size:var(--current-base); color:var(--text-dim);
+    background:rgba(255,255,255,0.03); border:1px solid transparent;
+    transition:all .3s;
+  }
+  .step-tab:hover { background:rgba(255,255,255,0.06); }
+  .step-tab.active {
+    background:var(--gold-dim); border-color:var(--gold);
+    color:var(--gold); font-weight:600;
+  }
+
+  /* 主体三栏 */
+  .main {
+    flex:1; display:flex; overflow:hidden;
+  }
+
+  /* ===== 工作区（左） ===== */
+  .workspace {
+    flex:1; padding:18px 20px; overflow-y:auto;
+    display:flex; flex-direction:column;
+    scrollbar-width:thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+  .workspace::-webkit-scrollbar { width:6px; }
+  .workspace::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px; opacity:0.5; }
+
+  .step-scene { display:none; flex:1; flex-direction:column; gap:16px; }
+  .step-scene.active { display:flex; }
+
+  /* 工作区卡片 */
+  .ws-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:14px; padding:20px 24px; opacity:0;
+    transform:translateY(12px); transition:all .5s ease;
+  }
+  .ws-card.show { opacity:1; transform:translateY(0); }
+  .ws-card-title {
+    font-size:var(--text-h4); color:var(--gold); font-weight:600;
+    margin-bottom:12px; display:flex; align-items:center; gap:8px;
+  }
+  .ws-card-title .badge {
+    font-size:var(--text-sm); padding:2px 8px; border-radius:6px;
+    background:var(--gold-dim); color:var(--gold);
+  }
+
+  /* ===== 分时图 ===== */
+  .chart-container {
+    width:100%; height:220px; background:rgba(0,0,0,0.2);
+    border-radius:10px; position:relative; overflow:hidden;
+  }
+  .chart-container canvas { width:100%; height:100%; }
+
+  /* ===== 通报卡片 ===== */
+  .bulletin-card {
+    background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.03));
+    border:1px solid var(--border); border-radius:14px;
+    padding:22px 26px; margin-top:8px;
+  }
+  .bulletin-head {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--border);
+  }
+  .bulletin-title { font-size:var(--text-lead); color:var(--gold); font-weight:600; }
+  .bulletin-time { font-size:var(--text-sm); color:var(--text-dim); }
+  .bulletin-body { font-size:var(--current-base); line-height:2; color:var(--text); }
+  .bulletin-body strong { color:var(--gold); }
+  .bulletin-tag {
+    display:inline-block; font-size:var(--text-sm); padding:2px 10px;
+    border-radius:5px; margin-right:6px; margin-top:4px;
+  }
+  .bulletin-tag.red { background:rgba(224,120,120,0.15); color:var(--red); }
+  .bulletin-tag.green { background:rgba(111,207,160,0.15); color:var(--green); }
+  .bulletin-tag.gold { background:var(--gold-dim); color:var(--gold); }
+
+  /* ===== 客户列表 ===== */
+  .client-row {
+    display:flex; align-items:center; padding:14px 18px;
+    background:rgba(0,0,0,0.15); border-radius:10px; margin-bottom:8px;
+    border-left:3px solid var(--gold); transition:all .3s;
+    cursor:pointer; opacity:0; transform:translateX(-10px);
+  }
+  .client-row.show { opacity:1; transform:translateX(0); }
+  .client-row:hover { background:rgba(255,255,255,0.04); }
+  .client-avatar {
+    width:42px; height:42px; border-radius:10px;
+    background:var(--gold-dim); display:flex; align-items:center; justify-content:center;
+    font-size:var(--text-lead); color:var(--gold); font-weight:700; margin-right:14px;
+  }
+  .client-info { flex:1; }
+  .client-name { font-size:var(--current-base); color:var(--text); font-weight:600; }
+  .client-detail { font-size:var(--text-sm); color:var(--text-dim); margin-top:2px; }
+  .client-score {
+    text-align:right;
+  }
+  .score-val { font-size:var(--text-h3); color:var(--gold); font-weight:700; }
+  .score-label { font-size:var(--text-sm); color:var(--text-dim); }
+  .client-product {
+    display:inline-block; font-size:var(--text-sm); padding:3px 10px;
+    border-radius:6px; margin-top:4px;
+  }
+  .product-notice { background:rgba(111,207,160,0.12); color:var(--green); }
+  .product-deposit { background:rgba(154,188,224,0.12); color:var(--gold-bright); }
+  .product-long { background:rgba(224,120,120,0.12); color:var(--red); }
+
+  /* ===== 话术卡片 ===== */
+  .script-box {
+    background:rgba(0,0,0,0.2); border:1px solid var(--border);
+    border-radius:12px; padding:18px 22px; margin-top:8px;
+    font-size:var(--current-base); line-height:2; color:var(--text);
+    max-height:300px; overflow-y:auto;
+    scrollbar-width:thin; scrollbar-color:var(--gold) transparent;
+  }
+  .script-box::-webkit-scrollbar { width:5px; }
+  .script-box::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px; }
+  .script-highlight { color:var(--gold); font-weight:600; }
+  .script-sub { color:var(--text-dim); font-size:var(--text-lead); margin-top:6px; }
+
+  /* ===== 触达进度 ===== */
+  .reach-progress {
+    display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;
+  }
+  .reach-item {
+    flex:1; min-width:120px; background:rgba(0,0,0,0.15);
+    border-radius:10px; padding:16px; text-align:center;
+    border:1px solid var(--border); opacity:0; transform:scale(0.9);
+    transition:all .5s;
+  }
+  .reach-item.show { opacity:1; transform:scale(1); }
+  .reach-num { font-size:var(--text-h3); font-weight:700; margin-bottom:4px; }
+  .reach-label { font-size:var(--text-sm); color:var(--text-dim); }
+
+  /* 回流成功卡片 */
+  .success-card {
+    background:linear-gradient(135deg, rgba(111,207,160,0.08), rgba(111,207,160,0.02));
+    border:1px solid rgba(111,207,160,0.3); border-radius:14px;
+    padding:22px 26px; margin-top:10px;
+  }
+  .success-amount { font-size:var(--text-h2); color:var(--green); font-weight:700; }
+  .success-detail { font-size:var(--current-base); color:var(--text); line-height:1.8; margin-top:8px; }
+
+  /* ===== 对话面板（中） ===== */
+  .chat-panel {
+    width:380px; flex-shrink:0; display:flex; flex-direction:column;
+    border-left:1px solid var(--border); border-right:1px solid var(--border);
+    background:rgba(0,0,0,0.15);
+  }
+  .chat-head {
+    padding:14px 16px; border-bottom:1px solid var(--border);
+    font-size:var(--text-sm); color:var(--gold); letter-spacing:1px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .online-dot {
+    width:7px; height:7px; border-radius:50%; background:var(--green);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  .chat-messages {
+    flex:1; overflow-y:auto; padding:14px;
+    display:flex; flex-direction:column; gap:10px;
+    scrollbar-width:thin; scrollbar-color:var(--gold) transparent;
+  }
+  .chat-messages::-webkit-scrollbar { width:4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.4); border-radius:2px; }
+
+  .bubble { font-size:var(--current-base); line-height:1.7; padding:10px 14px; border-radius:12px; max-width:90%; word-break:break-word; white-space:pre-line; }
+  .bubble.user {
+    align-self:flex-end; background:var(--gold-dim); color:var(--gold);
+    border-bottom-right-radius:4px;
+  }
+  .bubble.ai {
+    align-self:flex-start; background:rgba(255,255,255,0.05); color:var(--text);
+    border-bottom-left-radius:4px;
+  }
+  .bubble.ai.typing { color:transparent; }
+  .bubble.ai.typing::after {
+    content:'●●●'; color:var(--text-dim); font-size:var(--text-sm);
+    animation:dots 1.2s infinite; letter-spacing:3px;
+  }
+  @keyframes dots { 0%{opacity:1;} 50%{opacity:0.3;} 100%{opacity:1;} }
+
+  .chat-input-area { padding:12px 14px; border-top:1px solid rgba(255,255,255,0.05); }
+  .chat-input-box {
+    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px; padding:10px 14px; display:flex; align-items:center; gap:8px;
+    cursor:pointer; transition:all .3s;
+  }
+  .chat-input-box:hover { border-color:rgba(201,168,76,0.3); }
+  .chat-input-text { flex:1; font-size:var(--current-base); color:#888; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+  .chat-send {
+    width:28px; height:28px; border-radius:8px;
+    background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:16px; transition:all .3s;
+  }
+  .chat-send:hover { background:rgba(201,168,76,0.3); }
+
+  /* ===== 右侧面板 ===== */
+  .side-panel {
+    width:280px; flex-shrink:0; padding:18px 16px;
+    border-left:1px solid var(--border);
+    display:flex; flex-direction:column; gap:12px;
+    overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent;
+  }
+  .side-panel::-webkit-scrollbar { width:4px; }
+  .side-panel::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); border-radius:2px; }
+
+  .side-head { font-size:var(--text-sm); color:var(--gold); letter-spacing:1px; margin-bottom:4px; }
+
+  .kpi-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:12px; padding:16px; text-align:center;
+  }
+  .kpi-title { font-size:var(--text-sm); color:var(--text-dim); margin-bottom:6px; }
+  .kpi-val { font-size:var(--text-h3); color:var(--gold); font-weight:700; }
+  .kpi-val sup { font-size:var(--text-sm); }
+  .kpi-change { font-size:var(--text-sm); margin-top:4px; }
+  .kpi-change.pos { color:var(--green); }
+  .kpi-change.neg { color:var(--red); }
+
+  .kpi-bar-wrap { width:100%; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; margin-top:8px; overflow:hidden; }
+  .kpi-bar { height:100%; border-radius:3px; transition:width 1.5s ease; width:0%; }
+
+  /* 推送按钮 */
+  .push-btn {
+    width:100%; padding:12px; border-radius:10px; border:1px solid var(--gold);
+    background:var(--gold-dim); color:var(--gold); font-size:var(--current-base);
+    font-weight:600; cursor:pointer; transition:all .3s; margin-top:8px;
+  }
+  .push-btn:hover { background:rgba(201,168,76,0.25); }
+  .push-btn.sent { border-color:var(--green); color:var(--green); background:rgba(111,207,160,0.1); }
+
+  /* ===== 底部 ===== */
+  .footer {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 24px; border-top:1px solid var(--border);
+    font-size:var(--text-sm); color:var(--text-dim); flex-shrink:0;
+  }
+  .workflow { display:flex; align-items:center; gap:6px; }
+  .wf-dot {
+    width:8px; height:8px; border-radius:50%;
+    background:rgba(255,255,255,0.12); transition:all .3s;
+  }
+  .wf-dot.lit { background:var(--gold); box-shadow:0 0 6px rgba(201,168,76,0.4); }
+  .wf-line { width:30px; height:2px; background:rgba(255,255,255,0.08); }
+  .progress-bar { width:120px; height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--gold); transition:width .5s; width:0%; }
+
+  .ctrl-btn {
+    padding:4px 12px; border-radius:6px; font-size:var(--text-sm);
+    background:rgba(255,255,255,0.04); border:1px solid var(--border);
+    color:var(--text-dim); cursor:pointer; transition:all .3s;
+  }
+  .ctrl-btn:hover { background:rgba(255,255,255,0.08); color:var(--text); }
+
+  /* ===== 背景装饰 ===== */
+  canvas#bgCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2; pointer-events:none; }
+  .grid-bg {
+    position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+
+  /* 市场指标行 */
+  .market-indicators {
+    display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px;
+  }
+  .mi-item {
+    flex:1; min-width:100px; background:rgba(0,0,0,0.15);
+    border-radius:8px; padding:10px 14px; text-align:center;
+    border:1px solid var(--border);
+  }
+  .mi-name { font-size:var(--text-sm); color:var(--text-dim); }
+  .mi-val { font-size:var(--text-lead); font-weight:700; margin-top:2px; }
+  .mi-val.up { color:var(--red); }
+  .mi-val.down { color:var(--green); }
+  .mi-change { font-size:var(--text-sm); margin-top:2px; }
+
+  /* 收盘分析热点标签 */
+  .hot-tag {
+    display:inline-block; font-size:var(--text-sm); padding:4px 12px;
+    border-radius:6px; margin:4px 4px 4px 0;
+    background:var(--gold-dim); color:var(--gold); border:1px solid rgba(201,168,76,0.2);
+  }
+
+  /* 近期走势缩略图 */
+  .mini-chart {
+    width:100%; height:120px; background:rgba(0,0,0,0.15);
+    border-radius:8px; margin-top:8px;
+  }
+
+  /* CTS余额条 */
+  .cts-bar {
+    display:flex; align-items:center; gap:10px; padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .cts-label { font-size:var(--text-sm); color:var(--text-dim); width:80px; }
+  .cts-track { flex:1; height:8px; background:rgba(255,255,255,0.06); border-radius:4px; overflow:hidden; }
+  .cts-fill { height:100%; border-radius:4px; transition:width 1.5s ease; }
+  .cts-val { font-size:var(--text-sm); color:var(--gold); font-weight:600; width:80px; text-align:right; }
+
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="grid-bg"></div>
+
+<div class="page" id="pageRoot">
+  <!-- ★ 版本水印 ★ -->
+  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:11px;color:var(--gold);font-weight:bold;opacity:0.5;pointer-events:none;letter-spacing:2px;">v3.19.4</div>
+
+  <div class="header">
+    <div>
+      <div class="h-label">SCENE 04 · INTELLIGENT MARKET INTELLIGENCE</div>
+      <div class="h-title">智能情报 &nbsp;<em>每日市场情报官</em></div>
+    </div>
+    <div class="step-tabs">
+      <div class="step-tab active" id="tab0" onclick="goStep(0)">① 14:30 风向感知</div>
+      <div class="step-tab" id="tab1" onclick="goStep(1)">② 15:00 收盘分析</div>
+      <div class="step-tab" id="tab2" onclick="goStep(2)">③ 15:10 回流识别</div>
+      <div class="step-tab" id="tab3" onclick="goStep(3)">④ 触达成功</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- ===== WORKSPACE (LEFT) ===== -->
+    <div class="workspace">
+
+      <!-- Step 0: 14:30 市场风向感知 -->
+      <div class="step-scene active" id="stepScene0">
+        <div class="ws-card" id="ws0a">
+          <div class="ws-card-title">📊 今日大盘分时走势 <span class="badge">实时</span></div>
+          <div class="market-indicators">
+            <div class="mi-item">
+              <div class="mi-name">上证指数</div>
+              <div class="mi-val up" id="shVal">3,387.25</div>
+              <div class="mi-change" style="color:var(--red)">+0.82%</div>
+            </div>
+            <div class="mi-item">
+              <div class="mi-name">深证成指</div>
+              <div class="mi-val down" id="szVal">10,892.41</div>
+              <div class="mi-change" style="color:var(--green)">-0.35%</div>
+            </div>
+            <div class="mi-item">
+              <div class="mi-name">创业板指</div>
+              <div class="mi-val down" id="cyVal">2,156.78</div>
+              <div class="mi-change" style="color:var(--green)">-0.61%</div>
+            </div>
+            <div class="mi-item">
+              <div class="mi-name">科创50</div>
+              <div class="mi-val up" id="kcVal">982.34</div>
+              <div class="mi-change" style="color:var(--red)">+1.23%</div>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartIntraday" width="800" height="220"></canvas>
+          </div>
+        </div>
+        <div class="ws-card" id="ws0b">
+          <div class="ws-card-title">📋 市场风向通报</div>
+          <div class="bulletin-card">
+            <div class="bulletin-head">
+              <div class="bulletin-title">【14:30 午后市场快报】</div>
+              <div class="bulletin-time">今日 14:30 自动生成</div>
+            </div>
+            <div class="bulletin-body" id="bulletinAM">
+              <strong>大盘分化明显</strong>：上证指数午后小幅走高，受权重股拉动上涨0.82%；但创业板和深成指持续承压，科技板块回调明显。
+              <br><br>
+              <strong>对证券转银行回流的影响预判：</strong>
+              <br>
+              <span class="bulletin-tag red">⚠️ 权益波动加大</span> 科技股持有客户焦虑感上升，回流意愿增强
+              <br>
+              <span class="bulletin-tag gold">📌 机会窗口</span> 上证护盘但深市走弱，部分资金可能在尾盘选择离场观望
+              <br>
+              <span class="bulletin-tag green">✅ 稳健配置推荐</span> 通知存款、龙钱宝等低波产品吸引力上升
+              <br><br>
+              <strong>建议行动：</strong>优先触达持仓以科技股为主的CTS客户，推荐中短债或通知存款作为资金避风港。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: 15:00 收盘综合分析 -->
+      <div class="step-scene" id="stepScene1">
+        <div class="ws-card" id="ws1a">
+          <div class="ws-card-title">📈 近5日市场走势 <span class="badge">收盘</span></div>
+          <div class="chart-container">
+            <canvas id="chart5Day" width="800" height="220"></canvas>
+          </div>
+        </div>
+        <div class="ws-card" id="ws1b">
+          <div class="ws-card-title">🌐 内外部信息聚合</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+            <span class="hot-tag">🇺🇸 美联储议息会议</span>
+            <span class="hot-tag">🏦 央行MLF操作</span>
+            <span class="hot-tag">📉 北向资金净流出</span>
+            <span class="hot-tag">📊 社融数据超预期</span>
+            <span class="hot-tag">🌐 地缘局势缓和</span>
+            <span class="hot-tag">💰 债市利率下行</span>
+          </div>
+          <div class="bulletin-card">
+            <div class="bulletin-head">
+              <div class="bulletin-title">【15:00 收盘综合分析通报】</div>
+              <div class="bulletin-time">今日 15:00 自动生成</div>
+            </div>
+            <div class="bulletin-body" id="bulletinPM">
+              <strong>今日收盘：</strong>上证指数收于3,387.25点（+0.82%），深证成指收于10,892.41点（-0.35%），两市成交额1.12万亿，较昨日放量8%。
+              <br><br>
+              <strong>近5日趋势：</strong>A股整体呈震荡分化格局，权重股托底但成长股持续调整。北向资金连续3日净流出，累计达126亿元。
+              <br><br>
+              <strong>外部环境：</strong>美联储6月议息会议释放偏鹰信号，但国内央行MLF超额续作释放流动性对冲。社融数据超预期，信贷需求边际改善。债市利率下行趋势确认，10Y国债收益率降至2.68%。
+              <br><br>
+              <strong>回流预判：</strong>
+              <span class="bulletin-tag gold">📌 降息预期升温</span> 存款利率下调预期下，提前锁定定期/大额存单窗口期
+              <span class="bulletin-tag red">⚠️ 权益信心不足</span> 连续调整后客户观望情绪浓，证券资金沉淀风险加大
+              <span class="bulletin-tag green">✅ 配置建议</span> 建议主推通知存款（灵活）+ 龙钱宝（T+0）+ 3个月定期（锁定收益）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 15:10 CTS回流客户识别 -->
+      <div class="step-scene" id="stepScene2">
+        <div class="ws-card" id="ws2a">
+          <div class="ws-card-title">💰 CTS实时余额监控 <span class="badge">15:10</span></div>
+          <div class="cts-bar">
+            <div class="cts-label">证券沉淀</div>
+            <div class="cts-track"><div class="cts-fill" id="ctsFill1" style="width:0%;background:var(--red);"></div></div>
+            <div class="cts-val" id="ctsVal1">2.38亿</div>
+          </div>
+          <div class="cts-bar">
+            <div class="cts-label">观望资金</div>
+            <div class="cts-track"><div class="cts-fill" id="ctsFill2" style="width:0%;background:var(--gold);"></div></div>
+            <div class="cts-val" id="ctsVal2">8,600万</div>
+          </div>
+          <div class="cts-bar">
+            <div class="cts-label">已回流</div>
+            <div class="cts-track"><div class="cts-fill" id="ctsFill3" style="width:0%;background:var(--green);"></div></div>
+            <div class="cts-val" id="ctsVal3">1,520万</div>
+          </div>
+        </div>
+        <div class="ws-card" id="ws2b">
+          <div class="ws-card-title">🎯 回流概率TOP客户 <span class="badge">AI排序</span></div>
+          <!-- 客户列表 -->
+          <div class="client-row" id="cr1">
+            <div class="client-avatar">王</div>
+            <div class="client-info">
+              <div class="client-name">王建国 · CTS余额 <span style="color:var(--gold)">186万</span></div>
+              <div class="client-detail">持仓科技股占比78%，近3日亏损-4.2%，焦虑度极高</div>
+              <div class="client-product product-notice">推荐：通知存款 · 7天</div>
+            </div>
+            <div class="client-score">
+              <div class="score-val">96%</div>
+              <div class="score-label">回流概率</div>
+            </div>
+          </div>
+          <div class="client-row" id="cr2">
+            <div class="client-avatar">李</div>
+            <div class="client-info">
+              <div class="client-name">李慧芳 · CTS余额 <span style="color:var(--gold)">92万</span></div>
+              <div class="client-detail">满仓半导体ETF，今日-2.8%，已连续3日致电咨询</div>
+              <div class="client-product product-deposit">推荐：3个月定期</div>
+            </div>
+            <div class="client-score">
+              <div class="score-val">91%</div>
+              <div class="score-label">回流概率</div>
+            </div>
+          </div>
+          <div class="client-row" id="cr3">
+            <div class="client-avatar">张</div>
+            <div class="client-info">
+              <div class="client-name">张明远 · CTS余额 <span style="color:var(--gold)">325万</span></div>
+              <div class="client-detail">混合持仓，权益部分-1.5%，风险偏好降低明显</div>
+              <div class="client-product product-long">推荐：龙钱宝 · T+0</div>
+            </div>
+            <div class="client-score">
+              <div class="score-val">84%</div>
+              <div class="score-label">回流概率</div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-card" id="ws2c">
+          <div class="ws-card-title">💬 王建国 · 话术建议</div>
+          <div class="script-box" id="scriptBox1">
+            <span class="script-highlight">【开场切入】</span>
+            "王总您好，今天市场波动挺大的，我注意到您的科技板块持仓今天跌了不少，特意来跟您同步一下情况。"
+            <br><br>
+            <span class="script-highlight">【痛点共鸣】</span>
+            "最近半导体板块连续调整，您持仓的那几只ETF这周已经回撤4%以上了，我知道您一直比较在意风险控制。"
+            <br><br>
+            <span class="script-highlight">【产品推荐 · 通知存款】</span>
+            "建议您先把部分资金转回银行，配置7天通知存款——年化1.65%，T+1到账，灵活度很高。等市场企稳了随时可以再转回去，不耽误您的机会。"
+            <br><br>
+            <span class="script-highlight">【异议处理】</span>
+            <span class="script-sub">
+            Q："收益太低了" → A："通知存款的定位不是跟股票比收益，而是帮您锁住利润、控制回撤。您现在的浮亏4%要涨回来需要4.2%的涨幅，但通知存款的1.65%是确定性收益。"
+            <br>
+            Q："我等等看" → A："可以理解，但7天通知存款完全支持随时取消，相当于给资金一个'安全停机坪'，不影响您后续操作。"
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 触达完成 · 回流成功 -->
+      <div class="step-scene" id="stepScene3">
+        <div class="ws-card" id="ws3a">
+          <div class="ws-card-title">📊 今日触达进度</div>
+          <div class="reach-progress">
+            <div class="reach-item" id="ri1">
+              <div class="reach-num" style="color:var(--gold)">12</div>
+              <div class="reach-label">已触达客户</div>
+            </div>
+            <div class="reach-item" id="ri2">
+              <div class="reach-num" style="color:var(--green)">8</div>
+              <div class="reach-label">确认回流</div>
+            </div>
+            <div class="reach-item" id="ri3">
+              <div class="reach-num" style="color:var(--red)">3</div>
+              <div class="reach-label">观望中</div>
+            </div>
+            <div class="reach-item" id="ri4">
+              <div class="reach-num" style="color:var(--text-dim)">1</div>
+              <div class="reach-label">拒绝</div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-card" id="ws3b">
+          <div class="ws-card-title">✅ 回流成功案例</div>
+          <div class="success-card">
+            <div style="font-size:var(--current-base);color:var(--green);font-weight:600;margin-bottom:8px;">王建国 · 通知存款 186万</div>
+            <div class="success-detail">
+              触达方式：<strong>电话</strong>（15:23拨出，通话4分32秒）
+              <br>话术命中：<strong>异议处理·收益太低</strong> → 成功转化
+              <br>配置方案：<strong>7天通知存款 120万 + 龙钱宝 66万</strong>
+              <br>回流金额：<span class="success-amount" style="font-size:var(--text-h4)">186万</span>
+              <br>回流耗时：从触达到到账 <strong>23分钟</strong>
+            </div>
+          </div>
+          <div class="success-card" style="margin-top:10px;">
+            <div style="font-size:var(--current-base);color:var(--green);font-weight:600;margin-bottom:8px;">李慧芳 · 3个月定期 92万</div>
+            <div class="success-detail">
+              触达方式：<strong>微信</strong>（15:18发送话术，15:31回复确认）
+              <br>话术命中：<strong>开场切入·市场波动</strong> → 直接转化
+              <br>配置方案：<strong>3个月定期存款 92万（年化1.85%）</strong>
+              <br>回流金额：<span class="success-amount" style="font-size:var(--text-h4)">92万</span>
+            </div>
+          </div>
+        </div>
+        <div class="ws-card" id="ws3c">
+          <div class="ws-card-title">📋 今日回流汇总</div>
+          <div style="display:flex; gap:16px; margin-top:8px;">
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:var(--text-h2);color:var(--gold);font-weight:700;">603万</div>
+              <div style="font-size:var(--text-sm);color:var(--text-dim);margin-top:4px;">今日回流总额</div>
+            </div>
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:var(--text-h2);color:var(--green);font-weight:700;">67%</div>
+              <div style="font-size:var(--text-sm);color:var(--text-dim);margin-top:4px;">触达转化率</div>
+            </div>
+            <div style="flex:1;text-align:center;">
+              <div style="font-size:var(--text-h2);color:var(--gold-bright);font-weight:700;">28min</div>
+              <div style="font-size:var(--text-sm);color:var(--text-dim);margin-top:4px;">平均回流耗时</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /workspace -->
+
+    <!-- ===== CHAT PANEL (CENTER) ===== -->
+    <div class="chat-panel">
+      <div class="chat-head">
+        <div class="online-dot"></div>
+        AI MARKET ADVISOR · 市场情报官
+      </div>
+      <div class="chat-messages" id="chatMsgs"></div>
+      <div class="chat-input-area">
+        <div class="chat-input-box" id="chatInputBox">
+          <div class="chat-input-text" id="chatInputPreview">查看今日市场风向</div>
+          <div class="chat-send" id="chatSendBtn">↑</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SIDE PANEL (RIGHT) ===== -->
+    <div class="side-panel">
+      <div class="side-head">INTELLIGENCE · 情报指标</div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">CTS沉淀资金</div>
+        <div class="kpi-val">2.38<span style="font-size:var(--current-base)">亿</span></div>
+        <div class="kpi-change neg">↑ 较昨日+320万</div>
+        <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb1" style="background:var(--red);"></div></div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">回流概率>80%客户</div>
+        <div class="kpi-val">23<span style="font-size:var(--current-base)">户</span></div>
+        <div class="kpi-change pos">↓ 较昨日-5户</div>
+        <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb2" style="background:var(--green);"></div></div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">今日回流金额</div>
+        <div class="kpi-val" id="kpiBackflow">0<span style="font-size:var(--current-base)">万</span></div>
+        <div class="kpi-change pos" id="kpiBfChange">—</div>
+        <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb3" style="background:var(--gold);"></div></div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">触达转化率</div>
+        <div class="kpi-val" id="kpiConvert">0<span style="font-size:var(--current-base)">%</span></div>
+        <div class="kpi-change pos" id="kpiCvChange">—</div>
+        <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb4" style="background:var(--gold-bright);"></div></div>
+      </div>
+
+      <button class="push-btn" id="pushBtn0" onclick="pushBulletin(0)">📨 推送通报给全体客户经理</button>
+      <button class="push-btn" id="pushBtn1" onclick="pushBulletin(1)" style="display:none;">📨 推送收盘分析通报</button>
+      <button class="push-btn" id="pushBtn2" onclick="pushBulletin(2)" style="display:none;">📨 发送话术至客户经理工作台</button>
+
+      <button class="ctrl-btn" id="playBtn" onclick="togglePlay()" style="margin-top:auto;">▶ 自动演示</button>
+    </div>
+
+  </div><!-- /main -->
+
+  <div class="footer">
+    <div class="workflow">
+      <div class="wf-dot lit" id="wf1"></div>
+      <div class="wf-line"></div>
+      <div class="wf-dot" id="wf2"></div>
+      <div class="wf-line"></div>
+      <div class="wf-dot" id="wf3"></div>
+      <div class="wf-line"></div>
+      <div class="wf-dot" id="wf4"></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="pgFill" style="width:25%"></div></div>
+    <div id="footerInfo">第1步 / 共4步</div>
+    <div style="display:flex;gap:6px;">
+      <button class="ctrl-btn" onclick="prevStep()">← 上一步</button>
+      <button class="ctrl-btn" onclick="nextStep()">下一步 →</button>
+      <button class="ctrl-btn" onclick="resetAll()" id="resetBtn">↺ 重置</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== STEP MANAGEMENT =====
+let currentStep=0;
+let autoPlay=false;
+let autoTimer=null;
+let chatAnimating=false;
+let pendingTransition=null;
+
+const stepNames=['14:30 风向感知','15:00 收盘分析','15:10 回流识别','触达成功'];
+const inputs=['查看今日市场风向','生成收盘综合分析','查找CTS回流客户','查看触达结果'];
+
+const chatConvos=[
+  // 场景1：14:30 市场风向感知
+  [
+    {u:'查看今日市场风向'},
+    {a:'正在对接行情数据源，抓取今日大盘分时走势、板块资金流向和北向资金变动…'},
+    {a:'📈 午后市场快报已生成！\n\n今日大盘分化明显：上证+0.82%但创业板-0.61%，科技板块承压回调。北向资金午后继续净流出。\n\n⚠️ 对CTS回流的影响：\n• 科技股客户焦虑度大幅上升，回流意愿增强\n• 尾盘可能有资金选择离场观望\n• 建议优先触达持仓科技股的CTS客户\n\n右侧已展示分时走势和通报详情。需要我推送通报给全体客户经理吗？'}
+  ],
+  // 场景2：15:00 收盘综合分析
+  [
+    {u:'生成收盘综合分析'},
+    {a:'正在聚合近5日走势数据 + 北向资金流向 + 国内外政策信号…'},
+    {a:'📊 收盘分析完成！\n\n今日收盘：上证3,387（+0.82%），深证10,892（-0.35%），成交1.12万亿。北向资金连续3日净流出，累计126亿。\n\n关键信号：\n• 美联储偏鹰但国内MLF超额续作对冲\n• 社融超预期，信贷边际改善\n• 债市利率下行确认，10Y国债降至2.68%\n\n回流预判：降息预期下定期存款窗口期缩短，建议主推通知存款+龙钱宝+3个月定期组合方案。\n\n右侧已展示完整通报。需要我推送并启动回流客户识别吗？'}
+  ],
+  // 场景3：15:10 CTS回流识别
+  [
+    {u:'查找CTS回流客户'},
+    {a:'正在扫描CTS实时余额数据，结合持仓结构、近期亏损幅度、历史行为特征进行回流概率建模…'},
+    {a:'🎯 已识别出23户高回流概率客户！TOP3如下：\n\n① 王建国 — CTS余额186万，回流概率96%\n   持仓科技股78%，本周亏损4.2%\n   推荐方案：7天通知存款\n\n② 李慧芳 — CTS余额92万，回流概率91%\n   满仓半导体ETF，今日-2.8%\n   推荐方案：3个月定期\n\n③ 张明远 — CTS余额325万，回流概率84%\n   混合持仓，权益部分-1.5%\n   推荐方案：龙钱宝T+0\n\n右侧已展示完整客户列表和话术建议。需要我发送话术到客户经理工作台吗？'}
+  ],
+  // 场景4：触达完成
+  [
+    {u:'查看触达结果'},
+    {a:'正在汇总今日全部触达记录和回流到账数据…'},
+    {a:'🎉 今日回流战报出炉！\n\n已触达12户，确认回流8户，转化率67%！\n\n✅ 成功案例：\n• 王建国：186万 → 通知存款120万+龙钱宝66万，23分钟到账\n• 李慧芳：92万 → 3个月定期，微信触达13分钟确认\n\n💰 今日回流总额：603万\n平均回流耗时：28分钟\n\n详细数据请查看右侧工作台。'}
+  ]
+];
+
+function goStep(n){
+  document.getElementById('stepScene'+currentStep).classList.remove('active');
+  document.getElementById('tab'+currentStep).classList.remove('active');
+  document.getElementById('wf'+(currentStep+1)).classList.remove('lit');
+
+  // 重置工作区
+  if(currentStep===0) resetStep0();
+  if(currentStep===1) resetStep1();
+  if(currentStep===2) resetStep2();
+  if(currentStep===3) resetStep3();
+
+  currentStep=n;
+  document.getElementById('stepScene'+n).classList.add('active');
+  document.getElementById('tab'+n).classList.add('active');
+  document.getElementById('wf'+(n+1)).classList.add('lit');
+  document.getElementById('pgFill').style.width=((n+1)/4*100)+'%';
+  document.getElementById('footerInfo').textContent=`第${n+1}步 / 共4步`;
+  document.getElementById('chatInputPreview').textContent=inputs[n];
+
+  // 推送按钮
+  ['pushBtn0','pushBtn1','pushBtn2'].forEach((id,i)=>{
+    document.getElementById(id).style.display=(i===n)?'block':'none';
+  });
+}
+
+function nextStep(){ if(currentStep<3) goStep(currentStep+1); }
+function prevStep(){ goStep((currentStep+3)%4); }
+
+// ★ 重置所有状态到初始
+function resetAll(){
+  // 停止自动演示
+  autoPlay=false;
+  clearTimeout(autoTimer);
+  const playBtn=document.getElementById('playBtn');
+  if(playBtn) playBtn.textContent='▶ 自动演示';
+
+  // 释放对话动画锁
+  chatAnimating=false;
+  pendingTransition=null;
+
+  // 清空所有工作区动画
+  resetStep0(); resetStep1(); resetStep2(); resetStep3();
+
+  // 重置CTS余额条
+  ['ctsFill1','ctsFill2','ctsFill3'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.width='0%';
+  });
+
+  // 重置推送按钮
+  for(let i=0;i<3;i++){
+    const btn=document.getElementById('pushBtn'+i);
+    if(btn){ btn.textContent=['📨 推送通报给全体客户经理','📨 推送收盘分析通报','📨 发送话术至客户经理工作台'][i]; btn.classList.remove('sent'); btn.disabled=false; }
+  }
+
+  // 回到第一步
+  goStep(0);
+}
+
+function resetStep0(){ ['ws0a','ws0b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
+function resetStep1(){ ['ws1a','ws1b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
+function resetStep2(){ ['ws2a','ws2b','ws2c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); ['cr1','cr2','cr3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
+function resetStep3(){ ['ws3a','ws3b','ws3c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); ['ri1','ri2','ri3','ri4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
+
+// ===== CHAT =====
+function pushChat(convos){
+  const container=document.getElementById('chatMsgs');
+  container.innerHTML='';
+  let totalDelay=0;
+  convos.forEach((msg,i)=>{
+    totalDelay=i*1200;
+    if(msg.a) totalDelay+=(msg.u?400:0)+800;
+  });
+  const workspaceTriggerDelay=totalDelay+300;
+
+  convos.forEach((msg,i)=>{
+    setTimeout(()=>{
+      if(msg.u){
+        const b=document.createElement('div');
+        b.className='bubble user'; b.textContent=msg.u;
+        container.appendChild(b);
+        container.scrollTop=container.scrollHeight;
+      }
+      if(msg.a){
+        setTimeout(()=>{
+          const typing=document.createElement('div');
+          typing.className='bubble ai typing';
+          container.appendChild(typing);
+          container.scrollTop=container.scrollHeight;
+          setTimeout(()=>{
+            typing.className='bubble ai';
+            typing.textContent=msg.a;
+            container.scrollTop=container.scrollHeight;
+          },800);
+        }, msg.u?400:0);
+      }
+    }, i*1200);
+  });
+
+  // 对话播完后触发工作区动画
+  setTimeout(()=>{
+    if(currentStep===0) animStep0();
+    if(currentStep===1) animStep1();
+    if(currentStep===2) animStep2();
+    if(currentStep===3) animStep3();
+
+    // 场景衔接：设置过渡状态
+    if(currentStep<3){
+      const nextInputs=['生成收盘综合分析','查找CTS回流客户','查看触达结果'];
+      const prevEl=document.getElementById('chatInputPreview');
+      const boxEl=document.getElementById('chatInputBox');
+      prevEl.textContent='✨ '+nextInputs[currentStep];
+      prevEl.style.color='#c9a84c';
+      prevEl.style.fontWeight='600';
+      boxEl.style.borderColor='rgba(201,168,76,0.7)';
+      boxEl.style.boxShadow='0 0 16px rgba(201,168,76,0.25)';
+      let flashes=0;
+      const pulseInt=setInterval(()=>{
+        flashes++;
+        boxEl.style.borderColor=flashes%2===0?'rgba(201,168,76,0.3)':'rgba(201,168,76,0.8)';
+        if(flashes>=5){ clearInterval(pulseInt); boxEl.style.borderColor='rgba(201,168,76,0.5)'; boxEl.style.boxShadow='0 0 10px rgba(201,168,76,0.15)'; }
+      },400);
+      pendingTransition={fromStep:currentStep, userInput:nextInputs[currentStep]};
+      chatAnimating=false;
+    } else {
+      chatAnimating=false;
+    }
+  }, workspaceTriggerDelay);
+}
+
+// 场景N→N+1过渡专用：只播放AI回复
+function playAiRepliesOnly(convos, container){
+  let totalDelay=0;
+  convos.forEach((msg,i)=>{ if(msg.a) totalDelay+=(i>0||convos[0].u?400:0)+800; });
+  const workspaceTriggerDelay=totalDelay+300;
+
+  convos.forEach((msg,i)=>{
+    if(msg.a){
+      setTimeout(()=>{
+        const typing=document.createElement('div');
+        typing.className='bubble ai typing';
+        container.appendChild(typing);
+        container.scrollTop=container.scrollHeight;
+        setTimeout(()=>{
+          typing.className='bubble ai';
+          typing.textContent=msg.a;
+          container.scrollTop=container.scrollHeight;
+        },800);
+      }, i*1200);
+    }
+  });
+
+  setTimeout(()=>{
+    if(currentStep===0) animStep0();
+    if(currentStep===1) animStep1();
+    if(currentStep===2) animStep2();
+    if(currentStep===3) animStep3();
+
+    if(currentStep<3){
+      const nextInputs=['生成收盘综合分析','查找CTS回流客户','查看触达结果'];
+      const prevEl=document.getElementById('chatInputPreview');
+      const boxEl=document.getElementById('chatInputBox');
+      prevEl.textContent='✨ '+nextInputs[currentStep];
+      prevEl.style.color='#c9a84c';
+      prevEl.style.fontWeight='600';
+      boxEl.style.borderColor='rgba(201,168,76,0.7)';
+      boxEl.style.boxShadow='0 0 16px rgba(201,168,76,0.25)';
+      pendingTransition={fromStep:currentStep, userInput:nextInputs[currentStep]};
+    }
+    chatAnimating=false;
+  }, workspaceTriggerDelay);
+}
+
+function sendChat(){
+  if(chatAnimating) return;
+
+  // 场景过渡
+  if(pendingTransition && pendingTransition.fromStep===currentStep){
+    const pt=pendingTransition;
+    pendingTransition=null;
+    // 切换到下一步
+    const nextN=currentStep+1;
+    document.getElementById('stepScene'+currentStep).classList.remove('active');
+    document.getElementById('tab'+currentStep).classList.remove('active');
+    document.getElementById('wf'+(currentStep+1)).classList.remove('lit');
+    currentStep=nextN;
+    document.getElementById('stepScene'+nextN).classList.add('active');
+    document.getElementById('tab'+nextN).classList.add('active');
+    document.getElementById('wf'+(nextN+1)).classList.add('lit');
+    document.getElementById('pgFill').style.width=((nextN+1)/4*100)+'%';
+    document.getElementById('footerInfo').textContent=`第${nextN+1}步 / 共4步`;
+    document.getElementById('chatInputPreview').textContent=inputs[nextN];
+    // 推送按钮
+    ['pushBtn0','pushBtn1','pushBtn2'].forEach((id,i)=>{
+      document.getElementById(id).style.display=(i===nextN)?'block':'none';
+    });
+    // 追加用户气泡
+    const container=document.getElementById('chatMsgs');
+    const ub=document.createElement('div');
+    ub.className='bubble user'; ub.textContent=pt.userInput;
+    container.appendChild(ub);
+    container.scrollTop=container.scrollHeight;
+    // 播放下一步AI回复
+    chatAnimating=true;
+    playAiRepliesOnly(chatConvos[nextN], container);
+    return;
+  }
+
+  chatAnimating=true;
+  pushChat(chatConvos[currentStep]);
+}
+
+// ===== 自动演示 =====
+function togglePlay(){
+  autoPlay=!autoPlay;
+  document.getElementById('playBtn').textContent=autoPlay?'⏸ 暂停':'▶ 自动演示';
+  if(autoPlay){ if(!chatAnimating) sendChat(); runAuto(); }
+  else clearTimeout(autoTimer);
+}
+function runAuto(){
+  if(!autoPlay) return;
+  if(currentStep<3){
+    autoTimer=setTimeout(()=>{ nextStep(); sendChat(); runAuto(); },6000);
+  } else {
+    autoTimer=setTimeout(()=>{ goStep(0); sendChat(); runAuto(); },7000);
+  }
+}
+
+// ===== 推送通报 =====
+function pushBulletin(step){
+  const btn=document.getElementById('pushBtn'+step);
+  btn.textContent='✅ 已推送至全体客户经理';
+  btn.classList.add('sent');
+  btn.disabled=true;
+}
+
+// ===== 工作区动画 =====
+function animStep0(){
+  ['ws0a','ws0b'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) setTimeout(()=>el.classList.add('show'), i*300+200);
+  });
+  setTimeout(()=>drawIntradayChart(), 400);
+}
+function animStep1(){
+  ['ws1a','ws1b'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) setTimeout(()=>el.classList.add('show'), i*300+200);
+  });
+  setTimeout(()=>draw5DayChart(), 400);
+}
+function animStep2(){
+  ['ws2a'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) setTimeout(()=>el.classList.add('show'), i*300+200);
+  });
+  // CTS余额条动画
+  setTimeout(()=>{
+    document.getElementById('ctsFill1').style.width='72%';
+    document.getElementById('ctsFill2').style.width='36%';
+    document.getElementById('ctsFill3').style.width='12%';
+  },600);
+  // 客户列表
+  setTimeout(()=>{
+    const ws2b=document.getElementById('ws2b');
+    if(ws2b) ws2b.classList.add('show');
+    ['cr1','cr2','cr3'].forEach((id,i)=>{
+      setTimeout(()=>{const el=document.getElementById(id);if(el)el.classList.add('show');}, i*250+300);
+    });
+  },800);
+  // 话术
+  setTimeout(()=>{
+    const ws2c=document.getElementById('ws2c');
+    if(ws2c) ws2c.classList.add('show');
+  },1600);
+}
+function animStep3(){
+  ['ws3a'].forEach((id)=>{
+    const el=document.getElementById(id);
+    if(el) setTimeout(()=>el.classList.add('show'),200);
+  });
+  ['ri1','ri2','ri3','ri4'].forEach((id,i)=>{
+    setTimeout(()=>{const el=document.getElementById(id);if(el)el.classList.add('show');}, i*200+500);
+  });
+  setTimeout(()=>{
+    const ws3b=document.getElementById('ws3b');
+    if(ws3b) ws3b.classList.add('show');
+  },1200);
+  setTimeout(()=>{
+    const ws3c=document.getElementById('ws3c');
+    if(ws3c) ws3c.classList.add('show');
+    // KPI更新
+    document.getElementById('kpiBackflow').innerHTML='603<span style="font-size:var(--current-base)">万</span>';
+    document.getElementById('kpiBfChange').textContent='↑ 今日累计';
+    document.getElementById('kpiBfChange').className='kpi-change pos';
+    document.getElementById('kpiConvert').innerHTML='67<span style="font-size:var(--current-base)">%</span>';
+    document.getElementById('kpiCvChange').textContent='↑ 8/12户转化';
+    document.getElementById('kpiCvChange').className='kpi-change pos';
+  },1800);
+}
+
+// ===== 图表绘制 =====
+function drawIntradayChart(){
+  const c=document.getElementById('chartIntraday');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  const w=c.width, h=c.height;
+  ctx.clearRect(0,0,w,h);
+
+  // 上证分时（模拟）
+  const shPoints=[];
+  let val=3350;
+  for(let i=0;i<60;i++){
+    val+=(Math.random()-0.48)*5;
+    shPoints.push(val);
+  }
+  // 午后走高
+  for(let i=0;i<30;i++){
+    val+=(Math.random()-0.38)*4;
+    shPoints.push(val);
+  }
+
+  const pad={t:20,b:30,l:50,r:20};
+  const cw=w-pad.l-pad.r, ch=h-pad.t-pad.b;
+  const minV=Math.min(...shPoints)-5, maxV=Math.max(...shPoints)+5;
+
+  // 零线
+  const zeroY=pad.t+ch*(1-(3350-minV)/(maxV-minV));
+  ctx.strokeStyle='rgba(255,255,255,0.08)';
+  ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.l,zeroY); ctx.lineTo(w-pad.r,zeroY); ctx.stroke();
+
+  // 面积
+  const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);
+  grad.addColorStop(0,'rgba(224,120,120,0.2)');
+  grad.addColorStop(1,'rgba(224,120,120,0.01)');
+  ctx.beginPath();
+  ctx.moveTo(pad.l,h-pad.b);
+  shPoints.forEach((v,i)=>{
+    const x=pad.l+i*cw/(shPoints.length-1);
+    const y=pad.t+ch*(1-(v-minV)/(maxV-minV));
+    ctx.lineTo(x,y);
+  });
+  ctx.lineTo(w-pad.r,h-pad.b); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+
+  // 线
+  ctx.beginPath();
+  shPoints.forEach((v,i)=>{
+    const x=pad.l+i*cw/(shPoints.length-1);
+    const y=pad.t+ch*(1-(v-minV)/(maxV-minV));
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle='var(--red)'; ctx.lineWidth=2; ctx.stroke();
+
+  // 创业板（叠加）
+  const cyPoints=[];
+  let cv=2180;
+  for(let i=0;i<60;i++){
+    cv-=(Math.random()-0.45)*4;
+    cyPoints.push(cv);
+  }
+  for(let i=0;i<30;i++){
+    cv-=(Math.random()-0.55)*3;
+    cyPoints.push(cv);
+  }
+  const minC=Math.min(...cyPoints)-5, maxC=Math.max(...cyPoints)+5;
+  ctx.beginPath();
+  cyPoints.forEach((v,i)=>{
+    const x=pad.l+i*cw/(cyPoints.length-1);
+    const y=pad.t+ch*(1-(v-minC)/(maxC-minC));
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle='var(--green)'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // 图例
+  ctx.font='12px sans-serif';
+  ctx.fillStyle='var(--red)'; ctx.fillText('● 上证指数',pad.l+10,pad.t+14);
+  ctx.fillStyle='var(--green)'; ctx.fillText('● 创业板指',pad.l+120,pad.t+14);
+
+  // 时间轴
+  const times=['9:30','10:30','11:30','13:00','14:00','15:00'];
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.font='11px sans-serif';
+  times.forEach((t,i)=>{
+    const x=pad.l+i*cw/(times.length-1);
+    ctx.fillText(t,x-15,h-pad.b+16);
+  });
+
+  // 午盘分隔线
+  const noonX=pad.l+(60/90)*cw;
+  ctx.strokeStyle='rgba(255,255,255,0.1)';
+  ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(noonX,pad.t); ctx.lineTo(noonX,h-pad.b); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fillText('午盘',noonX-12,pad.t+14);
+}
+
+function draw5DayChart(){
+  const c=document.getElementById('chart5Day');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  const w=c.width, h=c.height;
+  ctx.clearRect(0,0,w,h);
+
+  const data=[
+    {label:'3/22',sh:3342,sz:10985,cy:2198},
+    {label:'3/25',sh:3358,sz:11012,cy:2180},
+    {label:'3/26',sh:3340,sz:10945,cy:2170},
+    {label:'3/27',sh:3360,sz:10920,cy:2165},
+    {label:'3/28',sh:3387,sz:10892,cy:2157},
+  ];
+
+  const pad={t:25,b:35,l:55,r:20};
+  const cw=w-pad.l-pad.r, ch=h-pad.t-pad.b;
+  const allVals=data.map(d=>d.sh);
+  const minV=Math.min(...allVals)-15, maxV=Math.max(...allVals)+15;
+
+  // 网格
+  for(let i=0;i<5;i++){
+    const y=pad.t+ch*i/4;
+    ctx.strokeStyle='rgba(255,255,255,0.05)';
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke();
+    const val=maxV-(maxV-minV)*i/4;
+    ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.font='11px sans-serif';
+    ctx.fillText(val.toFixed(0),5,y+4);
+  }
+
+  // 面积+线
+  const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);
+  grad.addColorStop(0,'rgba(201,168,76,0.2)');
+  grad.addColorStop(1,'rgba(201,168,76,0.01)');
+  ctx.beginPath();
+  ctx.moveTo(pad.l,h-pad.b);
+  data.forEach((d,i)=>{
+    const x=pad.l+i*cw/(data.length-1);
+    const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
+    ctx.lineTo(x,y);
+  });
+  ctx.lineTo(pad.l+(data.length-1)*cw,h-pad.b); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+
+  ctx.beginPath();
+  data.forEach((d,i)=>{
+    const x=pad.l+i*cw/(data.length-1);
+    const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle='var(--gold)'; ctx.lineWidth=2.5; ctx.stroke();
+
+  // 点
+  data.forEach((d,i)=>{
+    const x=pad.l+i*cw/(data.length-1);
+    const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
+    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+    ctx.fillStyle=i===data.length-1?'var(--gold)':'rgba(201,168,76,0.6)';
+    ctx.fill();
+    // 涨跌标注
+    if(i>0){
+      const change=((d.sh-data[i-1].sh)/data[i-1].sh*100).toFixed(2);
+      const color=change>=0?'var(--red)':'var(--green)';
+      ctx.fillStyle=color; ctx.font='11px sans-serif';
+      ctx.fillText((change>=0?'+':'')+change+'%',x-18,y-12);
+    }
+    // X轴标签
+    ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font='12px sans-serif';
+    ctx.fillText(d.label,x-12,h-pad.b+18);
+  });
+}
+
+// ===== 背景粒子 =====
+function initBg(){
+  const c=document.getElementById('bgCanvas');
+  c.width=window.innerWidth; c.height=window.innerHeight;
+  const ctx=c.getContext('2d');
+  const particles=[];
+  for(let i=0;i<40;i++){
+    particles.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+0.5,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,a:Math.random()*0.3+0.1});
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=c.width; if(p.x>c.width)p.x=0;
+      if(p.y<0)p.y=c.height; if(p.y>c.height)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${p.a})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ===== INIT =====
+goStep(0);
+document.getElementById('chatMsgs').innerHTML='';
+chatAnimating=false;
+
+// 绑定点击事件
+document.getElementById('chatSendBtn').addEventListener('click',sendChat);
+document.getElementById('chatInputBox').addEventListener('click',sendChat);
+
+// KPI bars
+setTimeout(()=>{
+  document.getElementById('kb1').style.width='72%';
+  document.getElementById('kb2').style.width='60%';
+  document.getElementById('kb3').style.width='0%';
+  document.getElementById('kb4').style.width='0%';
+},500);
+
+// 键盘
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='PageDown'||e.key==='PageUp'){
+    try{window.parent.postMessage({type:'iframeKeydown',key:e.key},'*');}catch(err){}
+  }
+  if(e.key==='ArrowRight') nextStep();
+  if(e.key==='ArrowLeft') prevStep();
+  if(e.key===' '){e.preventDefault();togglePlay();}
+});
+
+initBg();
+
+// 字体大小同步
+window.addEventListener('message',(e)=>{
+  if(e.data&&e.data.type==='fontSize'){
+    document.documentElement.setAttribute('data-font-level',e.data.size||'medium');
+  }
+  if(e.data&&e.data.type==='visibility'){
+    if(e.data.visible){}else{}
+  }
+});
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+parent.postMessage({type:'iframeReady'},'*');
+</script>
+</body>
+</html>

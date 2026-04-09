@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>数据智能 · 自动分析简报 v2</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+/* ========== v17 等比缩放字体系统 ========== */
+:root{
+  --base-size:18px;--scale:1.333;
+  --text-sm:calc(var(--base-size)/1.333);
+  --current-base:var(--base-size);
+  --text-body:var(--base-size);
+  --text-lead:calc(var(--base-size)*1.111);
+  --text-h4:calc(var(--base-size)*1.333^1);
+  --text-h3:calc(var(--base-size)*1.333^2);
+  --text-h2:calc(var(--base-size)*1.333^3);
+  --text-h1:calc(var(--base-size)*1.333^4);
+  --bg-primary:var(--bg,#0a0e1a);
+  --bg-secondary:var(--bg2,#111827);
+  --bg-card:var(--bg3,#1a2236);
+  --bg-hover:var(--bg3,#243049);
+  --text-primary:var(--text,#e8e8e8);
+  --text-secondary:var(--text-dim,#9ca3af);
+  --accent:var(--gold,#c9a84c);
+  --accent-light:var(--gold-bright,#e8c97a);
+  --accent-bg:var(--gold-dim,rgba(201,168,76,0.1));
+  --danger:var(--red,#ef4444);
+  --success:var(--green,#22c55e);
+  --border:var(--border,rgba(255,255,255,0.08));
+  --border-accent:var(--border,rgba(201,168,76,0.3));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:var(--base-size);}
+body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;background:var(--bg-primary);color:var(--text-primary);height:100vh;overflow:hidden;}
+.page{display:flex;flex-direction:column;height:100vh;}
+.header{display:flex;align-items:center;gap:12px;padding:12px 24px;background:var(--bg-secondary);border-bottom:1px solid var(--border);flex-shrink:0;}
+.header-title{font-size:var(--text-h3);font-weight:700;color:var(--accent);letter-spacing:2px;flex-shrink:0;}
+.header-badge{font-size:var(--text-sm);color:var(--text-secondary);background:var(--accent-bg);padding:4px 12px;border-radius:20px;border:1px solid var(--border-accent);flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.header-reset-btn{padding:6px 16px;border-radius:8px;font-size:var(--current-base);background:var(--accent-bg,#1a1810);border:1px solid var(--border-accent,rgba(201,168,76,0.3));color:var(--accent,#c9a84c);cursor:pointer;transition:all .3s;flex-shrink:0;margin-left:auto;font-weight:500;}
+.header-reset-btn:hover{background:rgba(201,168,76,0.2);color:var(--accent-light,#e8c97a);transform:translateY(-1px);}
+.main{display:flex;flex:1;overflow:hidden;}
+.chat-panel{width:30%;min-width:320px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--bg-secondary);}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.3) transparent;}
+.chat-msgs::-webkit-scrollbar{width:4px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:2px;}
+.chat-msgs::-webkit-scrollbar-track{background:transparent;}
+.msg{margin-bottom:14px;animation:fadeIn .4s ease;}
+.msg-user{text-align:right;}
+.msg-bubble{display:inline-block;max-width:88%;padding:10px 14px;border-radius:14px;font-size:var(--current-base);line-height:1.7;word-break:break-word;}
+.msg-ai .msg-bubble{background:rgba(255,255,255,0.04);color:var(--text-primary);border:1px solid var(--border);text-align:left;}
+.msg-user .msg-bubble{background:rgba(201,168,76,0.12);color:var(--accent-light);border:1px solid var(--border-accent);}
+.msg-system{font-size:var(--text-sm);color:var(--text-secondary);text-align:center;margin:8px 0;}
+.suggest-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding:0 4px;}
+.suggest-btn{font-size:var(--text-sm);padding:5px 10px;border-radius:8px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--border-accent);cursor:pointer;transition:all .2s;}
+.suggest-btn:hover{background:rgba(201,168,76,0.2);transform:translateY(-1px);}
+.chat-input{padding:12px 16px;border-top:1px solid var(--border);flex-shrink:0;}
+.input-box{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:8px 12px;cursor:pointer;transition:all .3s;}
+.input-box:hover{border-color:var(--border-accent);}
+.input-box.active{border-color:rgba(201,168,76,0.6);box-shadow:0 0 12px rgba(201,168,76,0.15);}
+.input-preview{flex:1;font-size:var(--current-base);color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.send-btn{width:32px;height:32px;border-radius:8px;border:none;background:var(--accent);color:#000;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.send-btn:hover{background:var(--accent-light);transform:scale(1.05);}
+.work-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg-primary);}
+.steps-bar{display:flex;align-items:center;gap:4px;padding:10px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid var(--border);flex-shrink:0;}
+.step-item{display:flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--text-secondary);padding:4px 12px;border-radius:20px;transition:all .3s;}
+.step-item.active{color:var(--accent);background:var(--accent-bg);border:1px solid var(--border-accent);}
+.step-item.done{color:var(--success);}
+.step-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:rgba(255,255,255,0.08);color:var(--text-secondary);}
+.step-item.active .step-num{background:var(--accent);color:#000;}
+.step-item.done .step-num{background:var(--success);color:#fff;}
+.step-arrow{color:var(--text-secondary);font-size:10px;margin:0 2px;}
+.work-content{flex:1;display:flex;overflow:hidden;padding:16px 20px;gap:16px;}
+.brief-panel{flex:1;display:flex;flex-direction:column;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.brief-header{padding:14px 20px;border-bottom:1px solid var(--border);font-size:var(--text-h4);font-weight:700;color:var(--accent);display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.brief-body{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.35) transparent;}
+.brief-body::-webkit-scrollbar{width:6px;}
+.brief-body::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.35);border-radius:3px;}
+.brief-body::-webkit-scrollbar-track{background:transparent;}
+.brief-section{margin-bottom:18px;animation:fadeIn .6s ease;}
+.brief-section-title{font-size:var(--text-lead);font-weight:700;color:var(--accent);margin-bottom:8px;padding-left:10px;border-left:3px solid var(--accent);}
+.brief-text{font-size:var(--current-base);line-height:2;color:#ccc;}
+.brief-text .highlight{color:var(--accent);font-weight:600;}
+.brief-text .danger{color:var(--danger);font-weight:600;}
+.brief-text .success{color:var(--success);font-weight:600;}
+.brief-divider{border:none;border-top:1px solid var(--border);margin:14px 0;}
+.chart-panel{flex:1;display:flex;flex-direction:column;gap:12px;overflow-y:auto;padding-right:4px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,0.3) transparent;}
+.chart-panel::-webkit-scrollbar{width:5px;}
+.chart-panel::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+.chart-card{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:12px;padding:12px 16px;flex-shrink:0;animation:chartIn .8s ease;}
+.chart-title{font-size:var(--text-sm);color:var(--text-secondary);margin-bottom:8px;font-weight:600;}
+.chart-box{width:100%;height:240px;}
+.upload-zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px;}
+.upload-box{width:100%;max-width:480px;border:2px dashed var(--border-accent);border-radius:16px;padding:40px 30px;text-align:center;cursor:pointer;transition:all .3s;background:rgba(201,168,76,0.03);}
+.upload-box:hover{border-color:var(--accent);background:rgba(201,168,76,0.06);}
+.upload-icon{font-size:42px;margin-bottom:12px;}
+.upload-title{font-size:var(--text-h4);color:var(--accent);margin-bottom:6px;}
+.upload-hint{font-size:var(--text-sm);color:var(--text-secondary);}
+.data-preview{width:100%;max-width:640px;margin-top:8px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeIn .5s ease;}
+.preview-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:var(--text-sm);color:var(--text-secondary);}
+.preview-table{width:100%;font-size:var(--text-sm);}
+.preview-table th{padding:6px 10px;text-align:left;color:var(--accent);border-bottom:1px solid var(--border);font-weight:600;}
+.preview-table td{padding:5px 10px;color:var(--text-secondary);border-bottom:1px solid rgba(255,255,255,0.03);}
+.field-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.field-tag{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(201,168,76,0.1);color:var(--accent);border:1px solid var(--border-accent);}
+.export-bar{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;border-top:1px solid var(--border);flex-shrink:0;background:rgba(0,0,0,0.2);}
+.export-btn{font-size:var(--text-sm);padding:8px 18px;border-radius:8px;border:1px solid var(--border-accent);background:var(--accent-bg);color:var(--accent);cursor:pointer;transition:all .2s;}
+.export-btn:hover{background:rgba(201,168,76,0.2);transform:translateY(-1px);}
+.export-btn.primary{background:var(--accent);color:#000;font-weight:600;border:none;}
+.export-btn.primary:hover{background:var(--accent-light);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes chartIn{from{opacity:0;transform:translateY(16px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.typing-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:pulse 1s infinite;margin-left:2px;vertical-align:middle;}
+.step-content{display:none;flex:1;overflow:hidden;}
+.step-content.visible{display:flex;flex-direction:column;}
+</style>
+</head>
+<body>
+<div class="page" id="pageRoot">
+  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:12px;color:#c9a84c;font-weight:bold;opacity:0.7;pointer-events:none;letter-spacing:2px;">v3.19.5-v2</div>
+  <div class="header">
+    <div class="header-title">数据智能 · 客户经营分析</div>
+    <div class="header-badge" style="color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">虚拟演示数据</div>
+    <button class="header-reset-btn" onclick="resetAll()" title="重置演示">↺ 重置</button>
+  </div>
+  <div class="main">
+    <div class="chat-panel">
+      <div class="chat-msgs" id="chatMsgs"></div>
+      <div class="chat-input">
+        <div class="input-box" id="chatInputBox">
+          <span class="input-preview" id="chatInputPreview">上传Excel/CSV开始分析</span>
+          <button class="send-btn" onclick="sendChat()">↑</button>
+        </div>
+      </div>
+    </div>
+    <div class="work-panel">
+      <div class="steps-bar">
+        <div class="step-item active" id="step0"><span class="step-num">1</span>上传数据</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step1"><span class="step-num">2</span>生成简报</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step2"><span class="step-num">3</span>专项追问</div>
+        <span class="step-arrow">›</span>
+        <div class="step-item" id="step3"><span class="step-num">4</span>简报定稿</div>
+      </div>
+      <div class="step-content visible" id="sc0">
+        <div class="upload-zone">
+          <div class="upload-box" id="uploadBox" onclick="simulateUpload()">
+            <div class="upload-icon">📊</div>
+            <div class="upload-title">拖拽客户经营数据至此处</div>
+            <div class="upload-hint">或点击选择文件 · 支持 .xlsx .xls .csv · 演示模式点击即可</div>
+          </div>
+          <div class="data-preview" id="dataPreview" style="display:none;"></div>
+          <div class="suggest-btns" id="suggestBtns" style="display:none;"></div>
+        </div>
+      </div>
+      <div class="step-content" id="sc1">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 客户经营分析简报</div>
+            <div class="brief-body" id="briefBody1"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel1"></div>
+        </div>
+      </div>
+      <div class="step-content" id="sc2">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 客户流失预警专项分析</div>
+            <div class="brief-body" id="briefBody2"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel2"></div>
+        </div>
+      </div>
+      <div class="step-content" id="sc3">
+        <div class="work-content">
+          <div class="brief-panel">
+            <div class="brief-header">📋 完整客户经营分析简报</div>
+            <div class="brief-body" id="briefBody3"></div>
+          </div>
+          <div class="chart-panel" id="chartPanel3"></div>
+        </div>
+        <div class="export-bar" id="exportBar" style="display:none;">
+          <button class="export-btn primary" onclick="alert('演示模式：已生成Word文档')">导出 Word</button>
+          <button class="export-btn" onclick="alert('演示模式：已生成PDF文档')">导出 PDF</button>
+          <button class="export-btn" onclick="alert('演示模式：已推送至运营管理层')">推送管理层</button>
+          <button class="export-btn" onclick="alert('演示模式：已保存至简报库')">保存至简报库</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== 数据 ====================
+// 广州企业微信个人客户线上经营数据（2026年Q1）
+const DEMO_DATA = {
+  fields: ['区域','月份','企微好友数','新增好友','流失好友','活跃客户数','活跃率(%)','群发触达数','单聊响应率(%)','复购客户数','复购率(%)','私域GMV(万)','客单价(元)'],
+  types:  ['分类','日期','数值','数值','数值','数值','数值','数值','数值','数值','数值','数值','数值'],
+  rows: [
+    ['天河区','2026-01',315000,21600,5400,189400,60.1,145000,78.5,58900,31.1,48300,820],
+    ['天河区','2026-02',326000,22700,5750,195900,60.1,155000,79.2,102000,52.1,50300,493],
+    ['天河区','2026-03',341000,25600,7600,200500,58.8,165300,76.8,60500,30.2,51500,851],
+    ['越秀区','2026-01',257000,15000,3550,155500,60.5,120000,82.1,48800,31.4,36800,754],
+    ['越秀区','2026-02',265000,15500,3890,162000,61.1,126800,83.5,84500,52.1,39200,464],
+    ['越秀区','2026-03',274000,16550,5920,159800,58.3,131800,78.6,48400,30.3,38500,796],
+    ['海珠区','2026-01',216000,12680,3050,129700,60.0,98000,75.2,37800,29.1,27400,725],
+    ['海珠区','2026-02',222500,13170,3380,134600,60.5,103100,76.8,70200,52.1,28500,406],
+    ['海珠区','2026-03',228000,13850,4910,132300,58.0,108200,72.5,36800,27.8,28900,785],
+    ['番禺区','2026-01',194500,11500,2540,112900,58.1,82800,71.5,31300,27.7,21100,674],
+    ['番禺区','2026-02',200500,12160,2870,117100,58.4,87800,73.2,61000,52.1,22100,362],
+    ['番禺区','2026-03',208000,13520,4390,114500,55.0,93000,68.8,30100,26.3,21600,718],
+    ['白云区','2026-01',165700,9470,2210,96090,58.0,69300,69.8,25740,26.8,16600,645],
+    ['白云区','2026-02',171000,9980,2540,99350,58.1,72700,71.2,89100,89.7,17200,193],
+    ['白云区','2026-03',177300,10990,4060,95600,53.9,76100,65.4,24600,25.7,16700,679],
+    ['黄埔区','2026-01',138700,8120,1690,83200,60.0,60900,80.5,24700,29.7,14500,587],
+    ['黄埔区','2026-02',143000,8620,1860,86660,60.6,64300,82.0,74500,85.9,15300,205],
+    ['黄埔区','2026-03',148500,9480,3050,85400,57.5,67600,77.3,25000,29.3,15500,620],
+    ['荔湾区','2026-01',121800,6420,1520,69300,56.9,50700,68.2,18240,26.3,11500,630],
+    ['荔湾区','2026-02',124800,6760,1690,71880,57.6,53300,70.5,65000,90.4,12000,185],
+    ['荔湾区','2026-03',128300,7610,2710,69000,53.8,55800,65.8,17700,25.7,11700,661],
+  ]
+};
+
+// ==================== 对话内容 ====================
+const chatConvos = [
+  {
+    user:'上传了「广州企微客户经营_Q1.xlsx」',
+    ai:`已成功解析您的数据文件。\n\n检测到13个字段、1,050条记录，时间范围2026年1月至3月。涵盖广州7个行政区（天河、越秀、海珠、番禺、白云、黄埔、荔湾），包含企微好友数、活跃率、单聊响应率、复购率、私域GMV等核心私域运营指标。\n\n我已为您推荐3个分析方向，也可以一键生成完整简报。`,
+    pendingHint:'✨ 生成客户经营简报',
+    suggests:['各区域私域GMV对比','客户流失预警分析','复购率变化趋势']
+  },
+  {
+    user:'生成客户经营简报',
+    ai:`好的，我已基于数据特征自动规划了分析框架：\n\n① 客户总盘概览：企微好友总数约150.5万人(+5.5%)，活跃率57.8%，私域GMV合计194,100万元(+8.4%)\n② 区域运营对比：天河区GMV领跑(150,100万)，黄埔区响应率最高(82%)，番禺/白云/荔湾需关注流失上升\n③ 客户活跃趋势：整体活跃率从58.9%降至56.0%，3月流失客户数较1月翻倍(1.79万→3.28万)\n④ 转化与复购：平均复购率28.5%较上季下降2.3pp，客单价整体保持在698元\n\n右侧图表已同步生成，您可以继续追问或导出完整简报。`,
+    pendingHint:'深入分析客户流失预警',
+    suggests:['流失客户归因分析','各区域活跃度对比','企微标签画像分析']
+  },
+  {
+    user:'深入分析客户流失预警',
+    ai:`已完成客户流失预警专项分析。\n\nQ1累计流失好友3.28万人，其中3月单月流失占比高达57%。天河区流失7,600人(+40.7%)居首，其次越秀5,920人(+68.6%)、海珠4,910人(+60.4%)。流失集中在3月可能与节后复工潮和私域活动减少有关。\n\n流失客户中，<30天新增好友占比42%，说明新客承接和早期激活不足。流失客户企微标签中"仅浏览未购买"占58%，"价格敏感型"占23%。\n\n建议措施：①新好友48小时内必须完成首单转化引导 ②对"仅浏览未购买"客户推送限时新人券 ③各区每周至少1次社群活动保持活跃\n\n右侧已追加归因图表，可继续追问或生成完整简报。`,
+    pendingHint:'✨ 生成完整简报',
+    suggests:['流失客户挽回方案','对比去年同期','预测下季流失趋势']
+  },
+  {
+    user:'生成完整简报',
+    ai:`完整客户经营分析简报已生成！\n\n包含4个分析模块、6张可视化图表和8条行动建议。简报摘要：Q1广州企微私域客户总盘稳步增长至150万+，但活跃率和复购率出现下行趋势。天河区和黄埔区运营质量最优，番禺和白云需加强客户激活。3月客户流失加速需引起重视。\n\n您可以通过右侧按钮导出Word/PDF，或直接推送至运营管理层。`,
+    pendingHint:null,
+    suggests:[]
+  }
+];
+
+// ==================== 简报内容 ====================
+const briefContents = {
+  1: [
+    {title:'核心摘要', text:`Q1广州企微私域客户总盘<span class="highlight">约150.5万人</span>，环比增长5.5%；活跃客户<span class="highlight">约87万人</span>，活跃率57.8%；私域GMV合计<span class="highlight">194,100万元</span>，环比增长8.4%；平均客单价<span class="highlight">698元</span>。`},
+    {title:'区域运营对比', text:`<span class="highlight">天河区</span>以150,100万GMV领跑，贡献占比77.3%，客户数34.1万为全市第一；<span class="highlight">黄埔区</span>单聊响应率82.0%为全市最高，客户满意度领先；<span class="success">越秀区</span>活跃率58.3%保持稳健，复购率30.3%居首。<span class="danger">番禺/白云/荔湾</span>活跃率均低于56%，需加强运营投入。`},
+    {title:'活跃与流失趋势', text:`整体活跃率从1月的<span class="danger">58.9%降至3月的56.0%</span>，降幅明显。3月单月流失3.28万人，是1月的1.83倍。天河区流失7,600人(+40.7%)、越秀5,920人(+68.6%)、海珠4,910人(+60.4%)，三个区域合计占流失总量的56.8%。`},
+    {title:'转化与复购', text:`平均复购率<span class="danger">28.5%</span>，较上季下降2.3个百分点。天河区复购率30.2%、越秀30.3%优于全市均值。番禺(26.3%)和白云(25.7%)复购率偏低。客单价整体698元，天河区851元最高，黄埔区587元最低。`}
+  ],
+  2: [
+    {title:'流失预警总览', text:`Q1累计流失企微好友<span class="danger">3.28万人</span>，流失率2.2%。其中3月单月流失<span class="danger">3.28万人</span>（注：累计值），较1-2月明显加速。流失率最高的区域：<span class="danger">番禺区55.0%</span>活跃率、<span class="danger">白云区53.9%</span>活跃率，远低于天河和越秀。`},
+    {title:'流失客户画像', text:`流失客户中，<span class="highlight">新增<30天的好友占42%</span>，说明新客承接和早期激活严重不足。企微标签分析显示："仅浏览未购买"占<span class="danger">58%</span>，"价格敏感型"占23%，"已购复购客户"仅占12%。`},
+    {title:'区域归因', text:`<span class="danger">天河区</span>流失7,600人，但基数最大(34.1万+)，流失率2.2%可控。<span class="danger">越秀区</span>流失5,920人(+68.6%)，主要因节后复工未恢复互动。<span class="danger">番禺区</span>流失4,390人，社区运营不足导致客户沉默。<span class="success">黄埔区</span>流失3,050人，管理较好，响应率保持77%以上。`},
+    {title:'行动建议', text:`① 新好友48小时内必须完成首单转化引导，赠送新人专享券\n② 对"仅浏览未购买"客户定向推送限时满减活动，激活沉默客户\n③ 各区每周至少1次社群互动活动(直播/秒杀/问答)，保持活跃\n④ 建立7天/15天/30天流失预警机制，自动触发企微SOP跟进\n⑤ 番禺和白云区增设专职社群运营人员，提升人效`}
+  ],
+  3: [
+    {title:'封面', text:`<div style="text-align:center;padding:20px 0;"><span style="font-size:var(--text-h2);font-weight:800;color:var(--accent);">2026年Q1 广州企微客户经营分析简报</span><br><span style="font-size:var(--text-lead);color:var(--text-secondary);margin-top:8px;display:inline-block;">数据智能自动生成</span><br><span style="font-size:var(--text-sm);color:var(--danger);margin-top:12px;display:inline-block;">※ 虚拟数据，仅供演示</span></div>`},
+    {title:'核心摘要', text:`Q1广州企微私域客户总盘<span class="highlight">约150.5万人</span>(+5.5%)，活跃率57.8%，私域GMV<span class="highlight">194,100万元</span>(+8.4%)。天河区GMV贡献77.3%，黄埔区响应率全市领先(82%)。但活跃率下行趋势和3月流失加速需重点关注。`},
+    {title:'区域对比', text:`天河(34.1万人)和越秀(27.4万人)贡献超41%客户；黄埔响应率82%最高；荔湾和白云活跃率<55%需提升。GMV：天河150,100万领跑，越秀114,500万次之，番禺72,100万第三。`},
+    {title:'流失预警', text:`Q1累计流失3.28万人，3月加速明显。新客(<30天)占流失42%，"仅浏览未购买"标签客户占58%。番禺/白云/荔湾流失率高于均值，需加强新客承接和激活。`},
+    {title:'转化复购', text:`平均复购率28.5%(-2.3pp)，天河(30.2%)和越秀(30.3%)优于均值。客单价698元，天河851元最高。单聊响应率黄埔82%领跑，白云65.4%垫底。`},
+    {title:'八项建议', text:`1. 新好友48小时首单转化引导机制\n2. "仅浏览"客户定向满减激活\n3. 各区每周1次社群互动活动\n4. 7/15/30天三级流失预警SOP\n5. 番禺/白云增设专职社群运营\n6. 客单价<650元的区域优化选品\n7. 响应率<70%的团队话术培训\n8. 月度私域运营健康度报告制度`}
+  ]
+};
+
+// ==================== 状态 ====================
+let currentStep=0,chatAnimating=false,pendingTransition=null,uploaded=false,chartInstances=[];
+
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+async function typeAIMsg(text,speed=22){
+  const msgs=document.getElementById('chatMsgs');
+  const div=document.createElement('div');
+  div.className='msg msg-ai';
+  div.innerHTML='<div class="msg-bubble"></div>';
+  msgs.appendChild(div);
+  const bubble=div.querySelector('.msg-bubble');
+  const lines=text.split('\n');
+  for(let li=0;li<lines.length;li++){
+    const span=document.createElement('span');
+    span.style.display='block';
+    if(lines[li]==='') span.style.height='8px';
+    else span.textContent=lines[li];
+    bubble.appendChild(span);
+    if(lines[li]){
+      const full=lines[li];
+      span.textContent='';
+      for(let i=0;i<full.length;i++){
+        span.textContent=full.slice(0,i+1);
+        msgs.scrollTop=msgs.scrollHeight;
+        await sleep(speed);
+      }
+    }
+    msgs.scrollTop=msgs.scrollHeight;
+    await sleep(80);
+  }
+}
+
+function addUserMsg(text){
+  const msgs=document.getElementById('chatMsgs');
+  const div=document.createElement('div');
+  div.className='msg msg-user';
+  div.innerHTML=`<div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function addSystemMsg(text){
+  const msgs=document.getElementById('chatMsgs');
+  const div=document.createElement('div');
+  div.className='msg-system';
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function setInputHint(text){
+  const el=document.getElementById('chatInputPreview');
+  el.textContent=text||'输入追问...';
+  if(text&&text.startsWith('✨')){
+    el.style.color='#c9a84c';el.style.fontWeight='600';
+    document.getElementById('chatInputBox').classList.add('active');
+  }else{
+    el.style.color='';el.style.fontWeight='';
+    document.getElementById('chatInputBox').classList.remove('active');
+  }
+}
+
+function showSuggests(items){
+  const el=document.getElementById('suggestBtns');
+  if(!items||!items.length){el.style.display='none';return;}
+  el.innerHTML=items.map(s=>`<button class="suggest-btn" onclick="suggestClick('${s}')">${s}</button>`).join('');
+  el.style.display='flex';
+}
+
+function suggestClick(text){
+  document.getElementById('chatInputPreview').textContent=text;
+  sendChat();
+}
+
+function updateSteps(){
+  for(let i=0;i<4;i++){
+    const el=document.getElementById('step'+i);
+    el.classList.remove('active','done');
+    if(i<currentStep) el.classList.add('done');
+    else if(i===currentStep) el.classList.add('active');
+  }
+  for(let i=0;i<4;i++){
+    document.getElementById('sc'+i).classList.toggle('visible',i===currentStep);
+  }
+}
+
+function resetAll(){
+  chatAnimating=false;pendingTransition=null;uploaded=false;currentStep=0;
+  document.getElementById('chatMsgs').innerHTML='';
+  chartInstances.forEach(c=>{try{c.dispose();}catch(e){}});chartInstances=[];
+  for(let i=1;i<=3;i++){
+    const bb=document.getElementById('briefBody'+i);
+    const cp=document.getElementById('chartPanel'+i);
+    if(bb) bb.innerHTML='';if(cp) cp.innerHTML='';
+  }
+  const uploadBox=document.getElementById('uploadBox');
+  uploadBox.innerHTML='<div class="upload-icon">📊</div><div class="upload-title">拖拽客户经营数据至此处</div><div class="upload-hint">或点击选择文件 · 支持 .xlsx .xls .csv · 演示模式点击即可</div>';
+  uploadBox.style.borderColor='';uploadBox.onclick=simulateUpload;
+  document.getElementById('dataPreview').style.display='none';
+  document.getElementById('suggestBtns').style.display='none';
+  document.getElementById('exportBar').style.display='none';
+  updateSteps();setInputHint('上传Excel/CSV开始分析');
+  document.getElementById('chatInputBox').classList.remove('active');
+  document.getElementById('chatInputBox').style.borderColor='';
+  document.getElementById('chatInputBox').style.boxShadow='';
+}
+
+// ==================== 上传模拟 ====================
+async function simulateUpload(){
+  if(uploaded||chatAnimating) return;
+  chatAnimating=true;
+  const box=document.getElementById('uploadBox');
+  box.innerHTML='<div class="upload-icon">⏳</div><div class="upload-title">正在解析文件...</div><div class="upload-hint">读取字段 · 识别类型 · 校验数据</div>';
+  await sleep(1500);
+  box.innerHTML='<div class="upload-icon" style="color:var(--success);">✅</div><div class="upload-title" style="color:var(--success);">解析完成</div><div class="upload-hint">13个字段 · 1,050条记录 · 2026年Q1 · 广州7区</div>';
+  box.style.borderColor='var(--success)';
+  showDataPreview();
+  uploaded=true;chatAnimating=false;
+  await sleep(500);currentStep=0;
+  addUserMsg('上传了「广州企微客户经营_Q1.xlsx」');
+  await sleep(300);chatAnimating=true;
+  await typeAIMsg(chatConvos[0].ai);
+  chatAnimating=false;
+  setInputHint(chatConvos[0].pendingHint);
+  showSuggests(chatConvos[0].suggests);
+  const inputBox=document.getElementById('chatInputBox');
+  inputBox.classList.add('active');
+  let flashes=0;
+  const pi=setInterval(()=>{
+    flashes++;
+    inputBox.style.borderColor=flashes%2===0?'rgba(201,168,76,0.3)':'rgba(201,168,76,0.8)';
+    if(flashes>=5){clearInterval(pi);inputBox.style.borderColor='';}
+  },400);
+}
+
+function showDataPreview(){
+  const el=document.getElementById('dataPreview');
+  let ths=DEMO_DATA.fields.slice(0,6).map(f=>`<th>${f}</th>`).join('');
+  let rows=DEMO_DATA.rows.slice(0,3).map(r=>`<tr>${r.slice(0,6).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+  el.innerHTML=`
+    <div class="preview-header">
+      <span>数据预览（前3行 / 共1,050条）</span>
+      <span style="color:var(--success);">✓ 格式校验通过</span>
+    </div>
+    <table class="preview-table"><tr>${ths}</tr>${rows}</table>
+    <div style="padding:8px 16px;">
+      <div class="field-tags">${DEMO_DATA.fields.map((f,i)=>`<span class="field-tag">${f}(${DEMO_DATA.types[i]})</span>`).join('')}</div>
+    </div>`;
+  el.style.display='block';
+}
+
+// ==================== 发送对话 ====================
+async function sendChat(){
+  if(chatAnimating) return;
+  const convIndex=currentStep;
+  if(convIndex>=chatConvos.length) return;
+  const conv=chatConvos[convIndex];
+  if(convIndex===0){
+    currentStep=1;updateSteps();
+    addUserMsg(conv.pendingHint.replace('✨ ',''));
+    chatAnimating=true;await typeAIMsg(chatConvos[1].ai);chatAnimating=false;
+    await renderBriefAndCharts(1);
+    setInputHint(chatConvos[1].pendingHint);
+    showSuggests(chatConvos[1].suggests);pulseInput();return;
+  }
+  if(convIndex===1){
+    addUserMsg(conv.pendingHint);currentStep=2;updateSteps();
+    chatAnimating=true;await typeAIMsg(chatConvos[2].ai);chatAnimating=false;
+    await renderBriefAndCharts(2);
+    setInputHint(chatConvos[2].pendingHint);
+    showSuggests(chatConvos[2].suggests);pulseInput();return;
+  }
+  if(convIndex===2){
+    addUserMsg(conv.pendingHint.replace('✨ ',''));currentStep=3;updateSteps();
+    chatAnimating=true;await typeAIMsg(chatConvos[3].ai);chatAnimating=false;
+    await renderBriefAndCharts(3);
+    setInputHint(null);showSuggests([]);
+    document.getElementById('exportBar').style.display='flex';return;
+  }
+}
+
+function pulseInput(){
+  const box=document.getElementById('chatInputBox');
+  box.classList.add('active');
+  let f=0;
+  const pi=setInterval(()=>{
+    f++;
+    box.style.borderColor=f%2===0?'rgba(201,168,76,0.3)':'rgba(201,168,76,0.8)';
+    box.style.boxShadow=f%2===0?'0 0 8px rgba(201,168,76,0.1)':'0 0 18px rgba(201,168,76,0.25)';
+    if(f>=5){clearInterval(pi);box.style.borderColor='';box.style.boxShadow='';}
+  },400);
+}
+
+// ==================== 简报+图表渲染 ====================
+async function renderBriefAndCharts(step){
+  const briefBody=document.getElementById('briefBody'+step);
+  const chartPanel=document.getElementById('chartPanel'+step);
+  briefBody.innerHTML='';chartPanel.innerHTML='';
+  const sections=briefContents[step];
+  for(let i=0;i<sections.length;i++){
+    const s=sections[i];
+    const div=document.createElement('div');
+    div.className='brief-section';
+    if(s.title==='封面') div.innerHTML=s.text;
+    else div.innerHTML=`<div class="brief-section-title">▎${s.title}</div><div class="brief-text">${s.text}</div>`;
+    briefBody.appendChild(div);
+    await sleep(400);briefBody.scrollTop=briefBody.scrollHeight;
+  }
+  await sleep(300);
+  if(step===1) await renderStep1Charts(chartPanel);
+  if(step===2) await renderStep2Charts(chartPanel);
+  if(step===3) await renderStep3Charts(chartPanel);
+}
+
+const chartTheme={
+  textStyle:{color:'#9ca3af',fontFamily:'PingFang SC,Microsoft YaHei'},
+  title:{textStyle:{color:'#e8e8e8'}},
+  legend:{textStyle:{color:'#9ca3af'}},
+  grid:{top:40,right:20,bottom:30,left:50},
+};
+
+function createChartCard(parent,title,id){
+  const card=document.createElement('div');
+  card.className='chart-card';
+  card.innerHTML=`<div class="chart-title">${title}</div><div class="chart-box" id="${id}"></div>`;
+  parent.appendChild(card);
+  const chart=echarts.init(document.getElementById(id),null,{renderer:'canvas'});
+  chartInstances.push(chart);
+  return chart;
+}
+
+async function renderStep1Charts(panel){
+  // 图1：各区域私域GMV对比
+  const c1=createChartCard(panel,'各区域Q1私域GMV(万元)','c1_1');
+  const districts=['天河','越秀','海珠','番禺','白云','黄埔','荔湾'];
+  const gmv=[150100,114500,84800,64800,50500,45300,35200];
+  c1.setOption({
+    ...chartTheme,tooltip:{trigger:'axis'},
+    grid:{top:30,right:20,bottom:30,left:70},
+    xAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    yAxis:{type:'category',data:districts,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    series:[{type:'bar',data:gmv.map(v=>({value:v,itemStyle:{color:v>80000?'#c9a84c':v>50000?'rgba(201,168,76,0.6)':'rgba(201,168,76,0.35)'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+
+  // 图2：客户活跃率趋势
+  const c2=createChartCard(panel,'各区域月度活跃率趋势(%)','c1_2');
+  c2.setOption({
+    ...chartTheme,tooltip:{trigger:'axis'},
+    legend:{data:['天河','越秀','海珠','番禺','白云'],textStyle:{color:'#9ca3af',fontSize:10}},
+    xAxis:{type:'category',data:['1月','2月','3月'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:{type:'value',min:50,max:65,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[
+      {name:'天河',type:'line',data:[60.1,60.1,58.8],smooth:true,lineStyle:{color:'#c9a84c',width:2},itemStyle:{color:'#c9a84c'}},
+      {name:'越秀',type:'line',data:[60.5,61.1,58.3],smooth:true,lineStyle:{color:'#6ee7b7',width:2},itemStyle:{color:'#6ee7b7'}},
+      {name:'海珠',type:'line',data:[60.0,60.5,58.0],smooth:true,lineStyle:{color:'#60a5fa',width:2},itemStyle:{color:'#60a5fa'}},
+      {name:'番禺',type:'line',data:[58.1,58.4,55.0],smooth:true,lineStyle:{color:'#f97316',width:2},itemStyle:{color:'#f97316'}},
+      {name:'白云',type:'line',data:[58.0,58.1,53.9],smooth:true,lineStyle:{color:'#ef4444',width:2},itemStyle:{color:'#ef4444'}}
+    ],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+
+  // 图3：企微好友增长与流失
+  const c3=createChartCard(panel,'月度好友新增 vs 流失(人)','c1_3');
+  c3.setOption({
+    ...chartTheme,tooltip:{trigger:'axis'},
+    legend:{data:['新增好友','流失好友'],textStyle:{color:'#9ca3af'}},
+    xAxis:{type:'category',data:['1月','2月','3月'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[
+      {name:'新增好友',type:'bar',data:[84770,89370,94630],barWidth:24,itemStyle:{color:'#22c55e',borderRadius:[4,4,0,0]}},
+      {name:'流失好友',type:'bar',data:[17970,19840,32780],barWidth:24,itemStyle:{color:'#ef4444',borderRadius:[4,4,0,0]}}
+    ],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+
+  // 图4：复购率对比
+  const c4=createChartCard(panel,'各区域Q1复购率(%)','c1_4');
+  c4.setOption({
+    ...chartTheme,tooltip:{trigger:'axis'},
+    grid:{top:30,right:20,bottom:30,left:70},
+    xAxis:{type:'value',min:20,max:35,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    yAxis:{type:'category',data:districts,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    series:[{type:'bar',data:[30.2,30.3,27.8,26.3,25.7,29.3,25.7].map(v=>({value:v,itemStyle:{color:v>29?'#22c55e':v>27?'#c9a84c':'#ef4444'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+async function renderStep2Charts(panel){
+  // 流失归因柱状图
+  const c1=createChartCard(panel,'各区域Q1流失人数及流失率(%)','c2_1');
+  c1.setOption({
+    ...chartTheme,tooltip:{trigger:'axis'},
+    legend:{data:['流失人数','流失率(%)'],textStyle:{color:'#9ca3af'}},
+    xAxis:{type:'category',data:['天河','越秀','海珠','番禺','白云','黄埔','荔湾'],axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
+    yAxis:[
+      {type:'value',name:'人',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+      {type:'value',name:'%',min:0,max:5,position:'right',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}}
+    ],
+    series:[
+      {name:'流失人数',type:'bar',data:[7600,5920,4910,4390,4060,3050,2710],barWidth:20,itemStyle:{color:'rgba(239,68,68,0.7)',borderRadius:[4,4,0,0]}},
+      {name:'流失率(%)',type:'line',yAxisIndex:1,data:[2.2,2.2,2.3,2.1,2.3,2.1,2.1],smooth:true,lineStyle:{color:'#f97316',width:2},itemStyle:{color:'#f97316'}}
+    ],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+
+  // 流失客户标签画像饼图
+  const c2=createChartCard(panel,'流失客户企微标签画像','c2_2');
+  c2.setOption({
+    ...chartTheme,tooltip:{trigger:'item'},
+    legend:{orient:'vertical',right:10,top:'center',textStyle:{color:'#9ca3af',fontSize:12}},
+    series:[{type:'pie',radius:['35%','65%'],center:['40%','50%'],
+      data:[
+        {value:58,name:'仅浏览未购买',itemStyle:{color:'#ef4444'}},
+        {value:23,name:'价格敏感型',itemStyle:{color:'#f97316'}},
+        {value:12,name:'已购未复购',itemStyle:{color:'#c9a84c'}},
+        {value:7,name:'其他',itemStyle:{color:'rgba(201,168,76,0.4)'}}
+      ],
+      label:{color:'#9ca3af',fontSize:12},
+      emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}
+    }],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+async function renderStep3Charts(panel){
+  // 私域GMV构成
+  const c1=createChartCard(panel,'Q1私域GMV区域贡献占比','c3_1');
+  c1.setOption({
+    ...chartTheme,tooltip:{trigger:'item'},
+    legend:{orient:'vertical',right:10,top:'center',textStyle:{color:'#9ca3af',fontSize:12}},
+    series:[{type:'pie',radius:['40%','70%'],center:['40%','50%'],
+      data:[
+        {value:150100,name:'天河区',itemStyle:{color:'#c9a84c'}},
+        {value:114500,name:'越秀区',itemStyle:{color:'rgba(201,168,76,0.7)'}},
+        {value:84800,name:'海珠区',itemStyle:{color:'rgba(201,168,76,0.5)'}},
+        {value:64800,name:'番禺区',itemStyle:{color:'rgba(201,168,76,0.35)'}},
+        {value:50500,name:'白云区',itemStyle:{color:'rgba(201,168,76,0.25)'}},
+        {value:45300,name:'黄埔区',itemStyle:{color:'rgba(201,168,76,0.2)'}},
+        {value:35200,name:'荔湾区',itemStyle:{color:'rgba(201,168,76,0.15)'}}
+      ],
+      label:{color:'#9ca3af',fontSize:11},
+      emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}
+    }],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+  await sleep(500);
+
+  // 单聊响应率 vs 复购率散点图
+  const c2=createChartCard(panel,'响应率 vs 复购率 · 区域运营质量矩阵','c3_2');
+  c2.setOption({
+    ...chartTheme,tooltip:{
+      trigger:'item',
+      formatter:function(p){return p.data[3]+'<br/>响应率: '+p.data[0]+'%<br/>复购率: '+p.data[1]+'%<br/>活跃率: '+p.data[2]+'%';}
+    },
+    xAxis:{type:'value',name:'单聊响应率(%)',min:60,max:85,nameTextStyle:{color:'#9ca3af'},axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    yAxis:{type:'value',name:'复购率(%)',min:23,max:33,nameTextStyle:{color:'#9ca3af'},axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
+    series:[{type:'scatter',symbolSize:28,
+      data:[
+        [76.8,30.2,58.8,'天河区'],
+        [78.6,30.3,58.3,'越秀区'],
+        [72.5,27.8,58.0,'海珠区'],
+        [68.8,26.3,55.0,'番禺区'],
+        [65.4,25.7,53.9,'白云区'],
+        [77.3,29.3,57.5,'黄埔区'],
+        [65.8,25.7,53.8,'荔湾区']
+      ].map(d=>({value:d,itemStyle:{color:d[0]>75&&d[1]>29?'#22c55e':d[0]>75||d[1]>29?'#c9a84c':'#ef4444'}})),
+      label:{show:true,formatter:function(p){return p.data[3];},color:'#9ca3af',fontSize:11,position:'top'}
+    }],
+    animationDuration:1200,animationEasing:'cubicOut'
+  });
+}
+
+// ==================== 交互绑定 ====================
+document.getElementById('chatInputBox').addEventListener('click',function(e){
+  e.preventDefault();e.stopPropagation();
+  if(!uploaded) simulateUpload();
+  else sendChat();
+});
+
+window.addEventListener('resize',function(){
+  chartInstances.forEach(c=>{try{c.resize();}catch(e){}});
+});
+
+// ==================== 初始化 ====================
+updateSteps();
+addSystemMsg('欢迎体验数据智能分析 · 上传客户经营数据即可开始');
+</script>
+
+<!-- ★ v8：主题系统 -->
+<script src="theme-config.js"></script>
+<script>
+window.addEventListener('message',(e)=>{
+  if(!e.data||!e.data.type) return;
+  if(e.data.type==='fontSize'){
+    document.documentElement.setAttribute('data-font-level',e.data.size||'medium');
+  }
+  if(e.data.type==='visibility'){}
+});
+try{parent.postMessage({type:'iframeReady'},'*');}catch(err){}
+</script>
+</body>
+</html>

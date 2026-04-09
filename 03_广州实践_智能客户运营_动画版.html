@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能客户运营 · 一体化工作台 · v2</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+  overflow:hidden; height:100vh; width:100vw;
+  /* 安全区域内边距，防止iframe嵌入时上下被裁切 */
+  padding-top: 8px; padding-bottom: 8px;
+}
+#bgCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.grid-bg {
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.025) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+
+.page {
+  position:relative; z-index:10;
+  width:100vw; height:100vh;
+  display:grid;
+  grid-template-rows: 80px 1fr 64px;
+}
+
+/* HEADER */
+.header {
+  display:flex; align-items:flex-end; gap:32px;
+  padding:0 56px 14px;
+  border-bottom:1px solid rgba(201,168,76,0.12);
+}
+.h-label { font-size: var(--current-sm); letter-spacing:4px; color: var(--gold); margin-bottom:5px; opacity:0.8; }
+.h-title { font-size: var(--current-2xl); font-weight:200; letter-spacing:1px; }
+.h-title em { color: var(--gold); font-style:normal; font-weight:500; }
+.step-tabs {
+  margin-left:auto; display:flex; gap:8px;
+}
+.step-tab {
+  padding:6px 18px; border-radius:20px;
+  border:1px solid rgba(201,168,76,0.2);
+  font-size: var(--text-sm); color:#888; cursor:pointer;
+  transition:all 0.3s;
+}
+.step-tab.active {
+  background:rgba(201,168,76,0.12);
+  border-color: var(--gold); color: var(--gold);
+}
+
+/* MAIN */
+.main {
+  display:grid;
+  grid-template-columns: 3fr 2fr 1.2fr;
+  overflow:hidden;
+}
+
+/* ===== CENTER: CHAT PANEL ===== */
+.chat-panel {
+  border-left:1px solid rgba(201,168,76,0.1);
+  border-right:1px solid rgba(201,168,76,0.1);
+  display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.chat-head {
+  padding:16px 18px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  font-size: var(--text-sm); letter-spacing:3px; color: var(--gold);
+  display:flex; align-items:center; gap:8px;
+  flex-shrink:0;
+}
+.online-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 6px var(--green); flex-shrink:0;
+}
+.chat-messages {
+  flex:1; min-height:0; overflow-y:auto; padding:14px 14px;
+  display:flex; flex-direction:column; gap:10px;
+  /* 可见细滚动条 */
+  scrollbar-width:thin;
+  scrollbar-color: rgba(201,168,76,0.25) transparent;
+}
+.chat-messages::-webkit-scrollbar { width:4px; }
+.chat-messages::-webkit-scrollbar-track { background:transparent; border-radius:2px; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background:rgba(201,168,76,0.3); border-radius:2px;
+}
+.chat-messages::-webkit-scrollbar-thumb:hover { background:rgba(201,168,76,0.5); }
+.bubble {
+  max-width:280px; padding:10px 14px;
+  border-radius:14px; font-size: var(--current-base); line-height:1.6;
+  animation: fadeUp 0.4s both;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.bubble.user {
+  background:rgba(201,168,76,0.12);
+  border:1px solid rgba(201,168,76,0.25);
+  color: var(--gold); align-self:flex-end;
+}
+.bubble.ai {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#ddd; align-self:flex-start;
+}
+.bubble.typing::after {
+  content:'●●●'; letter-spacing:2px; color: var(--gold);
+  animation:dots 1.2s infinite;
+}
+@keyframes dots { 0%{opacity:1;} 50%{opacity:0.3;} 100%{opacity:1;} }
+
+/* ★ CTA按钮 - 场景二对话完成后弹出 */
+.cta-btn-wrap {
+  align-self:flex-start;
+  animation: fadeUp 0.5s 0.2s both;
+  margin-top:4px;
+}
+.cta-generate-btn {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8c97a 50%, #c9a84c 100%);
+  background-size: 200% 200%;
+  color:#1a1a2e;
+  border:none;
+  border-radius:12px;
+  padding:10px 22px;
+  font-size:var(--current-base);
+  font-weight:700;
+  cursor:pointer;
+  letter-spacing:0.5px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 2px 8px rgba(0,0,0,0.2);
+  animation: cta-pulse 2s ease-in-out infinite, cta-shimmer 3s ease-in-out infinite;
+}
+.cta-generate-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 4px 16px rgba(0,0,0,0.3);
+  background-position: 100% 100%;
+}
+.cta-generate-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+@keyframes cta-pulse {
+  0%,100% { box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 2px 8px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 0 30px rgba(201,168,76,0.5), 0 4px 16px rgba(0,0,0,0.3); }
+}
+@keyframes cta-shimmer {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.chat-input-area {
+  padding:12px 14px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  flex-shrink:0;
+  position:relative;
+  z-index:5;
+}
+.chat-input-box {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:10px 14px;
+  display:flex; align-items:center; gap:8px;
+}
+.chat-input-text {
+  flex:1; font-size: var(--text-sm); color:#888;
+  overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+}
+.chat-send {
+  width:28px; height:28px; border-radius:8px;
+  background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--gold); font-size:var(--text-sm); cursor:pointer;
+  flex-shrink:0;
+}
+
+/* ===== LEFT: MAIN WORKSPACE ===== */
+.workspace {
+  display:flex; flex-direction:column; overflow:hidden;
+  position:relative;
+}
+
+.step-scene {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  opacity:0; pointer-events:none; transition:opacity 0.5s;
+  padding:24px 32px;
+}
+.step-scene.active { opacity:1; pointer-events:auto; }
+
+/* Step 1: Schedule */
+.schedule-wrap {
+  flex:1; display:flex; flex-direction:column; gap:16px;
+}
+.sched-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.sched-title { font-size:var(--text-body); font-weight:300; }
+.sched-date { font-size: var(--text-sm); color:#666; }
+.sched-summary {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+.ss-card {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px; padding:14px;
+  text-align:center; transition:all 0.4s;
+}
+.ss-card.highlight {
+  background:rgba(201,168,76,0.07);
+  border-color:rgba(201,168,76,0.25);
+}
+.ss-val { font-size:var(--text-h3); font-weight:200; color: var(--gold); }
+.ss-label { font-size: var(--text-sm); color:#666; margin-top:4px; }
+
+.sched-list { flex:1; display:flex; flex-direction:column; gap:10px; }
+.sched-item {
+  display:flex; align-items:center; gap:16px;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  transition:all 0.4s;
+  opacity:0; transform:translateX(-20px);
+}
+.sched-item.show { opacity:1; transform:translateX(0); }
+.sched-item.priority {
+  background:rgba(201,168,76,0.05);
+  border-color:rgba(201,168,76,0.2);
+  cursor:pointer;
+}
+.sched-item.priority:hover {
+  background:rgba(201,168,76,0.12);
+  border-color:rgba(201,168,76,0.4);
+}
+.sched-time { font-size: var(--text-sm); color:#888; width:50px; flex-shrink:0; }
+.sched-info { flex:1; }
+.sched-name { font-size:var(--current-base); font-weight:500; margin-bottom:3px; }
+.sched-reason { font-size: var(--current-base); color:#777; }
+.sched-tag {
+  font-size: var(--current-base); padding:3px 10px; border-radius:20px;
+}
+.sched-tag.high {
+  background:rgba(201,168,76,0.12); color: var(--gold);
+  border:1px solid rgba(201,168,76,0.25);
+}
+.sched-tag.med {
+  background:rgba(91,141,239,0.1); color:#7bb3f0;
+  border:1px solid rgba(91,141,239,0.25);
+}
+
+/* Step 2: Portrait */
+.portrait-wrap {
+  flex:1; display:flex; flex-direction:column; gap:16px;
+}
+.portrait-top {
+  display:flex; align-items:center; gap:20px;
+  padding:18px; background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06); border-radius:14px;
+}
+.portrait-avatar {
+  width:60px; height:60px; border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.3),rgba(201,168,76,0.05));
+  border:2px solid rgba(201,168,76,0.4);
+  display:flex; align-items:center; justify-content:center;
+  font-size:var(--text-h4); flex-shrink:0;
+}
+.portrait-meta { flex:1; }
+.portrait-name { font-size:var(--text-h4); font-weight:300; margin-bottom:4px; }
+.portrait-sub { font-size: var(--current-base); color:#888; }
+.portrait-tags { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+.ptag {
+  font-size: var(--current-base); padding:3px 12px; border-radius:20px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.2);
+  color: var(--gold);
+}
+
+.portrait-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:12px; flex:1;
+}
+.pg-card {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px; padding:16px;
+  transition:all 0.4s; opacity:0;
+}
+.pg-card.show { opacity:1; }
+.pg-card-title {
+  font-size: var(--current-base); letter-spacing:2px; color: var(--gold);
+  margin-bottom:12px; font-weight:500;
+}
+.pg-item {
+  display:flex; justify-content:space-between;
+  font-size: var(--current-base); margin-bottom:8px;
+}
+.pg-key { color:#777; }
+.pg-val { color:#ddd; }
+.pg-val.gold { color: var(--gold); }
+
+/* emotion curve */
+.emotion-curve { height:50px; margin-top:8px; }
+
+/* Step 3: Script */
+.script-wrap {
+  flex:1; display:flex; flex-direction:column; gap:16px;
+  min-height:0; overflow:hidden;
+}
+.script-meta {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 18px;
+  flex-shrink:0;
+  background:rgba(201,168,76,0.05);
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:12px;
+}
+.script-meta-icon { font-size:var(--text-lead); }
+.script-meta-text { flex:1; font-size: var(--current-base); }
+.script-meta-text span { color: var(--gold); }
+.script-gen-btn {
+  padding:7px 18px; border-radius:20px;
+  background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4);
+  color: var(--gold); font-size: var(--text-sm); cursor:pointer;
+  font-family:inherit; transition:all 0.3s;
+}
+.script-gen-btn:hover { background:rgba(201,168,76,0.25); }
+
+.script-content {
+  flex:1; min-height:0;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px; padding:20px 24px;
+  font-size: var(--current-base); line-height:2;
+  color:#ccc; overflow-y:auto;
+  /* ★ 超明显滚动条 */
+  scrollbar-width:thin;
+  scrollbar-color: #c9a84c transparent;
+  position:relative;
+}
+.script-content::-webkit-scrollbar { width:8px !important; }
+.script-content::-webkit-scrollbar-track { background:rgba(201,168,76,0.08) !important; border-radius:4px; }
+.script-content::-webkit-scrollbar-thumb {
+  background:#c9a84c !important; border-radius:4px;
+  border:1px solid rgba(0,0,0,0.3);
+}
+.script-content::-webkit-scrollbar-thumb:hover { background:#e8c97a !important; }
+/* ★ 强制始终显示滚动条（内容不够时也显示占位） */
+.script-content { overflow-y: scroll !important; }
+.tw-cursor {
+  display:inline-block; width:2px; height:14px;
+  background:var(--gold); margin-left:2px; vertical-align:middle;
+  animation:blink2 0.8s infinite;
+}
+@keyframes blink2 { 0%,100%{opacity:1;} 50%{opacity:0;} }
+.sc-label {
+  font-size: var(--current-base); letter-spacing:2px; color: var(--gold);
+  margin-bottom:12px; display:block;
+}
+#scriptText { line-height:2; word-break:break-word; }
+.sc-highlight { color: var(--gold); }
+.sc-sub { color:#888; font-size: var(--current-base); }
+
+/* ===== RIGHT: KPI ===== */
+.kpi-panel {
+  border-left:1px solid rgba(201,168,76,0.1);
+  padding:18px 16px;
+  display:flex; flex-direction:column; gap:14px;
+  overflow:hidden;
+}
+.kpi-head {
+  font-size: var(--text-sm); letter-spacing:3px; color: var(--gold);
+  padding-bottom:12px; border-bottom:1px solid rgba(201,168,76,0.12);
+}
+.kpi-card {
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px; padding:14px 16px;
+}
+.kpi-title { font-size: var(--text-sm); color:#888; margin-bottom:8px; }
+.kpi-val { font-size:var(--text-h3); font-weight:200; color: var(--gold); }
+.kpi-val sup { font-size:var(--text-sm); }
+.kpi-change {
+  font-size: var(--text-sm); margin-top:4px;
+  display:flex; align-items:center; gap:4px;
+}
+.kpi-change.pos { color:var(--green); }
+.kpi-change.warn { color:var(--red); }
+
+.kpi-bar-wrap { margin-top:8px; }
+.kpi-bar-label {
+  display:flex; justify-content:space-between;
+  font-size: var(--text-sm); color:#666; margin-bottom:5px;
+}
+.kpi-bar {
+  height:4px; background:rgba(255,255,255,0.05);
+  border-radius:2px; overflow:hidden;
+}
+.kpi-bar-fill {
+  height:100%; border-radius:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold));
+  transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.workflow-mini {
+  display:flex; flex-direction:column; gap:8px;
+}
+.wf-step {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:8px; transition:all 0.4s;
+}
+.wf-step.lit {
+  background:rgba(201,168,76,0.06);
+  border-color:rgba(201,168,76,0.2);
+}
+.wf-icon { font-size:var(--text-body); flex-shrink:0; }
+.wf-text { font-size: var(--current-base); color:#888; }
+.wf-step.lit .wf-text { color:#ddd; }
+
+/* FOOTER */
+.footer {
+  border-top:1px solid rgba(201,168,76,0.1);
+  padding:0 56px;
+  display:flex; align-items:center; gap:14px;
+}
+.ctrl-btn {
+  padding:7px 18px; border-radius:20px;
+  border:1px solid rgba(201,168,76,0.3);
+  background:transparent; color: var(--gold); font-size: var(--text-sm);
+  cursor:pointer; transition:all 0.3s; font-family:inherit;
+}
+.ctrl-btn:hover { background:rgba(201,168,76,0.1); }
+.ctrl-btn.primary { background:rgba(201,168,76,0.12); border-color: var(--gold); }
+.progress-bar {
+  flex:1; max-width:160px; height:2px;
+  background:rgba(255,255,255,0.05); border-radius:1px; overflow:hidden;
+}
+.progress-fill { height:100%; background:var(--gold); transition:width 0.4s; }
+.footer-info {
+  margin-left:auto; font-size: var(--text-sm); color:#555; letter-spacing:2px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  body { overflow-y: auto !important; height: auto !important; }
+  .page { height: auto !important; min-height: 1080px; }
+  .header { height: auto; padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
+  .h-title { font-size: clamp(18px, 5vw, 30px); }
+  .main { grid-template-columns: 1fr !important; overflow-y: auto !important; min-height: 80vh; }
+  .chat-panel { border-left: none !important; border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.08); border-top: 1px solid rgba(201,168,76,0.08); max-height: 300px; }
+  .profile-panel { border-left: none !important; border-top: 1px solid rgba(201,168,76,0.08); max-height: 280px; }
+  .footer { height: auto; padding: 10px 20px; flex-wrap: wrap; gap: 10px; }
+  .footer-info { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  html { height: auto !important; overflow: visible !important; }
+  body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; }
+  .page { height: auto !important; min-height: 1080px; }
+  .header { padding: 10px 14px; }
+  .h-title { font-size: var(--current-md); }
+  .main { grid-template-columns: 1fr !important; grid-template-rows: auto auto auto !important; overflow-y: auto !important; min-height: auto !important; }
+  .chat-panel { max-height: none !important; min-height: 260px; border-left: none !important; border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.08); border-top: 1px solid rgba(201,168,76,0.08); }
+  .profile-panel { max-height: none !important; border-left: none !important; border-top: 1px solid rgba(201,168,76,0.08); overflow-y: visible !important; }
+  .workspace { max-height: none !important; overflow: visible !important; min-height: 300px; }
+  .footer { padding: 8px 12px; gap: 8px; position: relative !important; bottom: auto !important; }
+  .ctrl-btn { padding: 6px 14px; font-size: var(--text-sm); }
+  .step-scene { min-height: auto; }
+  .schedule-wrap, .profile-wrap, .script-wrap { max-height: none !important; overflow: visible !important; }
+}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="grid-bg"></div>
+
+<div class="page" id="pageRoot">
+  <!-- ★ 版本水印 v3.19.4 ★ -->
+  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:12px;color:#c9a84c;font-weight:bold;opacity:0.7;pointer-events:none;letter-spacing:2px;">v3.19.4</div>
+  <div class="header">
+    <div>
+      <div class="h-label">SCENE 01 · INTELLIGENT CLIENT OPERATION</div>
+      <div class="h-title">智能客户运营 &nbsp;<em>一体化工作台</em></div>
+    </div>
+    <div class="step-tabs">
+      <div class="step-tab active" id="tab0" onclick="goStep(0)">① 日程规划</div>
+      <div class="step-tab" id="tab1" onclick="goStep(1)">② 客户画像</div>
+      <div class="step-tab" id="tab2" onclick="goStep(2)">③ 话术生成</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- WORKSPACE (LEFT) -->
+    <div class="workspace">
+
+      <!-- Step 0: Schedule -->
+      <div class="step-scene active" id="stepScene0">
+        <div class="schedule-wrap">
+          <div class="sched-top">
+            <div>
+              <div class="sched-title">今日行动计划 · 3月26日</div>
+              <div class="sched-date">AI已为您分析 <span style="color:var(--gold)">15,826</span>户客户 · 筛选 <span style="color:var(--gold)">68</span> 位需今日跟进</div>
+            </div>
+          </div>
+          <div class="sched-summary">
+            <div class="ss-card highlight">
+              <div class="ss-val">2,340</div><div class="ss-label">高净值客户</div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-val">6,800</div><div class="ss-label">潜力客户</div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-val">6,686</div><div class="ss-label">沉睡/低活客户</div>
+            </div>
+          </div>
+          <div class="sched-list" id="schedList">
+            <div class="sched-item priority" id="si1">
+              <div class="sched-time">09:30</div>
+              <div class="sched-info">
+                <div class="sched-name">王总 · 高净值</div>
+                <div class="sched-reason">持仓出现风险偏离，需调仓确认，信任深化期·周末偏好</div>
+              </div>
+              <div class="sched-tag high">优先</div>
+            </div>
+            <div class="sched-item" id="si2">
+              <div class="sched-time">11:00</div>
+              <div class="sched-info">
+                <div class="sched-name">李女士 · 成长型</div>
+                <div class="sched-reason">新产品发行符合其偏好，上次沟通距今14天，建议跟进</div>
+              </div>
+              <div class="sched-tag med">建议</div>
+            </div>
+            <div class="sched-item" id="si3">
+              <div class="sched-time">14:30</div>
+              <div class="sched-info">
+                <div class="sched-name">张先生 · 面谈</div>
+                <div class="sched-reason">理财产品到期，需提前规划续投方案，客户首选下午见面</div>
+              </div>
+              <div class="sched-tag high">面谈</div>
+            </div>
+            <div class="sched-item" id="si4">
+              <div class="sched-time">16:00</div>
+              <div class="sched-info">
+                <div class="sched-name">陈总 · 企业主</div>
+                <div class="sched-reason">授信额度到期，主动上门拜访，带最新方案</div>
+              </div>
+              <div class="sched-tag med">拜访</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Portrait -->
+      <div class="step-scene" id="stepScene1">
+        <div class="portrait-wrap">
+          <div class="portrait-top">
+            <div class="portrait-avatar">王</div>
+            <div class="portrait-meta">
+              <div class="portrait-name">王建国 · 客户360°画像</div>
+              <div class="portrait-sub">高净值客户 · 总资产 820万 · 关系等级：信任深化期 · 客龄 3年8月</div>
+              <div class="portrait-tags">
+                <span class="ptag">稳健型</span>
+                <span class="ptag">周末偏好</span>
+                <span class="ptag">数据驱动决策</span>
+                <span class="ptag">理性保守</span>
+                <span class="ptag">企业主背景</span>
+              </div>
+            </div>
+          </div>
+          <div class="portrait-grid">
+            <div class="pg-card" id="pg1">
+              <div class="pg-card-title">ASSET · 资产全景</div>
+              <div class="pg-item"><span class="pg-key">总资产(AUM)</span><span class="pg-val gold">820万</span></div>
+              <div class="pg-item"><span class="pg-key">持有产品数</span><span class="pg-val">7款（3债+2权+2基）</span></div>
+              <div class="pg-item"><span class="pg-key">综合年化收益</span><span class="pg-val gold">5.2%</span></div>
+              <div class="pg-item"><span class="pg-key">最大回撤记录</span><span class="pg-val" style="color:var(--red)">-3.1%（2025Q1）</span></div>
+              <div class="pg-item"><span class="pg-key">风险等级偏好</span><span class="pg-val">R1-R2 稳健型</span></div>
+            </div>
+            <div class="pg-card" id="pg2">
+              <div class="pg-card-title">BEHAVIOR · 行为偏好画像</div>
+              <div class="pg-item"><span class="pg-key">产品偏好</span><span class="pg-val">中短债 + 指增混合</span></div>
+              <div class="pg-item"><span class="pg-key">最佳触达时间</span><span class="pg-val gold">周六上午 9-11点</span></div>
+              <div class="pg-item"><span class="pg-key">沟通风格</span><span class="pg-val gold">数据+逻辑+对比论证</span></div>
+              <div class="pg-item"><span class="pg-key">敏感话题</span><span class="pg-val" style="color:var(--red)">高风险产品、波动过大</span></div>
+              <div class="pg-item"><span class="pg-key">主要渠道</span><span class="pg-val">APP自操 + 电话确认</span></div>
+            </div>
+            <div class="pg-card" id="pg3">
+              <div class="pg-card-title">HISTORY · 交互与转化</div>
+              <div class="pg-item"><span class="pg-key">最近联系</span><span class="pg-val">7天前（产品到期提醒）</span></div>
+              <div class="pg-item"><span class="pg-key">历史成交次数</span><span class="pg-val">12次成功交易</span></div>
+              <div class="pg-item"><span class="pg-key">历史转化率</span><span class="pg-val gold">83%（12/15次邀约）</span></div>
+              <div class="pg-item"><span class="pg-key">当前核心诉求</span><span class="pg-val gold">控风险 + 锁定收益</span></div>
+              <div class="pg-item"><span class="pg-key">生命周期阶段</span><span class="pg-val" style="color:var(--green)">↑ 成长期→成熟期过渡</span></div>
+            </div>
+            <div class="pg-card" id="pg4">
+              <div class="pg-card-title">INSIGHT · AI 洞察建议</div>
+              <div style="font-size:var(--current-base);color:#ccc;line-height:1.8;">
+                <div style="margin-bottom:8px;"><span style="color:var(--gold);font-weight:500;">最佳行动时机：</span>本周六上午，结合其持仓中短债基金即将到期的窗口期，推荐低波替代品。</div>
+                <div style="margin-bottom:8px;"><span style="color:var(--gold);font-weight:500;">风险预警：</span>近期权益仓位出现-3.1%回撤，客户可能产生焦虑情绪，沟通时需主动安抚。</div>
+                <div><span style="color:var(--gold);font-weight:500;">交叉销售机会：</span>客户有企业授信需求（从对话关键词提取），可联动对公团队。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Script -->
+      <div class="step-scene" id="stepScene2">
+        <div class="script-wrap">
+          <div class="script-meta">
+            <div class="script-meta-icon">🎯</div>
+            <div class="script-meta-text">
+              基于<span>王总完整画像</span> · 产品：<span>中短期债券基金</span> · 目标：<span>调仓确认</span>
+            </div>
+            <button class="script-gen-btn" onclick="genScript()">AI重新生成</button>
+          </div>
+          <div class="script-content" id="scriptContent">
+            <span class="sc-label">AI GENERATED SCRIPT · 定制化话术</span>
+            <div id="scriptText"><span class="tw-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /workspace -->
+
+    <!-- CHAT PANEL (CENTER) -->
+    <div class="chat-panel">
+      <div class="chat-head">
+        <div class="online-dot"></div>
+        AI ASSISTANT · 对话窗口
+      </div>
+      <div class="chat-messages" id="chatMsgs"></div>
+      <div class="chat-input-area">
+        <div class="chat-input-box" id="chatInputBox" style="cursor:pointer;">
+          <div class="chat-input-text" id="chatInputPreview">帮我生成今日日程规划</div>
+          <div class="chat-send" id="chatSendBtn">↑</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI PANEL (RIGHT) -->
+    <div class="kpi-panel">
+      <div class="kpi-head">PERFORMANCE · 效能指标</div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">工作效率提升</div>
+        <div class="kpi-val">30<sup>%+</sup></div>
+        <div class="kpi-change pos">↑ 较传统方式</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">今日管户情况</div>
+        <div style="display:flex;gap:12px;margin-top:4px;">
+          <div>
+            <div style="font-size:var(--text-h4);font-weight:200;color: var(--gold);">15,826</div>
+            <div style="font-size: var(--text-sm);color:#666;margin-top:2px;">总管户</div>
+          </div>
+          <div>
+            <div style="font-size:var(--text-h4);font-weight:200;color:var(--green);">68</div>
+            <div style="font-size: var(--text-sm);color:#666;margin-top:2px;">今日重点</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title">话术转化率</div>
+        <div class="kpi-val">83%</div>
+        <div class="kpi-bar-wrap">
+          <div class="kpi-bar-label"><span>AI话术</span><span>83%</span></div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" id="kb1" style="width:0%"></div></div>
+        </div>
+        <div class="kpi-bar-wrap">
+          <div class="kpi-bar-label"><span>传统话术</span><span>54%</span></div>
+          <div class="kpi-bar"><div class="kpi-bar-fill" id="kb2" style="width:0%;background:rgba(255,255,255,0.2)"></div></div>
+        </div>
+      </div>
+
+      <div class="kpi-card" style="flex:1;">
+        <div class="kpi-title">当前工作流</div>
+        <div class="workflow-mini">
+          <div class="wf-step" id="wf1"><div class="wf-icon">📅</div><div class="wf-text">日程规划</div></div>
+          <div class="wf-step" id="wf2"><div class="wf-icon">👤</div><div class="wf-text">客户画像</div></div>
+          <div class="wf-step" id="wf3"><div class="wf-icon">💬</div><div class="wf-text">话术生成</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <button class="ctrl-btn" onclick="prevStep()">← 上一步</button>
+    <button class="ctrl-btn primary" id="playBtn" onclick="togglePlay()">▶ 自动演示</button>
+    <button class="ctrl-btn" onclick="resetAll()" id="resetBtn">↺ 重置</button>
+    <button class="ctrl-btn" onclick="nextStep()">下一步 →</button>
+    <div class="progress-bar">
+      <div class="progress-fill" id="pgFill" style="width:33%"></div>
+    </div>
+    <div class="footer-info" id="footerInfo">第1步 / 共3步</div>
+  </div>
+</div>
+
+<script>
+// BG
+const bgC=document.getElementById('bgCanvas');
+const bgX=bgC.getContext('2d');
+function resizeBg(){bgC.width=window.innerWidth;bgC.height=window.innerHeight;}
+resizeBg(); window.addEventListener('resize',resizeBg);
+const bgPts=[];
+for(let i=0;i<60;i++) bgPts.push({
+  x:Math.random()*bgC.width, y:Math.random()*bgC.height,
+  vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+  s:Math.random()*1.2+.3, a:Math.random()*.3+.05
+});
+function animBg(){
+  if(isPaused) return;
+  bgX.clearRect(0,0,bgC.width,bgC.height);
+  bgPts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>bgC.width) p.vx*=-1;
+    if(p.y<0||p.y>bgC.height) p.vy*=-1;
+    bgX.globalAlpha=p.a; bgX.fillStyle='var(--gold)';
+    bgX.beginPath(); bgX.arc(p.x,p.y,p.s,0,Math.PI*2); bgX.fill();
+  });
+  bgX.globalAlpha=1;
+  rafId=requestAnimationFrame(animBg);
+}
+// 暂停控制
+let isPaused=false;
+let rafId=null;
+function pauseAnimations(){ isPaused=true; if(rafId){cancelAnimationFrame(rafId);rafId=null;} }
+function resumeAnimations(){ isPaused=false; animBg(); }
+animBg();
+
+// EMOTION CURVE
+function drawEmotion(){
+  const c=document.getElementById('emotionCanvas');
+  if(!c) return; // emotionCanvas 不存在时安全跳过
+  const ctx=c.getContext('2d');
+  const pts=[20,35,28,45,40,48];
+  const w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);
+  const step=w/(pts.length-1);
+  // fill
+  const g=ctx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,'rgba(76,175,80,0.3)');
+  g.addColorStop(1,'transparent');
+  ctx.beginPath();
+  ctx.moveTo(0,h);
+  pts.forEach((v,i)=>ctx.lineTo(i*step,(1-v/60)*h));
+  ctx.lineTo((pts.length-1)*step,h);
+  ctx.closePath(); ctx.fillStyle=g; ctx.fill();
+  // line
+  ctx.beginPath();
+  pts.forEach((v,i)=>i===0?ctx.moveTo(0,(1-v/60)*h):ctx.lineTo(i*step,(1-v/60)*h));
+  ctx.strokeStyle='var(--green)'; ctx.lineWidth=2; ctx.stroke();
+  // dots
+  pts.forEach((v,i)=>{
+    ctx.beginPath();
+    ctx.arc(i*step,(1-v/60)*h,3,0,Math.PI*2);
+    ctx.fillStyle='var(--green)'; ctx.fill();
+  });
+}
+
+// STEP MANAGEMENT
+let currentStep=0;
+let autoPlay=false;
+let autoTimer=null;
+let chatAnimating=false; // 是否正在播放对话动画
+let pendingTransition=null; // 场景切换待过渡：{ fromStep, toStep, userInput }
+const stepNames=['日程规划','客户画像','话术生成'];
+const chatConvos=[
+  [{u:'帮我生成今日日程规划'},{a:'正在分析15,826户客户数据，按优先级为您排程…'},
+   {a:'已完成！从1.5万管户中筛选出68位需跟进客户。首位推荐王建国——高净值客户，近期权益仓位出现-3.1%回撤，建议优先安抚并推荐中短债替代方案。\n\n💡 提示：可点击「王总」卡片查看完整360°画像 →'}],
+  [{u:'帮我看一下王总的客户画像'},{a:'正在整合王建国的全维度信息，包括资产数据、行为标签和交互历史…'},
+   {a:'360°画像已生成！王建国，企业主背景，AUM 820万，持有7款产品。核心特征：\n\n• 风格：理性保守型，只认数据和逻辑\n• 最佳触达：周六上午9-11点\n• 当前痛点：权益回撤导致焦虑，急需低波替代品\n• 转化记录：历史12次成交，转化率83%\n\n右侧工作台已展示完整画像详情，包含AI洞察建议。'},
+   {a:'👉 请问需要我帮您生成对应的【产品沟通话术】吗？\n\n我可以基于王总完整的360°画像，结合当前市场环境和他"控风险+锁定收益"的核心诉求，为您定制一份专属沟通脚本。'}],
+  [{u:'生成对应的产品沟通话术'},{a:'基于王建国完整画像+当前市场环境+产品特性，正在生成定制化话术…'},
+   {a:'个性化话术已就绪！针对其"控风险+锁定收益"的核心诉求，生成了5段式沟通脚本：\n\n① 开场白——用数据建立信任\n② 痛点切入——结合其-3.1%回撤痛点\n③ 产品方案——对比论证（最大回撤仅1.2%）\n④ 异议预案——"收益太低"+"时机不好"\n⑤ 下一步行动——邀约面谈/电话确认\n\n预计转化率从83%提升至88%+。请查看右侧工作台完整话术。'}]
+];
+
+function goStep(n){
+  // hide old
+  document.getElementById('stepScene'+currentStep).classList.remove('active');
+  document.getElementById('tab'+currentStep).classList.remove('active');
+  document.getElementById('wf'+(currentStep+1)).classList.remove('lit');
+
+  // 重置旧步骤的工作区动画状态
+  if(currentStep===0) ['si1','si2','si3','si4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  if(currentStep===1) ['pg1','pg2','pg3','pg4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  if(currentStep===2){ scriptAnimated=false; const el=document.getElementById('scriptText');if(el)el.innerHTML='<span class="tw-cursor"></span>'; }
+
+  currentStep=n;
+  // show new
+  document.getElementById('stepScene'+n).classList.add('active');
+  document.getElementById('tab'+n).classList.add('active');
+  document.getElementById('wf'+(n+1)).classList.add('lit');
+  document.getElementById('pgFill').style.width=((n+1)/3*100)+'%';
+  document.getElementById('footerInfo').textContent=`第${n+1}步 / 共3步`;
+
+  // 工作区动画不再在此自动触发，改为等对话播放完毕后再触发
+  // 对话播完后由 pushChat 的回调负责调用 animSchedule / animPortrait / animScript
+
+  // 清空对话区域，等待用户点击发送
+  document.getElementById('chatMsgs').innerHTML='';
+  chatAnimating=false;
+
+  // update input preview（同时重置金色脉冲样式）
+  const inputs=['帮我生成今日日程规划','帮我看一下王总的客户画像','生成对应的产品沟通话术'];
+  const prevElGo=document.getElementById('chatInputPreview');
+  const boxElGo=document.getElementById('chatInputBox');
+  prevElGo.textContent=inputs[n];
+  prevElGo.style.color='';
+  prevElGo.style.fontWeight='';
+  prevElGo.style.fontSize='';
+  boxElGo.style.borderColor='';
+  boxElGo.style.background='';
+  boxElGo.style.boxShadow='';
+  // 重置过渡状态
+  pendingTransition=null;
+}
+
+function nextStep(){ goStep((currentStep+1)%3); }
+function prevStep(){ goStep((currentStep+2)%3); }
+
+// ★ 重置所有状态到初始
+function resetAll(){
+  // 停止自动演示
+  autoPlay=false;
+  clearTimeout(autoTimer);
+  document.getElementById('playBtn').textContent='▶ 自动演示';
+
+  // 释放对话动画锁
+  chatAnimating=false;
+  pendingTransition=null;
+  scriptAnimated=false;
+
+  // 清空所有工作区动画
+  ['si1','si2','si3','si4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  ['pg1','pg2','pg3','pg4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  const scriptEl=document.getElementById('scriptText');
+  if(scriptEl) scriptEl.innerHTML='<span class="tw-cursor"></span>';
+
+  // 回到第一步
+  goStep(0);
+}
+
+// 点击发送按钮触发对话
+function sendChat(){
+  console.log('[sendChat] currentStep='+currentStep+', chatAnimating='+chatAnimating+', pendingTransition='+(pendingTransition?'SET':'null'));
+  if(chatAnimating) return; // 防止重复点击
+
+  // ★ 场景二→三过渡：画像对话已播完，用户点击发送进入场景三
+  if(currentStep===1 && pendingTransition){
+    console.log('[场景二→三过渡] currentStep=1, pendingTransition存在');
+    goToStep3();
+    return;
+  }
+
+  chatAnimating=true;
+  pushChat(chatConvos[currentStep]);
+}
+
+// 自动演示 - 点击后开始自动播放
+function togglePlay(){
+  autoPlay=!autoPlay;
+  document.getElementById('playBtn').textContent=autoPlay?'⏸ 暂停':'▶ 自动演示';
+  if(autoPlay){ 
+    // 如果当前没有对话，先发送当前步骤的对话
+    if(!chatAnimating) sendChat();
+    runAuto(); 
+  }
+  else clearTimeout(autoTimer);
+}
+function runAuto(){
+  if(!autoPlay) return;
+  if(currentStep<2){
+    autoTimer=setTimeout(()=>{ nextStep(); sendChat(); runAuto(); }, 5000);
+  } else {
+    autoTimer=setTimeout(()=>{ goStep(0); sendChat(); runAuto(); }, 6000);
+  }
+}
+
+// 绑定发送按钮点击事件 + 交互联动
+document.addEventListener('DOMContentLoaded', () => {
+  const sendBtn = document.getElementById('chatSendBtn');
+  const inputBox = document.getElementById('chatInputBox');
+  if(sendBtn) sendBtn.addEventListener('click', sendChat);
+  if(inputBox) inputBox.addEventListener('click', sendChat);
+
+  // 场景一：点击王总日程项 → 自动跳转场景二并触发对话
+  const si1 = document.getElementById('si1');
+  if(si1){
+    si1.addEventListener('click', () => {
+      if(currentStep!==0) return;
+      goStep(1);
+      setTimeout(()=>sendChat(), 300); // 稍微延迟后自动发对话
+    });
+    si1.title = '点击查看王总详细画像 →';
+  }
+});
+
+// SCHEDULE ANIM
+function animSchedule(){
+  ['si1','si2','si3','si4'].forEach((id,i)=>{
+    document.getElementById(id).classList.remove('show');
+    setTimeout(()=>document.getElementById(id).classList.add('show'), i*300+200);
+  });
+}
+
+// PORTRAIT ANIM
+function animPortrait(){
+  ['pg1','pg2','pg3','pg4'].forEach((id,i)=>{
+    document.getElementById(id).classList.remove('show');
+    setTimeout(()=>{ document.getElementById(id).classList.add('show'); }, i*250+200);
+  });
+  setTimeout(()=>drawEmotion(), 1200);
+}
+
+// SCRIPT TYPEWRITER
+const scriptFull = `<span class="sc-highlight">【开场白 · 建立信任】</span>
+"王总您好，周六打扰了。我仔细看了您最近的账户情况，有个数据想跟您汇报一下。"
+
+<span class="sc-highlight">【痛点切入 · 共情引导】</span>
+"您目前持有的组合整体收益是正的，平均年化5.2%，这个表现其实已经跑赢了市场上80%的同类产品了。但我注意到您其中一只权益基金近期波动比较大，最大回撤到了-3.1%，我知道您一直比较在意风险控制，所以第一时间想跟您同步这个情况。"
+
+<span class="sc-highlight">【产品方案 · 数据对比】</span>
+"针对您'控风险+锁定收益'的诉求，我筛选了一款中短期债券基金给您参考：过去3年最大回撤仅1.2%（您现在的权益仓位波动是它的2.5倍），年化收益稳定在4.2%-5.8%之间，风险等级R2，完全符合您的稳健配置需求。而且这款产品的基金经理管理规模超过200亿，业绩非常稳健。"
+
+<span class="sc-highlight">【异议预案 · 提前准备】</span>
+<span class="sc-sub">
+Q："收益是不是太低了？" 
+→ A："王总，如果单看绝对收益确实不如权益产品，但我们要看风险调整后的收益。您现在权益仓位的夏普比率是0.8，而这款债基的夏普比率达到2.3，也就是说承担每单位风险获得的回报其实是更高的。而且当前利率下行周期，锁定4-5%的确定性收益本身就是一种策略。"
+
+Q："现在是买入的好时机吗？" 
+→ A："好问题。从央行最新的货币政策来看，降息通道还没走完，现在配置中短债正好可以吃到利率下行的资本利得+票息双重收益，窗口期大约还有6-12个月。"
+</span>
+
+<span class="sc-highlight">【下一步行动】</span>
+"要不这样王总，我先发一份详细的产品对比资料到您微信，您周末有空的时候看一下？下周我们可以约个电话或者见面，我带纸质版过去，当面帮您做个详细的持仓分析方案。"`;
+
+let twTimer=null;
+let scriptAnimated=false;
+function animScript(){
+  if(scriptAnimated) return;
+  scriptAnimated=true;
+  const el=document.getElementById('scriptText');
+  el.innerHTML='<span class="tw-cursor"></span>';
+  const cursor=el.querySelector('.tw-cursor');
+  let i=0;
+  const chars=[];
+  // Build char array from full text (simplified: inject HTML chunks)
+  const chunks=scriptFull.split('\n');
+  let ci=0;
+  clearInterval(twTimer);
+  twTimer=setInterval(()=>{
+    if(ci<chunks.length){
+      const span=document.createElement('span');
+      span.innerHTML=chunks[ci]+(ci<chunks.length-1?'<br>':'');
+      el.insertBefore(span,cursor);
+      ci++;
+      // 滚动外层script-content容器，而非scriptText自身
+      const sc=document.getElementById('scriptContent');
+      if(sc) sc.scrollTop=sc.scrollHeight;
+    } else {
+      clearInterval(twTimer);
+    }
+  }, 200);
+}
+function genScript(){
+  scriptAnimated=false;
+  animScript();
+}
+
+// CHAT
+const chatConvState={};
+function pushChat(convos){
+  const container=document.getElementById('chatMsgs');
+  container.innerHTML='';
+  // 计算最后一条消息播放完毕的时间（取最后一条消息的结束时间，而非累加所有时长）
+  let totalDelay=0;
+  const lastIdx=convos.length-1;
+  // 最后一条消息的开始时间 = lastIdx * 1200
+  totalDelay = lastIdx * 1200;
+  // 最后一条消息的typing延迟 + 打字时间
+  const lastMsg = convos[lastIdx];
+  if(lastMsg.a) totalDelay += (lastMsg.u?400:0) + 800;
+  if(lastMsg.u) totalDelay += 0;
+  // 最后再加一点缓冲，让用户看到完整的AI回复
+  const workspaceTriggerDelay=totalDelay+500;
+
+  convos.forEach((msg,i)=>{
+    const isLast = (i === lastIdx);
+    setTimeout(()=>{
+      if(msg.u){
+        const b=document.createElement('div');
+        b.className='bubble user'; b.textContent=msg.u;
+        container.appendChild(b);
+      }
+      if(msg.a){
+        setTimeout(()=>{
+          const typing=document.createElement('div');
+          typing.className='bubble ai typing';
+          container.appendChild(typing);
+          container.scrollTop=container.scrollHeight;
+          setTimeout(()=>{
+            typing.className='bubble ai';
+            typing.textContent=msg.a;
+            container.scrollTop=container.scrollHeight;
+            // ★ 关键修复：在最后一条消息内容实际渲染完成后，立即触发回调
+            // 这比外层的 workspaceTriggerDelay 更可靠，不受 setTimeout 时序漂移影响
+            if(isLast && currentStep===1){
+              triggerStep2Complete();
+            }
+          }, 800);
+        }, msg.u?400:0);
+      }
+    }, i*1200);
+  });
+
+  // ★ 对话全部播完后，触发对应步骤的工作区动画（作为后备触发器）
+  setTimeout(()=>{
+    if(currentStep===0) { animSchedule(); chatAnimating=false; }
+    if(currentStep===1) {
+      // 检查是否已被 isLast 回调提前触发过
+      if(!pendingTransition){
+        triggerStep2Complete();
+      }
+    }
+    if(currentStep===2) animScript();
+  }, workspaceTriggerDelay);
+}
+
+// ★ 场景二对话播完后的统一回调：插入"生成话术"CTA按钮
+function triggerStep2Complete(){
+  if(pendingTransition) return; // 防止重复触发
+  try { animPortrait(); } catch(e) { console.warn('[triggerStep2Complete] animPortrait skip:', e.message); }
+  try { drawEmotion(); } catch(e) { console.warn('[triggerStep2Complete] drawEmotion skip:', e.message); }
+  // 在对话区末尾插入CTA按钮
+  const container=document.getElementById('chatMsgs');
+  const btnWrap=document.createElement('div');
+  btnWrap.className='cta-btn-wrap';
+  btnWrap.innerHTML='<button class="cta-generate-btn" id="ctaGenBtn">✨ 生成产品沟通话术 →</button>';
+  container.appendChild(btnWrap);
+  container.scrollTop=container.scrollHeight;
+  // 绑定按钮点击 → 直接跳转场景三
+  document.getElementById('ctaGenBtn').addEventListener('click', ()=>{
+    if(document.getElementById('ctaGenBtn')) document.getElementById('ctaGenBtn').remove();
+    goToStep3();
+  });
+  // 设置过渡状态 + 释放锁
+  pendingTransition={ fromStep:1, userInput:'生成对应的产品沟通话术' };
+  chatAnimating=false;
+  console.log('[场景二] 画像对话播完！CTA按钮已插入');
+}
+
+// ★ 场景二→三过渡（CTA按钮和输入框发送共用）
+function goToStep3(){
+  const pt = pendingTransition;
+  pendingTransition=null;
+  // 切换场景到话术
+  currentStep=2;
+  document.getElementById('stepScene1').classList.remove('active');
+  document.getElementById('tab1').classList.remove('active');
+  document.getElementById('wf2').classList.remove('lit');
+  document.getElementById('stepScene2').classList.add('active');
+  document.getElementById('tab2').classList.add('active');
+  document.getElementById('wf3').classList.add('lit');
+  document.getElementById('pgFill').style.width='100%';
+  document.getElementById('footerInfo').textContent='第3步 / 共3步';
+  // 重置输入框样式
+  const prevEl2=document.getElementById('chatInputPreview');
+  const boxEl2=document.getElementById('chatInputBox');
+  prevEl2.textContent='生成对应的产品沟通话术';
+  prevEl2.style.color='';
+  prevEl2.style.fontWeight='';
+  prevEl2.style.fontSize='';
+  boxEl2.style.borderColor='';
+  boxEl2.style.background='';
+  boxEl2.style.boxShadow='';
+  // 追加用户消息气泡
+  const container=document.getElementById('chatMsgs');
+  const ub=document.createElement('div');
+  ub.className='bubble user'; ub.textContent=pt?pt.userInput:'生成对应的产品沟通话术';
+  container.appendChild(ub);
+  container.scrollTop=container.scrollHeight;
+  // 触发场景三的AI回复
+  chatAnimating=true;
+  playAiRepliesOnly(chatConvos[2], container);
+}
+
+// ★ 场景二→三专用：只播放AI回复（用户消息已手动添加）
+function playAiRepliesOnly(convos, container){
+  let totalDelay=0;
+  convos.forEach((msg,i)=>{
+    if(msg.a){
+      totalDelay+=(i>0||convos[0].u?400:0)+800;
+    }
+  });
+  const workspaceTriggerDelay=totalDelay+300;
+
+  convos.forEach((msg,i)=>{
+    if(msg.a){
+      setTimeout(()=>{
+        setTimeout(()=>{
+          const typing=document.createElement('div');
+          typing.className='bubble ai typing';
+          container.appendChild(typing);
+          container.scrollTop=container.scrollHeight;
+          setTimeout(()=>{
+            typing.className='bubble ai';
+            typing.textContent=msg.a;
+            container.scrollTop=container.scrollHeight;
+          }, 800);
+        }, msg.u && i===0 ? 400 : 0); // 仅第一条有用户消息时延迟
+      }, i*1200);
+    }
+  });
+
+  setTimeout(()=>{
+    animScript();
+  }, workspaceTriggerDelay);
+}
+
+// KPI bars
+setTimeout(()=>{
+  document.getElementById('kb1').style.width='83%';
+  document.getElementById('kb2').style.width='54%';
+}, 500);
+
+// keyboard
+document.addEventListener('keydown',e=>{
+  // 只转发上下翻页键给父窗口
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='PageDown'||e.key==='PageUp'){
+    try{window.parent.postMessage({type:'iframeKeydown',key:e.key},'*');}catch(err){}
+  }
+  // 左右箭头在内部处理（切换步骤）
+  if(e.key==='ArrowRight') nextStep();
+  if(e.key==='ArrowLeft') prevStep();
+  if(e.key===' '){e.preventDefault();togglePlay();}
+});
+
+// init - 初始化步骤但不自动播放对话
+goStep(0);
+// 页面加载时清空对话区域，等待用户点击发送
+document.getElementById('chatMsgs').innerHTML='';
+chatAnimating=false;
+
+// ★ 输入框点击事件已在 DOMContentLoaded 中绑定（行1071-1072），此处不再重复绑定
+// 移除重复的事件监听器，避免 sendChat 被调用两次导致状态异常
+
+// 字体大小同步 - 接收父页面消息
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+  // 可见性控制
+  if (e.data && e.data.type === 'visibility') {
+    if (e.data.visible) { resumeAnimations(); }
+    else { pauseAnimations(); }
+  }
+});
+
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>

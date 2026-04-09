@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8.1 v18字体版 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v18 大号字体系统（Type Scale）===== */
+  :root {
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    /* 大号字体（默认） */
+    --text-xs:   15px;
+    --text-sm:   16px;   /* 增大一级 */
+    --text-body: 20px;
+    --text-lead: 26px;
+    --text-h4:   34px;
+    --text-h3:   44px;
+    --text-h2:   58px;
+    --text-h1:   76px;
+    /* 向后兼容别名 */
+    --font-xs:   var(--text-xs);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-lead);
+    --font-xl:   var(--text-h4);
+    --font-2xl:  var(--text-h3);
+    --font-2xl2: var(--text-h3);
+    --font-3xl:  var(--text-h2);
+    --font-3xl2: var(--text-h2);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    /* 语义化当前字体变量 */
+    --current-xs:   var(--text-xs);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-lead);
+    --current-xl:   var(--text-h4);
+    --current-2xl:  var(--text-h3);
+    --current-2xl2: var(--text-h3);
+    --current-3xl:  var(--text-h2);
+    --current-3xl2: var(--text-h2);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  /* 小号字体（兼容） */
+  html[data-font-level="small"] {
+    --text-xs:   13px;
+    --text-sm:   14px;
+    --text-body: 16px;
+    --text-lead: 18px;
+    --text-h4:   22px;
+    --text-h3:   26px;
+    --text-h2:   34px;
+    --text-h1:   42px;
+  }
+  /* 中号字体（兼容） */
+  html[data-font-level="medium"] {
+    --text-xs:   14px;
+    --text-sm:   15px;
+    --text-body: 17px;
+    --text-lead: 20px;
+    --text-h4:   24px;
+    --text-h3:   30px;
+    --text-h2:   38px;
+    --text-h1:   50px;
+  }
+  /* 大号字体（默认，v18标准） */
+  html[data-font-level="large"] {
+    --text-xs:   15px;
+    --text-sm:   16px;
+    --text-body: 20px;
+    --text-lead: 26px;
+    --text-h4:   34px;
+    --text-h3:   44px;
+    --text-h2:   58px;
+    --text-h1:   76px;
+  }
+  /* 默认使用大号字体 */
+  html[data-font-level]:not([data-font-level="small"]):not([data-font-level="medium"]) {
+    --text-xs:   15px;
+    --text-sm:   16px;
+    --text-body: 20px;
+    --text-lead: 26px;
+    --text-h4:   34px;
+    --text-h3:   44px;
+    --text-h2:   58px;
+    --text-h1:   76px;
+  }
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨部门协同 · 一团乱麻 → 并行秒查</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  background: linear-gradient(135deg, var(--bg) 0%, #111 100%);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+}
+
+canvas#bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部栏 */
+.topbar {
+  height: 56px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+.tb-left { display: flex; align-items: center; gap: 16px; }
+.tb-badge {
+  padding: 3px 10px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 4px;
+  font-size: var(--current-sm);
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+.tb-title { font-size: var(--text-body); font-weight: 300; }
+.tb-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.tb-right { display: flex; align-items: center; gap: 8px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+.tb-status { font-size: var(--text-sm); color: #666; }
+
+/* 主区 */
+.stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 场景切换 */
+.scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.5s; }
+.scene.active { opacity: 1; pointer-events: auto; }
+
+/* ===== Scene 0: 导入 ===== */
+.intro-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 650px;
+  text-align: center;
+}
+.intro-tag { font-size: var(--text-sm); letter-spacing: 3px; color: #555; }
+.intro-title { font-size: var(--text-h2); /* 56.9px */ font-weight: 200; line-height: 1.3; }
+.intro-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.chat-bubble {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 20px 20px 20px 4px;
+  padding: 18px 24px;
+  font-size: var(--current-md);
+  line-height: 1.7;
+  color: #eee;
+  position: relative;
+  max-width: 480px;
+  align-self: center;
+  transform: translateY(16px);
+  animation: floatUp 0.5s ease-out forwards;
+}
+@keyframes floatUp { to { transform: translateY(0); } }
+.chat-bubble .sender {
+  position: absolute;
+  top: -10px; left: 14px;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: var(--current-sm);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.time-row { display: flex; gap: 48px; align-items: center; }
+.ti-box { text-align: center; }
+.ti-num { font-size: var(--text-h2); /* 56.9px */ font-weight: 200; color: var(--red); line-height: 1; }
+.ti-num.green { color: var(--green); }
+.ti-label { font-size: var(--current-base); color: #666; margin-top: 4px; }
+.ti-arrow { font-size: var(--text-h4); color: #333; }
+.intro-hint { font-size: var(--current-base); color: #444; }
+
+/* ===== Scene 1: 传统流程 — 一团乱麻 ===== */
+.trad-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.trad-header {
+  padding: 24px 48px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.trad-tag {
+  font-size: var(--current-sm);
+  letter-spacing: 2px;
+  color: var(--red);
+  padding: 4px 12px;
+  border: 1px solid rgba(248,113,113,0.3);
+  border-radius: 4px;
+}
+.trad-title { font-size: var(--text-h4); font-weight: 300; }
+.trad-title em { color: var(--red); font-style: normal; }
+
+/* SVG 乱麻区 */
+.trad-canvas-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+canvas#chaosCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 乱麻结束动画 */
+.chaos-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 对齐到底部 */
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s;
+  padding-bottom: 80px; /* 距离底部一定距离 */
+}
+.chaos-overlay.active { opacity: 1; pointer-events: auto; }
+.chaos-trash {
+  font-size: var(--text-hero); /* 75.9px */
+  animation: shakeIn 0.6s ease-out;
+}
+@keyframes shakeIn {
+  0% { transform: scale(2) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.1) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.chaos-text {
+  font-size: var(--current-2xl2);
+  font-weight: 200;
+  color: var(--red);
+  text-align: center;
+  line-height: 1.6;
+}
+.chaos-sub {
+  font-size: var(--current-md);
+  color: #888;
+}
+
+/* ===== 对话气泡（传统流程叠加层）===== */
+.chaos-bubbles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%; /* 占画布下方区域 */
+  pointer-events: none;
+  z-index: 2;
+}
+.chaos-msg {
+  position: absolute;
+  background: rgba(15,10,5,0.85);
+  border: 1px solid rgba(248,113,113,0.35);
+  border-radius: 10px 10px 10px 2px;
+  padding: 6px 12px;
+  font-size: var(--text-sm);
+  color: rgba(248,180,180,0.9);
+  line-height: 1.4;
+  white-space: nowrap;
+  max-width: 200px;
+  white-space: normal;
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.chaos-msg.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.chaos-msg .cm-from {
+  font-size: var(--text-xs); /* v18: 13.5px */
+  color: rgba(248,113,113,0.7);
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+/* 对话气泡：右侧变体 */
+.chaos-msg.right {
+  border-radius: 10px 10px 2px 10px;
+  border-color: rgba(100,180,255,0.3);
+  color: rgba(180,220,255,0.9);
+}
+.chaos-msg.right .cm-from { color: rgba(100,180,255,0.7); }
+
+/* ===== Scene 2: AI并行流程 ===== */
+.ai-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 32px;
+  gap: 12px;
+  justify-content: space-between; /* 元素分布：头部在顶部，merge-bar和result-push在底部 */
+}
+.ai-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.ai-tag {
+  font-size: var(--current-sm);
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding: 4px 12px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+}
+.ai-main-title { font-size: var(--text-h4); font-weight: 300; }
+.ai-main-title em { color: var(--gold); font-style: normal; }
+
+/* 企微入口 */
+.wechat-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  flex-shrink: 0;
+}
+.wechat-entry.show { opacity: 1; }
+.wechat-avatar {
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  background: var(--gold);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-base); font-weight: 700;
+  flex-shrink: 0;
+}
+.wechat-msg {
+  flex: 1;
+}
+.wechat-name { font-size: var(--text-sm); color: #888; margin-bottom: 4px; }
+.wechat-text { font-size: var(--text-sm); color: #ddd; line-height: 1.6; }
+.wechat-text em { color: var(--gold); font-style: normal; }
+.wechat-time { font-size: var(--current-sm); color: #555; margin-top: 4px; }
+
+/* AI处理区 */
+.ai-process {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr;  /* 左侧AI指令面板固定宽度 */
+  gap: 16px;
+  min-height: 0;
+}
+
+/* 左：指令面板 */
+.ai-cmd {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ai-cmd-label { font-size: var(--current-sm); letter-spacing: 2px; color: #555; }
+.ai-cmd-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: var(--text-sm);
+  color: var(--gold);
+  line-height: 1.6;
+  font-family: inherit;
+}
+.ai-think {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-sm);
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.ai-think.show { opacity: 1; }
+.think-dots { display: flex; gap: 4px; }
+.think-dots span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: thinkPulse 1.2s infinite;
+}
+.think-dots span:nth-child(2) { animation-delay: 0.2s; }
+.think-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes thinkPulse { 0%,100%{opacity:0.2;transform:scale(0.8);} 50%{opacity:1;transform:scale(1.2);} }
+
+/* 执行日志 */
+.ai-log {
+  flex: 1;
+  font-size: var(--current-sm);
+  font-family: 'SF Mono', 'Menlo', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+.log-line {
+  display: flex; gap: 8px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.log-line.show { opacity: 1; }
+.log-time { color: #444; flex-shrink: 0; }
+.log-txt { color: #888; }
+.log-txt.ok { color: var(--green); }
+
+/* 右：三路并行 */
+.parallel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.parallel-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0.25;
+  transition: all 0.4s;
+}
+.parallel-card.running {
+  opacity: 1;
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.03);
+}
+.parallel-card.done {
+  opacity: 1;
+  border-color: rgba(74,222,128,0.25);
+  background: rgba(74,222,128,0.03);
+}
+.pc-header { display: flex; align-items: center; gap: 10px; }
+.pc-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-md); flex-shrink: 0;
+}
+.parallel-card.running .pc-icon { background: rgba(201,168,76,0.12); }
+.parallel-card.done .pc-icon { background: rgba(74,222,128,0.1); }
+.pc-sys { font-size: var(--text-sm); color: #555; letter-spacing: 1px; }
+.parallel-card.running .pc-sys { color: var(--gold); }
+.parallel-card.done .pc-sys { color: var(--green); }
+.pc-name { font-size: var(--text-sm); font-weight: 500; }
+
+/* 进度条 */
+.pc-progress { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.pc-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold));
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.parallel-card.done .pc-progress-bar { background: linear-gradient(90deg, var(--green), #86efac); width: 100% !important; }
+
+/* 滚动代码区 */
+.pc-code {
+  flex: 1;
+  background: rgba(0,0,0,0.3);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: var(--current-sm);
+  color: #888;
+  line-height: 1.6;
+  overflow: hidden;
+  position: relative;
+  min-height: 0;
+}
+.pc-code-inner {
+  position: absolute;
+  inset: 8px 10px;
+  overflow: hidden;
+}
+.code-line {
+  white-space: nowrap;
+  height: 16px;
+  opacity: 0.5;
+}
+.code-line.active { opacity: 1; color: var(--gold); }
+.parallel-card.done .code-line.active { color: var(--green); }
+.code-scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(201,168,76,0.08), transparent);
+  animation: scanDown 1.5s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.parallel-card.running .code-scanline { opacity: 1; }
+.parallel-card.done .code-scanline { opacity: 0; }
+@keyframes scanDown { 0%{top:0;} 100%{top:100%;} }
+
+.pc-result {
+  font-size: var(--text-sm);
+  color: #888;
+  line-height: 1.5;
+  min-height: 18px;
+}
+.parallel-card.done .pc-result { color: #aaa; }
+.pc-status {
+  font-size: var(--current-sm);
+  color: #555;
+  text-align: right;
+  flex-shrink: 0;
+}
+.parallel-card.running .pc-status { color: var(--gold); animation: blink2 0.8s infinite; }
+.parallel-card.done .pc-status { color: var(--green); }
+@keyframes blink2 { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+/* AI合并诊断 */
+.merge-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  flex-shrink: 0;
+  margin-left: auto; /* 右对齐 */
+  max-width: 55%; /* 限制宽度 */
+  transform: translateY(-100px); /* 向上移动 */
+  position: relative;
+  z-index: 20;
+}
+.merge-bar.show { opacity: 1; }
+.merge-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-base);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.3);} 50%{box-shadow:0 0 0 8px rgba(201,168,76,0);} }
+.merge-text { font-size: var(--text-sm); color: #ddd; }
+.merge-text em { color: var(--gold); font-style: normal; }
+
+/* 结果推回企微 */
+.result-push {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(74,222,128,0.04);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+  margin-left: auto; /* 右对齐 */
+  max-width: 60%; /* 限制宽度 */
+  transform: translateY(-90px); /* 向上移动 */
+}
+.result-push.show { opacity: 1; }
+.rp-avatar {
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  background: var(--green);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-base); font-weight: 700;
+  flex-shrink: 0;
+}
+.rp-body { flex: 1; }
+.rp-label { font-size: var(--current-sm); color: var(--green); letter-spacing: 1px; margin-bottom: 4px; }
+.rp-text { font-size: var(--text-sm); color: #ddd; line-height: 1.7; }
+.rp-text strong { color: var(--gold); font-weight: 500; }
+
+/* ===== Scene 3: 对比总结 ===== */
+.compare-wrap {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.cmp-side {
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cmp-side.left { border-right: 1px solid rgba(255,255,255,0.06); }
+.cmp-label { font-size: var(--current-sm); letter-spacing: 3px; }
+.cmp-label.red { color: var(--red); }
+.cmp-label.gold { color: var(--gold); }
+.cmp-time-box {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+.cmp-time-box.red-b { background: rgba(248,113,113,0.05); border: 1px solid rgba(248,113,113,0.15); }
+.cmp-time-box.gold-b { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); }
+.cmp-time-num { font-size: var(--current-hero); font-weight: 200; line-height: 1; }
+.cmp-time-num.red { color: var(--red); }
+.cmp-time-num.gold { color: var(--gold); }
+.cmp-time-unit { font-size: var(--current-base); color: #888; margin-top: 6px; }
+.cmp-detail { font-size: var(--current-base); color: #888; line-height: 1.8; }
+.cmp-result-box {
+  background: rgba(74,222,128,0.04);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: var(--text-sm);
+  color: #ccc;
+  line-height: 1.8;
+  flex: 1;
+}
+.cmp-result-box strong { color: var(--gold); }
+.metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.metric-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+.metric-val { font-size: var(--text-h3); font-weight: 300; color: var(--gold); }
+.metric-key { font-size: var(--text-sm); color: #666; margin-top: 2px; }
+
+/* AI 对话流 */
+.ai-dialog-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;  /* 添加滚动条 */
+  max-height: 120px; /* 限制高度 */
+  flex-shrink: 0;
+  padding-right: 4px; /* 滚动条不遮挡内容 */
+}
+.ai-dialog-flow::-webkit-scrollbar { width: 4px; }
+.ai-dialog-flow::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+.ai-dlg-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.ai-dlg-msg.show { opacity: 1; transform: translateY(0); }
+.ai-dlg-msg.user { flex-direction: row-reverse; }
+.ai-dlg-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-xs); /* 13.5px */ font-weight: 700;
+  flex-shrink: 0;
+}
+.ai-dlg-avatar.mgr { background: rgba(201,168,76,0.25); color: var(--gold); }
+.ai-dlg-avatar.ai  { background: rgba(74,222,128,0.2);  color: var(--green); }
+.ai-dlg-bubble {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px 8px 8px 2px;
+  padding: 6px 10px;
+  font-size: var(--text-sm);
+  color: #bbb;
+  line-height: 1.5;
+  max-width: 160px;
+}
+.ai-dlg-msg.user .ai-dlg-bubble {
+  border-radius: 8px 8px 2px 8px;
+  border-color: rgba(201,168,76,0.2);
+  color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+.ai-dlg-msg.ai .ai-dlg-bubble {
+  border-color: rgba(74,222,128,0.2);
+  color: #adf0cc;
+  background: rgba(74,222,128,0.05);
+}
+.ai-typing {
+  display: flex; gap: 3px; align-items: center; padding: 2px 0;
+}
+.ai-typing span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green);
+  animation: typingDot 1.2s infinite;
+}
+.ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,100%{opacity:0.2;transform:scale(0.7);} 50%{opacity:1;transform:scale(1.1);} }
+
+/* ===== 底部控制 ===== */
+.controls {
+  height: 68px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  background: rgba(8,8,8,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.c-label { font-size: var(--current-sm); color: #444; }
+.c-dots { display: flex; gap: 8px; }
+.c-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.c-dot.active { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+.c-dot.done { background: rgba(201,168,76,0.4); }
+.sep { width: 1px; height: 24px; background: rgba(255,255,255,0.07); }
+.cbtn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.04);
+  color: var(--gold);
+  font-size: var(--current-base);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.cbtn:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
+.cbtn:disabled { opacity: 0.2; cursor: default; transform: none; }
+.cbtn.play {
+  width: 48px; height: 48px;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: var(--current-md);
+  border: none;
+  box-shadow: 0 0 16px rgba(201,168,76,0.3);
+}
+.cbtn.play:hover { background: var(--gold); }
+.prog-wrap { display: flex; align-items: center; gap: 8px; min-width: 160px; }
+.prog-bar { flex:1; height: 3px; background: rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; }
+.prog-inner { height:100%; background: linear-gradient(90deg, var(--gold), var(--gold)); transition: width 0.4s; width:0; }
+.prog-txt { font-size: var(--text-sm); color:#444; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  html, body { overflow-y: auto !important; overflow-x: hidden !important; }
+  .page { height: auto !important; min-height: 100vh; }
+  .topbar { height: auto; padding: 12px 16px; flex-wrap: wrap; gap: 6px; }
+  .tb-title { font-size: clamp(13px, 3.5vw, 17px); }
+  .stage { min-height: 600px; }
+  .scene { position: relative !important; min-height: 600px; }
+  .intro-title { font-size: clamp(24px, 6vw, 44px); }
+  .intro-wrap { padding: 0 16px; }
+  .chat-bubble { max-width: 100%; padding: 12px 16px; }
+  .time-row { gap: 24px; }
+  .ti-num { font-size: clamp(32px, 8vw, 52px); }
+  .trad-header { padding: 16px 20px 0; }
+  .trad-title { font-size: clamp(16px, 4vw, 22px); }
+  .ai-wrap { padding: 16px 12px; }
+  .ai-main-title { font-size: clamp(16px, 4vw, 22px); }
+  .ai-process { grid-template-columns: 1fr !important; }
+  .parallel-grid { grid-template-columns: 1fr !important; }
+  .ai-cmd { max-height: none !important; overflow: visible !important; }
+  .compare-wrap { grid-template-columns: 1fr !important; }
+  .cmp-side { padding: 20px 16px; }
+  .cmp-side.left { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .cmp-time-num { font-size: clamp(36px, 10vw, 64px); }
+  .wechat-entry, .merge-bar, .result-push { flex-shrink: 0; }
+  .controls { height: auto; padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
+  .prog-wrap { min-width: 100px; }
+}
+@media (max-width: 480px) {
+  html { height: auto !important; overflow: visible !important; }
+  body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; }
+  .page { height: auto !important; min-height: 100vh; }
+  .topbar { padding: 10px 12px; }
+  .stage { min-height: auto !important; height: auto !important; overflow: visible !important; }
+  .scene { position: relative !important; min-height: auto !important; height: auto !important; overflow: visible !important; }
+  .trad-canvas-wrap { min-height: 400px; }
+  .ai-wrap { padding: 12px 10px; gap: 8px; }
+  .ai-process { gap: 8px; }
+  .parallel-card { padding: 10px; }
+  .compare-wrap { overflow: visible !important; }
+  .controls { padding: 8px 10px; gap: 6px; position: relative !important; bottom: auto !important; }
+  .cbtn { width: 34px; height: 34px; font-size: var(--current-sm); }
+  .cbtn.play { width: 42px; height: 42px; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<div class="page">
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-badge">场景 02</div>
+      <div class="tb-title">跨部门协同</div>
+    </div>
+    <div class="tb-right">
+      <div class="dot"></div>
+      <span class="tb-status" id="tbStatus">就绪</span>
+    </div>
+  </div>
+
+  <div class="stage">
+    <!-- Scene 0: 导入 -->
+    <div class="scene active" id="sc0">
+      <div class="intro-wrap">
+        <div class="intro-tag">真实场景 · 广州建设银行</div>
+        <div class="intro-title">客户工资<em>未到账</em><br>怎么处理？</div>
+        <div class="chat-bubble">
+          <div class="sender">客户</div>
+          "我这个月工资还没到账，公司说已经发了…"
+        </div>
+        <div class="time-row">
+          <div class="ti-box">
+            <div class="ti-num">70</div>
+            <div class="ti-label">分钟（传统）</div>
+          </div>
+          <div class="ti-arrow">→</div>
+          <div class="ti-box">
+            <div class="ti-num green">5</div>
+            <div class="ti-label">分钟（智能体）</div>
+          </div>
+        </div>
+        <div class="intro-hint">点击下方 ▶ 开始演示</div>
+      </div>
+    </div>
+
+    <!-- Scene 1: 传统流程 — 一团乱麻 -->
+    <div class="scene" id="sc1">
+      <div class="trad-wrap">
+        <div class="trad-header">
+          <div class="trad-tag">⚠ 传统处理方式</div>
+          <div class="trad-title">直营经理<em>逐个部门</em>人工排查</div>
+        </div>
+        <div class="trad-canvas-wrap">
+          <canvas id="chaosCanvas"></canvas>
+        </div>
+        <!-- 对话气泡叠加层（放在画布下方区域） -->
+        <div class="chaos-bubbles" id="chaosBubbles">
+          <div class="chaos-msg right" id="cmsg0" style="right:3%; bottom:8%">
+            <div class="cm-from">客户 → 直营经理</div>
+            …
+          </div>
+          <div class="chaos-msg right" id="cmsg1" style="right:3%; bottom:28%">
+            <div class="cm-from">直营经理 → 对公部</div>
+            …
+          </div>
+          <div class="chaos-msg right" id="cmsg2" style="right:3%; bottom:48%">
+            <div class="cm-from">直营经理 → 结算部</div>
+            …
+          </div>
+          <div class="chaos-msg right" id="cmsg3" style="right:3%; bottom:68%">
+            <div class="cm-from">对私部 → 经理</div>
+            …
+          </div>
+          <div class="chaos-msg right" id="cmsg4" style="right:18%; bottom:18%">
+            <div class="cm-from">结算部 → 对公部</div>
+            …
+          </div>
+          <div class="chaos-msg right" id="cmsg5" style="right:18%; bottom:58%">
+            <div class="cm-from">经理 → 客户</div>
+            …
+          </div>
+        </div>
+        <div class="chaos-overlay" id="chaosOverlay">
+          <div class="chaos-trash">🗑️</div>
+          <div class="chaos-text">70分钟 · 多个部门 · 多次转办</div>
+          <div class="chaos-sub">切换到 AI 智能体方案 →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: AI并行流程 -->
+    <div class="scene" id="sc2">
+      <div class="ai-wrap">
+        <div class="ai-header">
+          <div class="ai-tag">⚡ 智能体方案</div>
+          <div class="ai-main-title">一句话指令，<em>并行查询</em>所有系统</div>
+        </div>
+
+        <!-- 企微入口 -->
+        <div class="wechat-entry" id="wechatEntry">
+          <div class="wechat-avatar">企</div>
+          <div class="wechat-msg">
+            <div class="wechat-name">客户经理 · 12:03:02</div>
+            <div class="wechat-text">"客户反馈工资未到账，请帮我<em>排查原因</em>"</div>
+            <div class="wechat-time">via 企业微信</div>
+          </div>
+        </div>
+
+        <div class="ai-process">
+          <!-- 左：指令面板 -->
+          <div class="ai-cmd">
+            <div class="ai-cmd-label">AI 指令解析</div>
+            <div class="ai-cmd-box">智能体识别意图 → 拆解为 3 路并行任务 → 同时调用企业发薪、交易流水、账户管理三大系统</div>
+            <div class="ai-think" id="aiThink">
+              <div class="think-dots"><span></span><span></span><span></span></div>
+              <span>AI 编排执行中...</span>
+            </div>
+            <!-- AI 对话流（放在执行日志上方） -->
+            <div class="ai-dialog-flow" id="aiDialogFlow">
+              <div class="ai-dlg-msg user" id="dlg0">
+                <div class="ai-dlg-avatar mgr">经</div>
+                <div class="ai-dlg-bubble">"客户工资未到账，帮排查原因"</div>
+              </div>
+              <div class="ai-dlg-msg ai" id="dlg1">
+                <div class="ai-dlg-avatar ai">AI</div>
+                <div class="ai-dlg-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>
+              </div>
+              <div class="ai-dlg-msg ai" id="dlg2" style="display:none">
+                <div class="ai-dlg-avatar ai">AI</div>
+                <div class="ai-dlg-bubble">已识别意图，拆解为 3 路并行任务，同时调用…</div>
+              </div>
+              <div class="ai-dlg-msg ai" id="dlg3" style="display:none">
+                <div class="ai-dlg-avatar ai">AI</div>
+                <div class="ai-dlg-bubble">✓ 数据已汇聚，发现<span style="color:var(--red);">二类卡限额</span>异常</div>
+              </div>
+              <div class="ai-dlg-msg ai" id="dlg4" style="display:none">
+                <div class="ai-dlg-avatar ai">AI</div>
+                <div class="ai-dlg-bubble">建议方案已生成，正在推送至企微 →</div>
+              </div>
+            </div>
+            <div style="font-size: var(--text-sm); letter-spacing:1px; color:#444;">执行日志</div>
+            <div class="ai-log" id="aiLog">
+              <div class="log-line" id="log0"><span class="log-time">12:03:03</span><span class="log-txt">意图识别：工资未到账 → 多系统排查</span></div>
+              <div class="log-line" id="log1"><span class="log-time">12:03:03</span><span class="log-txt">任务编排：并行 3 路 API 调用</span></div>
+              <div class="log-line" id="log2"><span class="log-time">12:03:05</span><span class="log-txt ok">✓ 代发批次系统 返回</span></div>
+              <div class="log-line" id="log3"><span class="log-time">12:03:06</span><span class="log-txt ok">✓ 交易流水系统 返回</span></div>
+              <div class="log-line" id="log4"><span class="log-time">12:03:06</span><span class="log-txt ok">✓ 账户管理系统 返回</span></div>
+              <div class="log-line" id="log5"><span class="log-time">12:03:07</span><span class="log-txt">AI 交叉分析 3 路数据...</span></div>
+              <div class="log-line" id="log6"><span class="log-time">12:03:08</span><span class="log-txt ok">✓ 根因定位完成，生成建议</span></div>
+            </div>
+          </div>
+
+          <!-- 右：三路并行 -->
+          <div class="parallel-grid">
+            <!-- Card 1 -->
+            <div class="parallel-card" id="pc1">
+              <div class="pc-header">
+                <div class="pc-icon">🏦</div>
+                <div>
+                  <div class="pc-sys">SYSTEM 01</div>
+                  <div class="pc-name">代发批次系统</div>
+                </div>
+              </div>
+              <div class="pc-progress"><div class="pc-progress-bar" id="pb1"></div></div>
+              <div class="pc-code">
+                <div class="code-scanline"></div>
+                <div class="pc-code-inner">
+                  <div class="code-line">查询: enterprise_id=CCB_GZ_001</div>
+                  <div class="code-line">查询: batch_date=2026-03-28</div>
+                  <div class="code-line">查询: batch_type=PAYROLL</div>
+                  <div class="code-line active">结果: 批次 #20260328009</div>
+                  <div class="code-line active">状态: SUCCESS | 金额: ¥2,480,000</div>
+                  <div class="code-line active">笔数: 186 | 时间: 09:00:32</div>
+                </div>
+              </div>
+              <div class="pc-result" id="pr1">等待调用...</div>
+              <div class="pc-status" id="ps1">●</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="parallel-card" id="pc2">
+              <div class="pc-header">
+                <div class="pc-icon">📋</div>
+                <div>
+                  <div class="pc-sys">SYSTEM 02</div>
+                  <div class="pc-name">交易流水系统</div>
+                </div>
+              </div>
+              <div class="pc-progress"><div class="pc-progress-bar" id="pb2"></div></div>
+              <div class="pc-code">
+                <div class="code-scanline"></div>
+                <div class="pc-code-inner">
+                  <div class="code-line">查询: account=622****8832</div>
+                  <div class="code-line">查询: date_range=2026-03</div>
+                  <div class="code-line">查询: type=CREDIT_TRANSFER</div>
+                  <div class="code-line active">结果: 代发交易已入账</div>
+                  <div class="code-line active">金额: ¥12,800.00</div>
+                  <div class="code-line active">状态: SUCCESS | 无异常</div>
+                </div>
+              </div>
+              <div class="pc-result" id="pr2">等待调用...</div>
+              <div class="pc-status" id="ps2">●</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="parallel-card" id="pc3">
+              <div class="pc-header">
+                <div class="pc-icon">🔐</div>
+                <div>
+                  <div class="pc-sys">SYSTEM 03</div>
+                  <div class="pc-name">账户管理系统</div>
+                </div>
+              </div>
+              <div class="pc-progress"><div class="pc-progress-bar" id="pb3"></div></div>
+              <div class="pc-code">
+                <div class="code-scanline"></div>
+                <div class="pc-code-inner">
+                  <div class="code-line">查询: account=622****8832</div>
+                  <div class="code-line">查询: account_type=DEBIT</div>
+                  <div class="code-line">查询: quota_info=true</div>
+                  <div class="code-line active">类型: 二类卡 (DEBIT_II)</div>
+                  <div class="code-line active">年累计入账: ¥198,500 / ¥200,000</div>
+                  <div class="code-line active" style="color:var(--red);font-weight:bold;font-size:var(--text-sm);">⚠ 限额已满 99.25%</div>
+                </div>
+              </div>
+              <div class="pc-result" id="pr3">等待调用...</div>
+              <div class="pc-status" id="ps3">●</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI合并诊断 -->
+        <div class="merge-bar" id="mergeBar">
+          <div class="merge-icon">⚡</div>
+          <div class="merge-text">AI 交叉分析三路数据 → <em>根因定位</em>：企业发薪正常 ✓ 交易成功 ✓ <strong style="color:var(--red);">二类卡限额已满</strong> ✗</div>
+        </div>
+
+        <!-- 结果推回企微 -->
+        <div class="result-push" id="resultPush">
+          <div class="rp-avatar">AI</div>
+          <div class="rp-body">
+            <div class="rp-label">诊断结果 · 已推送至企微</div>
+            <div class="rp-text">
+              问题定位：<strong>客户账户为二类卡，<span style="color:var(--red);">本年累计入账已达限额（99.25%）</span></strong>，工资已发起但无法入账。<br>
+              建议：① 引导客户升级为一类卡（约10分钟） ② 或联系企业财务更换收款账户
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: 对比总结 -->
+    <div class="scene" id="sc3">
+      <div class="compare-wrap">
+        <div class="cmp-side left">
+          <div class="cmp-label red">传统方式 · 串行排查</div>
+          <div class="cmp-time-box red-b">
+            <div class="cmp-time-num red">70</div>
+            <div class="cmp-time-unit">分钟</div>
+          </div>
+          <div class="cmp-detail">
+            ✗ 联系对公部门 → 10min<br>
+            ✗ 查询结算交易 → 15min<br>
+            ✗ 核实个人账户 → 10min<br>
+            ✗ 汇总人工分析 → 20min<br>
+            ✗ 反馈客户指导 → 15min<br><br>
+            <span style="color:var(--red);">部门墙高 · 信息孤岛 · 客户等待</span>
+          </div>
+        </div>
+        <div class="cmp-side">
+          <div class="cmp-label gold">智能体方案 · 并行秒查</div>
+          <div class="cmp-time-box gold-b">
+            <div class="cmp-time-num gold">5</div>
+            <div class="cmp-time-unit">分钟</div>
+          </div>
+          <div class="cmp-result-box">
+            根因：<strong><span style="color:var(--red);">二类卡年累计入账限额已满（99.25%）</span></strong><br>
+            企业发薪正常，交易成功，入账被限额拦截。<br><br>
+            建议：<br>
+            ① 引导升级为一类卡（约10分钟）<br>
+            ② 或联系企业财务更换收款账户
+          </div>
+          <div class="metric-row">
+            <div class="metric-card"><div class="metric-val">14×</div><div class="metric-key">效率提升</div></div>
+            <div class="metric-card"><div class="metric-val">65min</div><div class="metric-key">节省时长</div></div>
+            <div class="metric-card"><div class="metric-val">3系统</div><div class="metric-key">并行调用</div></div>
+            <div class="metric-card"><div class="metric-val">0次</div><div class="metric-key">人工协调</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部控制 -->
+  <div class="controls">
+    <div class="c-dots" id="cDots">
+      <div class="c-dot active" data-scene="0"></div>
+      <div class="c-dot" data-scene="1"></div>
+      <div class="c-dot" data-scene="2"></div>
+      <div class="c-dot" data-scene="3"></div>
+    </div>
+    <div class="sep"></div>
+    <button class="cbtn" id="prevBtn" disabled>◀</button>
+    <button class="cbtn play" id="playBtn">▶</button>
+    <button class="cbtn" id="nextBtn">▶▌</button>
+    <button class="cbtn" id="resetBtn">↺</button>
+    <div class="sep"></div>
+    <div class="prog-wrap">
+      <span class="prog-txt" id="progTxt">0 / 3</span>
+      <div class="prog-bar"><div class="prog-inner" id="progInner"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== 粒子背景 ===== */
+const bgCanvas = document.getElementById('bg');
+const bgCtx = bgCanvas.getContext('2d');
+bgCanvas.width = window.innerWidth;
+bgCanvas.height = window.innerHeight;
+const pts = Array.from({length:40}, () => ({
+  x: Math.random()*bgCanvas.width, y: Math.random()*bgCanvas.height,
+  vx:(Math.random()-.5)*.2, vy:(Math.random()-.5)*.2,
+  r: Math.random()*1.2+.3, a: Math.random()*.25+.05
+}));
+let isPaused=false;
+let bgRafId=null;
+function bgLoop() {
+  if(!isPaused){
+    bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
+    pts.forEach(p => {
+      bgCtx.beginPath(); bgCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      bgCtx.fillStyle=`rgba(201,168,76,${p.a})`; bgCtx.fill();
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>bgCanvas.width)p.vx*=-1;
+      if(p.y<0||p.y>bgCanvas.height)p.vy*=-1;
+    });
+  }
+  bgRafId=requestAnimationFrame(bgLoop);
+}
+function pauseAnimations(){
+  isPaused=true;
+  if(bgRafId){cancelAnimationFrame(bgRafId);bgRafId=null;}
+  if(chaosAnim){cancelAnimationFrame(chaosAnim);chaosAnim=null;}
+}
+function resumeAnimations(){isPaused=false;bgLoop();}
+bgLoop();
+
+/* ===== Scene 1: 一团乱麻 Canvas 动画 ===== */
+const chaosCanvas = document.getElementById('chaosCanvas');
+const cctx = chaosCanvas.getContext('2d');
+let chaosAnim = null;
+let chaosFrame = 0;
+
+const DEPARTMENTS = [
+  { name: '客户', short: '客户', color: 'var(--gold)', big: false },
+  { name: '直营经理', short: '经理', color: 'var(--green)', big: true },
+  { name: '对公部', short: '对公', color: 'var(--red)', big: false },
+  { name: '结算部', short: '结算', color: '#fb923c', big: false },
+  { name: '网点', short: '网点', color: '#a78bfa', big: false },
+  { name: '对私部', short: '对私', color: '#38bdf8', big: false },
+  { name: '科技部', short: '科技', color: '#f472b6', big: false }
+];
+
+// 连接：客户→经理，经理↔各部门，部门↔部门（经理在中间被拉扯）
+const LINKS = [
+  [0,1],           // 客户 → 经理
+  [1,2],[1,3],[1,4],[1,5],[1,6],  // 经理 → 各部门
+  [2,1],[3,1],[4,1],[5,1],[6,1],  // 各部门 → 经理（反馈）
+  [1,2],[1,3],[2,1],[3,1],        // 经理被部门之间来回拉
+  [1,4],[1,5],[4,1],[5,1],
+  [1,6],[6,1],
+  [2,3],[3,2],                      // 部门之间也互转
+  [3,4],[4,3],
+  [5,6],[6,5]
+];
+
+// 部门节点位置（百分比）— 经理在中心，客户在底部
+const NODE_POS = [
+  { x: 0.5, y: 0.92 },   // 客户（底部）
+  { x: 0.5, y: 0.42 },   // 直营经理（中心，突出）
+  { x: 0.12, y: 0.52 },  // 对公
+  { x: 0.28, y: 0.18 },  // 结算
+  { x: 0.72, y: 0.18 },  // 网点
+  { x: 0.88, y: 0.52 },  // 对私
+  { x: 0.5, y: 0.05 }    // 科技
+];
+
+function resizeChaos() {
+  const wrap = chaosCanvas.parentElement;
+  chaosCanvas.width = wrap.clientWidth;
+  chaosCanvas.height = wrap.clientHeight;
+}
+
+function drawChaosFrame() {
+  chaosFrame++;
+  const W = chaosCanvas.width;
+  const H = chaosCanvas.height;
+  cctx.clearRect(0, 0, W, H);
+
+  // 阶段控制
+  const phase = chaosFrame < 120 ? 0 : chaosFrame < 300 ? 1 : 2; // 0=节点出现, 1=连线出现, 2=乱麻
+
+  // 绘制连线
+  LINKS.forEach((link, i) => {
+    const startTime = 120 + i * 8;
+    if (chaosFrame < startTime) return;
+
+    const progress = Math.min(1, (chaosFrame - startTime) / 20);
+    const from = NODE_POS[link[0]];
+    const to = NODE_POS[link[1]];
+
+    const fx = from.x * W, fy = from.y * H;
+    const tx = to.x * W, ty = to.y * H;
+    const cx = fx + (tx - fx) * progress;
+    const cy = fy + (ty - fy) * progress;
+
+    // 曲线偏移（乱麻效果）
+    let cpx = (fx + tx) / 2, cpy = (fy + ty) / 2;
+    if (phase === 2) {
+      const t = chaosFrame * 0.01 + i * 0.7;
+      cpx += Math.sin(t * 2.3 + i) * W * 0.12;
+      cpy += Math.cos(t * 1.7 + i * 0.5) * H * 0.1;
+    }
+
+    cctx.beginPath();
+    cctx.moveTo(fx, fy);
+    cctx.quadraticCurveTo(cpx, cpy, cx, cy);
+    const alpha = phase === 2 ? 0.15 + Math.sin(chaosFrame * 0.03 + i) * 0.1 : 0.35;
+    cctx.strokeStyle = `rgba(248,113,113,${alpha})`;
+    cctx.lineWidth = phase === 2 ? 1.2 : 1.5;
+    cctx.stroke();
+
+    // 移动的小球（乱麻阶段）
+    if (phase === 2 && chaosFrame > startTime + 30) {
+      const ballT = ((chaosFrame - startTime) * 0.015 + i * 0.3) % 1;
+      const bx = (1-ballT)*(1-ballT)*fx + 2*(1-ballT)*ballT*cpx + ballT*ballT*tx;
+      const by = (1-ballT)*(1-ballT)*fy + 2*(1-ballT)*ballT*cpy + ballT*ballT*ty;
+      cctx.beginPath();
+      cctx.arc(bx, by, 3, 0, Math.PI * 2);
+      cctx.fillStyle = `rgba(248,113,113,${0.6 + Math.sin(chaosFrame*0.05+i)*0.3})`;
+      cctx.fill();
+    }
+  });
+
+  // 绘制节点
+  NODE_POS.forEach((pos, i) => {
+    const appear = i * 15;
+    if (chaosFrame < appear) return;
+
+    const scale = Math.min(1, (chaosFrame - appear) / 15);
+    const nx = pos.x * W;
+    const ny = pos.y * H;
+    const dept = DEPARTMENTS[i];
+    const isBig = dept.big;
+    const r = (isBig ? 38 : 28) * scale;
+
+    // 外圈
+    cctx.beginPath();
+    cctx.arc(nx, ny, r + 4, 0, Math.PI * 2);
+    cctx.fillStyle = 'rgba(0,0,0,0.6)';
+    cctx.fill();
+
+    // 内圆
+    cctx.beginPath();
+    cctx.arc(nx, ny, r, 0, Math.PI * 2);
+    cctx.fillStyle = dept.color + (isBig ? '30' : '20');
+    cctx.fill();
+    cctx.strokeStyle = dept.color + (phase === 2 ? '60' : (isBig ? 'ee' : 'aa'));
+    cctx.lineWidth = isBig ? 2.5 : 1.5;
+    cctx.stroke();
+
+    // 经理节点外圈光环
+    if (isBig && phase >= 1) {
+      cctx.beginPath();
+      cctx.arc(nx, ny, r + 10, 0, Math.PI * 2);
+      cctx.strokeStyle = dept.color + '20';
+      cctx.lineWidth = 1;
+      cctx.stroke();
+    }
+
+    // 乱麻时抖动
+    if (phase === 2) {
+      const shakeX = Math.sin(chaosFrame * 0.08 + i * 1.5) * 2;
+      const shakeY = Math.cos(chaosFrame * 0.06 + i * 2) * 2;
+      cctx.beginPath();
+      cctx.arc(nx + shakeX, ny + shakeY, r, 0, Math.PI * 2);
+      cctx.fillStyle = dept.color + '15';
+      cctx.fill();
+    }
+
+    // 文字（v18大号字体：节点17px/14px按比例缩放，放大1.5倍）
+    cctx.fillStyle = '#fff';
+    cctx.font = `${isBig ? 'bold ' : ''}${Math.round((isBig ? 22 : 18) * scale)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+    cctx.textAlign = 'center';
+    cctx.textBaseline = 'middle';
+    cctx.fillText(dept.short, nx, ny);
+
+    // 名称（v18大号字体：节点名称18px/15px按比例缩放，放大1.5倍）
+    cctx.fillStyle = '#999';
+    cctx.font = `${Math.round((isBig ? 18 : 15) * scale)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+    cctx.fillText(dept.name, nx, ny + r + (isBig ? 22 : 20));
+  });
+
+  // 中间大标题（阶段0显示，v18大号字体 --text-body: 18px，放大到22px）
+  if (phase === 0) {
+    const titleAlpha = Math.min(1, chaosFrame / 40);
+    cctx.fillStyle = `rgba(248,113,113,${titleAlpha * 0.8})`;
+    cctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+    cctx.textAlign = 'center';
+    cctx.fillText('客户求助 → 直营经理逐个部门人工排查 → 汇总回复客户', W/2, H * 0.18);
+  }
+
+  // 乱麻阶段文字（移到Canvas中间区域，红色圈位置）
+  if (phase === 2) {
+    const alpha = Math.min(1, (chaosFrame - 300) / 60);
+    const flash = 0.5 + Math.sin(chaosFrame * 0.06) * 0.3;
+
+    // 中间区域位置计算（相对于画布中心）
+    const labelW = 320, labelH = 90;
+    const labelX = (W - labelW) / 2;
+    const labelY = (H - labelH) / 2 + 40; // 向下偏移避免遮挡节点
+
+    // 半透明背景防遮挡
+    cctx.fillStyle = `rgba(0,0,0,${alpha * 0.75})`;
+    cctx.beginPath();
+    cctx.roundRect(labelX, labelY, labelW, labelH, 12);
+    cctx.fill();
+
+    // 副标题（v18大号字体 --text-body: 18px，放大到22px）
+    cctx.fillStyle = `rgba(248,113,113,${alpha * flash})`;
+    cctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+    cctx.textAlign = 'center';
+    cctx.fillText('信息多次转办 · 流程冗长', W/2, labelY + 30);
+
+    // 计时器（v18大号字体 --text-h4: 32px，放大到40px）
+    const elapsed = Math.min(70, Math.floor((chaosFrame - 300) / 2.5));
+    cctx.fillStyle = `rgba(248,113,113,${alpha})`;
+    cctx.font = 'bold 40px "PingFang SC","Microsoft YaHei",sans-serif';
+    cctx.textAlign = 'center';
+    cctx.fillText(elapsed + ' 分钟', W/2, labelY + 72);
+  }
+
+  // 停止条件
+  if (chaosFrame > 520) {
+    document.getElementById('chaosOverlay').classList.add('active');
+    return; // 停止动画
+  }
+
+  // 对话气泡按帧触发
+  const BUBBLE_SCHEDULE = [
+    { id: 'cmsg0', frame: 20 },
+    { id: 'cmsg1', frame: 130 },
+    { id: 'cmsg2', frame: 180 },
+    { id: 'cmsg3', frame: 260 },
+    { id: 'cmsg4', frame: 340 },
+    { id: 'cmsg5', frame: 420 },
+  ];
+  BUBBLE_SCHEDULE.forEach(({ id, frame }) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('visible', chaosFrame >= frame && chaosFrame < frame + 120);
+  });
+
+  chaosAnim = requestAnimationFrame(drawChaosFrame);
+}
+
+/* ===== Scene 2: AI流程动画 ===== */
+let aiTimers = [];
+
+function animateAI() {
+  resetAI();
+
+  // 企微消息
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('wechatEntry').classList.add('show');
+  }, 200));
+
+  // AI对话流：展开 + 用户消息
+  aiTimers.push(setTimeout(() => {
+    const flow = document.getElementById('aiDialogFlow');
+    flow.classList.add('open');
+    document.getElementById('dlg0').classList.add('show');
+    // 自动滚动到底部
+    setTimeout(() => { flow.scrollTop = flow.scrollHeight; }, 50);
+  }, 400));
+
+  // AI思考（打字动效 bubble）
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('dlg1').classList.add('show');
+    document.getElementById('aiThink').classList.add('show');
+  }, 750));
+
+  // AI回复1：识别意图
+  aiTimers.push(setTimeout(() => {
+    const dlg1 = document.getElementById('dlg1');
+    dlg1.style.display = 'none';
+    const dlg2 = document.getElementById('dlg2');
+    dlg2.style.display = 'flex';
+    requestAnimationFrame(() => {
+      dlg2.classList.add('show');
+      // 自动滚动
+      const flow = document.getElementById('aiDialogFlow');
+      setTimeout(() => { flow.scrollTop = flow.scrollHeight; }, 50);
+    });
+  }, 1200));
+
+  // 三路同时启动
+  aiTimers.push(setTimeout(() => {
+    ['pc1','pc2','pc3'].forEach((id, i) => {
+      document.getElementById(id).classList.add('running');
+      document.getElementById('ps' + (i+1)).textContent = '调用中';
+    });
+    // 进度条动画
+    startProgressBars();
+  }, 1000));
+
+  // AI回复2（数据汇聚）
+  aiTimers.push(setTimeout(() => {
+    const dlg3 = document.getElementById('dlg3');
+    dlg3.style.display = 'flex';
+    requestAnimationFrame(() => {
+      dlg3.classList.add('show');
+      const flow = document.getElementById('aiDialogFlow');
+      setTimeout(() => { flow.scrollTop = flow.scrollHeight; }, 50);
+    });
+  }, 3900));
+
+  // AI回复3（推送）
+  aiTimers.push(setTimeout(() => {
+    const dlg4 = document.getElementById('dlg4');
+    dlg4.style.display = 'flex';
+    requestAnimationFrame(() => {
+      dlg4.classList.add('show');
+      const flow = document.getElementById('aiDialogFlow');
+      setTimeout(() => { flow.scrollTop = flow.scrollHeight; }, 50);
+    });
+  }, 5200));
+
+  // 日志逐行出现
+  [0,1,2,3,4,5,6].forEach((l, i) => {
+    aiTimers.push(setTimeout(() => {
+      document.getElementById('log' + l).classList.add('show');
+    }, 1200 + i * 350));
+  });
+
+  // Card 1 完成
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('pc1').classList.remove('running');
+    document.getElementById('pc1').classList.add('done');
+    document.getElementById('pr1').textContent = '✓ 批次#20260328009 成功，¥248万';
+    document.getElementById('ps1').textContent = '✓ 完成';
+    document.getElementById('pb1').style.width = '100%';
+  }, 2800));
+
+  // Card 2 完成
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('pc2').classList.remove('running');
+    document.getElementById('pc2').classList.add('done');
+    document.getElementById('pr2').textContent = '✓ 代发¥12,800已入账，无异常';
+    document.getElementById('ps2').textContent = '✓ 完成';
+    document.getElementById('pb2').style.width = '100%';
+  }, 3200));
+
+  // Card 3 完成
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('pc3').classList.remove('running');
+    document.getElementById('pc3').classList.add('done');
+    document.getElementById('pr3').textContent = '⚠ 二类卡限额99.25%，即将满额';
+    document.getElementById('ps3').textContent = '✓ 完成';
+    document.getElementById('pb3').style.width = '100%';
+  }, 3600));
+
+  // AI思考关闭
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('aiThink').classList.remove('show');
+  }, 3800));
+
+  // 合并诊断
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('mergeBar').classList.add('show');
+  }, 4200));
+
+  // 结果推送
+  aiTimers.push(setTimeout(() => {
+    document.getElementById('resultPush').classList.add('show');
+    document.getElementById('tbStatus').textContent = '诊断完成';
+  }, 5500));
+}
+
+function startProgressBars() {
+  // 模拟进度条
+  let p1 = 0, p2 = 0, p3 = 0;
+  const iv = setInterval(() => {
+    p1 = Math.min(95, p1 + Math.random() * 8 + 2);
+    p2 = Math.min(93, p2 + Math.random() * 7 + 2);
+    p3 = Math.min(96, p3 + Math.random() * 9 + 2);
+    const c1 = document.getElementById('pc1');
+    if (c1 && !c1.classList.contains('done')) document.getElementById('pb1').style.width = p1 + '%';
+    const c2 = document.getElementById('pc2');
+    if (c2 && !c2.classList.contains('done')) document.getElementById('pb2').style.width = p2 + '%';
+    const c3 = document.getElementById('pc3');
+    if (c3 && !c3.classList.contains('done')) document.getElementById('pb3').style.width = p3 + '%';
+    if (c1.classList.contains('done') && c2.classList.contains('done') && c3.classList.contains('done')) {
+      clearInterval(iv);
+    }
+  }, 200);
+  aiTimers.push(iv);
+}
+
+function resetAI() {
+  aiTimers.forEach(t => { clearTimeout(t); clearInterval(t); });
+  aiTimers = [];
+  document.getElementById('wechatEntry').classList.remove('show');
+  document.getElementById('aiThink').classList.remove('show');
+  document.getElementById('mergeBar').classList.remove('show');
+  document.getElementById('resultPush').classList.remove('show');
+  ['pc1','pc2','pc3'].forEach((id) => {
+    const el = document.getElementById(id);
+    el.classList.remove('running','done');
+  });
+  [1,2,3].forEach(i => {
+    document.getElementById('pb' + i).style.width = '0';
+    document.getElementById('pr' + i).textContent = '等待调用...';
+    document.getElementById('ps' + i).textContent = '●';
+  });
+  [0,1,2,3,4,5,6].forEach(i => {
+    document.getElementById('log' + i).classList.remove('show');
+  });
+  // 重置对话流
+  document.getElementById('aiDialogFlow').classList.remove('open');
+  ['dlg0','dlg1','dlg2','dlg3','dlg4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('show');
+    if (id !== 'dlg0' && id !== 'dlg1') el.style.display = 'none';
+    else el.style.display = '';
+  });
+  document.getElementById('dlg1').style.display = '';
+  document.getElementById('tbStatus').textContent = '就绪';
+}
+
+/* ===== 场景管理 ===== */
+const TOTAL_SCENES = 3;
+let currentScene = 0;
+let isPlaying = false;
+let playTimer = null;
+const SCENE_DURATIONS = [2500, 7000, 7000, 4000];
+
+function showScene(n) {
+  // 停止之前的动画
+  if (chaosAnim) { cancelAnimationFrame(chaosAnim); chaosAnim = null; }
+  if (currentScene === 1) chaosFrame = 0;
+  document.getElementById('chaosOverlay').classList.remove('active');
+  resetAI();
+
+  document.querySelectorAll('.scene').forEach((s, i) => {
+    s.classList.toggle('active', i === n);
+  });
+  document.querySelectorAll('.c-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === n);
+    d.classList.toggle('done', i < n);
+  });
+  document.getElementById('progTxt').textContent = `${n} / ${TOTAL_SCENES}`;
+  document.getElementById('progInner').style.width = `${(n / TOTAL_SCENES) * 100}%`;
+  document.getElementById('prevBtn').disabled = n === 0;
+  document.getElementById('nextBtn').disabled = n === TOTAL_SCENES;
+  currentScene = n;
+
+  if (n === 1) {
+    resizeChaos();
+    chaosFrame = 0;
+    chaosAnim = requestAnimationFrame(drawChaosFrame);
+  }
+  if (n === 2) {
+    setTimeout(animateAI, 300);
+  }
+}
+
+/* 自动播放 */
+function autoAdvance() {
+  const dur = SCENE_DURATIONS[currentScene] || 3000;
+  playTimer = setTimeout(() => {
+    if (currentScene < TOTAL_SCENES) {
+      showScene(currentScene + 1);
+      autoAdvance();
+    } else {
+      stopPlay();
+    }
+  }, dur);
+}
+
+function startPlay() {
+  isPlaying = true;
+  document.getElementById('playBtn').textContent = '⏸';
+  autoAdvance();
+}
+
+function stopPlay() {
+  isPlaying = false;
+  document.getElementById('playBtn').textContent = '▶';
+  clearTimeout(playTimer);
+}
+
+document.getElementById('playBtn').addEventListener('click', () => {
+  if (isPlaying) stopPlay();
+  else {
+    if (currentScene >= TOTAL_SCENES) { showScene(0); setTimeout(startPlay, 200); }
+    else startPlay();
+  }
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  stopPlay(); if (currentScene > 0) showScene(currentScene - 1);
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  stopPlay(); if (currentScene < TOTAL_SCENES) showScene(currentScene + 1);
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  stopPlay();
+  showScene(0);
+});
+
+document.querySelectorAll('.c-dot').forEach((d) => {
+  d.addEventListener('click', () => { stopPlay(); showScene(parseInt(d.dataset.scene)); });
+});
+
+document.addEventListener('keydown', e => {
+  // 只转发上下翻页键给父窗口
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='PageDown'||e.key==='PageUp'){
+    try{window.parent.postMessage({type:'iframeKeydown',key:e.key},'*');}catch(err){}
+  }
+  // 左右箭头在内部处理
+  if (e.code === 'Space') { e.preventDefault(); document.getElementById('playBtn').click(); }
+  else if (e.code === 'ArrowLeft') document.getElementById('prevBtn').click();
+  else if (e.code === 'ArrowRight') document.getElementById('nextBtn').click();
+  else if (e.code === 'KeyR') document.getElementById('resetBtn').click();
+});
+
+/* 窗口resize */
+window.addEventListener('resize', () => {
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
+  if (currentScene === 1) resizeChaos();
+});
+
+/* 字体大小同步 */
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+  // 可见性控制
+  if (e.data && e.data.type === 'visibility') {
+    if (e.data.visible) { resumeAnimations(); }
+    else { pauseAnimations(); }
+  }
+});
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>

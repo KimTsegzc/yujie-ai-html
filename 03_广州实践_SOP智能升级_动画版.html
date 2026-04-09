@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>内容创作智能化 · AI赋能团队</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --gold: var(--gold);
+  --gold-bright: var(--gold);
+  --gold-dim: rgba(201,168,76,0.15);
+  --red: var(--red);
+  --green: var(--green);
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --bg: var(--bg);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+}
+
+/* ===== CANVAS BG ===== */
+#bgCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* ===== LAYOUT ===== */
+.page {
+  position: relative; z-index: 10;
+  width: 1440px; height: 1080px;
+  display: grid;
+  grid-template-rows: 72px 1fr 58px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 0 48px;
+  display: flex; align-items: center; gap: 20px;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.h-label {
+  font-size: var(--text-sm); letter-spacing: 4px; color: var(--gold);
+  margin-bottom: 3px;
+}
+.h-title {
+  font-size: var(--current-3xl); font-weight: 200; letter-spacing: 1px;
+}
+.h-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.h-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+/* ===== SCENE DOTS ===== */
+.scene-dots { display: flex; gap: 8px; align-items: center; }
+.sdot {
+  width: 28px; height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.4s; cursor: pointer;
+}
+.sdot.active { background: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.5); width: 44px; }
+.sdot.done { background: rgba(201,168,76,0.3); }
+
+.scene-label {
+  font-size: var(--current-md); color: #555; letter-spacing: 2px;
+}
+
+/* ===== MAIN ===== */
+.main { position: relative; overflow: hidden; }
+
+/* ===== SCENES ===== */
+.scene {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 40px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.scene.active { opacity: 1; pointer-events: auto; }
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid rgba(201,168,76,0.08);
+  padding: 0 48px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ctrl-btn {
+  padding: 7px 20px; border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent; color: var(--gold);
+  font-size: var(--text-body); cursor: pointer;
+  transition: all 0.3s; font-family: inherit;
+  letter-spacing: 1px;
+}
+.ctrl-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+.ctrl-btn.primary { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+.prog-track { flex: 1; max-width: 200px; height: 2px; background: rgba(255,255,255,0.05); border-radius: 1px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); transition: width 0.5s; }
+.footer-info { margin-left: auto; font-size: var(--current-md); color: #444; letter-spacing: 2px; }
+
+/* ============================================================
+   SCENE 0: RADAR SCAN → TEAM MEMBER REVEAL
+   ============================================================ */
+#scene0 { flex-direction: column; gap: 0; }
+
+.s0-title {
+  font-size: var(--text-body); letter-spacing: 5px; color: var(--gold);
+  text-align: center; margin-bottom: 14px;
+  opacity: 0; animation: fadeUp 0.5s 0.2s forwards;
+}
+
+.s0-grid {
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr;
+  gap: 0; width: 100%; max-width: 1120px;
+}
+
+/* Side panels */
+.s0-panel {
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.s0-panel-hd {
+  padding: 14px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.s0-panel.old .s0-panel-hd {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.s0-panel.new .s0-panel-hd {
+  background: rgba(201,168,76,0.06);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.s0-panel-hd-tag {
+  font-size: var(--current-base); letter-spacing: 3px; padding: 3px 8px;
+  border-radius: 4px; font-weight: 500;
+}
+.s0-panel.old .s0-panel-hd-tag {
+  background: rgba(255,255,255,0.05);
+  color: #777;
+}
+.s0-panel.new .s0-panel-hd-tag {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold);
+}
+.s0-panel-hd-title { font-size: var(--text-h4); font-weight: 300; }
+.s0-panel-body {
+  flex: 1; padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.s0-panel.old { background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.06); }
+.s0-panel.new { background: rgba(201,168,76,0.02); border: 1px solid rgba(201,168,76,0.12); }
+
+/* Member rows */
+.m-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 13px; border-radius: 10px;
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity 0.4s, transform 0.4s;
+  position: relative; overflow: hidden;
+}
+.m-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 2px 0 0 2px;
+  opacity: 0; transition: opacity 0.4s;
+}
+.m-row.show { opacity: 1; transform: translateX(0); }
+.m-row.show::before { opacity: 1; }
+
+.s0-panel.old .m-row {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.s0-panel.old .m-row::before { background: #555; }
+
+.s0-panel.new .m-row {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.1);
+}
+.s0-panel.new .m-row::before { background: var(--gold); }
+.s0-panel.new .m-row.ai-member::before { background: var(--blue); }
+
+.m-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-xl); flex-shrink: 0;
+}
+.s0-panel.old .m-icon {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+}
+.s0-panel.new .m-icon.human {
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+}
+.s0-panel.new .m-icon.ai-icon {
+  background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3);
+}
+.m-info { flex: 1; }
+.m-name { font-size: var(--current-lg); font-weight: 500; }
+.m-role { font-size: var(--text-sm); color: #666; margin-top: 1px; }
+.m-tag {
+  font-size: var(--current-base); padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+.tag-cost { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+.tag-token { background: rgba(96,165,250,0.1); color: var(--blue); border: 1px solid rgba(96,165,250,0.2); }
+.tag-core { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+
+/* Totals */
+.s0-total {
+  margin: 8px 16px 14px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  opacity: 0; transition: opacity 0.5s 0.8s;
+}
+.s0-total.show { opacity: 1; }
+.s0-panel.old .s0-total { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.15); }
+.s0-panel.new .s0-total { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.15); }
+.s0-total-label { font-size: var(--current-md); color: #777; }
+.s0-total-val { font-size: var(--text-h3); font-weight: 300; }
+.s0-panel.old .s0-total-val { color: var(--red); }
+.s0-panel.new .s0-total-val { color: var(--green); }
+
+/* VS divider */
+.s0-vs {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+}
+.vs-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-lg); font-weight: 200; color: #555; letter-spacing: 1px;
+  background: rgba(201,168,76,0.02);
+}
+.vs-line {
+  flex: 1; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(201,168,76,0.15), transparent);
+}
+
+/* ============================================================
+   SCENE 1: THOUSAND-IN-ONE 动态流程演示
+   ============================================================ */
+#scene1 { flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+#funnelCanvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* 顶部标题 */
+.s1-header {
+  position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+  font-size: var(--text-body); letter-spacing: 5px; color: var(--gold);
+  opacity: 0; animation: none;
+  z-index: 10;
+}
+.s1-header.show { animation: fadeUp 0.5s forwards; }
+
+/* 中央舞台区域 */
+.s1-stage-area {
+  position: relative;
+  width: 100%; max-width: 1100px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 步骤指示器 */
+.s1-step-indicator {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px;
+  z-index: 10;
+}
+.s1-step-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.4s;
+}
+.s1-step-dot.active { background: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+.s1-step-dot.done { background: rgba(201,168,76,0.4); }
+
+/* 各步骤容器 */
+.s1-step {
+  position: absolute;
+  inset: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+.s1-step.active { opacity: 1; pointer-events: auto; }
+
+/* 步骤标题 */
+.s1-step-title {
+  font-size: var(--text-h4); font-weight: 300; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 30px;
+  text-align: center;
+}
+.s1-step-title .step-num {
+  display: inline-block;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
+  font-size: var(--current-md); line-height: 30px; text-align: center;
+  margin-right: 12px; vertical-align: middle;
+}
+
+/* ===== STEP 1: 团队提创意 ===== */
+.s1-team-members {
+  display: flex; gap: 30px;
+  margin-bottom: 30px;
+}
+.s1-member {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.5s;
+}
+.s1-member.show { opacity: 1; transform: translateY(0); }
+.s1-member-icon {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-2xl2);
+}
+.s1-member-name { font-size: var(--text-sm); color: #aaa; }
+.s1-ideas-flow {
+  display: flex; gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
+}
+.s1-idea-bubble {
+  padding: 10px 18px; border-radius: 20px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  font-size: var(--current-base); color: #ccc;
+  opacity: 0; transform: scale(0.8);
+  transition: all 0.4s;
+}
+.s1-idea-bubble.show {
+  opacity: 1; transform: scale(1);
+  background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25);
+  color: var(--gold-bright);
+}
+
+/* ===== STEP 2: AI批量生成 ===== */
+.s1-ai-generator {
+  display: flex; align-items: center; gap: 40px;
+}
+.s1-ai-core {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(96,165,250,0.3), rgba(96,165,250,0.08));
+  border: 2px solid rgba(96,165,250,0.4);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: var(--current-3xl2);
+  position: relative;
+  animation: aiPulse 2s infinite;
+}
+@keyframes aiPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(96,165,250,0.3); }
+  50% { box-shadow: 0 0 40px rgba(96,165,250,0.6); }
+}
+.s1-ai-core::before {
+  content: ''; position: absolute; inset: -10px;
+  border-radius: 50%;
+  border: 1px dashed rgba(96,165,250,0.3);
+  animation: spin 10s linear infinite;
+}
+.s1-ai-label { font-size: var(--text-sm); color: var(--blue); margin-top: 4px; }
+.s1-output-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  width: 280px;
+}
+.s1-output-cell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-xl);
+  opacity: 0; transform: scale(0);
+  transition: all 0.3s;
+}
+.s1-output-cell.show {
+  opacity: 1; transform: scale(1);
+  background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.25);
+}
+.s1-batch-counter {
+  position: absolute; bottom: 60px;
+  font-size: var(--current-lg); color: var(--green);
+  opacity: 0; transition: opacity 0.5s;
+}
+.s1-batch-counter.show { opacity: 1; }
+
+/* ===== STEP 3: AI海选 ===== */
+.s1-filter-container {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 25px;
+}
+.s1-filter-visual {
+  display: flex; align-items: center; gap: 30px;
+}
+.s1-filter-input {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  width: 200px; min-height: 80px;
+  padding: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+.s1-filter-chip {
+  padding: 4px 10px; border-radius: 12px;
+  background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2);
+  font-size: var(--current-sm); color: var(--green);
+  opacity: 0; transform: translateX(-20px);
+  transition: all 0.3s;
+}
+.s1-filter-chip.show { opacity: 1; transform: translateX(0); }
+.s1-filter-chip.eliminated {
+  background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.2);
+  color: var(--red);
+  opacity: 0.3;
+}
+.s1-filter-funnel {
+  width: 80px; height: 100px;
+  position: relative;
+}
+.s1-filter-funnel svg { width: 100%; height: 100%; }
+.s1-filter-output {
+  display: flex; flex-direction: column; gap: 8px;
+  width: 120px;
+}
+.s1-top-chip {
+  padding: 8px 12px; border-radius: 8px;
+  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+  font-size: var(--text-sm); color: var(--gold-bright); text-align: center;
+  opacity: 0; transform: translateY(-15px);
+  transition: all 0.4s;
+}
+.s1-top-chip.show { opacity: 1; transform: translateY(0); }
+.s1-filter-stats {
+  display: flex; gap: 60px;
+  font-size: var(--text-sm);
+  margin-top: 10px;
+}
+.s1-stat { text-align: center; min-width: 80px; }
+.s1-stat-num { font-size: var(--current-3xl2); font-weight: 200; line-height: 1.2; }
+.s1-stat-num.in { color: var(--green); }
+.s1-stat-num.out { color: var(--gold-bright); }
+.s1-stat-label { font-size: var(--current-base); color: #666; margin-top: 8px; }
+
+/* ===== STEP 4: 人工精选 ===== */
+.s1-human-pick {
+  display: flex; align-items: center; gap: 50px;
+}
+.s1-candidates {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.s1-candidate-card {
+  width: 180px; padding: 14px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; transform: translateX(-30px);
+  transition: all 0.4s;
+}
+.s1-candidate-card.show { opacity: 1; transform: translateX(0); }
+.s1-candidate-card.selected {
+  background: rgba(201,168,76,0.12); border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201,168,76,0.2);
+}
+.s1-candidate-card.rejected { opacity: 0.2; }
+.s1-candidate-icon { font-size: var(--current-2xl); }
+.s1-candidate-info { flex: 1; }
+.s1-candidate-title { font-size: var(--current-base); color: #ddd; }
+.s1-candidate-score { font-size: var(--current-sm); color: #888; margin-top: 2px; }
+.s1-candidate-check {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-base); color: var(--gold);
+  opacity: 0; transform: scale(0);
+  transition: all 0.3s;
+}
+.s1-candidate-card.selected .s1-candidate-check { opacity: 1; transform: scale(1); }
+.s1-human-avatar {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+}
+.s1-human-icon {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(201,168,76,0.15); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-3xl);
+}
+.s1-human-label { font-size: var(--current-base); color: var(--gold); }
+
+/* ===== STEP 5: 最终结果 ===== */
+.s1-result {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 20px;
+}
+.s1-result-crown {
+  font-size: var(--current-4xl);
+  opacity: 0; transform: translateY(-20px);
+  transition: all 0.5s;
+}
+.s1-result-crown.show { opacity: 1; transform: translateY(0); }
+.s1-result-card {
+  padding: 30px 50px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 16px;
+  text-align: center;
+  opacity: 0; transform: scale(0.9);
+  transition: all 0.6s;
+}
+.s1-result-card.show { opacity: 1; transform: scale(1); }
+.s1-result-num {
+  font-size: var(--text-hero); /* 75.9px */ font-weight: 100;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,168,76,0.6);
+  letter-spacing: -2px;
+}
+.s1-result-label {
+  font-size: var(--current-2xl2); letter-spacing: 8px;
+  color: var(--gold); margin-top: 10px;
+}
+.s1-result-sub {
+  font-size: var(--text-sm); color: #888; margin-top: 15px;
+  letter-spacing: 1px;
+}
+.s1-result-stats {
+  display: flex; gap: 50px;
+  margin-top: 25px;
+  opacity: 0;
+  transition: opacity 0.5s 0.3s;
+}
+.s1-result-stats.show { opacity: 1; }
+.s1-result-stat { text-align: center; }
+.s1-result-stat-val { font-size: var(--current-2xl); color: var(--gold-bright); }
+.s1-result-stat-label { font-size: var(--text-sm); color: #666; margin-top: 4px; }
+
+/* 自动播放控制 */
+.s1-auto-controls {
+  position: absolute; bottom: 20px;
+  display: flex; gap: 15px;
+  opacity: 0.6;
+}
+.s1-auto-btn {
+  padding: 6px 16px; border-radius: 16px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent; color: var(--gold);
+  font-size: var(--text-sm); cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+.s1-auto-btn:hover { background: rgba(201,168,76,0.1); }
+
+/* ============================================================
+   SCENE 2: COST EXPLOSION (爆破效果)
+   ============================================================ */
+#scene2 { gap: 20px; flex-direction: column; }
+.s2-title-area { text-align: center; flex-shrink: 0; }
+.s2-sup { font-size: var(--current-md); letter-spacing: 4px; color: var(--gold); margin-bottom: 6px; }
+.s2-main-title { font-size: var(--text-h3); font-weight: 200; }
+.s2-main-title em { color: var(--gold); font-style: normal; font-weight: 400; }
+
+.s2-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px; width: 100%; max-width: 1000px;
+  align-items: start;
+}
+
+/* Left: animated bar comparison */
+.s2-bars { display: flex; flex-direction: column; gap: 14px; }
+.s2-bar-group {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.s2-bar-label {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: var(--text-body); color: #999;
+}
+.s2-bar-value { font-size: var(--current-lg); font-weight: 500; }
+.s2-bar-old-val { color: var(--red); }
+.s2-bar-new-val { color: var(--green); }
+
+.s2-bar-track {
+  height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  position: relative; overflow: hidden;
+}
+.s2-bar-fill {
+  height: 100%; border-radius: 8px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 12px; font-size: var(--text-body); font-weight: 500;
+  width: 0; transition: width 1.4s cubic-bezier(0.22,0.61,0.36,1);
+  position: relative; overflow: hidden;
+}
+.s2-bar-fill::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: shimmer 2s 1.5s infinite;
+}
+@keyframes shimmer { to { left: 200%; } }
+
+.s2-bar-fill.old-fill {
+  background: linear-gradient(90deg, rgba(248,113,113,0.08), rgba(248,113,113,0.22));
+  color: var(--red);
+}
+.s2-bar-fill.new-fill {
+  background: linear-gradient(90deg, rgba(74,222,128,0.08), rgba(74,222,128,0.22));
+  color: var(--green);
+}
+
+/* Right: metrics explosion cards */
+.s2-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.s2-metric {
+  padding: 18px; border-radius: 14px;
+  text-align: center;
+  opacity: 0; transform: scale(0.85);
+  transition: opacity 0.5s, transform 0.5s;
+  position: relative; overflow: hidden;
+}
+.s2-metric::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 14px;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 70%);
+}
+.s2-metric.show { opacity: 1; transform: scale(1); }
+
+.s2-metric.m-save {
+  background: rgba(74,222,128,0.05); border: 1px solid rgba(74,222,128,0.18);
+}
+.s2-metric.m-speed {
+  background: rgba(96,165,250,0.05); border: 1px solid rgba(96,165,250,0.18);
+}
+.s2-metric.m-volume {
+  background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.18);
+}
+.s2-metric.m-scale {
+  background: rgba(168,85,247,0.05); border: 1px solid rgba(168,85,247,0.18);
+}
+
+.s2-metric-val { font-size: var(--text-3xl); /* 56.9px */ font-weight: 100; line-height: 1; }
+.s2-metric-unit { font-size: var(--text-body); }
+.s2-metric.m-save .s2-metric-val { color: var(--green); }
+.s2-metric.m-speed .s2-metric-val { color: var(--blue); }
+.s2-metric.m-volume .s2-metric-val { color: var(--gold-bright); }
+.s2-metric.m-scale .s2-metric-val { color: var(--purple); }
+.s2-metric-label { font-size: var(--current-md); color: #777; margin-top: 6px; }
+
+/* ============================================================
+   SCENE 3: AI TEAM ASSEMBLY (钢铁侠组装)
+   ============================================================ */
+#scene3 { gap: 0; flex-direction: column; align-items: center; justify-content: center; }
+#assemblyCanvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.s3-overlay {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  gap: 16px;
+}
+.s3-title {
+  font-size: var(--text-body); letter-spacing: 5px; color: var(--gold);
+  opacity: 0;
+}
+.s3-title.show { opacity: 1; transition: opacity 0.5s; }
+
+/* AI Agent cards flying in */
+.s3-agents {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  justify-content: center; max-width: 900px;
+}
+.s3-agent {
+  width: 160px; padding: 20px 14px;
+  border-radius: 14px; text-align: center;
+  opacity: 0; transform: translateY(-60px) scale(0.6);
+  transition: opacity 0.5s, transform 0.5s;
+  position: relative; overflow: hidden;
+  cursor: default;
+}
+.s3-agent.landed { opacity: 1; transform: translateY(0) scale(1); }
+
+.s3-agent::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.s3-agent-0 { background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.2); }
+.s3-agent-0::before { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+.s3-agent-1 { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); }
+.s3-agent-1::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.s3-agent-2 { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); }
+.s3-agent-2::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.s3-agent-3 { background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); }
+.s3-agent-3::before { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.s3-agent-4 { background: rgba(251,146,60,0.06); border: 1px solid rgba(251,146,60,0.2); }
+.s3-agent-4::before { background: linear-gradient(90deg, transparent, #fb923c, transparent); }
+
+.s3-agent-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-h3); margin: 0 auto 10px;
+}
+.s3-agent-0 .s3-agent-icon { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3); }
+.s3-agent-1 .s3-agent-icon { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); }
+.s3-agent-2 .s3-agent-icon { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.3); }
+.s3-agent-3 .s3-agent-icon { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); }
+.s3-agent-4 .s3-agent-icon { background: rgba(251,146,60,0.12); border: 1px solid rgba(251,146,60,0.3); }
+
+.s3-agent-name { font-size: var(--text-body); font-weight: 500; margin-bottom: 4px; }
+.s3-agent-desc { font-size: var(--text-sm); color: #777; line-height: 1.4; }
+.s3-agent-status {
+  margin-top: 8px; font-size: var(--current-base); letter-spacing: 1px;
+  padding: 2px 6px; border-radius: 6px; display: inline-block;
+  opacity: 0; transition: opacity 0.3s 0.3s;
+}
+.s3-agent.landed .s3-agent-status { opacity: 1; }
+.s3-agent-0 .s3-agent-status { background: rgba(96,165,250,0.1); color: var(--blue); }
+.s3-agent-1 .s3-agent-status { background: rgba(201,168,76,0.1); color: var(--gold); }
+.s3-agent-2 .s3-agent-status { background: rgba(74,222,128,0.1); color: var(--green); }
+.s3-agent-3 .s3-agent-status { background: rgba(168,85,247,0.1); color: var(--purple); }
+.s3-agent-4 .s3-agent-status { background: rgba(251,146,60,0.1); color: #fb923c; }
+
+/* Big reveal text */
+.s3-reveal {
+  text-align: center;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.s3-reveal.show { opacity: 1; transform: translateY(0); }
+.s3-reveal-title { font-size: var(--current-3xl2); font-weight: 200; letter-spacing: 2px; }
+.s3-reveal-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.s3-reveal-sub { font-size: var(--current-lg); color: #666; margin-top: 6px; letter-spacing: 1px; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes scanLine {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(200%); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  html, body { height: auto !important; overflow: visible !important; }
+  .page { height: auto !important; min-height: 1080px; grid-template-rows: auto 1fr auto; }
+  .header { padding: 14px 20px; }
+  .h-title { font-size: clamp(22px, 5vw, 32px); }
+  .main { min-height: 80vh; position: relative; }
+  .scene { padding: 16px 20px; position: relative; min-height: auto; }
+  .s0-grid { grid-template-columns: 1fr; gap: 12px; }
+  .s0-vs { flex-direction: row; padding: 4px 0; }
+  .vs-line { width: 40px; height: 1px; flex: none; }
+  .s2-content { grid-template-columns: 1fr; gap: 16px; }
+  .s2-metrics { grid-template-columns: 1fr 1fr; }
+  .s3-agents { gap: 10px; }
+  .s3-agent { width: 130px; padding: 14px 10px; }
+  .footer { padding: 10px 20px; flex-wrap: wrap; }
+  .footer-info { margin-left: 0; }
+}
+
+@media (max-width: 480px) {
+  .s0-panel-body { gap: 6px; }
+  .m-row { padding: 7px 10px; }
+  .m-name { font-size: var(--current-md); }
+  .m-role { font-size: var(--current-base); }
+  .s2-metric-val { font-size: var(--text-h2); }
+  .s2-metric-label { font-size: var(--current-base); }
+  .s3-agent { width: 110px; }
+  .s3-agent-icon { width: 42px; height: 42px; font-size: var(--current-xl); }
+  .s3-agent-name { font-size: var(--text-sm); }
+  .s3-agent-desc { font-size: var(--text-sm); }
+}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div>
+      <div class="h-label">PART 03 · 广州实践</div>
+      <div class="h-title"><em>内容创作</em>智能化</div>
+    </div>
+    <div class="h-right">
+      <div class="scene-dots">
+        <div class="sdot active" data-idx="0"></div>
+        <div class="sdot" data-idx="1"></div>
+        <div class="sdot" data-idx="2"></div>
+        <div class="sdot" data-idx="3"></div>
+      </div>
+      <div class="scene-label" id="sceneLabel">01 / 04</div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+
+    <!-- ============================
+         SCENE 0: TEAM COMPARISON
+         ============================ -->
+    <div class="scene active" id="scene0">
+      <div style="width:100%;max-width:1120px;display:flex;flex-direction:column;gap:12px;">
+        <div class="s0-title">TEAM STRUCTURE COMPARISON</div>
+        <div class="s0-grid">
+
+          <!-- OLD TEAM -->
+          <div class="s0-panel old">
+            <div class="s0-panel-hd">
+              <div class="s0-panel-hd-tag">TRADITIONAL</div>
+              <div class="s0-panel-hd-title">传统内容团队</div>
+            </div>
+            <div class="s0-panel-body" id="oldMembers">
+              <div class="m-row" data-delay="0" data-side="old">
+                <div class="m-icon">🎨</div>
+                <div class="m-info"><div class="m-name">内部美工 ×4</div><div class="m-role">视觉设计、Banner制作</div></div>
+                <div class="m-tag tag-cost">约140万/年</div>
+              </div>
+              <div class="m-row" data-delay="120" data-side="old">
+                <div class="m-icon">✍️</div>
+                <div class="m-info"><div class="m-name">内部文案 ×2</div><div class="m-role">活动文案、推送撰写</div></div>
+                <div class="m-tag tag-cost">约70万/年</div>
+              </div>
+              <div class="m-row" data-delay="240" data-side="old">
+                <div class="m-icon">📋</div>
+                <div class="m-info"><div class="m-name">内部策划 ×1</div><div class="m-role">活动策划、执行落地</div></div>
+                <div class="m-tag tag-cost">约35万/年</div>
+              </div>
+              <div class="m-row" data-delay="360" data-side="old">
+                <div class="m-icon">🌐</div>
+                <div class="m-info"><div class="m-name">外包美工</div><div class="m-role">高端视觉、品牌设计</div></div>
+                <div class="m-tag tag-cost">30万/年</div>
+              </div>
+              <div class="m-row" data-delay="480" data-side="old">
+                <div class="m-icon">📝</div>
+                <div class="m-info"><div class="m-name">外包文案</div><div class="m-role">品牌文案、专题策划</div></div>
+                <div class="m-tag tag-cost">20万/年</div>
+              </div>
+              <div class="m-row" data-delay="600" data-side="old">
+                <div class="m-icon">🎬</div>
+                <div class="m-info"><div class="m-name">外包视频</div><div class="m-role">短视频拍摄与剪辑</div></div>
+                <div class="m-tag tag-cost">25万/年</div>
+              </div>
+            </div>
+            <div class="s0-total" id="oldTotal">
+              <span class="s0-total-label">年度人力成本（含外包）</span>
+              <span class="s0-total-val">约 320万+</span>
+            </div>
+          </div>
+
+          <!-- VS -->
+          <div class="s0-vs">
+            <div class="vs-line"></div>
+            <div class="vs-circle">VS</div>
+            <div class="vs-line"></div>
+          </div>
+
+          <!-- NEW TEAM -->
+          <div class="s0-panel new">
+            <div class="s0-panel-hd">
+              <div class="s0-panel-hd-tag">AI-POWERED</div>
+              <div class="s0-panel-hd-title">AI赋能内容团队</div>
+            </div>
+            <div class="s0-panel-body" id="newMembers">
+              <div class="m-row" data-delay="700" data-side="new">
+                <div class="m-icon human">🎯</div>
+                <div class="m-info"><div class="m-name">美术总监</div><div class="m-role">创意方向把控·质量审核</div></div>
+                <div class="m-tag tag-core">核心人才</div>
+              </div>
+              <div class="m-row" data-delay="820" data-side="new">
+                <div class="m-icon human">💡</div>
+                <div class="m-info"><div class="m-name">资深策划</div><div class="m-role">策略制定·人工精选</div></div>
+                <div class="m-tag tag-core">核心人才</div>
+              </div>
+              <div class="m-row ai-member" data-delay="940" data-side="new">
+                <div class="m-icon ai-icon">🤖</div>
+                <div class="m-info"><div class="m-name">AI视觉智能体</div><div class="m-role">Banner、海报、视频批量生成</div></div>
+                <div class="m-tag tag-token">Token计费</div>
+              </div>
+              <div class="m-row ai-member" data-delay="1060" data-side="new">
+                <div class="m-icon ai-icon">🤖</div>
+                <div class="m-info"><div class="m-name">AI文案智能体</div><div class="m-role">推送、活动文案自动撰写</div></div>
+                <div class="m-tag tag-token">Token计费</div>
+              </div>
+              <div class="m-row ai-member" data-delay="1180" data-side="new">
+                <div class="m-icon ai-icon">🤖</div>
+                <div class="m-info"><div class="m-name">AI评审智能体</div><div class="m-role">方案海选·Top10筛选</div></div>
+                <div class="m-tag tag-token">Token计费</div>
+              </div>
+              <div class="m-row ai-member" data-delay="1300" data-side="new">
+                <div class="m-icon ai-icon">🤖</div>
+                <div class="m-info"><div class="m-name">AI数据智能体</div><div class="m-role">受众分析·效果追踪反馈</div></div>
+                <div class="m-tag tag-token">Token计费</div>
+              </div>
+            </div>
+            <div class="s0-total" id="newTotal">
+              <span class="s0-total-label">年度成本（人力 + Token）</span>
+              <span class="s0-total-val">约 80万</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         SCENE 1: THOUSAND-IN-ONE 动态流程演示
+         ============================ -->
+    <div class="scene" id="scene1">
+      <canvas id="funnelCanvas"></canvas>
+      <div class="s1-header" id="s1Header">千里挑一 · 创意生产流程</div>
+      
+      <div class="s1-stage-area">
+        <!-- 步骤指示器 -->
+        <div class="s1-step-indicator" id="stepIndicator">
+          <div class="s1-step-dot active"></div>
+          <div class="s1-step-dot"></div>
+          <div class="s1-step-dot"></div>
+          <div class="s1-step-dot"></div>
+          <div class="s1-step-dot"></div>
+        </div>
+
+        <!-- STEP 1: 团队提创意 -->
+        <div class="s1-step active" id="step1">
+          <div class="s1-step-title"><span class="step-num">1</span>团队成员各提创意方向</div>
+          <div class="s1-team-members">
+            <div class="s1-member" data-delay="0">
+              <div class="s1-member-icon">🎨</div>
+              <div class="s1-member-name">美术总监</div>
+            </div>
+            <div class="s1-member" data-delay="150">
+              <div class="s1-member-icon">✍️</div>
+              <div class="s1-member-name">资深策划</div>
+            </div>
+            <div class="s1-member" data-delay="300">
+              <div class="s1-member-icon">💡</div>
+              <div class="s1-member-name">创意专员</div>
+            </div>
+          </div>
+          <div class="s1-ideas-flow" id="ideasFlow">
+            <div class="s1-idea-bubble" data-delay="500">春季理财主题</div>
+            <div class="s1-idea-bubble" data-delay="650">年轻人投资</div>
+            <div class="s1-idea-bubble" data-delay="800">家庭财富规划</div>
+            <div class="s1-idea-bubble" data-delay="950">养老理财</div>
+            <div class="s1-idea-bubble" data-delay="1100">数字化银行</div>
+            <div class="s1-idea-bubble" data-delay="1250">绿色金融</div>
+          </div>
+        </div>
+
+        <!-- STEP 2: AI批量生成 -->
+        <div class="s1-step" id="step2">
+          <div class="s1-step-title"><span class="step-num">2</span>AI批量生产百个方案</div>
+          <div class="s1-ai-generator">
+            <div class="s1-ai-core">
+              🤖
+              <div class="s1-ai-label">AI引擎</div>
+            </div>
+            <div style="font-size:var(--text-h4);color:#555;">➜</div>
+            <div class="s1-output-grid" id="outputGrid">
+              <!-- 25 cells generated by JS -->
+            </div>
+          </div>
+          <div class="s1-batch-counter" id="batchCounter">已生成: 0 / 100+</div>
+        </div>
+
+        <!-- STEP 3: AI海选 -->
+        <div class="s1-step" id="step3">
+          <div class="s1-step-title"><span class="step-num">3</span>AI自动海选 Top 10</div>
+          <div class="s1-filter-container">
+            <div class="s1-filter-visual">
+              <div class="s1-filter-input" id="filterInput">
+                <!-- chips generated by JS -->
+              </div>
+              <div class="s1-filter-funnel">
+                <svg viewBox="0 0 80 100">
+                  <defs>
+                    <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style="stop-color:rgba(201,168,76,0.3)"/>
+                      <stop offset="100%" style="stop-color:rgba(201,168,76,0.1)"/>
+                    </linearGradient>
+                  </defs>
+                  <polygon points="5,5 75,5 50,95 30,95" fill="url(#funnelGrad)" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+                  <line x1="5" y1="5" x2="30" y2="95" stroke="rgba(201,168,76,0.3)" stroke-dasharray="3,3"/>
+                  <line x1="75" y1="5" x2="50" y2="95" stroke="rgba(201,168,76,0.3)" stroke-dasharray="3,3"/>
+                </svg>
+              </div>
+              <div class="s1-filter-output" id="filterOutput">
+                <!-- top chips -->
+              </div>
+            </div>
+            <div class="s1-filter-stats">
+              <div class="s1-stat">
+                <div class="s1-stat-num in" id="statIn">100+</div>
+                <div class="s1-stat-label">输入方案</div>
+              </div>
+              <div class="s1-stat">
+                <div class="s1-stat-num out" id="statOut">0</div>
+                <div class="s1-stat-label">精选Top</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: 人工精选 -->
+        <div class="s1-step" id="step4">
+          <div class="s1-step-title"><span class="step-num">4</span>人工精选最终3个</div>
+          <div class="s1-human-pick">
+            <div class="s1-candidates" id="candidates">
+              <div class="s1-candidate-card" data-idx="0">
+                <div class="s1-candidate-icon">🎯</div>
+                <div class="s1-candidate-info">
+                  <div class="s1-candidate-title">方案A：春日理财季</div>
+                  <div class="s1-candidate-score">AI评分: 92分</div>
+                </div>
+                <div class="s1-candidate-check">✓</div>
+              </div>
+              <div class="s1-candidate-card" data-idx="1">
+                <div class="s1-candidate-icon">🌱</div>
+                <div class="s1-candidate-info">
+                  <div class="s1-candidate-title">方案B：绿色投资计划</div>
+                  <div class="s1-candidate-score">AI评分: 88分</div>
+                </div>
+                <div class="s1-candidate-check">✓</div>
+              </div>
+              <div class="s1-candidate-card" data-idx="2">
+                <div class="s1-candidate-icon">👨‍👩‍👧</div>
+                <div class="s1-candidate-info">
+                  <div class="s1-candidate-title">方案C：家庭财富管家</div>
+                  <div class="s1-candidate-score">AI评分: 85分</div>
+                </div>
+                <div class="s1-candidate-check">✓</div>
+              </div>
+              <div class="s1-candidate-card" data-idx="3">
+                <div class="s1-candidate-icon">📱</div>
+                <div class="s1-candidate-info">
+                  <div class="s1-candidate-title">方案D：数字银行体验</div>
+                  <div class="s1-candidate-score">AI评分: 82分</div>
+                </div>
+                <div class="s1-candidate-check">✓</div>
+              </div>
+            </div>
+            <div class="s1-human-avatar">
+              <div class="s1-human-icon">👤</div>
+              <div class="s1-human-label">人工终审</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: 最终结果 -->
+        <div class="s1-step" id="step5">
+          <div class="s1-result">
+            <div class="s1-result-crown" id="resultCrown">👑</div>
+            <div class="s1-result-card" id="resultCard">
+              <div class="s1-result-num">1000:1</div>
+              <div class="s1-result-label">千里挑一</div>
+              <div class="s1-result-sub">从海量创意中精选最优方案</div>
+            </div>
+            <div class="s1-result-stats" id="resultStats">
+              <div class="s1-result-stat">
+                <div class="s1-result-stat-val">1-2天</div>
+                <div class="s1-result-stat-label">交付周期</div>
+              </div>
+              <div class="s1-result-stat">
+                <div class="s1-result-stat-val">100+</div>
+                <div class="s1-result-stat-label">初始方案</div>
+              </div>
+              <div class="s1-result-stat">
+                <div class="s1-result-stat-val">3</div>
+                <div class="s1-result-stat-label">终选方案</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s1-auto-controls">
+        <button class="s1-auto-btn" onclick="s1PrevStep()">◀ 上一步</button>
+        <button class="s1-auto-btn" onclick="s1ToggleAuto()" id="autoPlayBtn">⏸ 暂停</button>
+        <button class="s1-auto-btn" onclick="s1NextStep()">下一步 ▶</button>
+      </div>
+    </div>
+
+    <!-- ============================
+         SCENE 2: COST ANALYSIS
+         ============================ -->
+    <div class="scene" id="scene2">
+      <div style="width:100%;max-width:1000px;display:flex;flex-direction:column;gap:16px;">
+        <div class="s2-title-area">
+          <div class="s2-sup">COST ANALYSIS</div>
+          <div class="s2-main-title">同等预算，<em>数十倍产出</em></div>
+        </div>
+        <div class="s2-content">
+          <!-- LEFT: bars -->
+          <div class="s2-bars" id="s2Bars">
+            <div class="s2-bar-group">
+              <div class="s2-bar-label">
+                <span>年度成本</span>
+                <div><span class="s2-bar-value s2-bar-old-val">320万+ </span><span style="color:#555;font-size: var(--text-sm);">→ </span><span class="s2-bar-value s2-bar-new-val">80万</span></div>
+              </div>
+              <div class="s2-bar-track">
+                <div class="s2-bar-fill old-fill" data-w="95" data-label="传统 320万">传统 320万</div>
+              </div>
+              <div class="s2-bar-track" style="margin-top:4px;">
+                <div class="s2-bar-fill new-fill" data-w="24" data-label="AI赋能 80万">AI赋能 80万</div>
+              </div>
+            </div>
+            <div class="s2-bar-group">
+              <div class="s2-bar-label">
+                <span>交付周期</span>
+                <div><span class="s2-bar-value s2-bar-old-val">5-7天 </span><span style="color:#555;font-size: var(--text-sm);">→ </span><span class="s2-bar-value s2-bar-new-val">1-2天</span></div>
+              </div>
+              <div class="s2-bar-track">
+                <div class="s2-bar-fill old-fill" data-w="87" data-label="传统 5-7天">传统 5-7天</div>
+              </div>
+              <div class="s2-bar-track" style="margin-top:4px;">
+                <div class="s2-bar-fill new-fill" data-w="26" data-label="AI赋能 1-2天">AI赋能 1-2天</div>
+              </div>
+            </div>
+            <div class="s2-bar-group">
+              <div class="s2-bar-label">
+                <span>可选方案数量</span>
+                <div><span class="s2-bar-value s2-bar-old-val">1-2个 </span><span style="color:#555;font-size: var(--text-sm);">→ </span><span class="s2-bar-value s2-bar-new-val">50-100+</span></div>
+              </div>
+              <div class="s2-bar-track">
+                <div class="s2-bar-fill old-fill" data-w="15"></div>
+              </div>
+              <div class="s2-bar-track" style="margin-top:4px;">
+                <div class="s2-bar-fill new-fill" data-w="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: metric cards -->
+          <div class="s2-metrics" id="s2Metrics">
+            <div class="s2-metric m-save" data-delay="800">
+              <div class="s2-metric-val">75<span class="s2-metric-unit">%</span></div>
+              <div class="s2-metric-label">成本降低</div>
+            </div>
+            <div class="s2-metric m-speed" data-delay="1000">
+              <div class="s2-metric-val">4<span class="s2-metric-unit">×</span></div>
+              <div class="s2-metric-label">效率提升</div>
+            </div>
+            <div class="s2-metric m-volume" data-delay="1200">
+              <div class="s2-metric-val">50<span class="s2-metric-unit">+</span></div>
+              <div class="s2-metric-label">方案选择量</div>
+            </div>
+            <div class="s2-metric m-scale" data-delay="1400">
+              <div class="s2-metric-val">∞</div>
+              <div class="s2-metric-label">Token即产能</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         SCENE 3: AI TEAM ASSEMBLY
+         ============================ -->
+    <div class="scene" id="scene3">
+      <canvas id="assemblyCanvas"></canvas>
+      <div class="s3-overlay">
+        <div class="s3-title" id="s3Title">AI TEAM · ONLINE</div>
+        <div class="s3-agents" id="s3Agents">
+          <div class="s3-agent s3-agent-0" data-idx="0">
+            <div class="s3-agent-icon">🖼️</div>
+            <div class="s3-agent-name">视觉智能体</div>
+            <div class="s3-agent-desc">Banner · 海报<br>视频脚本生成</div>
+            <div class="s3-agent-status">ONLINE</div>
+          </div>
+          <div class="s3-agent s3-agent-1" data-idx="1">
+            <div class="s3-agent-icon">✍️</div>
+            <div class="s3-agent-name">文案智能体</div>
+            <div class="s3-agent-desc">推送文案<br>活动策划撰写</div>
+            <div class="s3-agent-status">ONLINE</div>
+          </div>
+          <div class="s3-agent s3-agent-2" data-idx="2">
+            <div class="s3-agent-icon">🔍</div>
+            <div class="s3-agent-name">评审智能体</div>
+            <div class="s3-agent-desc">海选过滤<br>Top10精选输出</div>
+            <div class="s3-agent-status">ONLINE</div>
+          </div>
+          <div class="s3-agent s3-agent-3" data-idx="3">
+            <div class="s3-agent-icon">📊</div>
+            <div class="s3-agent-name">数据智能体</div>
+            <div class="s3-agent-desc">受众画像<br>效果追踪反馈</div>
+            <div class="s3-agent-status">ONLINE</div>
+          </div>
+          <div class="s3-agent s3-agent-4" data-idx="4">
+            <div class="s3-agent-icon">⚡</div>
+            <div class="s3-agent-name">迭代智能体</div>
+            <div class="s3-agent-desc">快速微调<br>版本管理输出</div>
+            <div class="s3-agent-status">ONLINE</div>
+          </div>
+        </div>
+        <div class="s3-reveal" id="s3Reveal">
+          <div class="s3-reveal-title">AI不替代创意，<em>AI放大创意</em></div>
+          <div class="s3-reveal-sub">核心人才把控方向 · AI批量执行 · 千里挑一</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <button class="ctrl-btn" onclick="prevScene()">◀ 上一场景</button>
+    <button class="ctrl-btn primary" onclick="nextScene()">下一场景 ▶</button>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:25%"></div></div>
+    <div class="footer-info" id="footerInfo">场景 1 / 4</div>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   BACKGROUND PARTICLES
+   ============================================================ */
+const bgCanvas = document.getElementById('bgCanvas');
+const bgCtx = bgCanvas.getContext('2d');
+let bgParts = [];
+
+function initBg() {
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
+  bgParts = [];
+  for (let i = 0; i < 50; i++) {
+    bgParts.push({
+      x: Math.random() * bgCanvas.width,
+      y: Math.random() * bgCanvas.height,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+      a: Math.random() * 0.25 + 0.05
+    });
+  }
+}
+let isPaused=false;
+let rafId=null;
+function drawBg() {
+  if(!isPaused){
+    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    bgParts.forEach(p => {
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0) p.x = bgCanvas.width;
+      if (p.x > bgCanvas.width) p.x = 0;
+      if (p.y < 0) p.y = bgCanvas.height;
+      if (p.y > bgCanvas.height) p.y = 0;
+      bgCtx.beginPath();
+      bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      bgCtx.fillStyle = `rgba(201,168,76,${p.a})`;
+      bgCtx.fill();
+    });
+  }
+  rafId=requestAnimationFrame(drawBg);
+}
+function pauseAnimations(){isPaused=true;if(rafId){cancelAnimationFrame(rafId);rafId=null;}}
+function resumeAnimations(){isPaused=false;drawBg();}
+initBg(); drawBg();
+window.addEventListener('resize', initBg);
+
+/* ============================================================
+   SCENE MANAGEMENT
+   ============================================================ */
+const TOTAL_SCENES = 4;
+let curScene = 0;
+const sceneEls = [
+  document.getElementById('scene0'),
+  document.getElementById('scene1'),
+  document.getElementById('scene2'),
+  document.getElementById('scene3')
+];
+const dots = document.querySelectorAll('.sdot');
+
+function goToScene(idx) {
+  if (idx < 0 || idx >= TOTAL_SCENES) return;
+  sceneEls[curScene].classList.remove('active');
+  dots[curScene].classList.remove('active');
+  dots[curScene].classList.add('done');
+  curScene = idx;
+  sceneEls[curScene].classList.add('active');
+  dots[curScene].classList.add('active');
+  document.getElementById('progFill').style.width = ((idx + 1) / TOTAL_SCENES * 100) + '%';
+  document.getElementById('footerInfo').textContent = `场景 ${idx + 1} / ${TOTAL_SCENES}`;
+  document.getElementById('sceneLabel').textContent = String(idx + 1).padStart(2, '0') + ' / 04';
+  runAnimation(idx);
+}
+
+function nextScene() { goToScene(curScene + 1); }
+function prevScene() { goToScene(curScene - 1); }
+
+dots.forEach(d => d.addEventListener('click', () => goToScene(parseInt(d.dataset.idx))));
+document.addEventListener('keydown', e => {
+  // 只转发上下翻页键给父窗口
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='PageDown'||e.key==='PageUp'){
+    try{window.parent.postMessage({type:'iframeKeydown',key:e.key},'*');}catch(err){}
+  }
+  // 左右箭头在内部处理场景切换
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextScene(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevScene(); }
+});
+
+/* ============================================================
+   SCENE 0 ANIMATION: Radar scan + member reveal
+   ============================================================ */
+let s0RadarAngle = 0;
+let s0RadarRAF = null;
+let s0Scanned = false;
+
+function animScene0() {
+  s0Scanned = false;
+  // Reset members
+  document.querySelectorAll('.m-row, .s0-total').forEach(r => r.classList.remove('show'));
+
+  // Scan and reveal
+  const allRows = document.querySelectorAll('.m-row');
+  allRows.forEach(row => {
+    const delay = parseInt(row.dataset.delay) || 0;
+    setTimeout(() => {
+      row.classList.add('show');
+    }, delay);
+  });
+  setTimeout(() => document.getElementById('oldTotal').classList.add('show'), 650);
+  setTimeout(() => document.getElementById('newTotal').classList.add('show'), 1400);
+}
+
+/* ============================================================
+   SCENE 1 ANIMATION: 5步动态流程演示 — 千里挑一
+   ============================================================ */
+const fCanvas = document.getElementById('funnelCanvas');
+const fCtx = fCanvas.getContext('2d');
+let fRAF = null;
+let s1CurrentStep = 0;
+let s1AutoPlay = true;
+let s1StepTimer = null;
+
+function initFunnel() {
+  if (!fCanvas) return;
+  fCanvas.width = fCanvas.offsetWidth;
+  fCanvas.height = fCanvas.offsetHeight;
+}
+
+// 初始化输出网格
+function initOutputGrid() {
+  const grid = document.getElementById('outputGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const icons = ['📝', '🎨', '📊', '🎯', '💡', '📱', '🌟', '🔥', '✨', '💎', '🚀', '📈'];
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement('div');
+    cell.className = 's1-output-cell';
+    cell.textContent = icons[i % icons.length];
+    cell.dataset.idx = i;
+    grid.appendChild(cell);
+  }
+}
+
+// 初始化海选输入
+function initFilterChips() {
+  const input = document.getElementById('filterInput');
+  const output = document.getElementById('filterOutput');
+  if (!input || !output) return;
+  
+  input.innerHTML = '';
+  output.innerHTML = '';
+  
+  const chips = [];
+  for (let i = 1; i <= 20; i++) {
+    chips.push(`方案${i}`);
+  }
+  chips.forEach((text, i) => {
+    const chip = document.createElement('div');
+    chip.className = 's1-filter-chip';
+    chip.textContent = text;
+    chip.dataset.idx = i;
+    input.appendChild(chip);
+  });
+  
+  // Top 10 output
+  for (let i = 0; i < 10; i++) {
+    const chip = document.createElement('div');
+    chip.className = 's1-top-chip';
+    chip.textContent = `Top ${i + 1}`;
+    chip.dataset.idx = i;
+    output.appendChild(chip);
+  }
+}
+
+// 切换到指定步骤
+function goToStep(step) {
+  if (step < 0 || step > 4) return;
+  s1CurrentStep = step;
+  
+  // 更新步骤指示器
+  document.querySelectorAll('.s1-step-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i === step) dot.classList.add('active');
+    else if (i < step) dot.classList.add('done');
+  });
+  
+  // 切换步骤显示
+  document.querySelectorAll('.s1-step').forEach((s, i) => {
+    s.classList.toggle('active', i === step);
+  });
+  
+  // 执行对应动画
+  runStepAnimation(step);
+}
+
+function s1NextStep() {
+  if (s1CurrentStep < 4) {
+    goToStep(s1CurrentStep + 1);
+  } else {
+    // 到达最后一步，停止自动播放，显示重播按钮
+    s1AutoPlay = false;
+    updateAutoPlayBtn();
+    clearTimeout(s1StepTimer);
+  }
+}
+
+function s1PrevStep() {
+  if (s1CurrentStep > 0) goToStep(s1CurrentStep - 1);
+}
+
+function s1ToggleAuto() {
+  s1AutoPlay = !s1AutoPlay;
+  updateAutoPlayBtn();
+  if (s1AutoPlay) {
+    // 如果已经在最后一步，点击播放则回到第一步重新开始
+    if (s1CurrentStep === 4) {
+      goToStep(0);
+    } else {
+      startAutoPlay();
+    }
+  } else {
+    clearTimeout(s1StepTimer);
+  }
+}
+
+function updateAutoPlayBtn() {
+  const btn = document.getElementById('autoPlayBtn');
+  if (s1CurrentStep === 4 && !s1AutoPlay) {
+    btn.textContent = '↻ 重播';
+  } else {
+    btn.textContent = s1AutoPlay ? '⏸ 暂停' : '▶ 播放';
+  }
+}
+
+function startAutoPlay() {
+  clearTimeout(s1StepTimer);
+  if (!s1AutoPlay) return;
+  const durations = [4000, 4500, 5000, 5000, 4000];
+  s1StepTimer = setTimeout(() => {
+    if (s1AutoPlay) s1NextStep();
+  }, durations[s1CurrentStep] || 4000);
+}
+
+// 各步骤动画
+function runStepAnimation(step) {
+  switch(step) {
+    case 0: // 团队提创意
+      document.querySelectorAll('#step1 .s1-member').forEach((m, i) => {
+        m.classList.remove('show');
+        setTimeout(() => m.classList.add('show'), i * 150);
+      });
+      document.querySelectorAll('#ideasFlow .s1-idea-bubble').forEach((b, i) => {
+        b.classList.remove('show');
+        setTimeout(() => b.classList.add('show'), 500 + i * 150);
+      });
+      break;
+      
+    case 1: // AI批量生成
+      document.querySelectorAll('#outputGrid .s1-output-cell').forEach((c, i) => {
+        c.classList.remove('show');
+        setTimeout(() => {
+          c.classList.add('show');
+          document.getElementById('batchCounter').textContent = `已生成: ${i + 1} / 100+`;
+        }, i * 80);
+      });
+      setTimeout(() => {
+        document.getElementById('batchCounter').classList.add('show');
+      }, 100);
+      break;
+      
+    case 2: // AI海选
+      document.getElementById('statOut').textContent = '0';
+      const chips = document.querySelectorAll('#filterInput .s1-filter-chip');
+      const tops = document.querySelectorAll('#filterOutput .s1-top-chip');
+      
+      chips.forEach((c, i) => {
+        c.classList.remove('show', 'eliminated');
+        setTimeout(() => c.classList.add('show'), i * 50);
+      });
+      
+      // 逐个淘汰
+      setTimeout(() => {
+        let eliminated = 0;
+        let passed = 0;
+        const eliminateInterval = setInterval(() => {
+          if (eliminated >= 10 || passed >= 10) {
+            clearInterval(eliminateInterval);
+            return;
+          }
+          // 随机淘汰或保留
+          const idx = Math.floor(Math.random() * chips.length);
+          if (!chips[idx].classList.contains('eliminated') && !chips[idx].classList.contains('passed')) {
+            if (Math.random() > 0.5 && passed < 10) {
+              chips[idx].classList.add('eliminated');
+              eliminated++;
+            }
+          }
+        }, 200);
+        
+        // Top 10 出现
+        tops.forEach((t, i) => {
+          t.classList.remove('show');
+          setTimeout(() => {
+            t.classList.add('show');
+            document.getElementById('statOut').textContent = i + 1;
+          }, 1500 + i * 200);
+        });
+      }, 1000);
+      break;
+      
+    case 3: // 人工精选
+      const cards = document.querySelectorAll('#candidates .s1-candidate-card');
+      cards.forEach((c, i) => {
+        c.classList.remove('show', 'selected', 'rejected');
+        setTimeout(() => c.classList.add('show'), i * 200);
+      });
+      
+      // 选中前3个
+      setTimeout(() => {
+        cards.forEach((c, i) => {
+          if (i < 3) {
+            setTimeout(() => c.classList.add('selected'), i * 400);
+          } else {
+            setTimeout(() => c.classList.add('rejected'), 1200);
+          }
+        });
+      }, 1000);
+      break;
+      
+    case 4: // 最终结果
+      document.getElementById('resultCrown').classList.remove('show');
+      document.getElementById('resultCard').classList.remove('show');
+      document.getElementById('resultStats').classList.remove('show');
+      
+      setTimeout(() => document.getElementById('resultCrown').classList.add('show'), 200);
+      setTimeout(() => document.getElementById('resultCard').classList.add('show'), 600);
+      setTimeout(() => document.getElementById('resultStats').classList.add('show'), 1200);
+      break;
+  }
+  
+  if (s1AutoPlay) startAutoPlay();
+  updateAutoPlayBtn();
+}
+
+function animScene1() {
+  initFunnel();
+  initOutputGrid();
+  initFilterChips();
+  
+  document.getElementById('s1Header').classList.add('show');
+  
+  // 重置到第一步
+  s1CurrentStep = 0;
+  s1AutoPlay = true;
+  document.getElementById('autoPlayBtn').textContent = '⏸ 暂停';
+  
+  // 更新指示器
+  document.querySelectorAll('.s1-step-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i === 0) dot.classList.add('active');
+  });
+  
+  // 显示第一步
+  document.querySelectorAll('.s1-step').forEach((s, i) => {
+    s.classList.toggle('active', i === 0);
+  });
+  
+  // 执行第一步动画
+  runStepAnimation(0);
+}
+
+/* ============================================================
+   SCENE 2 ANIMATION: Cost bars + metric cards
+   ============================================================ */
+function animScene2() {
+  // Reset
+  document.querySelectorAll('.s2-bar-fill').forEach(b => { b.style.width = '0'; });
+  document.querySelectorAll('.s2-metric').forEach(m => m.classList.remove('show'));
+
+  // Animate bars with stagger
+  const bars = document.querySelectorAll('.s2-bar-fill');
+  bars.forEach((b, i) => {
+    setTimeout(() => {
+      b.style.width = b.dataset.w + '%';
+    }, i * 180 + 200);
+  });
+
+  // Animate metric cards
+  document.querySelectorAll('.s2-metric').forEach(m => {
+    const delay = parseInt(m.dataset.delay) || 800;
+    setTimeout(() => m.classList.add('show'), delay);
+  });
+}
+
+/* ============================================================
+   SCENE 3 ANIMATION: Agent assembly + canvas sparks
+   ============================================================ */
+const aCanvas = document.getElementById('assemblyCanvas');
+const aCtx = aCanvas.getContext('2d');
+let aRAF = null;
+let aSparks = [];
+let aAnimRunning = false;
+
+function initAssembly() {
+  aCanvas.width = aCanvas.offsetWidth;
+  aCanvas.height = aCanvas.offsetHeight;
+}
+
+function spawnSparks(x, y, color) {
+  for (let i = 0; i < 18; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 4 + 1;
+    aSparks.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 1,
+      r: Math.random() * 2 + 0.5,
+      a: 1,
+      color
+    });
+  }
+}
+
+const agentColors = [
+  'rgba(96,165,250,',
+  'rgba(201,168,76,',
+  'rgba(74,222,128,',
+  'rgba(168,85,247,',
+  'rgba(251,146,60,'
+];
+
+function animScene3() {
+  initAssembly();
+  aSparks = [];
+  aAnimRunning = true;
+
+  // Reset agents
+  document.querySelectorAll('.s3-agent').forEach(a => a.classList.remove('landed'));
+  document.getElementById('s3Reveal').classList.remove('show');
+  document.getElementById('s3Title').classList.remove('show');
+
+  setTimeout(() => document.getElementById('s3Title').classList.add('show'), 200);
+
+  // Drop agents in one by one
+  const agents = document.querySelectorAll('.s3-agent');
+  agents.forEach((agent, i) => {
+    setTimeout(() => {
+      agent.classList.add('landed');
+      // Get position for sparks
+      const rect = agent.getBoundingClientRect();
+      const canvasRect = aCanvas.getBoundingClientRect();
+      const sx = rect.left - canvasRect.left + rect.width / 2;
+      const sy = rect.top - canvasRect.top + rect.height * 0.8;
+      spawnSparks(sx, sy, agentColors[i]);
+    }, 600 + i * 350);
+  });
+
+  // Show reveal text after all agents land
+  setTimeout(() => {
+    document.getElementById('s3Reveal').classList.add('show');
+  }, 600 + agents.length * 350 + 400);
+
+  // Run spark animation
+  if (aRAF) cancelAnimationFrame(aRAF);
+  function aLoop() {
+    if (!aAnimRunning) return;
+    aCtx.clearRect(0, 0, aCanvas.width, aCanvas.height);
+
+    aSparks = aSparks.filter(s => s.a > 0.02);
+    aSparks.forEach(s => {
+      s.x += s.vx; s.y += s.vy;
+      s.vy += 0.12; // gravity
+      s.a -= 0.025;
+      aCtx.beginPath();
+      aCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      aCtx.fillStyle = s.color + s.a + ')';
+      aCtx.fill();
+    });
+
+    aRAF = requestAnimationFrame(aLoop);
+  }
+  aLoop();
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+function stopAllAnimations() {
+  fAnimRunning = false;
+  aAnimRunning = false;
+}
+
+function runAnimation(idx) {
+  stopAllAnimations();
+  if (idx === 0) animScene0();
+  else if (idx === 1) {
+    setTimeout(animScene1, 100);
+  }
+  else if (idx === 2) animScene2();
+  else if (idx === 3) animScene3();
+}
+
+// Init
+runAnimation(0);
+
+// v6三档字号切换
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+  // 可见性控制
+  if (e.data && e.data.type === 'visibility') {
+    if (e.data.visible) { resumeAnimations(); }
+    else { pauseAnimations(); }
+  }
+});
+parent.postMessage({ type: 'iframeReady' }, '*');
+
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>

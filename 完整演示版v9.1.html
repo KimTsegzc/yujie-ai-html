@@ -1,0 +1,6125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1.0, user-scalable=no">
+<title>数字金融与AI运营能力升级 · 完整演示版 v9 (4:3)</title>
+<link rel="stylesheet" href="react-bits-effects.css">
+<!-- ★ v8 颜色主题配置中心（统一管理所有色系） -->
+<script src="theme-config.js"></script>
+<style>
+  /* ===== v9 色系主题定义 =====
+     颜色通过 JS style.setProperty 动态注入，CSS 只需默认值
+     修改颜色请编辑 theme-config.js
+  ===== */
+
+  /* 默认：深海蓝（与 theme-config.js 保持一致，JS 会立即覆盖） */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  :root {
+    /* 金色透明度变体（由 JS 动态更新） */
+    --gold-04: rgba(154,188,224,0.04);
+    --gold-05: rgba(154,188,224,0.05);
+    --gold-08: rgba(154,188,224,0.08);
+    --gold-10: rgba(154,188,224,0.1);
+    --gold-12: rgba(154,188,224,0.12);
+    --gold-15: rgba(154,188,224,0.15);
+    --gold-20: rgba(154,188,224,0.2);
+    --gold-30: rgba(154,188,224,0.3);
+    --gold-40: rgba(154,188,224,0.4);
+    --gold-50: rgba(154,188,224,0.5);
+
+    /* ===== v17 等比缩放字体系统（Type Scale）=====
+       基于16px基准，采用等比缩放比例：
+       - 小号：1.200 (Minor Third) - 适合阅读
+       - 中号：1.250 (Major Third) - 默认，适合企业官网
+       - 大号：1.333 (Perfect Fourth) - 适合营销展示
+    ===== */
+    
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;  /* 页面主标题 */
+    --text-h2:   39.1px;  /* 栏位大标题 */
+    --text-h3:   31.3px;  /* 模块标题 */
+    --text-h4:   25.0px;  /* 小组/卡片标题 */
+    --text-lead: 20.0px;  /* 突出正文/前言 */
+    --text-body: 16.0px;  /* 标准正文(基准) */
+    --text-sm:   12.8px;  /* 辅助说明/页脚 */
+    
+    /* ===== 12档旧变量映射到7档新变量（兼容层）=====
+       保持现有样式代码不变，通过映射使用新字体系统
+    ===== */
+    --font-xs:   var(--text-sm);    /* 12.8px */
+    --font-sm:   var(--text-sm);    /* 12.8px */
+    --font-base: var(--text-body);  /* 16.0px */
+    --font-md:   var(--text-body);  /* 16.0px */
+    --font-lg:   var(--text-h4);    /* 25.0px */
+    --font-xl:   var(--text-h3);    /* 31.3px */
+    --font-2xl:  var(--text-h2);    /* 39.1px */
+    --font-2xl2: var(--text-h2);    /* 39.1px */
+    --font-3xl:  var(--text-h1);    /* 48.8px */
+    --font-3xl2: var(--text-h1);    /* 48.8px */
+    --font-4xl:  var(--text-h1);    /* 48.8px */
+    --font-hero: var(--text-h1);    /* 48.8px */
+    
+    /* 当前选中档次（默认中号） */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200 Minor Third) */
+  html[data-font-level="small"] {
+    --text-h1:   39.8px;
+    --text-h2:   33.2px;
+    --text-h3:   27.6px;
+    --text-h4:   23.0px;
+    --text-lead: 19.2px;
+    --text-body: 16.0px;
+    --text-sm:   13.3px;
+    /* 兼容层自动继承新变量值 */
+  }
+  
+  /* 中号方案 (1.250 Major Third) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+  }
+  
+  /* 大号方案 (1.333 Perfect Fourth) */
+  html[data-font-level="large"] {
+    --text-h1:   75.9px;
+    --text-h2:   56.9px;
+    --text-h3:   42.7px;
+    --text-h4:   32.0px;
+    --text-lead: 24.0px;
+    --text-body: 18.0px;
+    --text-sm:   13.5px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== 4:3 固定画布 1440×1080 ===== */
+  html {
+    scroll-behavior: smooth;
+    font-size: calc(var(--font-base) * var(--font-scale));
+    /* 强制 html 占满窗口，背景填黑 */
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    /* 固定画布尺寸 */
+    width: 1440px;
+    height: 1080px;
+    overflow: hidden;
+    /* 居中缩放适配窗口 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(var(--canvas-scale, 1));
+  }
+
+  /* ===== 实时演示跳转按钮 ===== */
+  .live-demo-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    color: var(--gold);
+    font-size: var(--current-base);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .live-demo-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.2);
+  }
+  .live-demo-btn .btn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+
+  /* ===== v8 色系切换器（支持6套主题） ===== */
+  .theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 136px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 8px 4px 4px;
+    backdrop-filter: blur(10px);
+  }
+
+  .theme-label {
+    color: var(--text-dim);
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 0 2px;
+    user-select: none;
+  }
+  .theme-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .theme-swatch:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .theme-swatch.active {
+    border-color: var(--text);
+    box-shadow: 0 0 0 2px var(--gold);
+    transform: scale(1.15);
+  }
+  /* 色盘渐变（固定颜色，不用 var，保证各主题下可见） */
+  .swatch-black-gold      { background: linear-gradient(135deg, #0A0A0F 50%, #C9A84C 50%); }
+  .swatch-deep-ocean      { background: linear-gradient(135deg, #031E36 50%, #9ABCE0 50%); }
+  .swatch-warm-parchment  { background: linear-gradient(135deg, #F5F0E8 50%, #8B6914 50%); }
+  .swatch-forest-night    { background: linear-gradient(135deg, #0D1F1A 50%, #7ECBA1 50%); }
+  .swatch-dusk-rose       { background: linear-gradient(135deg, #1A0F14 50%, #E8A0B0 50%); }
+  .swatch-nebula-purple   { background: linear-gradient(135deg, #0C0A1A 50%, #A78BFA 50%); }
+
+  /* ===== 翻页导航按钮 ===== */
+  .page-nav-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .nav-arrow {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--card-bg);
+    color: var(--gold);
+    font-size: var(--current-2xl);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px var(--gold-20);
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-arrow:hover {
+    background: var(--gold);
+    color: var(--bg);
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px var(--gold-40);
+  }
+  .nav-arrow:active {
+    transform: scale(0.95);
+  }
+  .nav-arrow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 40%,
+      var(--gold-10) 50%,
+      transparent 60%
+    );
+    animation: shimmer 3s infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  }
+  /* 沙粒掉落动画 */
+  .sand-particles {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 20px;
+    pointer-events: none;
+  }
+  .sand-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: sandFall 1.5s ease-out infinite;
+  }
+  @keyframes sandFall {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(25px) translateX(var(--drift, 0px));
+      opacity: 0;
+    }
+  }
+  /* 键盘提示 */
+  .nav-arrow::after {
+    content: attr(title);
+    position: absolute;
+    right: 70px;
+    background: rgba(0,0,0,0.8);
+    color: var(--gold);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: var(--current-sm);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    border: 1px solid var(--border);
+  }
+  .nav-arrow:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ===== 隐藏式侧边栏 ===== */
+  #sidebar {
+    width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; left: 0;
+    height: 1080px;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(calc(-100% + 12px));
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+  }
+  /* 悬停触发区域 */
+  #sidebar::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 1080px;
+    z-index: 99;
+    background: linear-gradient(90deg, var(--gold-10), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  #sidebar:hover::after {
+    opacity: 1;
+  }
+  /* 悬停时展开 */
+  #sidebar:hover,
+  #sidebar.active {
+    transform: translateX(0);
+  }
+  /* 展开指示器 */
+  .sidebar-trigger {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 80px;
+    background: linear-gradient(90deg, var(--gold-30), transparent);
+    border-radius: 0 4px 4px 0;
+    z-index: 99;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidebar-trigger::before {
+    content: '›';
+    color: var(--gold);
+    font-size: var(--current-base);
+    margin-left: -2px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .sidebar-trigger:hover {
+    width: 16px;
+    background: linear-gradient(90deg, var(--gold-50), transparent);
+  }
+  .sidebar-trigger:hover::before {
+    opacity: 1;
+  }
+  #sidebar:hover ~ .sidebar-trigger,
+  #sidebar.active ~ .sidebar-trigger {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo .logo-title {
+    font-size: var(--current-base);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }
+  .sidebar-logo .logo-sub {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 0;
+  }
+
+  .nav-section {
+    margin-bottom: 4px;
+  }
+
+  .nav-section-title {
+    font-size: var(--current-xs);
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 20px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-item:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+    padding-left: 24px;
+  }
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: var(--gold-dim);
+  }
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--gold-20), transparent);
+    transition: width 0.3s ease;
+  }
+  .nav-item:hover::after {
+    width: 100%;
+  }
+  .nav-item .nav-icon { font-size: var(--current-base); width: 18px; text-align: center; }
+  .nav-item .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+  }
+
+  /* 移动端菜单按钮 */
+  .mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 101;
+    width: 40px;
+    height: 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--gold);
+    font-size: var(--current-xl);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+
+  /* ===== 主内容区 ===== */
+  #main {
+    flex: 1;
+    overflow-y: auto;
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+    height: 1080px;
+    width: 100%;
+  }
+
+  /* ===== 顶部大标题 - React Bits 风格升级 ===== */
+  .hero {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Aurora 极光背景效果 */
+  .hero-aurora {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  .hero-aurora .aurora-layer {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    mix-blend-mode: screen;
+  }
+  .hero-aurora .aurora-layer:nth-child(1) {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 60%, var(--gold-12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(232,201,122,0.08) 0%, transparent 50%);
+    animation: aurora-drift-1 12s ease-in-out infinite alternate;
+  }
+  .hero-aurora .aurora-layer:nth-child(2) {
+    background:
+      radial-gradient(ellipse 70% 50% at 70% 70%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 30% 40%, rgba(255,107,107,0.04) 0%, transparent 50%);
+    animation: aurora-drift-2 15s ease-in-out infinite alternate;
+  }
+  .hero-aurora .aurora-layer:nth-child(3) {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 50%, var(--gold-04) 0%, transparent 60%);
+    animation: aurora-drift-3 18s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-drift-1 {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    100% { transform: translate(30px, -20px) scale(1.1); opacity: 1; }
+  }
+  @keyframes aurora-drift-2 {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+    100% { transform: translate(-20px, 15px) rotate(3deg); opacity: 0.8; }
+  }
+  @keyframes aurora-drift-3 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(15px, -10px) scale(1.05); }
+  }
+
+  /* 浮动粒子效果 */
+  .hero-particles {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero-particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particle-float linear infinite;
+  }
+  /* 大型光点粒子 */
+  .hero-particle.glow {
+    width: 4px; height: 4px;
+    box-shadow: 0 0 6px var(--gold), 0 0 12px var(--gold-30);
+  }
+  /* 闪烁粒子 */
+  .hero-particle.twinkle {
+    animation: particle-twinkle ease-in-out infinite;
+  }
+  @keyframes particle-float {
+    0% { opacity: 0; transform: translateY(0) translateX(0); }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-1080px) translateX(30px); }
+  }
+  @keyframes particle-twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.8); }
+  }
+
+  /* 网格背景 */
+  .hero-grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 70%);
+  }
+
+  /* 内容层 */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Badge - 带呼吸光效 */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--current-sm);
+    letter-spacing: 3px;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    width: fit-content;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: badge-in 0.8s ease forwards 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-badge::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, var(--gold-10), transparent);
+    animation: badge-shine 3s ease-in-out infinite 2s;
+  }
+  @keyframes badge-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes badge-shine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+  .hero-badge .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+  @keyframes badge-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gold-40); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(201,168,76,0); }
+  }
+
+  /* ===== 标题 - 高级 SplitText + Shiny 升级版 ===== */
+  .hero h1 {
+    font-size: var(--current-4xl);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 10;
+    perspective: 800px;
+  }
+
+  /* 逐字入场动画 - 普通字符 */
+  .hero h1 .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(60px) translateZ(30px) rotateX(50deg) scale(0.85);
+    animation: split-char-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: center bottom;
+    position: relative;
+  }
+  .hero h1 .char.space { width: 0.3em; }
+
+  @keyframes split-char-in {
+    0% { opacity: 0; transform: translateY(60px) translateZ(30px) rotateX(50deg) scale(0.85); }
+    60% { opacity: 1; transform: translateY(-3px) translateZ(0) rotateX(-2deg) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) translateZ(0) rotateX(0deg) scale(1); }
+  }
+
+  /* ===== AI运营字符 - 高级发光效果 ===== */
+  .hero h1 .char.ai-char {
+    color: var(--gold);
+    text-shadow:
+      0 0 10px var(--gold-50),
+      0 0 30px var(--gold-20),
+      0 0 60px var(--gold-10);
+    /* 多层渐变 */
+    background: linear-gradient(
+      135deg,
+      var(--gold) 0%,
+      var(--gold-bright) 20%,
+      var(--gold-bright) 40%,
+      #fff 48%,
+      var(--gold-bright) 56%,
+      var(--gold-bright) 75%,
+      var(--gold) 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 6px var(--gold-40));
+    animation:
+      split-char-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+      ai-char-glow 3s ease-in-out infinite 1.5s,
+      ai-char-shine 5s ease-in-out infinite 1.5s;
+  }
+
+  /* AI字符持续发光脉冲 */
+  @keyframes ai-char-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 6px var(--gold-40));
+      text-shadow: 0 0 10px var(--gold-50), 0 0 30px var(--gold-20);
+    }
+    50% {
+      filter: drop-shadow(0 0 16px rgba(201,168,76,0.7));
+      text-shadow:
+        0 0 15px rgba(201,168,76,0.7),
+        0 0 40px rgba(201,168,76,0.35),
+        0 0 80px var(--gold-15),
+        0 0 120px var(--gold-05);
+    }
+  }
+
+  /* AI字符扫光效果 */
+  @keyframes ai-char-shine {
+    0%, 100% { background-position: 100% center; }
+    50% { background-position: -200% center; }
+  }
+
+  /* AI运营区域容器 - 扫描光线 */
+  .ai-text-group {
+    position: relative;
+    display: inline-block;
+  }
+  .ai-text-group::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -5%;
+    width: 110%; height: 100%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(201,168,76,0) 25%,
+      rgba(255,255,255,0.15) 50%,
+      rgba(201,168,76,0) 75%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: group-scan 6s ease-in-out infinite 2s;
+    pointer-events: none;
+    border-radius: 4px;
+  }
+  @keyframes group-scan {
+    0%, 100% { background-position: -100% center; }
+    50% { background-position: 200% center; }
+  }
+
+  /* AI运营背后的呼吸光晕 */
+  .ai-text-group::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 180%; height: 250%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    animation: ai-glow-breathe 4s ease-in-out infinite;
+  }
+  @keyframes ai-glow-breathe {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  }
+
+  /* 标题下方装饰线 */
+  .hero-title-line {
+    display: block;
+    height: 2px;
+    margin-top: 12px;
+    background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, transparent);
+    border-radius: 1px;
+    opacity: 0;
+    animation: title-line-reveal 0.8s ease forwards 1.8s;
+    box-shadow: 0 0 12px var(--gold-30);
+  }
+  @keyframes title-line-reveal {
+    0% { opacity: 0; transform: scaleX(0); }
+    100% { opacity: 0.7; transform: scaleX(1); }
+  }
+
+  /* 副标题 - 打字机 + 光标效果 */
+  .hero-sub {
+    font-size: var(--current-lg);
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--gold);
+    width: 0;
+    display: inline-block;
+    animation:
+      subtitle-reveal 1.5s steps(18) forwards 1.6s,
+      subtitle-cursor 0.8s step-end infinite;
+    max-width: 100%;
+  }
+  @keyframes subtitle-reveal {
+    0% { opacity: 1; width: 0; }
+    100% { opacity: 1; width: 18.5em; }
+  }
+  @keyframes subtitle-cursor {
+    0%, 100% { border-color: var(--gold); }
+    50% { border-color: transparent; }
+  }
+  /* 响应式：小屏幕副标题换行 */
+  @media (max-width: 768px) {
+    .hero-sub {
+      white-space: normal;
+      width: auto !important;
+      animation: subtitle-fade-in 1s ease forwards 1.6s;
+      border-right: none;
+    }
+    @keyframes subtitle-fade-in {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  /* CountUp 数字统计卡片 */
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: stats-in 0.8s ease forwards 1.5s;
+  }
+  @keyframes stats-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-stat-item {
+    text-align: left;
+    padding: 20px 32px;
+    position: relative;
+    border-right: 1px solid var(--gold-10);
+  }
+  .hero-stat-item:last-child { border-right: none; }
+  .hero-stat-num {
+    font-size: var(--current-3xl2);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(
+      90deg,
+      var(--gold) 0%,
+      var(--gold-bright) 25%,
+      #fff 50%,
+      var(--gold-bright) 75%,
+      var(--gold) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-move 4s linear infinite;
+    transition: transform 0.3s ease;
+  }
+  .hero-stat-item:hover .hero-stat-num {
+    animation: shimmer-move 1s linear infinite;
+  }
+  @keyframes shimmer-move {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  .hero-stat-label {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* 向下滚动指示器 */
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: scroll-hint-in 0.8s ease forwards 2.5s;
+  }
+  .hero-scroll-hint span {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .scroll-hint-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scroll-line-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-hint-in {
+    to { opacity: 1; }
+  }
+  @keyframes scroll-line-pulse {
+    0%, 100% { opacity: 0.3; height: 40px; }
+    50% { opacity: 1; height: 50px; }
+  }
+
+  /* ===== Part 标题 ===== */
+  .part-header {
+    padding: 2rem 3.5rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .part-tag {
+    font-size: var(--current-sm);
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .part-title {
+    font-size: var(--current-2xl2);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .part-desc {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* ===== 通用内容区 ===== */
+  .section {
+    padding: 2rem 3.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .section-title {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+  .section-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  /* ===== iframe 包装 - 发光边框效果 ===== */
+  .iframe-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    position: relative;
+    width: 100%;
+    /* 高度由 JS scaleIframeToFit() 动态设置，精确匹配 4:3 缩放比例 */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .iframe-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    background: conic-gradient(
+      from var(--cursor-angle, 0deg),
+      transparent 0deg,
+      rgba(201,168,76,0.6) 60deg,
+      rgba(232,201,122,0.8) 120deg,
+      rgba(201,168,76,0.6) 180deg,
+      transparent 240deg,
+      transparent 360deg
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(12px);
+  }
+  .iframe-wrap:hover::before {
+    opacity: 0.8;
+  }
+  .iframe-wrap:hover {
+    border-color: var(--gold-40);
+    box-shadow: 0 0 40px var(--gold-10);
+  }
+  .iframe-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    /* 固定原始尺寸 1440×1080，JS transform scale 缩放到容器宽度 */
+    width: 1440px;
+    height: 1080px;
+    transform-origin: left top;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* 防止iframe内部内容溢出导致空白 */
+    overflow: hidden;
+  }
+  .iframe-wrap iframe.scaled {
+    opacity: 1;
+  }
+  .iframe-label {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--gold-20);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: var(--current-sm);
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s, box-shadow 0.2s;
+    user-select: none;
+  }
+  .iframe-label:hover {
+    background: var(--gold-30);
+    box-shadow: 0 0 12px var(--gold-20);
+  }
+  .iframe-label::after {
+    content: ' ⛶';
+    font-size: 0.85em;
+    opacity: 0.8;
+  }
+
+  /* ===== 全屏 iframe modal ===== */
+  #iframe-fullscreen-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.2s ease;
+  }
+  #iframe-fullscreen-modal.open {
+    display: flex;
+  }
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  #iframe-fullscreen-inner {
+    position: relative;
+    width: 95vw;
+    /* 保持 4:3 */
+    aspect-ratio: 4 / 3;
+    max-height: 95vh;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    border: 1px solid var(--border);
+  }
+  #iframe-fullscreen-inner iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  #iframe-fullscreen-close {
+    position: absolute;
+    top: -16px; right: -16px;
+    width: 36px; height: 36px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  #iframe-fullscreen-close:hover { background: var(--bg3); }
+
+  /* ===== Part1 挑战卡片 ===== */
+  .challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .challenge-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .challenge-card:hover { 
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px var(--gold-10);
+  }
+  .challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-12) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .challenge-card:hover::before {
+    opacity: 1;
+  }
+  .challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+  .challenge-num {
+    font-size: var(--current-sm);
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .challenge-title {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .challenge-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ========== AI 发展历程时间线样式 ========== */
+  #part1-ai-timeline {
+    min-height: 1080px;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .timeline-intro {
+    text-align: center;
+    margin: 30px 0 40px;
+  }
+  .timeline-highlight {
+    display: inline-block;
+    font-size: var(--current-xl);
+    font-weight: 600;
+    color: var(--gold);
+    padding: 12px 40px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+  }
+  .timeline-table-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+  }
+  .timeline-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--current-base);
+  }
+  .timeline-table thead th {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    color: var(--gold);
+    font-weight: 600;
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+    font-size: var(--current-md);
+  }
+  .timeline-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s ease;
+  }
+  .timeline-table tbody tr:hover {
+    background: rgba(201,168,76,0.05);
+  }
+  .timeline-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  .timeline-table td {
+    padding: 16px 20px;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .time-cell {
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .event-cell {
+    color: #fff;
+    font-weight: 500;
+  }
+  .impact-cell {
+    color: var(--text-dim);
+  }
+  .timeline-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 20px;
+  }
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: var(--current-lg);
+  }
+  .summary-icon {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: var(--current-xl);
+  }
+  .summary-text {
+    color: var(--text);
+  }
+  .summary-text strong {
+    color: var(--gold-bright);
+    font-weight: 600;
+  }
+
+  /* Part1 四重挑战 section - 确保完整占满一屏 */
+  #part1-challenge {
+    min-height: 1080px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #part1-challenge .section-title {
+    margin-top: 0;
+  }
+
+  .policy-quote {
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02));
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .policy-quote:hover {
+    border-color: var(--gold-40);
+    box-shadow: 0 10px 30px var(--gold-08);
+    transform: translateX(4px);
+  }
+  .policy-quote::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-08) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .policy-quote:hover::before {
+    opacity: 1;
+  }
+  .policy-quote p {
+    font-size: var(--current-md);
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .policy-quote .source {
+    font-size: var(--current-sm);
+    color: var(--gold);
+  }
+  .policy-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .policy-tag {
+    background: var(--gold-dim);
+    border: 1px solid var(--border);
+    color: var(--gold-bright);
+    font-size: var(--current-base);
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  /* ===== Part4 三阶段路线图 ===== */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: calc(16.67% + 20px);
+    right: calc(16.67% + 20px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+    z-index: 1;
+  }
+  .phase-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .phase-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px var(--gold-15);
+  }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .phase-card:hover::before {
+    opacity: 1;
+  }
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-size: var(--current-base);
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: var(--bg);
+  }
+  .phase-period {
+    font-size: var(--current-sm);
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .phase-name {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .phase-tag-line {
+    font-size: var(--current-base);
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+  }
+  .phase-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .phase-items li {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .phase-items li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ===== Part4 KPI ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .kpi-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card:hover {
+    border-color: var(--gold);
+    background: var(--gold-05);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-12) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .kpi-card:hover::before {
+    opacity: 1;
+  }
+  .kpi-metric {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .kpi-current {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .kpi-arrow { color: var(--gold); margin: 0 6px; }
+  .kpi-target {
+    font-size: var(--current-2xl2);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .kpi-desc {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+  }
+
+  /* ===== Part4 风险 ===== */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .risk-card {
+    background: var(--bg3);
+    border: 1px solid rgba(255,100,100,0.15);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .risk-card:hover { 
+    border-color: rgba(255,100,100,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(255,100,100,0.1);
+  }
+  .risk-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255,120,80,0.1) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .risk-card:hover::before {
+    opacity: 1;
+  }
+  .risk-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .risk-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,100,100,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--current-lg);
+  }
+  .risk-name {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: #ff9999;
+  }
+  .risk-problem {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .risk-solutions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .risk-solutions li {
+    font-size: var(--current-base);
+    color: var(--text);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .risk-solutions li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: var(--current-sm);
+  }
+
+  /* ===== Part4 诉求 ===== */
+  .request-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  /* ===== Part4 AI安全边界（养虾比喻） ===== */
+  .shrimp-tank-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 32px 0;
+    padding: 28px;
+    background: linear-gradient(135deg, var(--gold-05) 0%, rgba(20,20,25,0.6) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--gold-15);
+  }
+
+  .tank-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tank-glass {
+    width: 220px;
+    height: 280px;
+    background: linear-gradient(180deg, var(--gold-10) 0%, var(--gold-05) 100%);
+    border: 3px solid var(--gold-30);
+    border-radius: 12px 12px 20px 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      inset 0 0 30px var(--gold-10),
+      0 10px 40px rgba(0,0,0,0.3);
+  }
+
+  .tank-water {
+    position: absolute;
+    inset: 8px;
+    background: linear-gradient(180deg, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 100%);
+    border-radius: 8px 8px 16px 16px;
+    overflow: hidden;
+  }
+
+  .shrimp-group {
+    position: absolute;
+    inset: 0;
+  }
+
+  .shrimp {
+    position: absolute;
+    font-size: var(--current-2xl2);
+    animation: shrimp-swim 4s ease-in-out infinite;
+  }
+
+  .shrimp-1 { left: 20%; top: 30%; animation-delay: 0s; }
+  .shrimp-2 { left: 55%; top: 50%; animation-delay: 0.8s; }
+  .shrimp-3 { left: 35%; top: 70%; animation-delay: 1.6s; }
+  .shrimp-4 { left: 70%; top: 25%; animation-delay: 2.4s; }
+  .shrimp-5 { left: 15%; top: 60%; animation-delay: 3.2s; }
+
+  @keyframes shrimp-swim {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  .tank-bubbles {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tank-bubbles span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    animation: bubble-rise 2s ease-in infinite;
+  }
+
+  .tank-bubbles span:nth-child(1) { left: -20px; animation-delay: 0s; }
+  .tank-bubbles span:nth-child(2) { left: -10px; animation-delay: 0.4s; }
+  .tank-bubbles span:nth-child(3) { left: 0; animation-delay: 0.8s; }
+  .tank-bubbles span:nth-child(4) { left: 10px; animation-delay: 1.2s; }
+  .tank-bubbles span:nth-child(5) { left: 20px; animation-delay: 1.6s; }
+
+  @keyframes bubble-rise {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    100% { transform: translateY(-200px) scale(0.3); opacity: 0; }
+  }
+
+  .tank-label {
+    margin-top: 16px;
+    font-size: var(--current-base);
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .tank-explanation {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+  }
+
+  .exp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border-left: 3px solid var(--gold);
+  }
+
+  .exp-icon {
+    font-size: var(--current-xl);
+  }
+
+  .exp-text {
+    font-size: var(--current-base);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .exp-text strong {
+    color: var(--gold);
+  }
+
+  /* 安全边界五要素 */
+  .security-boundary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .boundary-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .boundary-card:hover {
+    border-color: var(--gold-30);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .boundary-num {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: var(--current-sm);
+    color: var(--gold-40);
+    font-weight: 600;
+  }
+
+  .boundary-icon {
+    font-size: var(--current-3xl2);
+    margin-bottom: 14px;
+  }
+
+  .boundary-title {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .boundary-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .boundary-tech {
+    font-size: var(--current-sm);
+    color: rgba(201,168,76,0.7);
+    padding: 8px 10px;
+    background: var(--gold-08);
+    border-radius: 6px;
+  }
+
+  /* 有/无授权中心对比 */
+  .auth-compare-section {
+    margin: 40px 0;
+    padding: 28px;
+    background: var(--bg2);
+    border-radius: 16px;
+  }
+
+  .compare-title {
+    text-align: center;
+    font-size: var(--current-xl);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .compare-card {
+    padding: 24px;
+    border-radius: 14px;
+  }
+
+  .compare-bad {
+    background: rgba(255,71,87,0.08);
+    border: 1px solid rgba(255,71,87,0.2);
+  }
+
+  .compare-good {
+    background: rgba(46,213,115,0.08);
+    border: 1px solid rgba(46,213,115,0.2);
+  }
+
+  .compare-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    font-size: var(--current-md);
+    font-weight: 600;
+  }
+
+  .compare-bad .compare-header { color: var(--red); }
+  .compare-good .compare-header { color: var(--green); }
+
+  .compare-icon { font-size: var(--current-xl); }
+
+  .compare-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .compare-list li {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .compare-list li:last-child { border-bottom: none; }
+
+  .compare-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: inherit;
+  }
+
+  .compare-result {
+    margin-top: 16px;
+    padding: 12px;
+    text-align: center;
+    font-size: var(--current-base);
+    font-weight: 600;
+    border-radius: 8px;
+  }
+
+  .compare-bad .compare-result {
+    background: rgba(255,71,87,0.15);
+    color: var(--red);
+  }
+
+  .compare-good .compare-result {
+    background: rgba(46,213,115,0.15);
+    color: var(--green);
+  }
+
+  .compare-vs {
+    font-size: var(--current-lg);
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* 三点论 */
+  .three-points-section {
+    margin: 40px 0;
+    padding: 28px;
+    background: linear-gradient(135deg, var(--gold-08) 0%, rgba(20,20,25,0.6) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--gold-15);
+  }
+
+  /* ===== Part5 AI必答题 ===== */
+  .mandatory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 32px 0;
+  }
+  .mandatory-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s ease;
+  }
+  .mandatory-card:hover {
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-4px);
+  }
+  .mandatory-icon {
+    font-size: var(--current-3xl);
+    margin-bottom: 16px;
+  }
+  .mandatory-title {
+    font-size: var(--current-xl);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .mandatory-desc {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .mandatory-conclusion {
+    text-align: center;
+    margin-top: 48px;
+    padding: 32px;
+    background: linear-gradient(180deg, var(--gold-08) 0%, transparent 100%);
+    border-radius: 12px;
+  }
+  .big-statement {
+    font-size: var(--current-2xl2);
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1.4;
+  }
+
+  /* ===== Part5 结尾考试场景（报销对比） ===== */
+  .reimbursement-compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    margin: 32px 0;
+    align-items: stretch;
+  }
+
+  .reimburse-section {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .ai-section {
+    background: rgba(46,213,115,0.05);
+    border-color: rgba(46,213,115,0.2);
+  }
+
+  .reimburse-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .ai-header {
+    border-bottom-color: rgba(46,213,115,0.2);
+  }
+
+  .reimburse-icon {
+    font-size: var(--current-2xl2);
+  }
+
+  .reimburse-title {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .reimburse-time {
+    font-size: var(--current-base);
+    font-weight: 600;
+    color: var(--red);
+    padding: 6px 14px;
+    background: rgba(255,71,87,0.1);
+    border-radius: 20px;
+  }
+
+  .ai-time {
+    color: var(--green);
+    background: rgba(46,213,115,0.1);
+  }
+
+  .reimburse-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .reimburse-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border-left: 3px solid rgba(255,71,87,0.5);
+  }
+
+  .ai-step {
+    border-left-color: rgba(46,213,115,0.5);
+  }
+
+  .highlight-step {
+    background: rgba(46,213,115,0.08);
+    border-left-color: var(--green);
+  }
+
+  .step-num {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,71,87,0.15);
+    color: var(--red);
+    font-size: var(--current-base);
+    font-weight: 600;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .ai-step-num {
+    background: rgba(46,213,115,0.15);
+    color: var(--green);
+  }
+
+  .step-title {
+    font-size: var(--current-base);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .reimburse-arrow {
+    text-align: center;
+    font-size: var(--current-lg);
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  .ai-arrow {
+    color: var(--green);
+    opacity: 0.8;
+  }
+
+  .ai-magic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(46,213,115,0.1) 0%, var(--gold-05) 100%);
+    border-radius: 12px;
+    border: 1px dashed rgba(46,213,115,0.3);
+  }
+
+  .magic-icon {
+    font-size: var(--current-3xl);
+    animation: magic-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes magic-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .magic-text {
+    font-size: var(--current-base);
+    color: var(--green);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .reimburse-vs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .vs-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, transparent, var(--gold-30), transparent);
+  }
+
+  .vs-badge {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--bg);
+    font-size: var(--current-base);
+    font-weight: 700;
+    border-radius: 50%;
+  }
+
+  /* 统计数据 */
+  .reimburse-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 32px 0;
+    padding: 24px;
+    background: var(--bg2);
+    border-radius: 16px;
+  }
+
+  .reimburse-stat-card {
+    text-align: center;
+    padding: 20px 28px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    min-width: 120px;
+  }
+
+  .reimburse-stat-card.highlight {
+    background: rgba(46,213,115,0.1);
+    border: 1px solid rgba(46,213,115,0.2);
+  }
+
+  .reimburse-stat-value {
+    font-size: var(--current-2xl2);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .reimburse-stat-card.highlight .reimburse-stat-value {
+    color: var(--green);
+  }
+
+  .reimburse-stat-label {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+  }
+
+  .reimburse-stat-arrow {
+    font-size: var(--current-2xl);
+    color: var(--gold);
+  }
+
+  /* 满分过关 */
+  .exam-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0;
+    padding: 40px;
+    background: linear-gradient(135deg, var(--gold-10) 0%, rgba(46,213,115,0.05) 100%);
+    border-radius: 20px;
+    border: 2px solid var(--gold-20);
+  }
+
+  .exam-badge {
+    font-size: var(--current-hero);
+    animation: badge-bounce 1s ease-in-out infinite;
+  }
+
+  @keyframes badge-bounce {
+    0%, 100% { transform: scale(1) rotate(-5deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .exam-title {
+    font-size: var(--current-3xl);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 8px;
+  }
+
+  .exam-subtitle {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+  }
+
+  .three-points-title {
+    text-align: center;
+    font-size: var(--current-xl);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .three-points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .point-card {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+  }
+
+  .point-number {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--bg);
+    font-size: var(--current-lg);
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .point-title {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .point-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ===== Part4 人才队伍转型 ===== */
+  .talent-positions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .position-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .position-card:hover {
+    border-color: var(--gold-30);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .position-icon {
+    font-size: var(--current-3xl2);
+    margin-bottom: 14px;
+  }
+
+  .position-title {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .position-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .position-skill {
+    font-size: var(--current-sm);
+    color: rgba(201,168,76,0.7);
+    padding: 10px;
+    background: var(--gold-08);
+    border-radius: 8px;
+  }
+
+  .budget-section {
+    margin: 40px 0;
+    padding: 28px;
+    background: var(--bg2);
+    border-radius: 16px;
+  }
+
+  .budget-title {
+    text-align: center;
+    font-size: var(--current-xl);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .budget-card {
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .budget-card.highlight {
+    background: var(--gold-10);
+    border-color: var(--gold-30);
+  }
+
+  .budget-label {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .budget-value {
+    font-size: var(--current-2xl2);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .budget-card.highlight .budget-value {
+    color: var(--gold-bright);
+  }
+
+  .budget-desc {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .request-card {
+    background: linear-gradient(135deg, var(--gold-05), rgba(201,168,76,0.01));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .request-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .request-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .request-card:hover::before {
+    opacity: 1;
+  }
+  .request-icon { font-size: var(--current-2xl2); margin-bottom: 12px; }
+  .request-title {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+  }
+  .request-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .value-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .value-card:hover::before {
+    opacity: 1;
+  }
+  .value-icon { font-size: var(--current-3xl); margin-bottom: 12px; }
+  .value-subject {
+    font-size: var(--current-base);
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .value-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .value-desc em { color: var(--text); font-style: normal; }
+
+  /* ===== Part5 时空隧道效果 ===== */
+  .time-tunnel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 28px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, #1a1200 50%, var(--bg) 100%);
+  }
+  
+  .time-tunnel {
+    position: absolute;
+    inset: 0;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+  
+  .tunnel-grid {
+    position: absolute;
+    inset: -50%;
+    background: 
+      linear-gradient(90deg, var(--gold-10) 1px, transparent 1px),
+      linear-gradient(var(--gold-10) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: rotateX(60deg);
+    animation: tunnel-move 3s linear infinite;
+  }
+  
+  @keyframes tunnel-move {
+    0% { transform: rotateX(60deg) translateY(0); }
+    100% { transform: rotateX(60deg) translateY(60px); }
+  }
+  
+  .tunnel-particles {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .tunnel-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold);
+    animation: particle-fly 2s ease-out infinite;
+  }
+  
+  @keyframes particle-fly {
+    0% {
+      transform: translateZ(-500px) scale(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateZ(500px) scale(2);
+      opacity: 0;
+    }
+  }
+  
+  .tunnel-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .tunnel-title {
+    font-size: var(--current-3xl2);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 30px var(--gold-50);
+    animation: tunnel-title-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes tunnel-title-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+  }
+  
+  .tunnel-subtitle {
+    font-size: var(--current-lg);
+    color: var(--text-dim);
+    margin-top: 16px;
+  }
+
+  /* ===== Part5 一人公司 ===== */
+  .opc-intro {
+    background: linear-gradient(135deg, var(--gold-08), rgba(201,168,76,0.02));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .opc-headline {
+    font-size: var(--current-xl);
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .opc-equation {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--gold-08);
+    border-radius: 12px;
+    padding: 20px 32px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .eq-part {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: var(--gold);
+  }
+  .eq-op {
+    font-size: var(--current-2xl);
+    color: var(--gold-bright);
+  }
+  .eq-result {
+    font-size: var(--current-lg);
+    font-weight: 700;
+    color: var(--red);
+  }
+  .opc-desc {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .opc-desc strong { color: var(--gold); }
+
+  .warning-banner {
+    background: linear-gradient(135deg, rgba(255,60,60,0.1), rgba(255,60,60,0.04));
+    border: 1px solid rgba(255,100,100,0.3);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .warning-banner::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,120,80,0.3) 0%, transparent 50%, rgba(255,120,80,0.3) 100%);
+    z-index: -1;
+    animation: pulse-glow-warning 3s ease-in-out infinite;
+    opacity: 0.5;
+  }
+  @keyframes pulse-glow-warning {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.01); }
+  }
+  .warning-icon { 
+    font-size: var(--current-3xl); 
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  .warning-text { 
+    font-size: var(--current-lg); 
+    color: var(--red); 
+    font-weight: 700; 
+    line-height: 1.5; 
+    margin-bottom: 6px;
+  }
+  .warning-sub { 
+    font-size: var(--current-md); 
+    color: var(--text-dim); 
+    font-weight: 400; 
+  }
+
+  .opc-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .opc-step {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .opc-step:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .opc-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .opc-step:hover::before {
+    opacity: 1;
+  }
+  .opc-step-num {
+    font-size: var(--current-sm);
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .opc-step-title {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .opc-step-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .opc-missing {
+    margin-top: 28px;
+    background: rgba(255,100,100,0.06);
+    border: 1px solid rgba(255,100,100,0.2);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .opc-missing-title {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .opc-missing-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .opc-missing-item {
+    background: rgba(255,100,100,0.06);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: var(--current-base);
+    color: var(--text-dim);
+  }
+  .opc-missing-item strong {
+    display: block;
+    color: #ff9999;
+    margin-bottom: 4px;
+    font-size: var(--current-base);
+  }
+  .punchline {
+    margin-top: 28px;
+    text-align: center;
+    padding: 32px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .punchline-text {
+    font-size: var(--current-xl);
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1.5;
+  }
+
+  /* ===== Part5 OPC政策 ===== */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 28px;
+  }
+  .policy-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .policy-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .policy-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .policy-card:hover::before {
+    opacity: 1;
+  }
+  .policy-level {
+    font-size: var(--current-sm);
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .policy-name {
+    font-size: var(--current-lg);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .policy-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .policy-items li {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .policy-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  .policy-items li strong { color: var(--gold-bright); }
+  .policy-insight {
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--gold-08), transparent);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: var(--current-base);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .policy-insight strong { color: var(--gold); }
+
+  /* ===== Part5 AI友好型 ===== */
+  .ai-friendly-concept {
+    background: linear-gradient(135deg, var(--gold-08), rgba(201,168,76,0.02));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .big-statement {
+    font-size: var(--current-2xl);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .big-statement span { color: var(--gold); }
+  .big-sub {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .agent-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+    position: relative;
+  }
+  .agent-flow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(33.33% - 10px);
+    right: calc(33.33% - 10px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold));
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .agent-step {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 1;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .agent-step:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px var(--gold-10);
+  }
+  .agent-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .agent-step:hover::before {
+    opacity: 1;
+  }
+  .agent-step-num {
+    font-size: var(--current-xl);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .agent-step-title {
+    font-size: var(--current-base);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .agent-step-desc {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .measures-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .measure-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .measure-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px var(--gold-10);
+  }
+  .measure-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-10) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .measure-card:hover::before {
+    opacity: 1;
+  }
+  .measure-icon {
+    font-size: var(--current-2xl);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 12px;
+    background: var(--gold-08);
+    border: 1px solid var(--gold-20);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  .measure-card:hover .measure-icon {
+    background: rgba(201,168,76,0.14);
+    border-color: var(--gold-40);
+    box-shadow: 0 0 16px var(--gold-15);
+  }
+  .measure-icon svg {
+    transition: filter 0.3s ease;
+  }
+  .measure-card:hover .measure-icon svg {
+    filter: drop-shadow(0 0 4px var(--gold-50));
+  }
+  .measure-title { font-size: var(--current-base); font-weight: 600; color: var(--gold-bright); margin-bottom: 6px; }
+  .measure-desc { font-size: var(--current-sm); color: var(--text-dim); line-height: 1.5; }
+
+  /* 三步走标题标签 */
+  .agent-3step-header {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    margin: 24px 0 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .agent-3step-tag {
+    font-size: var(--current-xs);
+    letter-spacing: 2px;
+    color: var(--gold);
+    background: var(--gold-10);
+    border: 1px solid var(--gold-30);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ===== Part5 行动倡议 ===== */
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .action-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .action-card:hover {
+    border-color: var(--gold);
+    background: var(--gold-04);
+    transform: translateX(8px);
+    box-shadow: 0 10px 30px var(--gold-08);
+  }
+  .action-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-08) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .action-card:hover::before {
+    opacity: 1;
+  }
+  .action-layer {
+    flex-shrink: 0;
+    width: 56px; height: 56px;
+    border-radius: 10px;
+    background: var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--current-sm);
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .action-content {}
+  .action-title {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: var(--gold-bright);
+    margin-bottom: 6px;
+  }
+  .action-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .final-cta {
+    background: linear-gradient(135deg, #0a0800, #1a1200, #0a0800);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 56px;
+    text-align: center;
+    margin-top: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .final-cta::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--gold-40) 0%, transparent 50%, var(--gold-40) 100%);
+    z-index: -1;
+    animation: pulse-glow-gold 3s ease-in-out infinite;
+    opacity: 0.5;
+  }
+  @keyframes pulse-glow-gold {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.01); }
+  }
+  .final-cta:hover {
+    box-shadow: 0 0 60px var(--gold-15);
+    border-color: var(--gold-bright);
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--gold-12) 0%, transparent 70%);
+  }
+  .final-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, var(--gold-08) 0%, transparent 70%);
+  }
+  .final-quote {
+    font-size: var(--current-2xl2);
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.4;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .final-sub {
+    font-size: var(--current-md);
+    color: var(--text-dim);
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .final-example {
+    display: inline-block;
+    background: var(--gold-12);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 28px;
+    font-size: var(--current-base);
+    color: var(--text);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    text-align: left;
+  }
+  .final-example strong { color: var(--gold-bright); }
+
+  /* ===== Part 分隔线 ===== */
+  .part-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0;
+  }
+
+  /* ===== 目录概览 - React Bits 磁力卡片 ===== */
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 1.5rem 3.5rem;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .toc-card {
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  .toc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--gold-12) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .toc-card::after {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; right: -1px; bottom: -1px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold-30), transparent 50%, var(--gold-10));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .toc-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.4),
+      0 0 30px var(--gold-08);
+  }
+  .toc-card:hover::before {
+    opacity: 1;
+  }
+  .toc-card:hover::after {
+    opacity: 1;
+  }
+  /* 卡片顶部装饰线 */
+  .toc-card .toc-accent {
+    width: 24px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 12px;
+    border-radius: 1px;
+    transition: width 0.4s ease;
+  }
+  .toc-card:hover .toc-accent {
+    width: 40px;
+  }
+  .toc-num {
+    font-size: var(--current-sm);
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .toc-name {
+    font-size: var(--current-md);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+  .toc-card:hover .toc-name {
+    color: #fff;
+  }
+  /* 动画标记闪烁 */
+  .toc-num .anim-dot {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: toc-dot-blink 1.5s ease-in-out infinite;
+  }
+  @keyframes toc-dot-blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ===== 响应式布局 ===== */
+  
+  /* 大屏幕 */
+  @media (min-width: 1400px) {
+    :root { --sidebar-w: 260px; }
+  }
+
+  /* 平板/小桌面 */
+  @media (max-width: 1200px) {
+    .hero { padding: 4rem 3rem 3rem; min-height: auto; }
+    .hero h1 { font-size: var(--current-3xl2); }
+    .hero-stat-item { padding: 16px 20px; }
+    .hero-stat-num { font-size: var(--current-2xl2); }
+    .part-header { padding: 3rem 3rem 2rem; }
+    .section { padding: 3rem 3rem; }
+    .toc-grid { padding: 2rem 3rem; grid-template-columns: repeat(3, 1fr); }
+    .roadmap::before { display: none; }
+  }
+
+  /* 平板 */
+  @media (max-width: 992px) {
+    :root { --sidebar-w: 200px; }
+    .challenge-grid,
+    .risk-grid,
+    .request-grid,
+    .policy-grid { grid-template-columns: 1fr; }
+    .kpi-grid,
+    .value-grid { grid-template-columns: repeat(2, 1fr); }
+    .opc-flow,
+    .agent-flow { grid-template-columns: repeat(2, 1fr); }
+    .measures-grid { grid-template-columns: repeat(3, 1fr); }
+    .shrimp-tank-container { grid-template-columns: 1fr; }
+    .security-boundary-grid { grid-template-columns: repeat(2, 1fr); }
+    .three-points-grid { grid-template-columns: 1fr; }
+    .talent-positions-grid { grid-template-columns: repeat(2, 1fr); }
+    .budget-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-vs { display: none; }
+    .roadmap { grid-template-columns: 1fr; }
+    .hero h1 { font-size: var(--current-3xl); }
+    .hero-stats { gap: 32px; }
+    .opc-missing-items { grid-template-columns: 1fr; }
+  }
+
+  /* 手机横屏 */
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0; }
+    #sidebar {
+      transform: translateX(-100%);
+      width: 260px;
+    }
+    #sidebar.open { transform: translateX(0); }
+    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+    .live-demo-btn { top: 72px; right: 12px; }
+    .theme-toggle { top: 72px; right: 128px; }
+
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .hero h1 { font-size: var(--current-2xl2); }
+    .hero-stats { flex-direction: column; gap: 0; }
+    .hero-stat-item { padding: 14px 0; border-right: none; border-bottom: 1px solid var(--gold-10); }
+    .hero-stat-item:last-child { border-bottom: none; }
+    .hero-scroll-hint { display: none; }
+
+    .part-header { padding: 2.5rem 1.5rem 1.5rem; }
+    .part-title { font-size: var(--current-2xl); }
+
+    .section { padding: 2rem 1.5rem; }
+    .section-title { font-size: var(--current-lg); }
+
+    .toc-grid {
+      padding: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .kpi-grid,
+    .value-grid { grid-template-columns: 1fr; }
+    .opc-flow,
+    .agent-flow { grid-template-columns: 1fr; }
+    .measures-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .action-card { flex-direction: column; gap: 16px; }
+    .action-layer { width: 100%; height: 48px; }
+
+    .final-cta { padding: 32px 20px; }
+    .final-quote { font-size: var(--current-xl); }
+    .iframe-label { font-size: var(--current-xs); padding: 2px 8px; }
+
+    .opc-equation { padding: 16px 20px; }
+    .eq-part, .eq-result { font-size: var(--current-md); }
+    .opc-headline { font-size: var(--current-lg); }
+    .warning-banner { flex-direction: column; text-align: center; padding: 20px; }
+  }
+
+  /* 小手机 */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: var(--current-2xl); }
+    .toc-grid { grid-template-columns: 1fr; }
+    .hero-stat-item { padding: 12px 0; }
+    .hero-stat-num { font-size: var(--current-2xl); }
+    .measures-grid { grid-template-columns: 1fr; }
+    .iframe-wrap { border-radius: 8px; }
+    .iframe-label { font-size: var(--current-xs); padding: 2px 6px; top: 6px; right: 6px; }
+    .opc-intro { padding: 24px 20px; }
+    .policy-quote { padding: 20px; }
+    .security-boundary-grid { grid-template-columns: 1fr; }
+    .talent-positions-grid { grid-template-columns: 1fr; }
+    .budget-grid { grid-template-columns: 1fr; }
+    .reimbursement-compare { grid-template-columns: 1fr; }
+    .mandatory-grid { grid-template-columns: 1fr; }
+    .reimburse-vs { flex-direction: row; gap: 12px; }
+    .vs-line { width: 100%; height: 2px; }
+    .reimburse-stats { flex-direction: column; gap: 12px; }
+    .reimburse-stat-arrow { transform: rotate(90deg); }
+    .exam-badge { font-size: var(--current-4xl); }
+    .exam-title { font-size: var(--current-2xl); }
+    .tank-glass { width: 160px; height: 220px; }
+    .shrimp { font-size: var(--current-xl); }
+    .point-card { flex-direction: column; text-align: center; }
+    .point-number { margin: 0 auto; }
+    .reimbursement-compare { grid-template-columns: 1fr; }
+    .reimburse-vs { flex-direction: row; }
+    .vs-line { width: 100%; height: 2px; }
+    .reimburse-stats { flex-direction: column; }
+    .reimburse-stat-arrow { transform: rotate(90deg); }
+    .policy-quote p { font-size: var(--current-md); }
+    .opc-intro { padding: 24px 20px; }
+    .ai-friendly-concept { padding: 24px 20px; }
+    .big-statement { font-size: var(--current-xl); }
+  }
+
+  /* 锚点偏移补偿 */
+  .anchor-target { scroll-margin-top: 0; }
+  
+  /* iframe-wrap 作为独立 snap 停点，确保第二下箭头能精确停在动画区域 */
+  .iframe-wrap.anchor-target {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 60px; /* 留出顶部空间，避免被浏览器UI遮挡 */
+  }
+  
+  /* ===== 滚动触发动画 ===== */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .reveal-on-scroll.reveal-left {
+    transform: translateX(-50px);
+  }
+  
+  .reveal-on-scroll.reveal-right {
+    transform: translateX(50px);
+  }
+  
+  .reveal-on-scroll.reveal-scale {
+    transform: scale(0.9);
+  }
+  
+  .reveal-on-scroll.reveal-rotate {
+    transform: rotateY(15deg) translateY(30px);
+  }
+  
+  .reveal-on-scroll.reveal-left.revealed,
+  .reveal-on-scroll.reveal-right.revealed,
+  .reveal-on-scroll.reveal-scale.revealed,
+  .reveal-on-scroll.reveal-rotate.revealed {
+    transform: translateX(0) translateY(0) scale(1) rotateY(0);
+  }
+  
+  /* 交错动画延迟 */
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  
+  /* 侧边栏遮罩 */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+  .sidebar-overlay.show { display: block; }
+
+  /* ===== 暖米白主题 & 浅色主题 颜色安全覆盖 ===== */
+  /* 当背景变浅时，白字会看不见——用主题变量覆盖 */
+  html[data-theme="warm-parchment"] .nav-item span,
+  html[data-theme="warm-parchment"] .nav-title,
+  html[data-theme="warm-parchment"] .sidebar-nav li,
+  html[data-theme="warm-parchment"] .part-label,
+  html[data-theme="warm-parchment"] .part-title,
+  html[data-theme="warm-parchment"] .hero-title,
+  html[data-theme="warm-parchment"] .section-title {
+    color: var(--text) !important;
+  }
+  html[data-theme="warm-parchment"] .content-wrapper,
+  html[data-theme="warm-parchment"] .scroll-area {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- 实时演示跳转按钮 -->
+<a href="http://81.71.25.120" target="_blank" class="live-demo-btn">
+  <span class="btn-dot"></span>
+  实时演示
+</a>
+
+<!-- v8 色系切换器（6套主题全联动子iframe） -->
+<div class="theme-toggle" id="themeToggle">
+  <span class="theme-label">色系</span>
+  <div class="theme-swatch swatch-black-gold active" data-theme="black-gold" title="黑金（默认）"></div>
+  <div class="theme-swatch swatch-deep-ocean" data-theme="deep-ocean" title="深海蓝"></div>
+  <div class="theme-swatch swatch-warm-parchment" data-theme="warm-parchment" title="暖米白"></div>
+  <div class="theme-swatch swatch-forest-night" data-theme="forest-night" title="暗夜绿"></div>
+  <div class="theme-swatch swatch-dusk-rose" data-theme="dusk-rose" title="暮光玫瑰"></div>
+  <div class="theme-swatch swatch-nebula-purple" data-theme="nebula-purple" title="星云紫"></div>
+</div>
+
+<!-- 移动端菜单按钮 -->
+<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- 侧边栏触发指示器 -->
+<div class="sidebar-trigger" id="sidebarTrigger" title="展开导航"></div>
+
+<!-- ===== 侧边栏 ===== -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-title">数字金融与AI运营<br>能力升级</div>
+    <div class="logo-sub">广州实践探索 · v7 多色系版</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-item active" onclick="scrollToSection('hero')">
+        <span class="nav-icon">🏠</span> 总览
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PART 01 · 宏观背景</div>
+      <div class="nav-item" onclick="scrollToSection('part1')">
+        <span class="nav-dot"></span> 政策指引与行业挑战
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PART 02 · 技术解读</div>
+      <div class="nav-item" onclick="scrollToSection('part2')">
+        <span class="nav-dot"></span> LLM原理与智能体架构
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PART 03 · 广州实践</div>
+      <div class="nav-item" onclick="scrollToSection('part3')">
+        <span class="nav-dot"></span> 七大落地场景
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PART 04 · 实施路径</div>
+      <div class="nav-item" onclick="scrollToSection('part4')">
+        <span class="nav-dot"></span> 实施路线与保障体系
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PART 05 · One More Thing</div>
+      <div class="nav-item" onclick="scrollToSection('part5')">
+        <span class="nav-dot"></span> 拥抱AI时代
+      </div>
+      <div class="nav-item" onclick="scrollToSection('part5-credits')" style="color: var(--gold);">
+        <span class="nav-dot" style="background: var(--gold);"></span> 致谢
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-footer">5大部分 · 完整演示</div>
+</nav>
+
+<!-- ===== 主内容 ===== -->
+<main id="main">
+
+  <!-- HERO - React Bits 风格升级版 -->
+  <div id="hero" class="hero anchor-target">
+    <!-- Aurora 极光背景层 -->
+    <div class="hero-aurora">
+      <div class="aurora-layer"></div>
+      <div class="aurora-layer"></div>
+      <div class="aurora-layer"></div>
+    </div>
+    <!-- 网格背景 -->
+    <div class="hero-grid-bg"></div>
+    <!-- 浮动粒子 -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <!-- 内容 -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        PRESENTATION · 2026
+      </div>
+      <h1 id="heroTitle">数字金融与<span class="ai-text-group"><span class="shiny">AI运营</span></span><br>能力升级<span class="hero-title-line"></span></h1>
+      <div class="hero-sub">基于广州直营实践的智能体探索与应用</div>
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" data-target="5" data-suffix="">0</div>
+          <div class="hero-stat-label">核心模块</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" data-target="8" data-suffix="+">0</div>
+          <div class="hero-stat-label">落地场景</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" data-target="24" data-suffix="x">0</div>
+          <div class="hero-stat-label">效率提升倍数</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 滚动指示器 -->
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </div>
+
+  <!-- 快速导航 - React Bits 磁力卡片 -->
+  <div class="toc-grid">
+    <a href="#part1" class="toc-card" onclick="scrollToSection('part1');return false;">
+      <div class="toc-accent"></div>
+      <div class="toc-num">PART 01</div>
+      <div class="toc-name">宏观背景</div>
+    </a>
+    <a href="#part2" class="toc-card" onclick="scrollToSection('part2-llm');return false;">
+      <div class="toc-accent"></div>
+      <div class="toc-num">PART 02 <span class="anim-dot"></span></div>
+      <div class="toc-name">技术解读</div>
+    </a>
+    <a href="#part3" class="toc-card" onclick="scrollToSection('part3-crm');return false;">
+      <div class="toc-accent"></div>
+      <div class="toc-num">PART 03 <span class="anim-dot"></span></div>
+      <div class="toc-name">广州实践</div>
+    </a>
+    <a href="#part4" class="toc-card" onclick="scrollToSection('part4-roadmap');return false;">
+      <div class="toc-accent"></div>
+      <div class="toc-num">PART 04</div>
+      <div class="toc-name">实施路径</div>
+    </a>
+    <a href="#part5" class="toc-card" onclick="scrollToSection('part5-opc');return false;">
+      <div class="toc-accent"></div>
+      <div class="toc-num">PART 05</div>
+      <div class="toc-name">One More Thing</div>
+    </a>
+  </div>
+
+  <!-- ========== PART 1 ========== -->
+  <div class="part-divider"></div>
+  <div id="part1" class="part-header anchor-target">
+    <div class="part-tag">PART 01 · 宏观背景</div>
+    <div class="part-title">2025 时代机遇与行业挑战</div>
+    <div class="part-desc">政策指引已明确方向，银行业面临四重现实压力，AI智能体正是破局关键。</div>
+  </div>
+
+  <div id="part1-policy" class="section anchor-target">
+    <div class="section-title">政策指引</div>
+    <div class="section-desc">国家层面的战略部署，为AI在金融领域的应用提供了政策保障。</div>
+
+    <div class="policy-quote">
+      <p>"深化拓展'人工智能+'行动，推进算力设施建设，引导企业加大人工智能投入，开发人工智能核心技术，打造具有国际竞争力的数字产业集群。"</p>
+      <div class="source">——2025年中央经济工作会议</div>
+    </div>
+
+    <div class="policy-quote">
+      <p>"积极稳妥、安全有序推进金融领域人工智能应用，将AI技术与金融业务深度融合，提升服务实体经济质效。"</p>
+      <div class="source">——央行2026年科技工作会议</div>
+    </div>
+
+    <div class="policy-tags">
+      <div class="policy-tag">人工智能+ 国家战略</div>
+      <div class="policy-tag">金融科技赋能</div>
+      <div class="policy-tag">从渠道线上化 → AI决策智能化</div>
+      <div class="policy-tag">安全有序推进</div>
+    </div>
+  </div>
+
+  <div id="part1-challenge" class="section anchor-target">
+    <div class="section-title">银行业面临的四重现实挑战</div>
+    <div class="section-desc">流量红利见顶，传统模式遭遇增长天花板，AI赋能是解法而非选项。</div>
+
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <div class="challenge-num">CHALLENGE 01</div>
+        <div class="challenge-title">获客成本上升</div>
+        <div class="challenge-desc">流量红利见顶，获客与活客成本激增，传统渠道效率持续走低，边际成本越来越高。</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">CHALLENGE 02</div>
+        <div class="challenge-title">存量运营压力</div>
+        <div class="challenge-desc">客户深度运营能力不足，活跃度提升困难，沉默客户占比居高不下，客户价值未能充分挖掘。</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">CHALLENGE 03</div>
+        <div class="challenge-title">服务供需错配</div>
+        <div class="challenge-desc">标准化产品无法满足个性化、场景化、即时化需求，客户体验与期望之间的鸿沟持续加深。</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">CHALLENGE 04</div>
+        <div class="challenge-title">规模不经济困境</div>
+        <div class="challenge-desc">有限人力面对无限需求，人海战术边际效益持续递减，人力成本高居不下难以突破。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== AI 发展历程时间线 ========== -->
+  <div id="part1-ai-timeline" class="section anchor-target">
+    <div class="section-title">AI 的演进：从对话工具到自主智能体</div>
+    <div class="section-desc">AI 的演进路径已从"对话工具"转向"自主智能体（Agent）"，成为破解上述困境的底层驱动力。</div>
+
+    <div class="timeline-intro">
+      <div class="timeline-highlight">AI 发展历程及关键里程碑</div>
+    </div>
+
+    <div class="timeline-table-wrap">
+      <table class="timeline-table">
+        <thead>
+          <tr>
+            <th style="width: 12%;">时间节点</th>
+            <th style="width: 22%;">重要事件</th>
+            <th style="width: 66%;">行业影响与意义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-cell">2017年6月</td>
+            <td class="event-cell">Transformer 架构发布</td>
+            <td class="impact-cell">Google 发表论文 Attention Is All You Need，奠定了现代大模型（LLM）的底层架构，解决了长文本处理的效率问题。</td>
+          </tr>
+          <tr>
+            <td class="time-cell">2022年11月</td>
+            <td class="event-cell">ChatGPT (GPT-3.5) 出世</td>
+            <td class="impact-cell">OpenAI 发布对话式 AI，标志着生成式 AI 进入大众视野。开始探索智能化客服与初级文本自动化。</td>
+          </tr>
+          <tr>
+            <td class="time-cell">2023年3月</td>
+            <td class="event-cell">多模态与开源浪潮</td>
+            <td class="impact-cell">GPT-4 发布；同时 Meta 开源 Llama 系列，大幅降低了机构私有化部署大模型的门槛。</td>
+          </tr>
+          <tr>
+            <td class="time-cell">2024年5月</td>
+            <td class="event-cell">原生多模态 (GPT-4o)</td>
+            <td class="impact-cell">实时音视频交互能力成熟，AI 开始具备理解情感、处理复杂金融单据、进行视觉辅助开户的能力。</td>
+          </tr>
+          <tr>
+            <td class="time-cell">2025年1月</td>
+            <td class="event-cell">Agentic AI (智能体) 爆发</td>
+            <td class="impact-cell">行业重点从"对话"转向"执行"。OpenAI 的 Operator 和 Google 的 Project Jarvis 允许 AI 直接操作电脑软件完成复杂工作流。</td>
+          </tr>
+          <tr>
+            <td class="time-cell">2025年11月</td>
+            <td class="event-cell">OpenClaw 的诞生</td>
+            <td class="impact-cell">开发者 Peter Steinberger 发布 OpenClaw（最初名为 Clawdbot）。它作为一款开源、隐私优先的自主 AI 助手，在 GitHub 上以史无前例的速度突破 10 万星标。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+  <!-- 大语言模型工作原理 -->
+  <div id="part2-llm" class="section anchor-target">
+    <div class="section-title">大语言模型工作原理</div>
+    <div class="section-desc">Token化 → 向量空间 → Transformer预测 → 输出生成，四步可视化流水线动画。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-llm">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe src="02_技术解读_LLM原理_动画版.html" id="iframe-llm" class="eager-load"></iframe>
+    </div>
+  </div>
+
+  <!-- ========== PART 2 过渡页 ========== -->
+  <div id="part2-intro" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 0; scroll-snap-align: start; scroll-snap-stop: always;">
+    <iframe src="p2a-1_智能体是什么_过渡页_v3.html" style="width: 100%; height: 1080px; border: none; display: block;" class="eager-iframe"></iframe>
+  </div>
+
+  <!-- 智能体组装动画预留位置 -->
+  <div id="part2-assembly" class="section anchor-target">
+    <div class="section-title">智能体组装——从零到一的构建过程</div>
+    <div class="section-desc">用「钢铁侠战衣组装」比喻呈现智能体从零配置的过程：裸骨架→基础能力层→Skill→工具→联动，逐层组装。</div>
+    <div class="iframe-wrap" style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);">
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-dim);">
+        <div style="font-size: var(--current-hero); margin-bottom: 20px;">🎬</div>
+        <div style="font-size: var(--current-2xl); color: var(--gold); margin-bottom: 12px;">电影级组装动画</div>
+        <div style="font-size: var(--current-md); max-width: 500px; line-height: 1.6;">
+          裸骨架 → 基础能力层 → Skill → 工具 → 联动<br>
+          <span style="color: var(--gold); opacity: 0.8;">逐层组装，最终完成态</span><br><br>
+          <span style="font-size: var(--current-base); opacity: 0.6;">[ 视频制作中 ]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 多智能体协同演示 -->
+  <div id="part2-multiagent" class="section anchor-target">
+    <div class="section-title">多智能体协同——分工、对话与协作</div>
+    <div class="section-desc">多个智能体如何分工协作、对话记录、互相纠错，展现真实的协同工作场景。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-multiagent">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="02_技术解读_多智能体协同_动画版_20260401_151600.html" id="iframe-multiagent" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <!-- ========== PART 3 ========== -->
+  <div class="part-divider"></div>
+  <div id="part3" class="part-header anchor-target">
+    <div class="part-tag">PART 03 · 广州实践 ✨ 动画演示</div>
+    <div class="part-title">真实场景与业务价值展示</div>
+    <div class="part-desc">广州直营场景。</div>
+  </div>
+
+  <div id="part3-crm" class="section anchor-target">
+    <div class="section-title">场景一：智能客户运营</div>
+    <div class="section-desc">AI画像分析 + 个性化话术生成 + 聊天界面展示，三步演示智能化客户经营。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-crm">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_智能客户运营_动画版.html" id="iframe-crm" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-collab" class="section anchor-target">
+    <div class="section-title">场景二：跨部门协同</div>
+    <div class="section-desc">70分钟 → 5分钟，传统 vs AI工作流时间轴对比，跨部门协同效率飞跃。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-collab">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_跨部门协同_动画版_v2.html" id="iframe-collab" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-email" class="section anchor-target">
+    <div class="section-title">场景三：邮件自动处理</div>
+    <div class="section-desc">全息终端风格，AI自动分类、摘要、回复邮件，释放重复性人力。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-email">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_邮件自动处理_动画版.html" id="iframe-email" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-asset" class="section anchor-target">
+    <div class="section-title">场景四：数据智能 · 自动分析简报</div>
+    <div class="section-desc">上传Excel/CSV自动生成专业分析简报，中后台数据组效率飞跃。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-asset">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="05_数据智能_自动分析简报_动画版_v2.html" id="iframe-asset" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-intel" class="section anchor-target">
+    <div class="section-title">场景五：智能情报 · 每日市场情报官</div>
+    <div class="section-desc">前台客户经理视角，四步时间线驱动，CTS资金回流情报自动触达。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-intel">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="04_智能情报_每日市场情报官_动画版.html" id="iframe-intel" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-sop" class="section anchor-target">
+    <div class="section-title">场景六：SOP智能升级</div>
+    <div class="section-desc">从固定SOP到AI千人千面的智能化演进，显著提升客户响应效果。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-sop">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_SOP智能升级_动画版.html" id="iframe-sop" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-skills" class="section anchor-target">
+    <div class="section-title">场景七：Skills智能体技能系统</div>
+    <div class="section-desc">AI Skills技能库如何驱动智能体协同工作，多角色对话与任务协作演示。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-skills">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_李东明Skills_v3.html" id="iframe-skills" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <!-- ========== PART 4 ========== -->
+  <div class="part-divider"></div>
+  <div id="part4" class="part-header anchor-target">
+    <div class="part-tag">PART 04 · 实施路径与预期价值</div>
+    <div class="part-title">怎么干？能得到什么？还缺什么？</div>
+    <div class="part-desc">三阶段可落地路线图，量化KPI目标，四维风险防控，四大资源诉求——务实且可执行。</div>
+  </div>
+
+  <!-- 4.1 KPI -->
+  <div id="part4-kpi" class="section anchor-target">
+    <div class="section-title">量化预期价值</div>
+    <div class="section-desc">6项核心指标，从现状到目标，每一个数字都有真实依据。</div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-metric">外呼添加率</div>
+        <div class="kpi-current">&lt;6% <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">15%</div>
+        <div class="kpi-desc">企微连接数翻倍</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">人均企微连接数</div>
+        <div class="kpi-current">1.5万 <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">5万</div>
+        <div class="kpi-desc">覆盖率 20%→80%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">信息收集耗时</div>
+        <div class="kpi-current">2小时/天 <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">5min</div>
+        <div class="kpi-desc">效率提升 24 倍</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">SOP客户回复率</div>
+        <div class="kpi-current">15% <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">25%+</div>
+        <div class="kpi-desc">个性化内容驱动</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">客户转化率</div>
+        <div class="kpi-current">基准值 <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">+35%</div>
+        <div class="kpi-desc">2028年Q4目标</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-metric">投资回收期</div>
+        <div class="kpi-current">预估 <span class="kpi-arrow">→</span></div>
+        <div class="kpi-target">2-3年</div>
+        <div class="kpi-desc">人效+转化双轮增收</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3 风险控制 -->
+  <div id="part4-risk" class="section anchor-target">
+    <div class="section-title">风险控制——四维防控体系</div>
+    <div class="section-desc">合规、责任、隐私、幻觉——每一个风险点都有可落地的解决方案，人工审核是最后一道关。</div>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">⚖️</div>
+          <div class="risk-name">合规风险控制</div>
+        </div>
+        <div class="risk-problem">问题：智能体自主决策可能触碰合规边界</div>
+        <ul class="risk-solutions">
+          <li>业务规则前置：将内控、合规规则写入智能体知识库</li>
+          <li>关键节点人工审核：高风险决策必须有人工确认</li>
+          <li>流程隔离：智能体执行与客户触达分离，人工把关</li>
+          <li>营销话术必须经直营经理确认后才能发给客户</li>
+        </ul>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🧑‍⚖️</div>
+          <div class="risk-name">责任界定机制</div>
+        </div>
+        <div class="risk-problem">问题：智能体出现错误，谁负责？</div>
+        <ul class="risk-solutions">
+          <li>明确边界：智能体负责信息收集初步分析，经理负责最终决策</li>
+          <li>全程留痕：所有操作都有日志可追溯</li>
+          <li>人工兜底：关键业务必须有人的确认</li>
+          <li>原则：技术可以辅助决策，但决策责任在人</li>
+        </ul>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🔒</div>
+          <div class="risk-name">客户隐私保护</div>
+        </div>
+        <div class="risk-problem">问题：智能体访问客户数据，如何保护隐私？</div>
+        <ul class="risk-solutions">
+          <li>权限控制：智能体只能访问授权范围内的数据</li>
+          <li>数据脱敏：敏感数据进入智能体前自动脱敏</li>
+          <li>最小必要原则：只收集完成任务必须的数据</li>
+          <li>沟通记录加密存储，仅授权人员可查看</li>
+        </ul>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🧠</div>
+          <div class="risk-name">AI幻觉风险应对</div>
+        </div>
+        <div class="risk-problem">问题：大模型可能生成错误信息（幻觉）</div>
+        <ul class="risk-solutions">
+          <li>知识库优先：优先查询内部知识库，不依赖模型编造</li>
+          <li>数据源校验：生成内容必须基于可信数据源</li>
+          <li>人工抽检：定期抽检输出，发现问题及时修正</li>
+          <li>产品信息必须从官方知识库查询，不确定时标注待确认</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3b AI安全边界专题（养虾比喻） -->
+  <div id="part4-security" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">AI安全边界——以"养虾"为喻</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">银行是经营风险的机构，AI时代的安全底线比任何时候都重要。没有最重要，只有更重要。</div>
+
+    <!-- 养虾比喻核心概念 -->
+    <div class="shrimp-tank-container reveal-on-scroll reveal-delay-2">
+      <div class="tank-visual">
+        <div class="tank-glass">
+          <div class="tank-water">
+            <div class="shrimp-group">
+              <div class="shrimp shrimp-1">🦐</div>
+              <div class="shrimp shrimp-2">🦐</div>
+              <div class="shrimp shrimp-3">🦀</div>
+              <div class="shrimp shrimp-4">🦐</div>
+              <div class="shrimp shrimp-5">🦞</div>
+            </div>
+            <div class="tank-bubbles">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="tank-label">智能体沙箱环境</div>
+      </div>
+      
+      <div class="tank-explanation">
+        <div class="exp-item">
+          <div class="exp-icon">🫙</div>
+          <div class="exp-text"><strong>玻璃缸</strong> = 沙箱隔离环境（OpenClaw等框架）</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-icon">💧</div>
+          <div class="exp-text"><strong>水</strong> = 算力基础设施 + 网络环境</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-icon">🍤</div>
+          <div class="exp-text"><strong>饲料</strong> = Token消耗 + 知识库投喂</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-icon">🔥</div>
+          <div class="exp-text"><strong>加热棒</strong> = 温度调节 = 模型调优与优化</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-icon">💡</div>
+          <div class="exp-text"><strong>杀菌灯</strong> = 安全过滤 = 合规审查机制</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全边界五要素 -->
+    <div class="security-boundary-grid">
+      <div class="boundary-card reveal-on-scroll reveal-left reveal-delay-1">
+        <div class="boundary-num">01</div>
+        <div class="boundary-icon">🧱</div>
+        <div class="boundary-title">沙箱隔离</div>
+        <div class="boundary-desc">每只"虾"都在独立的玻璃缸中运行，互不干扰。通过容器化技术实现环境隔离，确保单个智能体的异常不会影响整体系统。</div>
+        <div class="boundary-tech">技术实现：Docker + K8s 容器编排</div>
+      </div>
+      
+      <div class="boundary-card reveal-on-scroll reveal-delay-2">
+        <div class="boundary-num">02</div>
+        <div class="boundary-icon">🕸️</div>
+        <div class="boundary-title">权限网格</div>
+        <div class="boundary-desc">给虾兵蟹将划定活动范围，装隔离网、划区域。不同智能体拥有不同的数据访问权限，核心数据需要额外授权。</div>
+        <div class="boundary-tech">技术实现：RBAC 角色权限控制 + ABAC 属性权限</div>
+      </div>
+      
+      <div class="boundary-card reveal-on-scroll reveal-right reveal-delay-1">
+        <div class="boundary-num">03</div>
+        <div class="boundary-icon">🐲</div>
+        <div class="boundary-title">龙王授权中心</div>
+        <div class="boundary-desc">所有智能体的操作必须经过授权中心验证。龙王拍桌子："按规矩来！"——没有授权，什么都干不了。</div>
+        <div class="boundary-tech">技术实现：统一身份认证 + 操作审计日志</div>
+      </div>
+      
+      <div class="boundary-card reveal-on-scroll reveal-left reveal-delay-3">
+        <div class="boundary-num">04</div>
+        <div class="boundary-icon">🔄</div>
+        <div class="boundary-title">数据流转管控</div>
+        <div class="boundary-desc">虾缸之间的连接管道受控，数据输入输出都有记录。敏感数据自动脱敏，确保客户隐私安全。</div>
+        <div class="boundary-tech">技术实现：数据脱敏 + 传输加密 + 访问日志</div>
+      </div>
+      
+      <div class="boundary-card reveal-on-scroll reveal-delay-4">
+        <div class="boundary-num">05</div>
+        <div class="boundary-icon">⚡</div>
+        <div class="boundary-title">应急响应</div>
+        <div class="boundary-desc">发现异常立即隔离，一键关停问题智能体。就像发现病虾立即捞出，防止传染整个虾塘。</div>
+        <div class="boundary-tech">技术实现：实时监控 + 熔断机制 + 一键下线</div>
+      </div>
+    </div>
+
+    <!-- 三点论 -->
+    <div class="three-points-section reveal-on-scroll reveal-delay-4">
+      <div class="three-points-title">安全治理三点论</div>
+      <div class="three-points-grid">
+        <div class="point-card point-1">
+          <div class="point-number">1</div>
+          <div class="point-content">
+            <div class="point-title">技控 > 人控</div>
+            <div class="point-desc">技术手段的约束比人工审核更可靠。把安全规则写进代码，让智能体突破不了边界，而不是依赖人的自觉。</div>
+          </div>
+        </div>
+        <div class="point-card point-2">
+          <div class="point-number">2</div>
+          <div class="point-content">
+            <div class="point-title">权限精细化</div>
+            <div class="point-desc">每个智能体只拥有完成任务所需的最小权限。能读的不给写，能写的不给删，层层设防。</div>
+          </div>
+        </div>
+        <div class="point-card point-3">
+          <div class="point-number">3</div>
+          <div class="point-content">
+            <div class="point-title">政委即连长</div>
+            <div class="point-desc">AI时代的安全人员不能只会"忽悠"，必须懂技术、会写代码。把支部建在连上，安全意识融入训练过程。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.4 人才队伍转型 -->
+  <div id="part4-talent" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">人才队伍转型</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">AI时代需要新型人才队伍，建章立制、资源配套、业技融合，三者缺一不可。</div>
+
+    <!-- 新增职位 -->
+    <div class="talent-positions-grid">
+      <div class="position-card reveal-on-scroll reveal-left reveal-delay-1">
+        <div class="position-icon">💬</div>
+        <div class="position-title">提示词工程师</div>
+        <div class="position-desc">设计、优化与AI交互的提示词，让智能体更懂业务、更懂客户</div>
+        <div class="position-skill">核心技能：自然语言处理 + 业务理解 + 逻辑思维</div>
+      </div>
+      
+      <div class="position-card reveal-on-scroll reveal-delay-2">
+        <div class="position-icon">🎨</div>
+        <div class="position-title">AI交互工程师</div>
+        <div class="position-desc">设计人机交互界面，让AI工具好用、易用、员工愿意用</div>
+        <div class="position-skill">核心技能：UX设计 + 前端开发 + 心理学</div>
+      </div>
+      
+      <div class="position-card reveal-on-scroll reveal-right reveal-delay-1">
+        <div class="position-icon">⚙️</div>
+        <div class="position-title">模型优化工程师</div>
+        <div class="position-desc">针对银行业务场景微调大模型，提升专业领域表现</div>
+        <div class="position-skill">核心技能：机器学习 + 金融知识 + 数据处理</div>
+      </div>
+      
+      <div class="position-card reveal-on-scroll reveal-left reveal-delay-3">
+        <div class="position-icon">🛡️</div>
+        <div class="position-title">AI安全工程师</div>
+        <div class="position-desc">构建AI安全边界，防范数据泄露、模型攻击等风险</div>
+        <div class="position-skill">核心技能：网络安全 + 合规知识 + 风险评估</div>
+      </div>
+      
+      <div class="position-card reveal-on-scroll reveal-delay-4">
+        <div class="position-icon">🎓</div>
+        <div class="position-title">智能体训练师</div>
+        <div class="position-desc">持续训练优化智能体，提升业务场景适配度</div>
+        <div class="position-skill">核心技能：业务专家 + 数据分析 + 持续学习</div>
+      </div>
+      
+      <div class="position-card reveal-on-scroll reveal-right reveal-delay-3">
+        <div class="position-icon">📊</div>
+        <div class="position-title">AI产品经理</div>
+        <div class="position-desc">统筹AI产品规划，连接业务需求与技术实现</div>
+        <div class="position-skill">核心技能：产品思维 + 项目管理 + 跨部门沟通</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.5 诉求与价值展望 -->
+  <div id="part4-request" class="section anchor-target">
+    <div class="section-title">需要支持的方面</div>
+    <div class="section-desc">以下是落地实施的先决条件，需要管理层支持或协调资源。</div>
+
+    <div class="request-grid">
+      <div class="request-card">
+        <div class="request-icon">🧪</div>
+        <div class="request-title">实验边界界定</div>
+        <div class="request-desc">明确可控实验环境的权限范围，允许在指定场景内先行探索——到底哪些能做、能做到什么程度？这是第一步，也是最重要的一步。</div>
+      </div>
+      <div class="request-card">
+        <div class="request-icon">💻</div>
+        <div class="request-title">本地算力支持</div>
+        <div class="request-desc">配置基础本地算力资源，解决内网部署与数据安全的核心问题。这是私有化部署的前提，没有本地算力，所有数据安全都是纸上谈兵。</div>
+      </div>
+      <div class="request-card">
+        <div class="request-icon">🤝</div>
+        <div class="request-title">外部合作引入</div>
+        <div class="request-desc">与高校及专业机构合作，引入前瞻性研究，避免闭门造车。单靠内部力量不够，需要吸收外部最新技术和经验。</div>
+      </div>
+      <div class="request-card">
+        <div class="request-icon">🔌</div>
+        <div class="request-title">系统接口开放</div>
+        <div class="request-desc">推动总行核心系统能力原子化、接口化开放，形成上下合力。只有系统开放了，智能体才能真正发挥威力，否则只能在边缘打转。</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <div class="section-title">价值展望：从三个维度看收益</div>
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="value-icon">👥</div>
+          <div class="value-subject">对客户</div>
+          <div class="value-desc"><em>响应更快</em> · <em>建议更准</em> · <em>服务更有温度</em><br><br>不是冷冰冰的系统，而是真正懂你的智能助手。</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">👩‍💼</div>
+          <div class="value-subject">对员工</div>
+          <div class="value-desc">从重复劳动中解放，聚焦高价值判断。<br><br><em>工具帮你干，不是AI替你走。</em>反而能创效增收、提升收入。</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🏦</div>
+          <div class="value-subject">对全行</div>
+          <div class="value-desc"><em>可复制的模式</em> · <em>可验证的ROI</em> · <em>可传承的智能运营体系</em><br><br>广州直营的探索，为全行提供示范样本。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PART 5 ========== -->
+  <div class="part-divider"></div>
+  
+  <!-- 5.0 感谢聆听入场 -->
+  <div id="part5-intro" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);">
+    <style>
+    /* 入场动画样式 - 独立命名空间 */
+    #part5-intro { --gold: var(--gold); }
+    #part5-intro canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+    #part5-intro .grid-bg {
+      position:fixed; top:0; left:0; width:100%; height:100%; z-index:0;
+      background-image: linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.03) 1px,transparent 1px);
+      background-size:60px 60px; pointer-events:none;
+    }
+    #part5-intro .scanline {
+      position:absolute; top:0; left:0; width:100%; height:2px;
+      background:rgba(201,168,76,0.15); z-index:100;
+      animation:scanline 4s linear infinite;
+      pointer-events:none;
+      box-shadow:0 0 10px rgba(201,168,76,0.3);
+    }
+    @keyframes scanline { 0% { top:-2px; } 100% { top:100%; } }
+    #part5-intro .scene-container {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      perspective: 1200px; overflow:hidden; z-index:10;
+    }
+    #part5-intro .thanks-page {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);
+      z-index:10; transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #part5-intro .thanks-page.pushed {
+      transform: translateX(-120%) rotateY(15deg) scale(0.85);
+      opacity: 0.6;
+    }
+    #part5-intro .thanks-content {
+      text-align:center; opacity:0; transform:translateY(30px);
+      transition:all 0.8s ease;
+    }
+    #part5-intro .thanks-content.show { opacity:1; transform:translateY(0); }
+    #part5-intro .thanks-title {
+      font-size:48px; font-weight:800; color: var(--gold);
+      text-shadow:0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.2);
+      margin-bottom:20px; letter-spacing:8px; min-height:70px;
+    }
+    #part5-intro .type-cursor {
+      display:inline-block; width:3px; height:56px; background:var(--gold);
+      margin-left:4px; animation:cursorBlink 0.8s infinite; vertical-align:middle;
+    }
+    @keyframes cursorBlink { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
+    #part5-intro .omt-final-container {
+      display:none; flex-direction:column; align-items:center;
+      justify-content:center; position:relative;
+    }
+    #part5-intro .omt-final-container.show {
+      display:flex; animation: finalAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes finalAppear { 0% { opacity:0; transform:scale(0.3); } 60% { transform:scale(1.05); } 100% { opacity:1; transform:scale(1); } }
+    #part5-intro .omt-glow {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:600px; height:600px;
+      background:radial-gradient(circle,rgba(201,168,76,0.5) 0%,rgba(201,168,76,0.2) 30%,rgba(201,168,76,0.05) 50%,transparent 70%);
+      border-radius:50%; opacity:0; pointer-events:none; z-index:-1;
+    }
+    #part5-intro .omt-glow.show { opacity:1; animation:glowAppear 1s ease-out forwards, pulseGlow 3s ease-in-out infinite 1s; }
+    @keyframes glowAppear { 0% { opacity:0; transform:translate(-50%,-50%) scale(0.5); } 100% { opacity:1; transform:translate(-50%,-50%) scale(1); } }
+    @keyframes pulseGlow { 0%,100% { transform:translate(-50%,-50%) scale(1); opacity:0.8; } 50% { transform:translate(-50%,-50%) scale(1.3); opacity:1; } }
+    #part5-intro .omt-text-wrapper { text-align:center; position:relative; }
+    #part5-intro .omt-main-text {
+      font-size:64px; font-weight:900;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing:12px;
+      filter: drop-shadow(0 0 40px rgba(201,168,76,0.8)) drop-shadow(0 0 80px rgba(201,168,76,0.4));
+      will-change: opacity, transform;
+      transform: translateY(30px) scale(0.85);
+      opacity: 0;
+    }
+    #part5-intro .omt-final-container.show .omt-main-text {
+      animation: omtTextReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards, textGlowPulse 2s ease-in-out infinite alternate 1s;
+    }
+    @keyframes omtTextReveal {
+      0%   { opacity:0; transform:translateY(30px) scale(0.85); }
+      60%  { opacity:1; transform:translateY(-4px) scale(1.02); }
+      100% { opacity:1; transform:translateY(0) scale(1); }
+    }
+    @keyframes textGlowPulse { 0% { filter: drop-shadow(0 0 30px rgba(201,168,76,0.6)) drop-shadow(0 0 60px rgba(201,168,76,0.3)); } 100% { filter: drop-shadow(0 0 50px rgba(201,168,76,0.9)) drop-shadow(0 0 100px rgba(201,168,76,0.5)); } }
+    #part5-intro .omt-subtitle {
+      font-size:24px; color:#aaa; margin-top:40px; letter-spacing:4px;
+      opacity: 0;
+      transform: translateY(20px);
+      will-change: opacity, transform;
+    }
+    #part5-intro .omt-final-container.show .omt-subtitle {
+      animation: omtSubReveal 0.6s ease-out 0.95s forwards;
+    }
+    @keyframes omtSubReveal { 0% { opacity:0; transform:translateY(20px); } 100% { opacity:1; transform:translateY(0); } }
+    #part5-intro .omt-decoration { position:absolute; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+    #part5-intro .deco-line { position:absolute; background:linear-gradient(90deg,transparent,rgba(201,168,76,0.8),transparent); height:2px; width:0; box-shadow:0 0 20px rgba(201,168,76,0.5); transition:width 1s ease 0.5s; }
+    #part5-intro .deco-line.top { top:25%; left:0; }
+    #part5-intro .deco-line.bottom { bottom:25%; left:0; }
+    #part5-intro .deco-line.show { width:100%; }
+    #part5-intro .deco-circle { position:absolute; border:2px solid rgba(201,168,76,0.4); border-radius:50%; opacity:0; transform:scale(0); transition:all 0.6s ease 0.4s; box-shadow:0 0 30px rgba(201,168,76,0.2), inset 0 0 30px rgba(201,168,76,0.1); }
+    #part5-intro .deco-circle.c1 { width:250px; height:250px; top:15%; left:8%; }
+    #part5-intro .deco-circle.c2 { width:180px; height:180px; bottom:20%; right:12%; }
+    #part5-intro .deco-circle.c3 { width:120px; height:120px; top:35%; right:18%; }
+    #part5-intro .deco-circle.show { opacity:1; transform:scale(1); animation: rotateCircle 20s linear infinite; }
+    @keyframes rotateCircle { 0% { transform:scale(1) rotate(0deg); } 100% { transform:scale(1) rotate(360deg); } }
+    #part5-intro .corner-deco { position:absolute; width:80px; height:80px; border:2px solid rgba(201,168,76,0.3); opacity:0; transition:all 0.6s ease 0.6s; }
+    #part5-intro .corner-deco.tl { top:40px; left:40px; border-right:none; border-bottom:none; }
+    #part5-intro .corner-deco.tr { top:40px; right:40px; border-left:none; border-bottom:none; }
+    #part5-intro .corner-deco.bl { bottom:40px; left:40px; border-right:none; border-top:none; }
+    #part5-intro .corner-deco.br { bottom:40px; right:40px; border-left:none; border-top:none; }
+    #part5-intro .corner-deco.show { opacity:1; }
+    #part5-intro .click-hint { position:absolute; bottom:80px; left:50%; transform:translateX(-50%); font-size:14px; color:#666; opacity:0; animation:fadeInHint 1s ease 2s forwards, pulseHint 2s ease-in-out 3s infinite; }
+    @keyframes fadeInHint { to { opacity:1; } }
+    @keyframes pulseHint { 0%,100% { opacity:0.6; transform:translateX(-50%) scale(1); } 50% { opacity:1; transform:translateX(-50%) scale(1.05); } }
+    #part5-intro .next-btn { position:absolute; bottom:60px; left:50%; transform:translateX(-50%); background:rgba(201,168,76,0.1); border:2px solid rgba(201,168,76,0.5); color:var(--gold); padding:14px 40px; border-radius:30px; font-size:16px; cursor:pointer; opacity:0; transition:all 0.4s ease 1s; font-family:inherit; letter-spacing:2px; box-shadow:0 0 20px rgba(201,168,76,0.2); }
+    #part5-intro .next-btn:hover { background:rgba(201,168,76,0.2); border-color:rgba(201,168,76,0.8); transform:translateX(-50%) translateY(-2px); box-shadow:0 0 30px rgba(201,168,76,0.4); }
+    #part5-intro .next-btn.visible { opacity:1; pointer-events:auto; }
+    </style>
+    
+    <canvas id="omtBgCanvas"></canvas>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+
+    <div class="scene-container">
+      <div class="thanks-page" id="thanksPage">
+        <div class="omt-decoration" id="omtDecoration" style="opacity:0; transition:opacity 0.8s ease;">
+          <div class="deco-line top" id="decoLineTop"></div>
+          <div class="deco-line bottom" id="decoLineBottom"></div>
+          <div class="deco-circle c1" id="decoC1"></div>
+          <div class="deco-circle c2" id="decoC2"></div>
+          <div class="deco-circle c3" id="decoC3"></div>
+          <div class="corner-deco tl" id="cornerTL"></div>
+          <div class="corner-deco tr" id="cornerTR"></div>
+          <div class="corner-deco bl" id="cornerBL"></div>
+          <div class="corner-deco br" id="cornerBR"></div>
+        </div>
+        
+        <div class="thanks-content" id="thanksContent">
+          <div class="thanks-title" id="typewriterTitle"></div>
+          <div class="omt-final-container" id="omtFinalContainer">
+            <div class="omt-glow" id="omtGlow"></div>
+            <div class="omt-text-wrapper">
+              <div class="omt-main-text" id="omtMainText">One More Thing……</div>
+            </div>
+            <div class="omt-subtitle" id="omtSubtitle">智能化时代的挑战与机遇</div>
+          </div>
+        </div>
+        
+        <div class="click-hint" id="clickHint">点击屏幕继续 →</div>
+        <button class="next-btn" id="nextBtn">进入正文 →</button>
+      </div>
+    </div>
+
+    <script>
+    // 入场动画JS
+    (function() {
+      const container = document.getElementById('part5-intro');
+      const canvas = document.getElementById('omtBgCanvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let transitioned = false;
+      let typewriterComplete = false;
+      let started = false;
+      let animationId = null; // 保存动画帧ID，用于停止动画
+      let isVisible = false;   // 标记section是否可见
+
+      function resize() { canvas.width = 1440; canvas.height = 1080; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 2 + 0.5,
+          a: Math.random() * 0.4 + 0.1
+        });
+      }
+
+      function animBg() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(201,168,76,' + p.a + ')';
+          ctx.fill();
+        });
+        // 优化：减少连线计算频率，每3帧计算一次
+        if (animBg.frameCount % 3 === 0) {
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+              if (d < 120) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = 'rgba(201,168,76,' + (0.08 * (1 - d / 120)) + ')';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        animBg.frameCount++;
+        // 只有在可见时才继续动画
+        if (isVisible) {
+          animationId = requestAnimationFrame(animBg);
+        }
+      }
+      animBg.frameCount = 0;
+
+      function triggerAnimation() {
+        if (started) return;
+        started = true;
+        document.getElementById('thanksContent').classList.add('show');
+        startTypewriterEffect();
+      }
+
+      function startTypewriterEffect() {
+        const titleEl = document.getElementById('typewriterTitle');
+        const clickHint = document.getElementById('clickHint');
+        let currentText = '';
+        let phase = 'typingGan';
+        let index = 0;
+
+        function updateDisplay() {
+          titleEl.innerHTML = currentText + '<span class="type-cursor"></span>';
+        }
+
+        function typeNext() {
+          if (phase === 'typingGan') {
+            const textGan = 'gan';
+            if (index < textGan.length) {
+              currentText = textGan.substring(0, index + 1);
+              index++;
+              updateDisplay();
+              setTimeout(typeNext, 150);
+            } else {
+              setTimeout(() => {
+                currentText = '感';
+                updateDisplay();
+                setTimeout(() => {
+                  phase = 'typingXie';
+                  index = 0;
+                  typeNext();
+                }, 200);
+              }, 200);
+            }
+          } else if (phase === 'typingXie') {
+            const textXie = 'xie';
+            if (index < textXie.length) {
+              currentText = '感' + textXie.substring(0, index + 1);
+              index++;
+              updateDisplay();
+              setTimeout(typeNext, 150);
+            } else {
+              setTimeout(() => {
+                currentText = '感谢';
+                updateDisplay();
+                setTimeout(() => {
+                  phase = 'typingLing';
+                  index = 0;
+                  typeNext();
+                }, 200);
+              }, 200);
+            }
+          } else if (phase === 'typingLing') {
+            const textLing = 'ling';
+            if (index < textLing.length) {
+              currentText = '感谢' + textLing.substring(0, index + 1);
+              index++;
+              updateDisplay();
+              setTimeout(typeNext, 150);
+            } else {
+              setTimeout(() => {
+                currentText = '感谢聆';
+                updateDisplay();
+                setTimeout(() => {
+                  phase = 'typingTing';
+                  index = 0;
+                  typeNext();
+                }, 200);
+              }, 200);
+            }
+          } else if (phase === 'typingTing') {
+            const textTing = 'ting';
+            if (index < textTing.length) {
+              currentText = '感谢聆' + textTing.substring(0, index + 1);
+              index++;
+              updateDisplay();
+              setTimeout(typeNext, 150);
+            } else {
+              setTimeout(() => {
+                currentText = '感谢聆听';
+                updateDisplay();
+                setTimeout(() => {
+                  phase = 'deleting';
+                  typeNext();
+                }, 300);
+              }, 200);
+            }
+          } else if (phase === 'deleting') {
+            if (currentText.length > 0) {
+              currentText = currentText.slice(0, -1);
+              updateDisplay();
+              setTimeout(typeNext, 100);
+            } else {
+              typewriterComplete = true;
+              titleEl.innerHTML = '';
+              clickHint.style.animation = 'fadeInHint 0.5s ease forwards, pulseHint 2s ease-in-out 1s infinite';
+            }
+          }
+        }
+        updateDisplay();
+        setTimeout(typeNext, 300);
+      }
+
+      function triggerTransition() {
+        if (transitioned || !typewriterComplete) return;
+        transitioned = true;
+        showFinalScene();
+      }
+
+      function showFinalScene() {
+        const titleEl = document.getElementById('typewriterTitle');
+        const omtFinal = document.getElementById('omtFinalContainer');
+        const clickHint = document.getElementById('clickHint');
+        const decoration = document.getElementById('omtDecoration');
+        const nextBtn = document.getElementById('nextBtn');
+        const omtMainText = document.getElementById('omtMainText');
+        const omtSubtitle = document.getElementById('omtSubtitle');
+        
+        titleEl.style.display = 'none';
+        clickHint.style.opacity = '0';
+        decoration.style.opacity = '1';
+        omtFinal.classList.add('show');
+        createBurstParticles();
+
+        // 兜底：动画结束后强制确保文字可见（解决 -webkit-text-fill-color + opacity 动画兼容性问题）
+        setTimeout(() => {
+          if (omtMainText) {
+            omtMainText.style.opacity = '1';
+            omtMainText.style.transform = 'translateY(0) scale(1)';
+          }
+        }, 1100);
+        setTimeout(() => {
+          if (omtSubtitle) {
+            omtSubtitle.style.opacity = '1';
+            omtSubtitle.style.transform = 'translateY(0)';
+          }
+        }, 1700);
+        
+        setTimeout(() => { document.getElementById('omtGlow').classList.add('show'); }, 200);
+        setTimeout(() => {
+          document.getElementById('decoLineTop').classList.add('show');
+          document.getElementById('decoLineBottom').classList.add('show');
+        }, 400);
+        setTimeout(() => {
+          ['decoC1', 'decoC2', 'decoC3', 'cornerTL', 'cornerTR', 'cornerBL', 'cornerBR'].forEach(id => {
+            document.getElementById(id).classList.add('show');
+          });
+        }, 600);
+        setTimeout(() => { nextBtn.classList.add('visible'); }, 1500);
+      }
+
+      function createBurstParticles() {
+        const colors = ['#C9A84C', '#C9A84C', '#E8D5A3', '#F5E6C8', '#FFA500'];
+        const maxDistance = Math.max(1440, 1080) * 0.8;
+        for (let i = 0; i < 120; i++) {
+          setTimeout(() => {
+            const particle = document.createElement('div');
+            const size = 3 + Math.random() * 8;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.cssText = 'position:fixed;width:' + size + 'px;height:' + size + 'px;background:' + color + ';border-radius:50%;left:50%;top:50%;pointer-events:none;box-shadow:0 0 ' + (10 + Math.random() * 20) + 'px ' + color + ';z-index:9999;';
+            document.body.appendChild(particle);
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 150 + Math.random() * maxDistance;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            particle.animate([
+              { transform: 'translate(-50%,-50%) scale(0)', opacity: 0 },
+              { transform: 'translate(-50%,-50%) scale(1.5)', opacity: 1, offset: 0.1 },
+              { transform: 'translate(calc(-50% + ' + tx + 'px),calc(-50% + ' + ty + 'px)) scale(0.3)', opacity: 0 }
+            ], { duration: 800 + Math.random() * 1200, easing: 'cubic-bezier(0.25,0.46,0.45,0.94)' }).onfinish = () => particle.remove();
+          }, i * 12);
+        }
+      }
+
+      // 点击和键盘事件
+      document.getElementById('thanksPage').addEventListener('click', triggerTransition);
+      document.getElementById('nextBtn').addEventListener('click', function(e) { e.stopPropagation(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') {
+          if (!typewriterComplete) return;
+          if (!transitioned) triggerTransition();
+        }
+      });
+
+      // Intersection Observer：滚动到此处时触发动画和Canvas动画
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // 进入视口：启动Canvas动画
+            if (!isVisible) {
+              isVisible = true;
+              animationId = requestAnimationFrame(animBg);
+            }
+            if (!started) {
+              setTimeout(triggerAnimation, 300);
+            }
+          } else {
+            // 离开视口：停止Canvas动画以节省资源
+            if (isVisible) {
+              isVisible = false;
+              if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+              }
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(container);
+      
+      // 页面卸载时清理资源
+      window.addEventListener('beforeunload', function() {
+        isVisible = false;
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+      });
+    })();
+    </script>
+  </div>
+
+  <div id="part5" class="part-header anchor-target">
+    <div class="part-tag">PART 05 · One More Thing</div>
+    <div class="part-title">智能化时代的挑战与机遇</div>
+    <div class="part-desc">往前再走一步——AI不只是工具，而是全新的商业业态。银行的位置在哪里？</div>
+  </div>
+
+  <!-- 5.1 一人公司 -->
+  <div id="part5-opc" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">一人公司（OPC）的崛起</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">一种全新的商业模式正在兴起，它正在重塑所有行业的服务逻辑——包括银行。</div>
+
+    <!-- 时空隧道效果 -->
+    <div class="time-tunnel-container reveal-on-scroll reveal-scale reveal-delay-2">
+      <div class="time-tunnel">
+        <div class="tunnel-grid"></div>
+        <div class="tunnel-particles" id="tunnelParticles"></div>
+        <div class="tunnel-content">
+          <div class="tunnel-title">🚀 One Person Company</div>
+          <div class="tunnel-subtitle">AI驱动的商业新纪元</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 先介绍OPC是什么 -->
+    <div class="opc-intro reveal-on-scroll reveal-delay-3">
+      <div class="opc-headline">一个人 + AI智能体团队 = 一家全自动化运营的公司</div>
+      <div class="opc-equation">
+        <span class="eq-part">👤 1人</span>
+        <span class="eq-op">+</span>
+        <span class="eq-part">🤖 AI团队</span>
+        <span class="eq-op">=</span>
+        <span class="eq-result">一家完整运营的公司</span>
+      </div>
+      <div class="opc-desc">
+        这就是<strong>一人公司（OPC, One Person Company）</strong>——新的商业模式正在崛起。
+        一个人担任产品经理 + 采购 + 运营 + 客服 + 财务 + 老板，AI智能体执行所有重复性工作。
+      </div>
+    </div>
+
+    <!-- 展示OPC的全流程 -->
+    <div class="opc-flow">
+      <div class="opc-step reveal-on-scroll reveal-left reveal-delay-1">
+        <div class="opc-step-num">STEP 01</div>
+        <div class="opc-step-title">🔍 市场调研</div>
+        <div class="opc-step-desc">智能体在全网搜索爆款产品，自动分析市场趋势</div>
+      </div>
+      <div class="opc-step reveal-on-scroll reveal-left reveal-delay-2">
+        <div class="opc-step-num">STEP 02</div>
+        <div class="opc-step-title">📦 供应商对接</div>
+        <div class="opc-step-desc">自动在1688等平台比价、进货，优选供应商</div>
+      </div>
+      <div class="opc-step reveal-on-scroll reveal-left reveal-delay-3">
+        <div class="opc-step-num">STEP 03</div>
+        <div class="opc-step-title">🏪 店铺运营</div>
+        <div class="opc-step-desc">自动开店、上架、优化listing，全程无人干预</div>
+      </div>
+      <div class="opc-step reveal-on-scroll reveal-right reveal-delay-1">
+        <div class="opc-step-num">STEP 04</div>
+        <div class="opc-step-title">💬 客服支持</div>
+        <div class="opc-step-desc">24小时自动回复客户问题，零遗漏零延迟</div>
+      </div>
+      <div class="opc-step reveal-on-scroll reveal-right reveal-delay-2">
+        <div class="opc-step-num">STEP 05</div>
+        <div class="opc-step-title">📣 内容投放</div>
+        <div class="opc-step-desc">自动写文案、发小红书、投流，持续引流</div>
+      </div>
+      <div class="opc-step reveal-on-scroll reveal-right reveal-delay-3">
+        <div class="opc-step-num">STEP 06</div>
+        <div class="opc-step-title">💰 财务管理</div>
+        <div class="opc-step-desc">自动对账、自动理财，资金高效流转</div>
+      </div>
+    </div>
+
+    <!-- 再引出颠覆性问题 -->
+    <div class="warning-banner reveal-on-scroll reveal-scale">
+      <div class="warning-icon">⚠️</div>
+      <div>
+        <div class="warning-text">往前再走一步，你会发现一个颠覆性的问题</div>
+        <div class="warning-sub">当所有业务流程都可以被AI智能体替代时，银行在哪里？</div>
+      </div>
+    </div>
+
+    <div class="opc-missing reveal-on-scroll reveal-delay-1">
+      <div class="opc-missing-title">❓ 在一人公司的全流程中，银行在哪里？</div>
+      <div class="opc-missing-items">
+        <div class="opc-missing-item reveal-on-scroll reveal-left reveal-delay-2">
+          <strong>贷款？</strong>微信、支付宝也有消费贷，更方便、更快
+        </div>
+        <div class="opc-missing-item reveal-on-scroll reveal-delay-3">
+          <strong>支付？</strong>微信、支付宝就够了，无需开户
+        </div>
+        <div class="opc-missing-item reveal-on-scroll reveal-right reveal-delay-2">
+          <strong>理财？</strong>智能体自动比较收益率，直接配置最优组合
+        </div>
+      </div>
+    </div>
+
+    <div class="punchline reveal-on-scroll reveal-scale reveal-delay-4">
+      <div class="punchline-text">答案扎心：在一人公司的商业模式里，银行几乎没有存在感。</div>
+    </div>
+  </div>
+
+  <!-- 5.3a AI友好型 - 时光倒流动画 + 三步走 -->
+  <div id="part5-friendly" class="section">
+    <div class="section-title reveal-on-scroll">深层洞察：AI友好型（智能体友好）银行</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">当智能体成为企业的数字员工，所有商业行为都通过智能体完成，银行必须让智能体能"看见"自己。</div>
+
+    <!-- 时光倒流动画 -->
+    <div class="iframe-wrap reveal-on-scroll reveal-scale reveal-delay-2" style="margin: 28px 0;">
+      <iframe data-src="05_AI友好型银行_时光倒流_动画版.html" frameborder="0" allowfullscreen class="lazy-iframe"></iframe>
+    </div>
+
+    <div class="agent-3step-header reveal-on-scroll reveal-delay-3">
+      <span class="agent-3step-tag">AGENT BEHAVIOR</span>
+      当一家企业的智能体需要金融服务时，它会自动完成以下三步：
+    </div>
+
+    <div class="agent-flow">
+      <div class="agent-step reveal-on-scroll reveal-left reveal-delay-1">
+        <div class="agent-step-num">①</div>
+        <div class="agent-step-title">自动搜索可用接口</div>
+        <div class="agent-step-desc">搜索有哪些银行的 API/Skill 可用，建立候选列表</div>
+      </div>
+      <div class="agent-step reveal-on-scroll reveal-delay-2">
+        <div class="agent-step-num">②</div>
+        <div class="agent-step-title">自动测试与评分</div>
+        <div class="agent-step-desc">测试哪家银行的接口更稳定、更便捷，打分排序</div>
+      </div>
+      <div class="agent-step reveal-on-scroll reveal-right reveal-delay-3">
+        <div class="agent-step-num">③</div>
+        <div class="agent-step-title">自动选择并执行</div>
+        <div class="agent-step-desc">选择最优方案并自动执行，客户无感知完成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.3b 做好AI友好型银行意味着什么 -->
+  <div id="part5-friendly-measures" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">做好AI友好型银行，意味着什么？</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">谁能让智能体感知、调用、信任——谁就掌握下一代客户关系的入口。</div>
+
+    <div class="measures-grid">
+      <div class="measure-card reveal-on-scroll reveal-scale reveal-delay-1">
+        <div class="measure-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="13" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+            <path d="M14 7 L17 11 L22 12 L18 16 L19 21 L14 18.5 L9 21 L10 16 L6 12 L11 11 Z" fill="var(--gold)" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="measure-title">被动获客</div>
+        <div class="measure-desc">智能体会主动来找我们，无需主动推销</div>
+      </div>
+      <div class="measure-card reveal-on-scroll reveal-scale reveal-delay-2">
+        <div class="measure-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="10" width="8" height="8" rx="2" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+            <rect x="16" y="10" width="8" height="8" rx="2" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+            <path d="M12 14 H16" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="8" cy="5" r="2" stroke="var(--gold)" stroke-width="1.2" fill="none"/>
+            <path d="M8 7 V10" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="20" cy="23" r="2" stroke="var(--gold)" stroke-width="1.2" fill="none"/>
+            <path d="M20 18 V21" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="measure-title">即插即用</div>
+        <div class="measure-desc">产品能力标准化，智能体自动组合最优方案</div>
+      </div>
+      <div class="measure-card reveal-on-scroll reveal-scale reveal-delay-3">
+        <div class="measure-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="14" cy="14" rx="10" ry="7" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3" fill="var(--gold)" opacity="0.8"/>
+            <path d="M14 7 V5 M14 21 V23 M4 14 H2 M26 14 H24" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="measure-title">无感体验</div>
+        <div class="measure-desc">客户甚至不知道是银行在服务，体验无缝融合</div>
+      </div>
+      <div class="measure-card reveal-on-scroll reveal-scale reveal-delay-4">
+        <div class="measure-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="20" height="20" rx="4" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+            <path d="M9 14 L13 18 L19 10" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="6" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+            <path d="M20 6 H24 M22 4 V8" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="measure-title">API开放</div>
+        <div class="measure-desc">存款、贷款、理财、支付——每个功能都能被智能体使用</div>
+      </div>
+      <div class="measure-card reveal-on-scroll reveal-scale reveal-delay-5">
+        <div class="measure-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 3 L16.5 9 L23 9.5 L18 14 L19.5 21 L14 17.5 L8.5 21 L10 14 L5 9.5 L11.5 9 Z" stroke="var(--gold)" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M14 3 L16.5 9 L23 9.5 L18 14 L19.5 21 L14 17.5 L8.5 21 L10 14 L5 9.5 L11.5 9 Z" fill="var(--gold)" opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="measure-title">先发优势</div>
+        <div class="measure-desc">谁先做好AI友好，谁就赢得下一代客户</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.4 OPC政策支持 -->
+  <div id="part5-policy" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">广东/广州OPC政策支持——时代趋势已来</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">OPC并非空中楼阁，而是已获政策层面大力推动，银行必须跟上这个时代浪潮。</div>
+
+    <div class="policy-grid">
+      <div class="policy-card reveal-on-scroll reveal-left reveal-delay-2">
+        <div class="policy-level">广东省层面</div>
+        <div class="policy-name">《广东省支持人工智能OPC创新发展行动方案（2026—2028年）》</div>
+        <ul class="policy-items">
+          <li>目标：2026年培育10个OPC生态社区，到2028年<strong>百社区、千企业、万人才</strong></li>
+          <li>六大保障：算力供给（算力券补贴）、数据支撑、模型服务、空间载体、场景开放、融资渠道</li>
+          <li>金融服务：鼓励银行推出<strong>OPC专属信贷产品</strong></li>
+          <li>支持"人才贷、研发贷、成果贷"，探索<strong>"算力贷"</strong>产品</li>
+        </ul>
+      </div>
+      <div class="policy-card reveal-on-scroll reveal-right reveal-delay-2">
+        <div class="policy-level">广州市海珠区层面</div>
+        <div class="policy-name">《人工智能OPC创新发展十条》——全国首创SOPC产业生态</div>
+        <ul class="policy-items">
+          <li><strong>最高支持500万元</strong>：引领性优质项目补贴30%，最高500万</li>
+          <li>智能体专区：最高<strong>12个月工位费全免</strong></li>
+          <li>社区孵化：年度最高<strong>150万</strong>支持</li>
+          <li>要素保障：算力补贴<strong>50%</strong>、数据补贴<strong>30%</strong></li>
+          <li>以日均token消耗量评价OPC发展阶段，精准扶持</li>
+          <li>目标：2026年新一代信息技术服务业营收<strong>1500亿</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="policy-insight reveal-on-scroll reveal-delay-3">
+      <strong>政策启示：</strong>OPC不是未来时，而是现在进行时。广东/广州已经率先布局，这是银行的历史性机遇窗口。主动布局OPC金融服务，意味着在这个新兴市场赢得先发优势——做 OPC 专属信贷、提供算力贷、成为AI企业的首选金融伙伴。
+    </div>
+  </div>
+
+  <!-- 5.5 行动倡议 -->
+  <div id="part5-action" class="section">
+    <div class="section-title reveal-on-scroll">行动倡议——现在该怎么办？</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">面对智能化浪潮，不能被动等待。五大层面，立刻行动。</div>
+
+    <div class="action-grid">
+      <div class="action-card reveal-on-scroll reveal-left reveal-delay-1">
+        <div class="action-layer">战略<br>层面</div>
+        <div class="action-content">
+          <div class="action-title">深入落实"人工智能+"战略</div>
+          <div class="action-desc">将AI运营能力提升至全行核心竞争力，加大算力、数据、人才投入，树立"智能银行"长期目标。</div>
+        </div>
+      </div>
+      <div class="action-card reveal-on-scroll reveal-left reveal-delay-2">
+        <div class="action-layer">战术<br>层面</div>
+        <div class="action-content">
+          <div class="action-title">立即启动试点，3个月内跑通闭环</div>
+          <div class="action-desc">选择1-2个场景，用数据证明ROI。<strong>将基础业务能力封装成API/Skill</strong>，让智能体能调用。存款、贷款、理财、支付——每一个功能都要能"被智能体使用"。</div>
+        </div>
+      </div>
+      <div class="action-card reveal-on-scroll reveal-left reveal-delay-3">
+        <div class="action-layer">组织<br>层面</div>
+        <div class="action-content">
+          <div class="action-title">培养"业务+AI"复合型人才</div>
+          <div class="action-desc">启动直营经理能力转型，业务人员要懂AI，技术人员要懂业务。<strong>创效增收而非削减岗位</strong>——工具帮你干，不是AI替你走。</div>
+        </div>
+      </div>
+      <div class="action-card reveal-on-scroll reveal-right reveal-delay-1">
+        <div class="action-layer">协同<br>层面</div>
+        <div class="action-content">
+          <div class="action-title">推动总行系统接口开放，形成上下合力</div>
+          <div class="action-desc">广州直营提供场景样本，总行提供系统能力。推动核心系统从"面向人"转变为"面向智能体"，从"功能菜单"转变为"能力接口"。</div>
+        </div>
+      </div>
+      <div class="action-card reveal-on-scroll reveal-right reveal-delay-2">
+        <div class="action-layer">监管<br>层面</div>
+        <div class="action-content">
+          <div class="action-title">积极稳妥、安全有序推进AI应用</div>
+          <div class="action-desc">主动汇报AI应用进展，争取监管支持。在合规框架内探索创新，落实央行"积极稳妥、安全有序推进金融领域人工智能应用"要求。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 5.6 AI必答题 -->
+  <div id="part5-mandatory" class="section anchor-target">
+    <div class="section-title reveal-on-scroll">AI友好型银行——这不仅是选择题，而是必答题</div>
+    <div class="section-desc reveal-on-scroll reveal-delay-1">在AI重塑一切的时代，不拥抱AI的金融机构将面临严峻挑战。这不是选择题，是必答题。</div>
+
+    <div class="mandatory-grid">
+      <div class="mandatory-card reveal-on-scroll reveal-delay-1" style="border-left: 3px solid var(--red);">
+        <div class="mandatory-icon" style="color: var(--red);">⚠️</div>
+        <div class="mandatory-title">被动等待的代价</div>
+        <div class="mandatory-desc">客户已习惯AI服务体验，传统银行将成为"数字时代的ATM"。功能齐全但体验落后，将失去下一代客户。市场份额将持续流向更智能的竞争者。</div>
+      </div>
+      <div class="mandatory-card reveal-on-scroll reveal-delay-2" style="border-left: 3px solid var(--green);">
+        <div class="mandatory-icon" style="color: var(--green);">✓</div>
+        <div class="mandatory-title">主动拥抱的机遇</div>
+        <div class="mandatory-desc">首批AI友好型银行将获得先发优势：更低运营成本、更高客户满意度、更强人才吸引力、更快创新迭代。在AI时代，领先一步就是领先一个时代。</div>
+      </div>
+    </div>
+
+    <!-- 第一个落地场景建议 -->
+    <div class="final-cta reveal-on-scroll reveal-scale reveal-delay-3" style="margin-top: 40px;">
+      <div class="final-quote">💡 第一个落地场景建议</div>
+      <div class="final-example">
+        当我们所有员工做差旅报销的时候，不用点任何东西，就能完成全流程，也符合规章流程的时候——<strong>我们的第一步就迈出去了。</strong><br><br>
+        AI时代的差旅报销：5秒完成。
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.8 致谢页 -->
+  </div>
+
+  <!-- 页脚 -->
+  <div style="padding: 40px 80px; background: var(--bg2); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+    <div>
+      <div style="font-size: var(--current-base); font-weight: 600; color: var(--gold);">数字金融与AI运营能力升级</div>
+    </div>
+    <div style="font-size: var(--current-sm); color: var(--text-dim); text-align: right;">
+      <div>以"人工智能+"为抓手</div>
+      <div>推动从"传统银行"向"智能银行"跨越</div>
+    </div>
+  </div>
+
+  <!-- ========== 致谢页 ========== -->
+  <div id="part5-credits" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000;">
+    <!-- Canvas 粒子层 -->
+    <canvas id="creditsCanvas" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;"></canvas>
+
+    <!-- 装饰竖线 -->
+    <div style="position: absolute; top: 0; bottom: 0; left: 10%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.12), transparent); z-index: 3; pointer-events: none;"></div>
+    <div style="position: absolute; top: 0; bottom: 0; right: 10%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.12), transparent); z-index: 3; pointer-events: none;"></div>
+
+    <!-- 背景对话滚动 -->
+    <div style="position: absolute; inset: 0; overflow: hidden; z-index: 2; mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
+      <div id="creditsBgContent" style="position: absolute; width: 100%; padding: 0 60px; animation: creditsBgUp 60s linear infinite; opacity: 0.18; font-family: 'PingFang SC', 'Microsoft YaHei', monospace; font-size: var(--current-md); line-height: 2;"></div>
+    </div>
+
+    <!-- 主内容 -->
+    <div style="position: relative; z-index: 20; display: flex; align-items: center; justify-content: center; pointer-events: none; width: 100%; height: 100%;">
+      <div style="width: min(760px, 90vw); background: rgba(0,0,0,0.82); border: 1px solid rgba(201,168,76,0.25); border-radius: 2px; padding: 48px 56px; text-align: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 0 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(201,168,76,0.15), inset 0 -1px 0 rgba(201,168,76,0.08); animation: cardFadeIn 1.2s ease forwards; position: relative;">
+        <!-- 角落装饰 -->
+        <div style="position: absolute; width: 14px; height: 14px; border-color: rgba(201,168,76,0.45); border-style: solid; top: -1px; left: -1px; border-width: 2px 0 0 2px;"></div>
+        <div style="position: absolute; width: 14px; height: 14px; border-color: rgba(201,168,76,0.45); border-style: solid; top: -1px; right: -1px; border-width: 2px 2px 0 0;"></div>
+        <div style="position: absolute; width: 14px; height: 14px; border-color: rgba(201,168,76,0.45); border-style: solid; bottom: -1px; left: -1px; border-width: 0 0 2px 2px;"></div>
+        <div style="position: absolute; width: 14px; height: 14px; border-color: rgba(201,168,76,0.45); border-style: solid; bottom: -1px; right: -1px; border-width: 0 2px 2px 0;"></div>
+        
+        <div style="font-size: var(--current-sm); letter-spacing: 6px; color: #666; text-transform: uppercase; margin-bottom: 10px; font-family: 'PingFang SC', sans-serif;">PRESENTATION · 2026</div>
+        <div style="font-size: var(--current-4xl); font-weight: 700; letter-spacing: 10px; background: linear-gradient(135deg, #a07820 0%, var(--gold) 30%, #f5e08a 55%, var(--gold) 75%, #a07820 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: goldShimmer 4s linear infinite; margin-bottom: 6px;">感谢聆听</div>
+        <div style="font-size: var(--current-md); color: #aaa; letter-spacing: 4px; margin-bottom: 0;">敬请各位领导批评指正</div>
+        
+        <div style="display: flex; align-items: center; gap: 16px; margin: 28px 0;">
+          <div style="flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);"></div>
+          <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px rgba(201,168,76,0.6);"></div>
+          <div style="flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);"></div>
+        </div>
+        
+        <div style="font-size: var(--current-sm); letter-spacing: 6px; color: #555; text-transform: uppercase; margin-bottom: 18px; font-family: 'PingFang SC', sans-serif;">POWERED BY · AI 技术协同生成</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div style="padding: 12px 16px; border: 1px solid rgba(201,168,76,0.15); background: rgba(201,168,76,0.04); border-radius: 2px; text-align: left; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.15)'">
+            <div style="font-size: var(--current-xs); letter-spacing: 3px; color: #555; margin-bottom: 5px; font-family: 'PingFang SC', sans-serif; text-transform: uppercase;">LLM Models</div>
+            <div style="font-size: var(--current-base); color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; font-weight: 500;">Claude · DeepSeek · Kimi</div>
+            <div style="font-size: var(--current-sm); color: #666; letter-spacing: 0.5px; font-family: 'PingFang SC', sans-serif;">内容架构 · 代码生成 · 技术方案</div>
+          </div>
+          <div style="padding: 12px 16px; border: 1px solid rgba(201,168,76,0.15); background: rgba(201,168,76,0.04); border-radius: 2px; text-align: left; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.15)'">
+            <div style="font-size: var(--current-xs); letter-spacing: 3px; color: #555; margin-bottom: 5px; font-family: 'PingFang SC', sans-serif; text-transform: uppercase;">Visual Generation</div>
+            <div style="font-size: var(--current-base); color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; font-weight: 500;">Nano Banana · Seedance</div>
+            <div style="font-size: var(--current-sm); color: #666; letter-spacing: 0.5px; font-family: 'PingFang SC', sans-serif;">视觉素材 · 视频内容生成</div>
+          </div>
+          <div style="padding: 12px 16px; border: 1px solid rgba(201,168,76,0.15); background: rgba(201,168,76,0.04); border-radius: 2px; text-align: left; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.15)'">
+            <div style="font-size: var(--current-xs); letter-spacing: 3px; color: #555; margin-bottom: 5px; font-family: 'PingFang SC', sans-serif; text-transform: uppercase;">Agent Framework</div>
+            <div style="font-size: var(--current-base); color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; font-weight: 500;">OpenClaw Framework</div>
+            <div style="font-size: var(--current-sm); color: #666; letter-spacing: 0.5px; font-family: 'PingFang SC', sans-serif;">智能体工作流 · Skill管理</div>
+          </div>
+          <div style="padding: 12px 16px; border: 1px solid rgba(201,168,76,0.15); background: rgba(201,168,76,0.04); border-radius: 2px; text-align: left; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.35)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.15)'">
+            <div style="font-size: var(--current-xs); letter-spacing: 3px; color: #555; margin-bottom: 5px; font-family: 'PingFang SC', sans-serif; text-transform: uppercase;">Dev Stack</div>
+            <div style="font-size: var(--current-base); color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; font-weight: 500;">Modern Web · Agent-Browser</div>
+            <div style="font-size: var(--current-sm); color: #666; letter-spacing: 0.5px; font-family: 'PingFang SC', sans-serif;">前端开发 · 浏览器自动化</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px; padding: 18px 24px; border-top: 1px solid rgba(201,168,76,0.2); border-bottom: 1px solid rgba(201,168,76,0.2); background: rgba(201,168,76,0.03);">
+          <div style="font-size: var(--current-md); font-style: italic; color: var(--gold); letter-spacing: 2px; line-height: 1.7; font-weight: 500;">"AI智能体不是选择题，而是必答题"</div>
+          <div style="font-size: var(--current-sm); color: #555; margin-top: 8px; letter-spacing: 2px; font-family: 'PingFang SC', sans-serif;">— 不是"要不要做"，而是"怎么做好"</div>
+        </div>
+        
+        <div style="margin-top: 20px; font-size: var(--current-sm); color: #444; letter-spacing: 5px; font-family: 'PingFang SC', sans-serif;">2026年3月 · 广州</div>
+      </div>
+    </div>
+    
+    <style>
+      @keyframes creditsBgUp {
+        0% { transform: translateY(1080px); }
+        100% { transform: translateY(-120%); }
+      }
+      @keyframes cardFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes goldShimmer {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+    </style>
+    
+    <script>
+      (function() {
+        // 粒子系统
+        const canvas = document.getElementById('creditsCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+        
+        function resize() {
+          W = canvas.width = 1440;
+          H = canvas.height = 1080;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        
+        class Particle {
+          constructor() { this.reset(true); }
+          reset(init) {
+            this.x = Math.random() * W;
+            this.y = init ? Math.random() * H : H + 10;
+            this.vy = -(0.3 + Math.random() * 0.7);
+            this.vx = (Math.random() - 0.5) * 0.3;
+            this.r = 0.6 + Math.random() * 1.2;
+            this.a = 0.1 + Math.random() * 0.5;
+            this.gold = Math.random() > 0.6;
+          }
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.y < -10) this.reset(false);
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = this.gold ? `rgba(201,168,76,${this.a})` : `rgba(255,255,255,${this.a * 0.5})`;
+            ctx.fill();
+          }
+        }
+        
+        for (let i = 0; i < 120; i++) particles.push(new Particle());
+        
+        function tick() {
+          ctx.clearRect(0, 0, W, H);
+          particles.forEach(p => { p.update(); p.draw(); });
+          requestAnimationFrame(tick);
+        }
+        tick();
+        
+        // 背景对话
+        const bgEl = document.getElementById('creditsBgContent');
+        if (!bgEl) return;
+        const dialogues = [
+          { u: "设计一个电影谢幕风格的致谢页，黑金配色，内容要在一屏内完整显示", a: "整体架构：Canvas粒子背景 + 对话文字缓速上升 + 主字幕卡片居中固定，衬线字体营造仪式感" },
+          { u: "字体必须够大，面向省行领导，最小14px", a: "已调整字体层级：主标题3.2rem，副标题1.05rem，说明文字0.85rem，最小12px辅助字 → 全部≥14px" },
+          { u: "卡片要有质感，不要塑料感", a: "加入backdrop-filter:blur(12px)毛玻璃效果，内边框渐变高光，角落切角装饰，阴影分三层" },
+          { u: "金色标题要有流光效果", a: "使用background-size:200%配合animation实现从左到右的金色流光扫过效果，周期4秒" },
+          { u: "背景粒子不要太抢眼，要烘托气氛", a: "粒子透明度0.1~0.5随机，粒子半径0.6~1.8px，60%金色40%白色，数量120个缓速上升" },
+          { u: "左右两侧加装饰竖线，有电影感", a: "已加：position:fixed的竖向渐变线，从透明到rgba(201,168,76,0.12)再到透明，宽1px" },
+          { u: "工具栏改为2×2网格排列，更整齐", a: "grid-template-columns:1fr 1fr，每格内：角色标签 / 名称 / 描述三行，hover时边框加亮" },
+          { u: "引用语区域要有区分感，不能和上方混在一起", a: "加上下边框线+轻微金色背景rgba(201,168,76,0.03)，视觉上独立成区块，营造收尾感" },
+          { u: "背景对话要体现真实的开发协作过程", a: "内容来自真实的设计对话：用户发需求在左(金色)，AI给方案在右(绿色)，opacity 0.18" },
+        ];
+        const repeated = [...dialogues, ...dialogues, ...dialogues];
+        let html = '';
+        repeated.forEach(d => {
+          html += '<div style="display: flex; gap: 0; max-width: 1200px; margin: 0 auto 36px;">' +
+            '<div style="flex: 0 0 42%; text-align: right; padding-right: 20px; color: var(--gold); font-size: var(--current-base);">' + d.u + '</div>' +
+            '<div style="flex: 0 0 16%; text-align: center; color: #333; font-size: var(--current-lg);">│</div>' +
+            '<div style="flex: 0 0 42%; padding-left: 20px; color: #4aaa88; font-size: var(--current-base);">' + d.a + '</div>' +
+          '</div>';
+        });
+        bgEl.innerHTML = html;
+      })();
+    </script>
+  </div>
+
+</main>
+
+<!-- 翻页导航按钮 -->
+<div class="page-nav-container" id="pageNav">
+  <button class="nav-arrow nav-up" id="navUp" title="上一页 (↑)">↑</button>
+  <button class="nav-arrow nav-down" id="navDown" title="下一页 (↓)">↓</button>
+  <div class="sand-particles" id="sandParticles"></div>
+</div>
+
+<script>
+  // 侧边栏导航点击滚动
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // 移动端关闭侧边栏
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.querySelector('.sidebar-overlay').classList.remove('show');
+    }
+  }
+
+  // 移动端侧边栏切换
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+
+  // 侧边栏高亮跟随滚动 - 使用 IntersectionObserver 实现精确定位
+  const navItems = document.querySelectorAll('.nav-item');
+  const main = document.getElementById('main');
+
+  // 建立 section 到 nav item 的映射（简化版 - 按PART分组）
+  const sectionToNavMap = {
+    'hero': 0,
+    // PART 1 - 映射到索引1
+    'part1': 1,
+    'part1-policy': 1,
+    'part1-challenge': 1,
+    // PART 2 - 映射到索引2
+    'part2': 2,
+    'part2-llm': 2,
+    'iframe-wrap-llm': 2,
+    'part2-intro': 2,
+    'part2-assembly': 2,
+    'part2-multiagent': 2,
+    'iframe-wrap-multiagent': 2,
+    // PART 3 - 映射到索引3
+    'part3': 3,
+    'part3-crm': 3,
+    'iframe-wrap-crm': 3,
+    'part3-collab': 3,
+    'iframe-wrap-collab': 3,
+    'part3-email': 3,
+    'iframe-wrap-email': 3,
+    'part3-asset': 3,
+    'iframe-wrap-asset': 3,
+    'part3-intel': 3,
+    'iframe-wrap-intel': 3,
+    'part3-sop': 3,
+    'iframe-wrap-sop': 3,
+    'part3-live-demo': 3,
+    'part3-skills': 3,
+    'iframe-wrap-skills': 3,
+    // PART 4 - 映射到索引4
+    'part4': 4,
+    'part4-kpi': 4,
+    'part4-risk': 4,
+    'part4-security': 4,
+    'part4-talent': 4,
+    'part4-request': 4,
+    // PART 5 - 映射到索引5
+    'part5': 5,
+    'part5-intro': 5,
+    'part5-opc': 5,
+    'part5-friendly': 5,
+    'part5-friendly-measures': 5,
+    'part5-action': 5,
+    'part5-policy': 5,
+    'part5-mandatory': 5,
+    'part5-reimbursement': 5,
+    'part5-credits': 5,
+  };
+
+  // 使用 IntersectionObserver 监听 section 进入视口
+  const observerOptions = {
+    root: main,
+    rootMargin: '-10% 0px -80% 0px',  // 当 section 进入视口顶部 10% 区域时触发
+    threshold: 0
+  };
+
+  let currentActiveIndex = 0;
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.id;
+        const navIndex = sectionToNavMap[sectionId];
+        if (navIndex !== undefined && navIndex !== currentActiveIndex) {
+          currentActiveIndex = navIndex;
+          updateNavActive(navIndex);
+        }
+      }
+    });
+  }, observerOptions);
+
+  // 观察所有 section
+  Object.keys(sectionToNavMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  function updateNavActive(index) {
+    // 边界检查，防止访问不存在的 navItems
+    if (index < 0 || index >= navItems.length) return;
+    
+    navItems.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+    });
+    // 自动滚动侧边栏，使当前项可见
+    const activeItem = navItems[index];
+    if (activeItem && activeItem.scrollIntoView) {
+      activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // updateNav sections映射
+  const navSections = [
+    { id: 'hero', idx: 0 },
+    // PART 1 - 所有part1相关section映射到idx 1
+    { id: 'part1', idx: 1 },
+    { id: 'part1-policy', idx: 1 },
+    { id: 'part1-challenge', idx: 1 },
+    { id: 'part1-ai-timeline', idx: 1 },
+    // PART 2 - 所有part2相关section映射到idx 2
+    { id: 'part2', idx: 2 },
+    { id: 'part2-llm', idx: 2 },
+    { id: 'part2-intro', idx: 2 },
+    { id: 'part2-assembly', idx: 2 },
+    { id: 'part2-multiagent', idx: 2 },
+    // PART 3 - 所有part3相关section映射到idx 3
+    { id: 'part3', idx: 3 },
+    { id: 'part3-crm', idx: 3 },
+    { id: 'part3-collab', idx: 3 },
+    { id: 'part3-email', idx: 3 },
+    { id: 'part3-asset', idx: 3 },
+    { id: 'part3-intel', idx: 3 },
+    { id: 'part3-sop', idx: 3 },
+    { id: 'part3-live-demo', idx: 3 },
+    // PART 4 - 所有part4相关section映射到idx 4
+    { id: 'part4', idx: 4 },
+    { id: 'part4-kpi', idx: 4 },
+    { id: 'part4-risk', idx: 4 },
+    { id: 'part4-security', idx: 4 },
+    { id: 'part4-talent', idx: 4 },
+    { id: 'part4-request', idx: 4 },
+    // PART 5 - 所有part5相关section映射到idx 5
+    { id: 'part5', idx: 5 },
+    { id: 'part5-intro', idx: 5 },
+    { id: 'part5-opc', idx: 5 },
+    { id: 'part5-friendly', idx: 5 },
+    { id: 'part5-friendly-measures', idx: 5 },
+    { id: 'part5-action', idx: 5 },
+    { id: 'part5-policy', idx: 5 },
+    { id: 'part5-mandatory', idx: 5 },
+    { id: 'part5-reimbursement', idx: 5 },
+    { id: 'part5-credits', idx: 5 },
+  ];
+
+  function updateNav() {
+    let current = 0;
+    const scrollTop = main.scrollTop;
+    navSections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el && el.offsetTop - 100 <= scrollTop) current = s.idx;
+    });
+
+    if (current !== currentActiveIndex) {
+      currentActiveIndex = current;
+      navItems.forEach((item, i) => {
+        item.classList.toggle('active', i === current);
+      });
+    }
+  }
+
+  main.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // ===== 翻页导航功能 =====
+  const sections = Array.from(document.querySelectorAll('.anchor-target, .part-header, .section'));
+  let currentSectionIndex = 0;
+  
+  // 获取所有可滚动到的section
+  function getScrollableSections() {
+    return Array.from(document.querySelectorAll('.anchor-target, .part-header, .section, iframe'))
+      .filter(el => el.id || el.classList.contains('part-header'));
+  }
+  
+  // 滚动到指定section
+  function scrollToSectionByIndex(index) {
+    const sections = getScrollableSections();
+    if (index < 0) index = 0;
+    if (index >= sections.length) index = sections.length - 1;
+    currentSectionIndex = index;
+    
+    const target = sections[index];
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // 下一页
+  function nextPage() {
+    const sections = getScrollableSections();
+    if (currentSectionIndex < sections.length - 1) {
+      scrollToSectionByIndex(currentSectionIndex + 1);
+    }
+  }
+  
+  // 上一页
+  function prevPage() {
+    if (currentSectionIndex > 0) {
+      scrollToSectionByIndex(currentSectionIndex - 1);
+    }
+  }
+  
+  // 更新当前section索引
+  function updateCurrentSectionIndex() {
+    const sections = getScrollableSections();
+    const scrollTop = main.scrollTop;
+    const viewportCenter = scrollTop + main.clientHeight / 2;
+    
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + scrollTop;
+      const sectionCenter = sectionTop + rect.height / 2;
+      
+      if (sectionCenter > scrollTop && sectionCenter <= viewportCenter + main.clientHeight / 2) {
+        currentSectionIndex = i;
+        break;
+      }
+    }
+  }
+  
+  // 监听滚动更新索引
+  main.addEventListener('scroll', updateCurrentSectionIndex, { passive: true });
+  
+  // 绑定按钮点击
+  document.getElementById('navUp').addEventListener('click', prevPage);
+  document.getElementById('navDown').addEventListener('click', nextPage);
+  
+  // 键盘绑定（支持来自iframe的消息）
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      nextPage();
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prevPage();
+    }
+  });
+
+  // 监听来自iframe的键盘消息
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'iframeKeydown') {
+      const key = e.data.key;
+      if (key === 'ArrowDown' || key === 'ArrowRight' || key === ' ' || key === 'PageDown') {
+        nextPage();
+      } else if (key === 'ArrowUp' || key === 'ArrowLeft' || key === 'PageUp') {
+        prevPage();
+      }
+    }
+  });
+
+  // ===== iframe焦点修复：当点击iframe后，确保键盘事件仍能被父窗口捕获 =====
+  document.querySelectorAll('iframe').forEach(iframe => {
+    // 当iframe被点击时，让main容器获得焦点
+    iframe.addEventListener('click', () => {
+      main.focus({ preventScroll: true });
+    });
+    // 当iframe失焦时，也让main获得焦点
+    iframe.addEventListener('blur', () => {
+      main.focus({ preventScroll: true });
+    });
+  });
+  // 当用户点击main区域时也确保焦点在main上
+  main.addEventListener('click', () => {
+    main.focus({ preventScroll: true });
+  });
+  
+  // 沙粒动画
+  function createSandParticles() {
+    const container = document.getElementById('sandParticles');
+    if (!container) return;
+    
+    for (let i = 0; i < 8; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'sand-particle';
+      particle.style.left = `${15 + Math.random() * 10}px`;
+      particle.style.animationDelay = `${Math.random() * 1.5}s`;
+      particle.style.setProperty('--drift', `${(Math.random() - 0.5) * 15}px`);
+      container.appendChild(particle);
+    }
+  }
+  createSandParticles();
+
+  // 字体大小切换（已替换为实时演示按钮，保留默认字体级别）
+  const html = document.documentElement;
+
+  // ===== v8 色系切换（完整联动子iframe） =====
+  const themeSwitcher = (() => {
+    const swatches = document.querySelectorAll('.theme-swatch');
+    const STORAGE_KEY = 'claw-theme';  // 与子iframe保持同一key
+
+    // 向所有iframe广播主题
+    function notifyIframesTheme(theme) {
+      document.querySelectorAll('iframe').forEach(iframe => {
+        try {
+          iframe.contentWindow.postMessage({ type: 'themeChange', theme: theme }, '*');
+        } catch (e) { /* iframe尚未加载，忽略 */ }
+      });
+    }
+
+    // 应用色系（主页面用 style.setProperty 直接注入，与子iframe完全一致）
+    function applyTheme(theme) {
+      // 用 CLAW_THEMES 直接注入 CSS 变量（最高优先级，覆盖任何硬编码值）
+      if (window.CLAW_THEMES && window.CLAW_THEMES[theme]) {
+        var vars = window.CLAW_THEMES[theme];
+        Object.keys(vars).forEach(function(k) {
+          document.documentElement.style.setProperty(k, vars[k]);
+        });
+      }
+      html.setAttribute('data-theme', theme);
+      swatches.forEach(s => s.classList.toggle('active', s.dataset.theme === theme));
+      localStorage.setItem(STORAGE_KEY, theme);
+      // 广播主题变更到所有子iframe
+      notifyIframesTheme(theme);
+    }
+
+    // 初始化
+    function init() {
+      swatches.forEach(swatch => {
+        swatch.addEventListener('click', () => applyTheme(swatch.dataset.theme));
+      });
+      // 恢复上次偏好（默认 deep-ocean 与子页面保持一致）
+      const saved = localStorage.getItem(STORAGE_KEY) || 'deep-ocean';
+      applyTheme(saved);
+    }
+
+    return { init, applyTheme, notifyIframesTheme };
+  })();
+  themeSwitcher.init();
+
+  // 向所有iframe发送字体大小消息
+  function notifyIframesFontSize(size) {
+    const iframes = document.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      try {
+        iframe.contentWindow.postMessage({ type: 'fontSize', size: size }, '*');
+      } catch (e) {
+        // iframe可能还没加载完成，忽略错误
+      }
+    });
+  }
+
+  // 默认中号字体（按钮已移除，直接设置）
+  const savedFontSize = localStorage.getItem('fontSize') || 'medium';
+  html.setAttribute('data-font-level', savedFontSize);
+
+  // iframe加载完成后同步字体大小 + 颜色主题
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'iframeReady') {
+      const currentSize = localStorage.getItem('fontSize') || 'medium';
+      const currentTheme = localStorage.getItem('claw-theme') || 'deep-ocean';
+      notifyIframesFontSize(currentSize);
+      // ★ 同时同步当前主题到刚加载好的iframe
+      themeSwitcher.notifyIframesTheme(currentTheme);
+    }
+  });
+
+  // 响应式iframe高度调整（已由 padding-top:75% + scaleIframeToFit 接管，此函数保留但不操作尺寸）
+  function adjustIframeHeight() {
+    // noop：iframe 尺寸由 CSS padding-top:75% 和 scaleIframeToFit 统一管理
+  }
+
+  window.addEventListener('resize', adjustIframeHeight);
+  adjustIframeHeight();
+
+  // ===== Hero 动画初始化 =====
+
+  // 1. SplitText - 逐字入场动画（修复AI运营显示）
+  function initSplitText() {
+    const title = document.getElementById('heroTitle');
+    if (!title) return;
+
+    // 保存原始HTML结构
+    const originalHTML = title.innerHTML;
+    const temp = document.createElement('div');
+    temp.innerHTML = originalHTML;
+    title.innerHTML = '';
+
+    let globalCharIndex = 0;
+
+    const processElement = (el) => {
+      for (const child of el.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent;
+          for (const char of text) {
+            if (char === ' ') {
+              const spaceSpan = document.createElement('span');
+              spaceSpan.className = 'char space';
+              spaceSpan.innerHTML = '&nbsp;';
+              title.appendChild(spaceSpan);
+            } else if (char === '\n' || char === '\r') {
+              // skip newlines
+            } else {
+              const span = document.createElement('span');
+              span.className = 'char';
+              span.textContent = char;
+              span.style.animationDelay = `${0.3 + globalCharIndex * 0.04}s`;
+              title.appendChild(span);
+              globalCharIndex++;
+            }
+          }
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          if (child.tagName === 'BR') {
+            title.appendChild(document.createElement('br'));
+          } else if (child.tagName === 'SPAN' && child.classList.contains('shiny')) {
+            // 保留shiny父容器包裹结构
+            const wrapper = child.parentElement;
+            const isAiGroup = wrapper && wrapper.classList.contains('ai-text-group');
+            
+            // 如果有ai-text-group包装，创建对应容器
+            if (isAiGroup) {
+              const groupSpan = document.createElement('span');
+              groupSpan.className = 'ai-text-group';
+              
+              const text = child.textContent;
+              for (const char of text) {
+                const span = document.createElement('span');
+                span.className = 'char shiny ai-char';
+                span.textContent = char;
+                span.style.animationDelay = `${0.3 + globalCharIndex * 0.05}s`;
+                groupSpan.appendChild(span);
+                globalCharIndex++;
+              }
+              title.appendChild(groupSpan);
+            } else {
+              const text = child.textContent;
+              for (const char of text) {
+                const span = document.createElement('span');
+                span.className = 'char shiny ai-char';
+                span.textContent = char;
+                span.style.animationDelay = `${0.3 + globalCharIndex * 0.05}s`;
+                title.appendChild(span);
+                globalCharIndex++;
+              }
+            }
+          } else if (child.tagName === 'SPAN' && child.classList.contains('ai-text-group')) {
+            // ai-text-group容器本身，处理其子节点
+            const groupSpan = document.createElement('span');
+            groupSpan.className = 'ai-text-group';
+            for (const gc of child.childNodes) {
+              if (gc.nodeType === Node.ELEMENT_NODE && gc.classList.contains('shiny')) {
+                const text = gc.textContent;
+                for (const char of text) {
+                  const span = document.createElement('span');
+                  span.className = 'char shiny ai-char';
+                  span.textContent = char;
+                  span.style.animationDelay = `${0.3 + globalCharIndex * 0.05}s`;
+                  groupSpan.appendChild(span);
+                  globalCharIndex++;
+                }
+              } else if (gc.nodeType === Node.TEXT_NODE) {
+                for (const char of gc.textContent) {
+                  if (char === ' ' || char === '\n') continue;
+                  const span = document.createElement('span');
+                  span.className = 'char shiny ai-char';
+                  span.textContent = char;
+                  span.style.animationDelay = `${0.3 + globalCharIndex * 0.05}s`;
+                  groupSpan.appendChild(span);
+                  globalCharIndex++;
+                }
+              }
+            }
+            title.appendChild(groupSpan);
+          } else if (child.tagName === 'SPAN' && child.classList.contains('hero-title-line')) {
+            // 保留装饰线元素
+            title.appendChild(child.cloneNode(true));
+          } else {
+            // 其他元素直接克隆
+            title.appendChild(child.cloneNode(true));
+          }
+        }
+      }
+    };
+
+    processElement(temp);
+  }
+
+  // 2. CountUp - 数字计数动画
+  function initCountUp() {
+    const statNums = document.querySelectorAll('.hero-stat-num[data-target]');
+    statNums.forEach((el, index) => {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const textVal = el.dataset.text;
+      
+      if (textVal) {
+        // 文字类型（如"广州"）
+        setTimeout(() => {
+          el.textContent = textVal;
+        }, 2000 + index * 200);
+        return;
+      }
+
+      let current = 0;
+      const duration = 1500; // 1.5秒
+      const startTime = performance.now() + 2000 + index * 200; // 延迟开始
+      
+      function animate(now) {
+        if (now < startTime) {
+          requestAnimationFrame(animate);
+          return;
+        }
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // 缓动函数
+        const eased = 1 - Math.pow(1 - progress, 3);
+        current = Math.round(eased * target);
+        el.textContent = current + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+      requestAnimationFrame(animate);
+    });
+  }
+
+  // 3. 浮动粒子效果（增强版）
+  function initParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    
+    const particleCount = 45;
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const size = 1 + Math.random() * 3;
+      const duration = 8 + Math.random() * 15;
+      const delay = Math.random() * duration;
+      const opacity = 0.2 + Math.random() * 0.5;
+      const rand = Math.random();
+      
+      // 分类粒子类型
+      if (rand > 0.85) {
+        particle.className = 'hero-particle glow';
+      } else if (rand > 0.7) {
+        particle.className = 'hero-particle twinkle';
+      } else {
+        particle.className = 'hero-particle';
+      }
+      
+      particle.style.cssText = `
+        left: ${x}%;
+        top: ${y}%;
+        width: ${size}px;
+        height: ${size}px;
+        animation-duration: ${duration}s;
+        animation-delay: -${delay}s;
+        opacity: ${opacity};
+      `;
+      container.appendChild(particle);
+    }
+  }
+
+  // 4. TOC卡片3D倾斜效果（优化：添加节流和will-change）
+  function initTocTilt() {
+    const cards = document.querySelectorAll('.toc-card');
+    const throttleMap = new Map();
+    
+    cards.forEach(card => {
+      // 预添加will-change提示浏览器即将变化
+      card.style.willChange = 'transform';
+      
+      card.addEventListener('mousemove', (e) => {
+        // 节流：每20ms最多更新一次
+        const now = Date.now();
+        if (throttleMap.get(card) && now - throttleMap.get(card) < 20) return;
+        throttleMap.set(card, now);
+        
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / centerY * -5;
+        const rotateY = (x - centerX) / centerX * 5;
+        
+        card.style.transform = `translateY(-6px) scale(1.02) perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // 初始化所有Hero动画
+  initSplitText();
+  initCountUp();
+  initParticles();
+  initTocTilt();
+
+  // ===== React Bits 聚光灯效果 =====
+  // 为所有卡片添加鼠标位置追踪（使用节流优化性能）
+  function initSpotlightEffect() {
+    const cards = document.querySelectorAll('.challenge-card, .phase-card, .kpi-card, .risk-card, .request-card, .value-card, .opc-step, .policy-card, .agent-step, .measure-card, .action-card, .toc-card, .policy-quote');
+    let rafId = null;
+    
+    cards.forEach(card => {
+      let lastX, lastY;
+      
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        // 节流：只有位置变化超过1%才更新
+        if (Math.abs(x - lastX) < 1 && Math.abs(y - lastY) < 1) return;
+        lastX = x;
+        lastY = y;
+        
+        // 使用requestAnimationFrame批量更新
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+          card.style.setProperty('--mouse-x', `${x}%`);
+          card.style.setProperty('--mouse-y', `${y}%`);
+          rafId = null;
+        });
+      });
+    });
+  }
+
+  // iframe 包装发光边框效果（添加节流优化）
+  function initIframeGlowEffect() {
+    const iframeWraps = document.querySelectorAll('.iframe-wrap');
+    const throttleMap = new Map();
+    
+    iframeWraps.forEach(wrap => {
+      wrap.addEventListener('mousemove', (e) => {
+        // 节流：每16ms最多更新一次（约60fps）
+        const now = Date.now();
+        if (throttleMap.get(wrap) && now - throttleMap.get(wrap) < 16) return;
+        throttleMap.set(wrap, now);
+        
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI) + 90;
+        wrap.style.setProperty('--cursor-angle', `${angle}deg`);
+      });
+    });
+  }
+
+  // ===== 滚动触发动画 =====
+  function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          // 可选：只触发一次动画
+          // revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: main,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.1
+    });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  // ===== 时空隧道粒子效果 =====
+  function initTimeTunnel() {
+    const container = document.getElementById('tunnelParticles');
+    if (!container) return;
+    
+    // 创建粒子
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'tunnel-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particle.style.animationDuration = (1.5 + Math.random() * 1) + 's';
+      container.appendChild(particle);
+    }
+  }
+
+  // 页面加载完成后初始化（使用标志防止重复执行）
+  let animationsInitialized = false;
+  
+  // ===== iframe智能懒加载 + 可见性暂停 =====
+  let iframeVisibilityObserver = null;
+  
+  function initIframeLazyLoad() {
+    // 可见性observer：暂停/恢复动画（加防抖，避免阈值抖动导致反复重置）
+    const visDebounceMap = new WeakMap();
+    iframeVisibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const iframe = entry.target;
+        const isVisible = entry.isIntersecting && entry.intersectionRatio > 0.3;
+
+        // 防抖 200ms：避免滚动时 ratio 在 0.3 附近反复抖动
+        if (visDebounceMap.has(iframe)) clearTimeout(visDebounceMap.get(iframe));
+        visDebounceMap.set(iframe, setTimeout(() => {
+          visDebounceMap.delete(iframe);
+          // 向子页面发送可见性消息
+          if (iframe.contentWindow && iframe.contentWindow !== window) {
+            iframe.contentWindow.postMessage({
+              type: 'visibility',
+              visible: isVisible
+            }, '*');
+          }
+        }, 200));
+      });
+    }, {
+      rootMargin: '100px',
+      threshold: [0, 0.3]
+    });
+    
+    // 懒加载observer：加载iframe
+    const loadObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = entry.target;
+          const src = iframe.getAttribute('data-src');
+          if (src) {
+            iframe.src = src;
+            iframe.removeAttribute('data-src');
+          }
+          // 加载后开始观察可见性
+          iframeVisibilityObserver.observe(iframe);
+          loadObserver.unobserve(iframe);
+        }
+      });
+    }, {
+      rootMargin: '300px',
+      threshold: 0
+    });
+    
+    // 观察所有lazy-iframe
+    const lazyIframes = document.querySelectorAll('.lazy-iframe[data-src]');
+    lazyIframes.forEach(iframe => loadObserver.observe(iframe));
+    
+    // 立即观察eager iframe的可见性（它们已经在加载了）
+    const eagerIframes = document.querySelectorAll('.eager-load, .eager-iframe');
+    eagerIframes.forEach(iframe => {
+      iframeVisibilityObserver.observe(iframe);
+    });
+  }
+  
+  // ===== iframe 等比缩放适配 =====
+  function scaleIframeToFit(iframe) {
+    const ORIG_W = 1440;
+    const ORIG_H = 1080;
+    const wrap = iframe.closest('.iframe-wrap');
+    if (!wrap) return;
+    // 获取容器的 CSS 宽度（不含 border）
+    const wrapW = wrap.clientWidth;
+    if (!wrapW) return;
+    // 按宽度缩放，高度按比例计算
+    const scale = wrapW / ORIG_W;
+    const scaledH = ORIG_H * scale;
+    // 动态设置容器高度，精确匹配 iframe 缩放后的高度
+    wrap.style.height = scaledH + 'px';
+    // iframe 从左上角开始缩放，无需居中偏移
+    iframe.style.transform = `scale(${scale})`;
+    iframe.classList.add('scaled');
+
+    // 同步缩放 ANIMATED 标签，使其与 iframe 内容视觉比例一致
+    const label = wrap.querySelector('.iframe-label');
+    if (label) {
+      const scaledRight = 12 * scale;
+      const scaledTop = 12 * scale;
+      label.style.right = scaledRight + 'px';
+      label.style.top = scaledTop + 'px';
+      label.style.transform = `scale(${scale})`;
+      label.style.transformOrigin = 'top right';
+    }
+  }
+
+  function scaleAllIframes() {
+    document.querySelectorAll('.iframe-wrap iframe').forEach(scaleIframeToFit);
+  }
+
+  function initIframeScale() {
+    // 初始缩放
+    scaleAllIframes();
+    // 窗口 resize 时重新缩放
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(scaleAllIframes, 80);
+    });
+    // iframe 加载完成后再缩放一次（保证内容渲染后尺寸准确）
+    document.querySelectorAll('.iframe-wrap iframe').forEach(iframe => {
+      iframe.addEventListener('load', () => scaleIframeToFit(iframe));
+    });
+    // 观察 lazy iframe 被加载时的 src 变更
+    const srcObserver = new MutationObserver(mutations => {
+      mutations.forEach(m => {
+        if (m.attributeName === 'src') {
+          const iframe = m.target;
+          scaleIframeToFit(iframe);
+          iframe.addEventListener('load', () => scaleIframeToFit(iframe), { once: true });
+        }
+      });
+    });
+    document.querySelectorAll('.iframe-wrap iframe').forEach(iframe => {
+      srcObserver.observe(iframe, { attributes: true, attributeFilter: ['src'] });
+    });
+  }
+
+  function initAllAnimations() {
+    if (animationsInitialized) return;
+    animationsInitialized = true;
+    
+    initIframeScale();        // ← iframe 满框缩放（最先执行）
+    initIframeLazyLoad(); // 智能懒加载iframe
+    initSpotlightEffect();
+    initIframeGlowEffect();
+    initScrollReveal();
+    initTimeTunnel();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllAnimations);
+  } else {
+    // DOM已加载完成，直接初始化
+    initAllAnimations();
+  }
+</script>
+
+
+<script>
+/* ===== 4:3 画布缩放适配 ===== */
+(function() {
+  var CANVAS_W = 1440, CANVAS_H = 1080;
+  function updateScale() {
+    var winW = window.innerWidth;
+    var winH = window.innerHeight;
+    var scaleByW = winW / CANVAS_W;
+    var scaleByH = winH / CANVAS_H;
+    var scale = Math.min(scaleByW, scaleByH);
+    document.body.style.setProperty('--canvas-scale', scale);
+    // transform 直接写到 body（CSS var 在 transform 里不能直接用，需要 JS 更新）
+    document.body.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+  }
+  updateScale();
+  window.addEventListener('resize', updateScale);
+})();
+</script>
+
+<!-- ===== 全屏展开 Modal ===== -->
+<div id="iframe-fullscreen-modal">
+  <div id="iframe-fullscreen-inner">
+    <button id="iframe-fullscreen-close" title="关闭">✕</button>
+    <iframe id="iframe-fullscreen-frame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+(function() {
+  var modal = document.getElementById('iframe-fullscreen-modal');
+  var frame = document.getElementById('iframe-fullscreen-frame');
+  var closeBtn = document.getElementById('iframe-fullscreen-close');
+  var currentTheme = localStorage.getItem('claw-theme') || 'deep-ocean';
+
+  // 点击 ANIMATED 标签 → 全屏展开
+  document.addEventListener('click', function(e) {
+    var label = e.target.closest('.iframe-label');
+    if (!label) return;
+    var wrap = label.closest('.iframe-wrap');
+    if (!wrap) return;
+    var srcIframe = wrap.querySelector('iframe');
+    if (!srcIframe) return;
+    var src = srcIframe.getAttribute('src') || srcIframe.getAttribute('data-src') || '';
+    if (!src) return;
+    frame.src = src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // 同步主题给弹窗 iframe
+    setTimeout(function() {
+      try {
+        frame.contentWindow.postMessage({ type: 'themeChange', theme: currentTheme }, '*');
+      } catch(err) {}
+    }, 300);
+  });
+
+  // 关闭按钮
+  closeBtn.addEventListener('click', closeModal);
+  // 点击遮罩关闭
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+  // ESC 关闭
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    frame.src = '';
+  }
+
+  // 监听主题切换，同步到弹窗 iframe
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'themeChange') {
+      currentTheme = e.data.theme;
+    }
+  });
+  // 主页面主题切换时同步弹窗
+  var origApply = window.CLAW_applyTheme;
+  if (origApply) {
+    window.CLAW_applyTheme = function(name) {
+      origApply(name);
+      currentTheme = name;
+      if (modal.classList.contains('open')) {
+        try { frame.contentWindow.postMessage({ type: 'themeChange', theme: name }, '*'); } catch(err) {}
+      }
+    };
+  }
+})();
+</script>
+</body>
+</html>

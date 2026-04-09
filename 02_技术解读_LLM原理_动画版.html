@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 浅色主题（warm-parchment）全面安全覆盖 =====
+     防止浅色背景下出现白字/深色背景框看不见的情况
+  ===== */
+
+  /* 1. 通用文字颜色 */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container,
+  html[data-theme="warm-parchment"] * {
+    color: inherit;
+  }
+  html[data-theme="warm-parchment"] body { color: var(--text) !important; }
+
+  /* 2. 强制白字改为深色文字 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"],
+  html[data-theme="warm-parchment"] [style*="color: #fff"],
+  html[data-theme="warm-parchment"] [style*="color:#FFF"],
+  html[data-theme="warm-parchment"] [style*="color: #FFF"] {
+    color: var(--text) !important;
+  }
+
+  /* 3. 硬编码白色文字的类名 */
+  html[data-theme="warm-parchment"] .embed-card .e-word,
+  html[data-theme="warm-parchment"] .vector-word-label,
+  html[data-theme="warm-parchment"] .pinball-flying-word,
+  html[data-theme="warm-parchment"] .output-text,
+  html[data-theme="warm-parchment"] .user-input,
+  html[data-theme="warm-parchment"] .user-input:focus,
+  html[data-theme="warm-parchment"] .user-input:active {
+    color: var(--text) !important;
+  }
+
+  /* 4. 深色半透明背景框 → 改为浅色 */
+  html[data-theme="warm-parchment"] .process-box {
+    background: rgba(139,105,20,0.05) !important;
+    border-color: rgba(139,105,20,0.25) !important;
+  }
+  html[data-theme="warm-parchment"] .step-input-box {
+    background: rgba(139,105,20,0.04) !important;
+  }
+  html[data-theme="warm-parchment"] .user-input {
+    background: rgba(139,105,20,0.06) !important;
+    border-color: rgba(139,105,20,0.35) !important;
+  }
+  html[data-theme="warm-parchment"] .user-input::placeholder { color: #9A8460 !important; }
+  html[data-theme="warm-parchment"] .token-card {
+    background: rgba(139,105,20,0.07) !important;
+    border-color: rgba(139,105,20,0.35) !important;
+  }
+  html[data-theme="warm-parchment"] .embed-card {
+    background: rgba(139,105,20,0.05) !important;
+    border-color: rgba(139,105,20,0.25) !important;
+  }
+  html[data-theme="warm-parchment"] .vector-space-box,
+  html[data-theme="warm-parchment"] .pinball-box,
+  html[data-theme="warm-parchment"] .filter-box {
+    background: rgba(139,105,20,0.03) !important;
+    border-color: rgba(139,105,20,0.2) !important;
+  }
+  html[data-theme="warm-parchment"] #pinballCanvas,
+  html[data-theme="warm-parchment"] #semanticCanvas {
+    background: rgba(139,105,20,0.03) !important;
+  }
+  html[data-theme="warm-parchment"] .pinball-output-bar {
+    background: rgba(139,105,20,0.05) !important;
+    border-bottom-color: rgba(139,105,20,0.25) !important;
+  }
+  html[data-theme="warm-parchment"] .pinball-layer {
+    border-top-color: rgba(139,105,20,0.2) !important;
+  }
+  html[data-theme="warm-parchment"] .pinball-layer-label,
+  html[data-theme="warm-parchment"] .pinball-char-pile span {
+    color: rgba(139,105,20,0.55) !important;
+  }
+  html[data-theme="warm-parchment"] .pinball-layer-label.edge {
+    color: rgba(139,105,20,0.8) !important;
+  }
+  html[data-theme="warm-parchment"] .pinball-peg {
+    background: rgba(139,105,20,0.4) !important;
+  }
+
+  /* 5. 固定灰色文字改为主题色 */
+  html[data-theme="warm-parchment"] .input-label,
+  html[data-theme="warm-parchment"] .pinball-title {
+    color: var(--text-dim) !important;
+  }
+  html[data-theme="warm-parchment"] .token-vec,
+  html[data-theme="warm-parchment"] .embed-card .e-id,
+  html[data-theme="warm-parchment"] .vector-hint,
+  html[data-theme="warm-parchment"] .vector-legend,
+  html[data-theme="warm-parchment"] .vector-source-hint {
+    color: var(--text-dim) !important;
+  }
+  html[data-theme="warm-parchment"] .embed-card .e-vec { color: #4A7A9B !important; }
+
+  /* 6. filter-gate-label 深黑背景 → 浅色 */
+  html[data-theme="warm-parchment"] .filter-gate-label {
+    background: rgba(240,235,220,0.9) !important;
+    color: var(--text-dim) !important;
+  }
+
+  /* 7. vector-dot 白色边框 → 深色 */
+  html[data-theme="warm-parchment"] .vector-dot {
+    border-color: var(--text) !important;
+  }
+
+  /* 8. output-text */
+  html[data-theme="warm-parchment"] .output-text { color: var(--text) !important; }
+  
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM原理 - 从文字到意义</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+  font-size: var(--current-xl);
+}
+.page {
+  width: 1440px; height: 1080px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  position: relative;
+}
+.header { position: absolute; top: 40px; left: 60px; }
+.header-label { font-size: var(--current-xl); letter-spacing: 4px; color: var(--gold); margin-bottom: 12px; }
+.header-title { font-size: 58px; font-weight: 200; letter-spacing: 2px; }
+.header-title em { color: var(--gold); font-style: normal; }
+.controls {
+  position: absolute; bottom: 40px;
+  display: flex; gap: 20px; align-items: center;
+}
+.btn {
+  padding: 12px 32px; background: transparent;
+  border: 1px solid var(--gold); color: var(--gold);
+  font-size: var(--current-xl); letter-spacing: 2px; cursor: pointer; transition: all 0.3s;
+}
+.btn:hover { background: rgba(201,168,76,0.1); }
+.btn.primary { background: var(--gold); color: var(--bg); }
+.btn.primary:hover { background: var(--gold); }
+.step-indicator { display: flex; gap: 6px; }
+.step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(201,168,76,0.3); transition: all 0.3s; cursor: pointer;
+}
+.step-dot.active { background: var(--gold); transform: scale(1.3); }
+.stage {
+  width: 1320px; height: 860px;
+  position: relative; display: flex;
+  align-items: center; justify-content: center;
+}
+.step {
+  position: absolute; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 40px;
+  opacity: 0; transform: translateX(50px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.step.active { opacity: 1; transform: translateX(0); pointer-events: all; }
+.step.prev { opacity: 0; transform: translateX(-50px); }
+
+.process-box {
+  padding: 36px; background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 12px; position: relative;
+}
+.process-title {
+  font-size: var(--text-h4); color: var(--gold);
+  letter-spacing: 3px; margin-bottom: 30px; text-align: center;
+}
+
+/* Step 0: 输入框 */
+.step-input-box { width: 720px; padding: 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; }
+.input-label { font-size: var(--current-lg); color: #aaa; letter-spacing: 2px; margin-bottom: 16px; }
+.user-input {
+  width: 100%; padding: 14px 20px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 8px; color: #fff; font-size: var(--current-2xl2);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif; outline: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.user-input:focus { border-color: var(--gold); }
+.user-input::placeholder { color: #777; }
+
+/* Step 1: 分词 */
+.tokenize-container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; min-height: 80px; }
+.token-card {
+  padding: 10px 16px; background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.4); border-radius: 6px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 70px; opacity: 0; transform: scale(0.7) translateY(12px);
+  animation: popIn 0.4s forwards;
+}
+.token-card .t-word { font-size: var(--text-h4); font-weight: 600; }
+.token-card .t-id { font-size: var(--text-sm); color: var(--gold); font-family: monospace; }
+@keyframes popIn { to { opacity: 1; transform: scale(1) translateY(0); } }
+/* 旧版JS兼容类名 */
+.token-word { font-size: var(--text-h4); font-weight: 600; }
+.token-id { font-size: var(--text-sm); color: var(--gold); font-family: monospace; }
+.token-vec { font-size: var(--text-sm); color: #666; font-family: 'Courier New', monospace; max-width: 140px; word-break: break-all; text-align: center; line-height: 1.4; margin-top: 2px; }
+
+/* Step 2: 嵌入向量 */
+.embed-container { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; min-height: 80px; }
+.embed-card {
+  padding: 10px 14px; background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.3); border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  opacity: 0; transform: scale(0.7); animation: popIn 0.4s forwards;
+  width: 120px; min-height: 140px;
+}
+.embed-card .e-word { font-size: var(--current-xl); font-weight: 600; color: #fff; }
+.embed-card .e-arrow { font-size: var(--current-md); color: var(--gold); }
+.embed-card .e-vec { font-size: var(--text-sm); color: #4db8ff; font-family: 'Courier New', monospace; max-width: 100px; word-break: break-all; text-align: center; line-height: 1.3; }
+.embed-card .e-id { font-size: var(--current-xs); color: #666; font-family: monospace; }
+
+/* Step 3: 语义向量空间 (HTML/SVG) */
+.vector-space-box {
+  width: 100%; position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px; overflow: hidden;
+}
+.vector-svg { width: 100%; height: 100%; }
+.vector-word-label {
+  position: absolute; font-size: var(--text-sm); font-weight: 700;
+  color: #fff; pointer-events: none; white-space: nowrap;
+  text-shadow: 0 0 8px rgba(0,0,0,0.8);
+  opacity: 0; animation: wordFadeIn 0.5s forwards;
+}
+@keyframes wordFadeIn { to { opacity: 1; } }
+.vector-glow {
+  position: absolute; width: 40px; height: 40px;
+  border-radius: 50%; pointer-events: none;
+  opacity: 0; animation: wordFadeIn 0.5s forwards;
+}
+.vector-dot {
+  position: absolute; width: 12px; height: 12px;
+  border-radius: 50%; border: 2px solid #fff;
+  pointer-events: none; opacity: 0; animation: wordFadeIn 0.5s forwards;
+}
+.vector-line {
+  position: absolute; height: 1px;
+  transform-origin: left center; pointer-events: none;
+  opacity: 0; animation: wordFadeIn 0.6s forwards;
+}
+.vector-line-label {
+  position: absolute; font-size: var(--current-sm); color: var(--gold);
+  pointer-events: none; white-space: nowrap;
+  opacity: 0; animation: wordFadeIn 0.6s forwards;
+}
+.vector-hint { font-size: var(--current-base); color: #555; text-align: center; font-style: italic; margin-top: 10px; }
+/* 旧版JS兼容 — 语义向量空间 */
+.vector-chart-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.vector-legend { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; font-size: var(--text-sm); color: #888; }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.vector-source-hint { font-size: var(--text-sm); color: #555; text-align: center; font-style: italic; }
+#semanticCanvas { background: transparent; display: block; max-width: 100%; }
+
+/* Step 4: 弹珠机 (HTML/CSS动画) */
+.pinball-box {
+  width: 100%; height: 300px; position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px; overflow: hidden;
+}
+/* 旧版JS兼容 — 弹珠机 */
+.pinball-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.pinball-title { font-size: var(--text-body); color: #bbb; letter-spacing: 2px; text-align: center; }
+.pinball-output-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; min-height: 32px; }
+.pinball-word { padding: 5px 12px; background: rgba(201,168,76,0.15); border: 1px solid var(--gold); border-radius: 4px; font-size: var(--text-lead); color: var(--gold); opacity: 0; transform: translateY(-8px); animation: popIn 0.4s forwards; }
+#pinballCanvas { background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; display: block; width: 100%; height: 100%; }
+@keyframes wordDrop { to { opacity: 1; transform: translateY(0); } }
+.pinball-layer {
+  position: absolute; left: 0; right: 0; height: 1px;
+  border-top: 1px dashed rgba(201,168,76,0.25);
+}
+.pinball-layer-label {
+  position: absolute; left: 8px; font-size: var(--current-base);
+  font-family: 'Courier New', monospace; color: rgba(201,168,76,0.6);
+  transform: translateY(-100%); padding-bottom: 2px;
+}
+.pinball-layer-label.edge { color: rgba(201,168,76,0.8); font-weight: bold; }
+.pinball-peg {
+  position: absolute; width: 8px; height: 8px;
+  border-radius: 50%; background: rgba(201,168,76,0.5);
+  border: 1px solid var(--gold);
+  transform: translate(-50%, -50%);
+}
+.pinball-output-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 40px;
+  background: rgba(201,168,76,0.06);
+  border-bottom: 1px dashed rgba(201,168,76,0.3);
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px; overflow: hidden;
+}
+.pinball-output-word {
+  padding: 4px 10px; border-radius: 4px;
+  font-size: var(--text-body); font-weight: 600;
+  border: 1px solid; opacity: 0;
+  animation: popIn 0.4s forwards;
+}
+.pinball-rain-word {
+  position: absolute; font-size: var(--current-md); color: rgba(170,170,170,0.6);
+  pointer-events: none; white-space: nowrap;
+}
+.pinball-flying-word {
+  position: absolute; padding: 4px 10px; border-radius: 4px;
+  font-size: var(--text-body); font-weight: 600; border: 1.5px solid;
+  color: #fff; pointer-events: none; white-space: nowrap;
+  transition: none;
+}
+.pinball-char-pile {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
+  display: flex; flex-wrap: wrap; gap: 2px; align-items: center;
+  padding: 0 8px; overflow: hidden;
+}
+.pinball-char-pile span {
+  font-size: var(--current-base); color: rgba(201,168,76,0.5); white-space: nowrap;
+}
+
+/* Step 5: 安全过滤网 (HTML/CSS动画) */
+.filter-box {
+  width: 100%; height: 300px; position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px; overflow: hidden;
+}
+.filter-net {
+  position: absolute; left: 0; right: 0; top: 45%;
+  height: 20px;
+  border-top: 2px solid rgba(76,175,80,0.7);
+  border-bottom: 2px solid rgba(76,175,80,0.4);
+  background:
+    repeating-linear-gradient(90deg, rgba(76,175,80,0.2) 0px, rgba(76,175,80,0.2) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(0deg, rgba(76,175,80,0.15) 0px, rgba(76,175,80,0.15) 1px, transparent 1px, transparent 18px);
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(76,175,80,0.15);
+}
+.filter-net-label {
+  position: absolute; right: 8px; top: 2px;
+  font-size: var(--text-sm); color: rgba(76,175,80,0.9);
+  font-family: 'Courier New', monospace; font-weight: bold;
+  letter-spacing: 1px;
+}
+.filter-gate-labels {
+  position: absolute; left: 0; right: 0; top: 52%;
+  transform: translateY(-50%);
+  z-index: 11; display: flex; justify-content: space-around; padding: 0 30px;
+  pointer-events: none;
+}
+.filter-gate-label {
+  font-size: var(--text-sm); color: rgba(76,175,80,0.8);
+  background: rgba(10,10,10,0.85);
+  padding: 2px 8px; border-radius: 3px;
+  border: 1px solid rgba(76,175,80,0.3);
+  white-space: nowrap;
+}
+.filter-drop-zone {
+  position: absolute; left: 0; right: 0; top: 0; height: 44%;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 30px;
+}
+.filter-drop-zone-title {
+  font-size: var(--text-sm); color: #666; letter-spacing: 2px; margin-bottom: 8px;
+}
+.filter-pass-zone {
+  position: absolute; left: 0; right: 0; top: 56%; bottom: 0;
+  background: rgba(76,175,80,0.04);
+  border-radius: 0 0 8px 8px;
+  display: flex; flex-direction: column; align-items: center; padding-top: 20px;
+}
+.filter-pass-zone-title {
+  font-size: var(--text-sm); color: rgba(76,175,80,0.6); letter-spacing: 2px; margin-bottom: 6px;
+}
+.filter-blocked-zone {
+  position: absolute; right: 12px; top: 8px;
+  display: flex; flex-direction: column; gap: 4px; align-items: flex-end;
+}
+.filter-blocked-item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 10px; background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.4); border-radius: 4px;
+  font-size: var(--current-base); color: var(--red);
+  opacity: 0; transform: translateX(20px);
+  animation: filterBlockedIn 0.4s forwards;
+}
+@keyframes filterBlockedIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+.filter-blocked-x {
+  font-size: var(--current-md); font-weight: bold; color: var(--red);
+}
+.filter-pass-row {
+  display: flex; gap: 6px; flex-wrap: wrap; padding: 4px 12px; justify-content: center;
+}
+.filter-pass-item {
+  padding: 5px 12px; background: rgba(76,175,80,0.12);
+  border: 1px solid rgba(76,175,80,0.5); border-radius: 4px;
+  font-size: var(--text-sm); color: #81C784; font-weight: 600;
+  opacity: 0; transform: translateY(10px);
+  animation: filterPassIn 0.4s forwards;
+}
+@keyframes filterPassIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.filter-dropping-word {
+  position: absolute; font-size: var(--current-xl); font-weight: 700;
+  pointer-events: none; white-space: nowrap;
+  z-index: 5;
+  transition: none;
+}
+.filter-spark {
+  position: absolute; width: 4px; height: 4px;
+  border-radius: 50%; pointer-events: none; z-index: 12;
+  animation: sparkBurst 0.6s forwards;
+}
+@keyframes sparkBurst {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3); }
+}
+.filter-status-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 32px;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(201,168,76,0.1);
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  font-size: var(--current-sm); color: #666;
+}
+.filter-status-bar .stat-pass { color: var(--green); }
+.filter-status-bar .stat-block { color: var(--red); }
+
+/* Step 6: 输出 */
+.output-text { font-size: var(--text-h4); line-height: 2; color: #fff; }
+.output-text .word {
+  opacity: 0; display: inline-block;
+  animation: wordAppear 0.3s forwards;
+}
+@keyframes wordAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* 粒子背景 */
+.particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute; width: 2px; height: 2px;
+  background: rgba(201,168,76,0.3); border-radius: 50%;
+  animation: float 20s infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; } 90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  body { overflow-y: auto !important; }
+  .page { height: auto !important; min-height: 100vh; flex-direction: column; justify-content: flex-start !important; align-items: stretch !important; }
+  .header { position: relative !important; top: auto !important; left: auto !important; padding: 24px 20px 12px; text-align: center; }
+  .header-title { font-size: clamp(20px, 5vw, 42px); }
+  .stage { width: 100% !important; height: auto !important; min-height: 550px; padding: 16px; }
+  .step { flex-direction: column !important; gap: 20px !important; padding: 0 16px; }
+  .process-box { width: 100% !important; max-width: 100% !important; }
+  .controls { position: relative !important; bottom: auto !important; padding: 16px; justify-content: center; }
+  .btn { padding: 10px 20px; font-size: var(--current-sm); }
+  .particles { display: none; }
+}
+@media (max-width: 480px) {
+  html { height: auto !important; overflow: visible !important; }
+  body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; }
+  .page { height: auto !important; min-height: 100vh; }
+  .header { padding: 16px 16px 8px; position: relative !important; text-align: center; }
+  .header-title { font-size: var(--current-lg); }
+  .stage { width: 100% !important; height: auto !important; min-height: 500px; padding: 12px; max-height: none !important; }
+  .step { flex-direction: column !important; gap: 14px !important; padding: 0 12px; }
+  .process-box { width: 100% !important; max-width: 100% !important; padding: 12px; }
+  .controls { position: relative !important; padding: 12px; gap: 10px; flex-wrap: wrap; }
+  .btn { padding: 8px 16px; font-size: var(--text-sm); }
+  .token-card .t-word { font-size: var(--current-lg); }
+  .embed-card .e-word { font-size: var(--text-body); }
+  .embed-card .e-vec { font-size: var(--text-sm); max-width: 120px; }
+  .user-input { font-size: var(--current-lg); }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="particles" id="particles"></div>
+  <div class="header">
+    <div class="header-label">LLM · 大语言模型</div>
+    <div class="header-title">从文字到意义的<br><em>神奇转变</em></div>
+  </div>
+
+  <div class="stage">
+
+    <!-- Step 0: 输入 -->
+    <div class="step active" id="step0">
+      <div class="step-input-box">
+        <div class="input-label">STEP 0 · 输入</div>
+        <input class="user-input" id="userInput" type="text" placeholder="输入任意中文句子..." maxlength="40" value="请帮我分析一下建设银行的理财产品" />
+      </div>
+    </div>
+
+    <!-- Step 1: 分词 -->
+    <div class="step" id="step1">
+      <div class="process-box" style="width:1100px;padding:35px;">
+        <div class="process-title" style="font-size:var(--text-h2);margin-bottom:24px;">STEP 1 · Token 分词</div>
+        <div class="tokenize-container" id="tokenContainer" style="min-height:550px;"></div>
+      </div>
+    </div>
+
+    <!-- Step 2: 嵌入向量 -->
+    <div class="step" id="step2">
+      <div class="process-box" style="width:1150px;padding:35px;">
+        <div class="process-title" style="font-size:var(--text-h2);margin-bottom:24px;">STEP 2 · 嵌入向量 Embedding</div>
+        <div class="embed-container" id="embedContainer" style="min-height:600px;"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: 语义向量空间 -->
+    <div class="step" id="step3">
+      <div class="process-box" style="width:1200px;padding:35px;">
+        <div class="process-title" style="font-size:var(--text-h2);margin-bottom:24px;">STEP 3 · 语义向量空间</div>
+        <div class="vector-space-box" id="vectorSpaceBox" style="height:700px;">
+          <div class="vector-chart-wrap">
+            <canvas id="semanticCanvas" width="1150" height="650"></canvas>
+            <div class="vector-legend" id="semanticLegend"></div>
+            <div class="vector-source-hint" id="vectorSourceHint"></div>
+          </div>
+        </div>
+        <div class="vector-hint" style="margin-top:12px;font-size:var(--text-body);color:#ccc;line-height:1.6;">
+          <span style="color:#4db8ff;">蓝色</span> = 已输入词 &nbsp;&nbsp;|&nbsp;&nbsp;<span style="color: var(--gold);">金色</span> = AI预测词 &nbsp;&nbsp;|&nbsp;&nbsp;<span style="color:#999;">灰色</span> = 候选词 &nbsp;&nbsp;|&nbsp;&nbsp;每次基于上下文预测下一个最可能的词
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Transformer 3D漏斗 -->
+    <div class="step" id="step4">
+      <div class="process-box" style="width:1150px;padding:30px;margin-left:180px;">
+        <div class="process-title" style="font-size:var(--text-h3);margin-bottom:20px;">STEP 4 · Transformer 漏斗：自回归预测循环</div>
+        <div class="pinball-box" id="pinballBox" style="height:680px;">
+          <canvas id="pinballCanvas" width="1090" height="680"></canvas>
+        </div>
+        <div style="margin-top:24px;text-align:center;font-size:var(--text-sm);color:#bbb;line-height:1.5;">
+          <span style="color: var(--gold);">自回归机制</span> — 输入词 → 向量化 → 多头注意力 → FFN → 预测下一词 → 回到输入端继续预测
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: 安全过滤 -->
+    <div class="step" id="step5">
+      <div class="process-box" style="width:1100px;padding:35px;">
+        <div class="process-title">STEP 5 · 安全合规过滤</div>
+        <div class="filter-box" id="filterBox">
+          <!-- 过滤网 -->
+          <div class="filter-net">
+            <div class="filter-net-label">SAFETY GATE</div>
+          </div>
+          <!-- 三道闸门标签 -->
+          <div class="filter-gate-labels">
+            <span class="filter-gate-label">监管合规</span>
+            <span class="filter-gate-label">消费者保护</span>
+            <span class="filter-gate-label">法律底线</span>
+          </div>
+          <!-- 掉落区 -->
+          <div class="filter-drop-zone">
+            <div class="filter-drop-zone-title">LLM 生成输出</div>
+          </div>
+          <!-- 通过区 -->
+          <div class="filter-pass-zone">
+            <div class="filter-pass-zone-title">安全输出 ✓</div>
+            <div class="filter-pass-row" id="filterPassRow"></div>
+          </div>
+          <!-- 拦截区 -->
+          <div class="filter-blocked-zone" id="filterBlockedZone"></div>
+          <!-- 状态栏 -->
+          <div class="filter-status-bar">
+            <span>监管合规 <span class="stat-pass">✓</span></span>
+            <span>消费者保护 <span class="stat-pass">✓</span></span>
+            <span>法律底线 <span class="stat-pass">✓</span></span>
+            <span id="filterStats" style="color: var(--gold);"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6: 输出 -->
+    <div class="step" id="step6">
+      <div class="process-box" style="width:900px;padding:35px;">
+        <div class="process-title">STEP 6 · 组装语言</div>
+        <div class="output-text" id="outputText" style="margin-top:20px;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="prevBtn">← 上一步</button>
+    <div class="step-indicator">
+      <div class="step-dot active" data-step="0"></div>
+      <div class="step-dot" data-step="1"></div>
+      <div class="step-dot" data-step="2"></div>
+      <div class="step-dot" data-step="3"></div>
+      <div class="step-dot" data-step="4"></div>
+      <div class="step-dot" data-step="5"></div>
+      <div class="step-dot" data-step="6"></div>
+    </div>
+    <button class="btn primary" id="nextBtn">下一步 →</button>
+    <button class="btn" id="autoBtn">▶ 自动演示</button>
+  </div>
+</div>
+
+<script>
+// roundRect polyfill
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w/2, h/2);
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.lineTo(x+w-r, y);
+    this.quadraticCurveTo(x+w, y, x+w, y+r);
+    this.lineTo(x+w, y+h-r);
+    this.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    this.lineTo(x+r, y+h);
+    this.quadraticCurveTo(x, y+h, x, y+h-r);
+    this.lineTo(x, y+r);
+    this.quadraticCurveTo(x, y, x+r, y);
+    this.closePath();
+  };
+}
+
+// 生成粒子背景
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 20 + 's';
+    p.style.animationDuration = (15 + Math.random() * 10) + 's';
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+// ===== 全局状态：用户输入驱动所有步骤 =====
+let globalInputText = '请帮我分析一下建设银行的理财产品';
+let globalTokens = [];
+let globalTokenVecs = {};  // token → [x, y] 映射
+
+function getUserInput() {
+  const inp = document.getElementById('userInput');
+  return inp ? inp.value.trim() : globalInputText;
+}
+
+function syncInput() {
+  const val = getUserInput();
+  if (val && val.length > 0) {
+    globalInputText = val;
+  } else {
+    globalInputText = '请帮我分析一下建设银行的理财产品';
+  }
+}
+
+// 步骤管理
+let currentStep = 0;
+const totalSteps = 6;
+let autoPlayInterval = null;
+
+function showStep(step) {
+  document.querySelectorAll('.step').forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i < step) s.classList.add('prev');
+    else if (i === step) s.classList.add('active');
+  });
+  document.querySelectorAll('.step-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === step);
+  });
+  triggerStepAnimation(step);
+  currentStep = step;
+}
+
+function triggerStepAnimation(step) {
+  syncInput();
+  // 清理可能残留的动画
+  if (window._semanticAnim) { cancelAnimationFrame(window._semanticAnim); window._semanticAnim = null; }
+  if (pinballAnim) { cancelAnimationFrame(pinballAnim); pinballAnim = null; }
+  switch(step) {
+    case 1:
+      generateTokens();
+      break;
+    case 2:
+      // Step2 嵌入：复用 generateTokens 的嵌入展示部分
+      generateEmbeddings();
+      break;
+    case 3:
+      // 延迟执行以确保DOM已更新
+      setTimeout(drawSemanticChart, 100);
+      break;
+    case 4:
+      runPinball();
+      break;
+    case 5:
+      generateFilter();
+      break;
+    case 6:
+      generateOutput();
+      break;
+  }
+}
+
+// ===== Step 2: 嵌入向量展示（从 generateTokens 拆分）=====
+function generateEmbeddings() {
+  const input = getUserInput();
+  const tokens = tokenize(input);
+  const container = document.getElementById('embedContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  tokens.forEach((token, i) => {
+    const vec = getVectorPreview(token);
+    const card = document.createElement('div');
+    card.className = 'embed-card';
+    card.style.animationDelay = (i * 0.15) + 's';
+    card.innerHTML = '<span class="e-word">' + token + '</span><span class="e-vec">[' + vec.join(', ') + ']</span>';
+    container.appendChild(card);
+  });
+}
+
+// ===== Step 5: 安全合规过滤（过滤网动画）=====
+let filterAnimTimer = null;
+
+function generateFilter() {
+  // 清理之前的动画
+  if (filterAnimTimer) { clearTimeout(filterAnimTimer); filterAnimTimer = null; }
+  const passRow = document.getElementById('filterPassRow');
+  const blockedZone = document.getElementById('filterBlockedZone');
+  const filterStats = document.getElementById('filterStats');
+  if (!passRow) return;
+  passRow.innerHTML = '';
+  if (blockedZone) blockedZone.innerHTML = '';
+  if (filterStats) filterStats.textContent = '';
+
+  const filterBox = document.getElementById('filterBox');
+  if (!filterBox) return;
+
+  // 生成测试词汇：正常词 + 模拟的不合规词
+  const normalWords = ['根据', '您的', '需求', '分析', '如下：', '建议', '配置', '稳健型', '产品'];
+  const blockedWords = [
+    { text: '内幕消息', reason: '违规信息' },
+    { text: '保证收益', reason: '误导承诺' },
+    { text: '私人账户', reason: '隐私风险' },
+  ];
+
+  // 合并并打乱顺序
+  const allWords = [];
+  normalWords.forEach(w => allWords.push({ text: w, blocked: false }));
+  blockedWords.forEach(w => allWords.push({ text: w.text, blocked: true, reason: w.reason }));
+
+  // Fisher-Yates 洗牌（保留blocked词的大致位置）
+  for (let i = allWords.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allWords[i], allWords[j]] = [allWords[j], allWords[i]];
+  }
+
+  let passCount = 0, blockCount = 0;
+
+  allWords.forEach((item, i) => {
+    filterAnimTimer = setTimeout(() => {
+      // 创建掉落的字元素
+      const wordEl = document.createElement('div');
+      wordEl.className = 'filter-dropping-word';
+      wordEl.textContent = item.text;
+      wordEl.style.color = item.blocked ? 'var(--red)' : '#fff';
+      wordEl.style.left = (60 + Math.random() * (filterBox.offsetWidth - 160)) + 'px';
+      wordEl.style.top = '10px';
+      wordEl.style.opacity = '1';
+      filterBox.appendChild(wordEl);
+
+      const netTop = filterBox.offsetHeight * 0.45;
+      const wordHeight = 28;
+      const duration = item.blocked ? 800 : 1100;
+      const startTime = performance.now();
+
+      function dropFrame(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = progress * progress; // 加速下落
+        const currentTop = 10 + eased * (netTop - wordHeight - 10);
+
+        if (item.blocked && currentTop >= netTop - wordHeight - 8) {
+          // 被拦截！
+          wordEl.remove();
+          blockCount++;
+          // 创建火花效果
+          for (let s = 0; s < 5; s++) {
+            const spark = document.createElement('div');
+            spark.className = 'filter-spark';
+            spark.style.background = 'var(--red)';
+            spark.style.left = (wordEl.offsetLeft + 20 + (Math.random() - 0.5) * 30) + 'px';
+            spark.style.top = (netTop - 10 + (Math.random() - 0.5) * 16) + 'px';
+            filterBox.appendChild(spark);
+            setTimeout(() => spark.remove(), 600);
+          }
+          // 添加到拦截区
+          if (blockedZone) {
+            const blockedItem = document.createElement('div');
+            blockedItem.className = 'filter-blocked-item';
+            blockedItem.innerHTML = '<span class="filter-blocked-x">✕</span>' + item.text + ' <span style="font-size: var(--text-sm);color:#aaa;">(' + item.reason + ')</span>';
+            blockedItem.style.animationDelay = '0s';
+            blockedZone.appendChild(blockedItem);
+          }
+          if (filterStats) filterStats.textContent = '通过 ' + passCount + ' / 拦截 ' + blockCount;
+          return;
+        }
+
+        if (!item.blocked && currentTop >= netTop + 24) {
+          // 通过过滤网！继续下落到通过区
+          wordEl.style.top = currentTop + 'px';
+          if (progress >= 1) {
+            wordEl.remove();
+            passCount++;
+            // 添加到通过区
+            const passItem = document.createElement('span');
+            passItem.className = 'filter-pass-item';
+            passItem.textContent = item.text;
+            passItem.style.animationDelay = '0s';
+            passRow.appendChild(passItem);
+            if (filterStats) filterStats.textContent = '通过 ' + passCount + ' / 拦截 ' + blockCount;
+            return;
+          }
+          requestAnimationFrame(dropFrame);
+          return;
+        }
+
+        wordEl.style.top = currentTop + 'px';
+        requestAnimationFrame(dropFrame);
+      }
+
+      requestAnimationFrame(dropFrame);
+    }, i * 350 + 200);
+  });
+}
+
+// ===== Step 2: 分词 + 向量展示 =====
+function tokenize(text) {
+  const wordList = [
+    '广州分行','大语言模型','智能体','神经网络',
+    '深度学习','机器学习','人工智能','客户经理','回流资金','资产配置',
+    '风险偏好','建设','银行','建设银行','分行','理','理财','理财产品','财','产品','分析','一下',
+    '请','帮','我','的','是','了','在','有','和','为','与','对','到','给','让','财','帮我',
+    '你','他','她','它','我们','你们','他们','什么','怎么','如何',
+    '为什么','能','会','可以','应该','需要','这个','那个','一个','一些',
+    '好','很好','非常','比较','最','更','也','都','就','还','不','没',
+    '吗','呢','吧','啊','哦','嗯','数据','信息','问题','答案','结果',
+    '报告','建议','方案','系统','平台','服务','管理','运营','市场','投资',
+    '收入','利率','收益','客户','业务','公司','企业','机构','部门','团队'
+  ];
+
+  let remaining = text;
+  const tokens = [];
+  let safety = 0;
+  while (remaining.length > 0 && safety++ < 50) {
+    let matched = false;
+    for (const w of wordList) {
+      if (remaining.startsWith(w)) {
+        tokens.push(w);
+        remaining = remaining.slice(w.length);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      tokens.push(remaining[0]);
+      remaining = remaining.slice(1);
+    }
+  }
+  return tokens;
+}
+
+// ===== Canvas 颜色辅助：读取 CSS 变量，自动适配深色/浅色主题 =====
+function getCSSColor(varName, alpha) {
+  const val = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  if (val.startsWith('#')) {
+    const h = val.slice(1);
+    const r = parseInt(h.slice(0,2), 16);
+    const g = parseInt(h.slice(2,4), 16);
+    const b = parseInt(h.slice(4,6), 16);
+    return alpha !== undefined ? 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')' : 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+  if (val.includes('rgba')) {
+    return alpha !== undefined ? val.replace(/[\d.]+\)$/, alpha + ')') : val;
+  }
+  if (val.includes('rgb')) {
+    return alpha !== undefined ? val.replace('rgb', 'rgba').replace(')', ',' + alpha + ')') : val;
+  }
+  return alpha !== undefined ? 'rgba(128,128,128,' + alpha + ')' : 'rgb(128,128,128)';
+}
+// 主题金色快捷方法（Canvas 绘图时用）
+function goldColor(alpha) { return getCSSColor('--gold', alpha); }
+function textColor(alpha) { return getCSSColor('--text', alpha); }
+function bgColor(alpha) { return getCSSColor('--bg', alpha); }
+
+// 基于词义的确定性伪随机向量（相同词永远得到相同坐标）
+function getSemanticCoords(word) {
+  // 简单hash函数生成确定性坐标
+  let hash = 0;
+  for (let i = 0; i < word.length; i++) {
+    hash = ((hash << 5) - hash) + word.charCodeAt(i);
+    hash |= 0;
+  }
+  const hash2 = (hash * 2654435761) >>> 0;
+  // 映射到 [-0.7, 0.7] 范围
+  const x = ((hash % 1000) / 1000) * 1.2 - 0.6;
+  const y = (((hash2 % 1000) / 1000) * 1.2 - 0.6);
+  return { x, y };
+}
+
+function getVectorPreview(word) {
+  const coords = getSemanticCoords(word);
+  const v1 = (coords.x * 1.5 + 0.3).toFixed(2);
+  const v2 = (coords.y * 1.2 - 0.1).toFixed(2);
+  const v3 = ((coords.x * 0.7 + coords.y * 0.5) + 0.2).toFixed(2);
+  const v4 = ((-coords.x * 0.4 + coords.y * 0.8) - 0.3).toFixed(2);
+  return [v1, v2, v3, v4];
+}
+
+function generateTokens() {
+  const container = document.getElementById('tokenContainer');
+  container.innerHTML = '';
+  const text = getUserInput() || globalInputText;
+  globalTokens = tokenize(text);
+  globalTokenVecs = {};
+
+  const baseId = Math.floor(Math.random() * 3000) + 1000;
+
+  globalTokens.forEach((token, i) => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'token-card';
+
+      const vec = getVectorPreview(token);
+      globalTokenVecs[token] = getSemanticCoords(token);
+
+      div.innerHTML =
+        '<span class="token-word">' + token + '</span>' +
+        '<span class="token-id">#' + (baseId + i) + '</span>' +
+        '<span class="token-vec">→ [' + vec.join(', ') + ']</span>';
+
+      div.style.animationDelay = '0s';
+      container.appendChild(div);
+    }, i * 130);
+  });
+}
+
+// ===== Step 3: 语义向量空间（3D 立方体版）=====
+function drawSemanticChart() {
+  const canvas = document.getElementById('semanticCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const inputStr = getUserInput() || globalInputText;
+  if (globalTokens.length === 0) globalTokens = tokenize(inputStr);
+  let inputTokens = globalTokens.length > 0 ? globalTokens : tokenize(inputStr);
+  if (inputTokens.length === 0) inputTokens = ['请','帮','我','分析','一下','建设','银行','的','理','财','产品'];
+
+  const predictionSequence = generatePredictionSequence(inputTokens);
+  const totalPredSteps = predictionSequence.length;
+
+  const inputColor = '#4db8ff';
+  const predictedColor = 'var(--gold)';
+  const candidateDim = '#666';
+
+  let frame = 0;
+  if (window._semanticAnim) { cancelAnimationFrame(window._semanticAnim); window._semanticAnim = null; }
+  // predictedWords: { word, nx, ny, nz }  — 3D 归一化坐标 [-1,1]
+  const predictedWords = [];
+
+  // ─── 3D 投影 ───
+  const cx3 = W / 2, cy3 = H / 2 - 10;
+  const CUBE_S = Math.min(W, H) * 0.36;  // 立方体半边长（画布单位）
+  const FOV = 600;  // 透视焦距
+
+  // 旋转状态：Y 轴慢速自转，X 轴小俯仰
+  let rotY = -0.3, rotX = 0.22;
+
+  function project(nx, ny, nz) {
+    // nx/ny/nz ∈ [-1,1] → 旋转 → 透视投影
+    // 先绕 Y 轴旋转
+    const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+    const x1 = nx * cosY + nz * sinY;
+    const y1 = ny;
+    const z1 = -nx * sinY + nz * cosY;
+    // 再绕 X 轴旋转
+    const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+    const x2 = x1;
+    const y2 = y1 * cosX - z1 * sinX;
+    const z2 = y1 * sinX + z1 * cosX;
+    // 透视
+    const scale = FOV / (FOV + z2 * CUBE_S + CUBE_S * 0.5);
+    return {
+      sx: cx3 + x2 * CUBE_S * scale,
+      sy: cy3 + y2 * CUBE_S * scale,
+      sz: z2,      // 深度，用于排序和亮度衰减
+      scale: scale
+    };
+  }
+
+  // 立方体 8 个顶点（归一化坐标 ±1）
+  const VERTS = [];
+  for (let xi = -1; xi <= 1; xi += 2)
+    for (let yi = -1; yi <= 1; yi += 2)
+      for (let zi = -1; zi <= 1; zi += 2)
+        VERTS.push([xi, yi, zi]);
+
+  // 立方体 12 条棱（顶点索引对）
+  const EDGES = [];
+  for (let i = 0; i < 8; i++) {
+    for (let j = i + 1; j < 8; j++) {
+      const diff = VERTS[i].map((v, k) => Math.abs(v - VERTS[j][k]));
+      if (diff.filter(d => d > 0).length === 1) EDGES.push([i, j]);
+    }
+  }
+
+  // 画立方体线框
+  function drawCube() {
+    ctx.save();
+    ctx.strokeStyle = goldColor(0.18);
+    ctx.lineWidth = 1;
+    EDGES.forEach(([a, b]) => {
+      const pa = project(...VERTS[a]);
+      const pb = project(...VERTS[b]);
+      ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
+    });
+    // 轴标签（靠近正方向顶点）
+    const axisLabels = [
+      { pos: [1.3, 0, 0],  label: '语义维度 X' },
+      { pos: [0, -1.3, 0], label: '语义维度 Y' },
+      { pos: [0, 0, 1.3],  label: '语义维度 Z' },
+    ];
+    ctx.font = 'bold 18px PingFang SC,Microsoft YaHei,sans-serif';
+    ctx.fillStyle = goldColor(0.55);
+    ctx.textAlign = 'center';
+    axisLabels.forEach(({ pos, label }) => {
+      const p = project(pos[0], pos[1], pos[2]);
+      ctx.fillText(label, p.sx, p.sy);
+    });
+    ctx.restore();
+  }
+
+  // 背景：微弱浮动数字
+  function drawBackground() {
+    ctx.save();
+    ctx.font = '14px Courier New,monospace';
+    ctx.fillStyle = 'rgba(77,184,255,0.06)';
+    for (let i = 0; i < 24; i++) {
+      const x = (i * 43 + frame * 0.15) % W;
+      const y = 18 + (i * 31 + frame * 0.07) % (H - 36);
+      const ch = Math.floor((frame * 0.06 + i * 1.7) % 2);
+      ctx.fillText(ch ? '1' : '0', x, y);
+    }
+    ctx.restore();
+  }
+
+  // 哈希值 -> 3D 位置（归一化 [-0.88, 0.88]）
+  function wordTo3D(word, salt) {
+    let h = 0;
+    for (let i = 0; i < word.length; i++) { h = ((h << 5) - h) + word.charCodeAt(i); h |= 0; }
+    const h2 = (h * 2654435761 + (salt || 0) * 7919) >>> 0;
+    const h3 = (h2 * 2246822519 + (salt || 0) * 1301) >>> 0;
+    const range = 0.88;
+    return {
+      nx: ((h  % 10000) / 10000 * 2 - 1) * range,
+      ny: ((h2 % 10000) / 10000 * 2 - 1) * range,
+      nz: ((h3 % 10000) / 10000 * 2 - 1) * range
+    };
+  }
+
+  // 画词（带深度感）
+  function drawWord3D(sx, sy, sz, scale3d, text, color, alpha, isGlow) {
+    if (alpha <= 0) return;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+    let r = 255, g = 255, b = 255;
+    if (color.startsWith('#') && color.length >= 7) {
+      r = parseInt(color.slice(1, 3), 16);
+      g = parseInt(color.slice(3, 5), 16);
+      b = parseInt(color.slice(5, 7), 16);
+    }
+    const s = scale3d;
+    const dotR = 5 * s;
+    // 光晕
+    const gs = (isGlow ? 22 : 14) * s;
+    const ga = isGlow ? 0.45 : 0.15;
+    const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, gs);
+    grad.addColorStop(0, `rgba(${r},${g},${b},${ga})`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ctx.beginPath(); ctx.arc(sx, sy, gs, 0, Math.PI * 2);
+    ctx.fillStyle = grad; ctx.fill();
+    // 外环（金色词才有）
+    if (isGlow) {
+      ctx.beginPath(); ctx.arc(sx, sy, 11 * s, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.45)`;
+      ctx.lineWidth = 1.5 * s; ctx.stroke();
+    }
+    // 圆点
+    ctx.beginPath(); ctx.arc(sx, sy, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = color; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = 1.2; ctx.stroke();
+    // 文字
+    const fs = Math.round((isGlow ? 24 : 20) * s);
+    ctx.fillStyle = color;
+    ctx.font = `${isGlow ? 'bold ' : ''}${Math.max(16, fs)}px PingFang SC,Microsoft YaHei,sans-serif`;
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    if (isGlow) { ctx.shadowColor = color; ctx.shadowBlur = 8 * s; }
+    ctx.fillText(text, sx + dotR + 5, sy);
+    ctx.restore();
+  }
+
+  // 画连线（蓝色输入词之间）
+  function drawConnections(wordItems, alpha) {
+    if (alpha <= 0) return;
+    ctx.save(); ctx.globalAlpha = alpha * 0.12;
+    ctx.strokeStyle = inputColor; ctx.lineWidth = 1; ctx.setLineDash([3, 6]);
+    for (let i = 0; i < wordItems.length; i++) {
+      const pa = project(wordItems[i].nx, wordItems[i].ny, wordItems[i].nz);
+      for (let j = i + 1; j < wordItems.length; j++) {
+        const pb = project(wordItems[j].nx, wordItems[j].ny, wordItems[j].nz);
+        const dist = Math.hypot(pa.sx - pb.sx, pa.sy - pb.sy);
+        if (dist < 200) {
+          ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
+        }
+      }
+    }
+    ctx.setLineDash([]); ctx.restore();
+  }
+
+  // 预计算输入词的 3D 坐标
+  const inputWords3D = inputTokens.map((w, i) => ({ word: w, ...wordTo3D(w, i * 100 + 500) }));
+
+  // 动画状态
+  let anim = {
+    phase: 'showInput',   // showInput → showPredict → done
+    predictStep: 0,
+    progress: 0,
+  };
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    frame++;
+    // 立方体慢速旋转
+    rotY += 0.004;
+
+    const pulse = Math.sin(frame * 0.025) * 0.1 + 1;
+
+    drawBackground();
+    drawCube();
+
+    // ── 公共：已预测词（金色凝固）──
+    if (anim.phase !== 'showInput') {
+      predictedWords.forEach((pw, i) => {
+        const p = project(pw.nx, pw.ny, pw.nz);
+        const depthAlpha = 0.55 + (1 - pw.nz * 0.4) * 0.45;  // 深度感
+        const cp = Math.sin(pulse * 1.3 + i * 0.5) * 0.05 + 1;
+        drawWord3D(p.sx, p.sy, pw.nz, p.scale * cp, pw.word, predictedColor, depthAlpha, true);
+      });
+    }
+
+    // ===== 阶段1：输入词渐入 =====
+    if (anim.phase === 'showInput') {
+      anim.progress++;
+      const fadeIn = Math.min(1, anim.progress / 20);
+      drawConnections(inputWords3D, fadeIn);
+      inputWords3D.forEach(({ word, nx, ny, nz }) => {
+        const p = project(nx, ny, nz);
+        const da = 0.5 + (1 - nz * 0.4) * 0.5;
+        drawWord3D(p.sx, p.sy, nz, p.scale, word, inputColor, fadeIn * da, false);
+      });
+      // 底部提示
+      ctx.fillStyle = 'rgba(180,180,180,0.85)'; ctx.font = '20px PingFang SC,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('输入词映射到高维语义向量空间...', W / 2, H - 18);
+      if (anim.progress > 35) { anim.phase = 'showPredict'; anim.progress = 0; }
+    }
+
+    // ===== 阶段2：逐步预测 =====
+    else if (anim.phase === 'showPredict') {
+      anim.progress++;
+      const step = predictionSequence[anim.predictStep];
+
+      // 画输入词（淡化为背景）
+      drawConnections(inputWords3D, 0.8);
+      inputWords3D.forEach(({ word, nx, ny, nz }) => {
+        const p = project(nx, ny, nz);
+        const da = 0.4 + (1 - nz * 0.4) * 0.45;
+        drawWord3D(p.sx, p.sy, nz, p.scale * 0.92, word, inputColor, da * 0.85, false);
+      });
+
+      // 当前预测步骤：候选词直接在立方体内散布出现
+      if (step && anim.predictStep < totalPredSteps) {
+        const candStart = 20;
+        if (anim.progress > candStart) {
+          step.candidates.forEach((cand, ci) => {
+            const pos3d = wordTo3D(cand, anim.predictStep * 31 + ci * 17);
+            const isPicked = ci === step.pickedIdx;
+            const cd = ci * 4;
+            const appearProg = Math.max(0, Math.min(1, (anim.progress - candStart - cd) / 14));
+            if (appearProg > 0) {
+              const p = project(pos3d.nx, pos3d.ny, pos3d.nz);
+              const da = 0.5 + (1 - pos3d.nz * 0.4) * 0.5;
+              if (isPicked) {
+                drawWord3D(p.sx, p.sy, pos3d.nz, p.scale, cand, predictedColor, appearProg * da, true);
+              } else {
+                drawWord3D(p.sx, p.sy, pos3d.nz, p.scale * 0.88, cand, candidateDim, appearProg * 0.55, false);
+              }
+            }
+          });
+        }
+
+        // 步骤完成
+        const stepDur = candStart + step.candidates.length * 4 + 55;
+        if (anim.progress > stepDur) {
+          const pickedWord = step.candidates[step.pickedIdx];
+          const pos3d = wordTo3D(pickedWord, anim.predictStep * 31 + step.pickedIdx * 17);
+          predictedWords.push({ word: pickedWord, ...pos3d });
+          anim.predictStep++;
+          anim.progress = 0;
+          if (anim.predictStep >= totalPredSteps) anim.phase = 'done';
+        }
+      }
+
+      // 顶部上下文
+      const shown = [...inputTokens, ...predictedWords.map(pw => pw.word)];
+      ctx.fillStyle = textColor(0.9); ctx.font = '20px PingFang SC,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('上下文: ' + shown.join(' ') + (anim.phase !== 'done' ? ' → ?' : ''), W / 2, 26);
+      if (step && anim.phase !== 'done') {
+        ctx.fillStyle = textColor(0.7); ctx.font = '18px PingFang SC,sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('预测第 ' + (anim.predictStep + 1) + '/' + totalPredSteps + ' 个词...', W / 2, H - 18);
+      }
+    }
+
+    // ===== 阶段3：完成 =====
+    else if (anim.phase === 'done') {
+      drawConnections(inputWords3D, 0.7);
+      inputWords3D.forEach(({ word, nx, ny, nz }) => {
+        const p = project(nx, ny, nz);
+        const da = 0.4 + (1 - nz * 0.4) * 0.45;
+        drawWord3D(p.sx, p.sy, nz, p.scale * 0.92, word, inputColor, da * 0.8, false);
+      });
+      const shown = [...inputTokens, ...predictedWords.map(pw => pw.word)];
+      ctx.fillStyle = textColor(0.9); ctx.font = '20px PingFang SC,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('上下文: ' + shown.join(' '), W / 2, 26);
+      ctx.fillStyle = 'var(--green)'; ctx.font = 'bold 22px PingFang SC,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('预测完成: ' + shown.join(' '), W / 2, H - 18);
+      // done 阶段继续旋转
+      window._semanticAnim = requestAnimationFrame(loop);
+      return;
+    }
+
+    window._semanticAnim = requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+// 根据输入词生成逐词预测序列
+// 注意：候选词的坐标由 getSemanticCoords 决定，但短词（如"的"、"型"）可能坐标重叠
+// 因此用候选词位置偏移来保证可视化效果
+function generatePredictionSequence(inputTokens) {
+  const inputStr = inputTokens.join('');
+  // 统一使用完整句子作为预测输出
+  return [
+    { context: ['产品'], candidates: ['根据','基于','关于','对于','所以','那么'], pickedIdx: 0 },
+    { context: ['根据'], candidates: ['您的','客户','市场','投资','整体','当前'], pickedIdx: 0 },
+    { context: ['您的'], candidates: ['需求','账户','投资','资产','配置','数据'], pickedIdx: 0 },
+    { context: ['需求'], candidates: ['分析','评估','报告','建议','方案','梳理'], pickedIdx: 0 },
+    { context: ['分析'], candidates: ['如下：','如下','结果','结论','报告','汇总'], pickedIdx: 0 },
+    { context: ['如下：'], candidates: ['①','一、','首先','第1','A、','(1)'], pickedIdx: 0 },
+    { context: ['①'], candidates: ['稳健型','均衡型','收益型','保本型','成长型','混合型'], pickedIdx: 0 },
+    { context: ['稳健型'], candidates: ['产品','方案','基金','组合','配置','策略'], pickedIdx: 0 },
+    { context: ['产品'], candidates: ['占比','约为','持有','达到','配置','分配'], pickedIdx: 0 },
+    { context: ['占比'], candidates: ['60%，','70%，','50%，','40%，','80%，','55%，'], pickedIdx: 0 },
+    { context: ['60%，'], candidates: ['适合','推荐','建议','匹配','满足','符合'], pickedIdx: 0 },
+    { context: ['适合'], candidates: ['保守投资','稳健投资','长期持有','价值投资','定投策略','低风险'], pickedIdx: 0 },
+  ];
+}
+
+// ===== Step 4: Transformer 3D 漏斗版 =====
+let pinballAnim = null;
+let responseTokens = [];
+
+function generateResponseSentence(input) {
+  if (!input || input.trim() === '') return ['请', '输入', '您', '的', '问题'];
+  const tokens = ['根据', '您的', '需求', '分析', '如下：', '①', '稳健型', '产品', '占比', '60%，', '适合', '保守投资'];
+  responseTokens = tokens;
+  return tokens;
+}
+
+function runPinball() {
+  const canvas = document.getElementById('pinballCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  if (pinballAnim) { cancelAnimationFrame(pinballAnim); pinballAnim = null; }
+
+  const sentence = generateResponseSentence(getUserInput() || globalInputText);
+
+  // 噪声词池
+  const noisePool = [
+    '的','了','是','在','有','和','对','与','给','让','到',
+    '我','你','他','什么','怎么','能','会','可以','应该',
+    '这个','那个','一些','非常','比较','也','都','就','还',
+    '数据','信息','问题','结果','报告','建议','方案',
+    '市场','投资','收入','利率','收益','客户','业务',
+    '运营','管理','分析','评估','调整','配置','规划',
+    '增长','下降','稳定','波动','趋势','风险','策略',
+  ];
+
+  // ─── 3D 漏斗参数 ───
+  const cx = W / 2, cy = H / 2 - 20;
+  const FUNNEL_TOP_R = 240;   // 漏斗顶部半径（3D空间）- 加宽让漏斗更饱满
+  const FUNNEL_BOT_R = 75;    // 漏斗底部半径 - 同比加宽
+  const FUNNEL_H = 450;       // 漏斗高度（适配 680px canvas，留出底部空间给标签）
+  const FUNNEL_TOP_Y = cy - FUNNEL_H / 2;
+  const FUNNEL_BOT_Y = cy + FUNNEL_H / 2;
+  const FOV = 500;
+  let rotY = -0.25, rotX = 0.15;
+
+  // ─── 增强视觉效果参数 ───
+  const streamParticles = []; // 环绕粒子流
+  for (let i = 0; i < 35; i++) {
+    streamParticles.push({
+      angle: Math.random() * Math.PI * 2,
+      height: Math.random() * FUNNEL_H * 0.9, // 只在漏斗上半部分流动
+      speed: 0.012 + Math.random() * 0.018,
+      radiusOffset: (Math.random() - 0.5) * 35,
+      life: Math.random() * 100,
+      maxLife: 50 + Math.random() * 50,
+    });
+  }
+
+  // 6层标签
+  const layerLabels = [
+    '输入词 Input',
+    '向量化 Embedding',
+    '多头注意力 Attention',
+    '前馈网络 FFN',
+    '残差归一化 Norm',
+    'Softmax 输出层',
+  ];
+
+  // ─── 3D 投影 ───
+  function project3D(x, y, z) {
+    const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+    const x1 = x * cosY + z * sinY;
+    const y1 = y;
+    const z1 = -x * sinY + z * cosY;
+    const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+    const x2 = x1;
+    const y2 = y1 * cosX - z1 * sinX;
+    const z2 = y1 * sinX + z1 * cosX;
+    const scale = FOV / (FOV + z2);
+    return { sx: cx + x2 * scale, sy: cy + y2 * scale, sz: z2, scale: scale };
+  }
+
+  // 漏斗在某 y 位置的半径
+  function funnelRadius(y) {
+    const t = (y - FUNNEL_TOP_Y) / FUNNEL_H;
+    return FUNNEL_TOP_R * (1 - t) + FUNNEL_BOT_R * t;
+  }
+
+  // ─── 绘制漏斗外壳 ───
+  function drawFunnel() {
+    ctx.save();
+
+    // 漏斗线框：上圆 + 下圆 + 纵线 + 层环
+    const segments = 24;
+    const rings = 6;
+
+    // 绘制能量网格（漏斗表面）
+    const gridOpacity = 0.04 + 0.03 * Math.sin(frame * 0.02);
+    ctx.fillStyle = goldColor(gridOpacity);
+    for (let j = 0; j < 20; j++) {
+      const t1 = j / 20;
+      const t2 = (j + 1) / 20;
+      const fy1 = FUNNEL_TOP_Y + t1 * FUNNEL_H;
+      const fy2 = FUNNEL_TOP_Y + t2 * FUNNEL_H;
+      const r1 = funnelRadius(fy1);
+      const r2 = funnelRadius(fy2);
+      
+      ctx.beginPath();
+      for (let i = 0; i <= 8; i++) {
+        const angle = (Math.PI * 2 / 8) * i + frame * 0.005;
+        const p1 = project3D(r1 * Math.cos(angle), fy1 - cy, r1 * Math.sin(angle));
+        const p2 = project3D(r2 * Math.cos(angle), fy2 - cy, r2 * Math.sin(angle));
+        if (i === 0) ctx.moveTo(p1.sx, p1.sy);
+        else ctx.lineTo(p1.sx, p1.sy);
+        ctx.lineTo(p2.sx, p2.sy);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // 纵线（从上到下，带渐变发光）
+    for (let i = 0; i < 12; i++) {
+      const angle = (Math.PI * 2 / 12) * i;
+      const gradient = ctx.createLinearGradient(cx, FUNNEL_TOP_Y, cx, FUNNEL_BOT_Y);
+      gradient.addColorStop(0, 'rgba(77,184,255,0.08)');
+      gradient.addColorStop(0.5, goldColor(0.15));
+      gradient.addColorStop(1, goldColor(0.25));
+      
+      ctx.beginPath();
+      let first = true;
+      for (let j = 0; j <= 30; j++) {
+        const t = j / 30;
+        const fy = FUNNEL_TOP_Y + t * FUNNEL_H;
+        const r = funnelRadius(fy);
+        const p = project3D(r * Math.cos(angle), fy - cy, r * Math.sin(angle));
+        if (first) { ctx.moveTo(p.sx, p.sy); first = false; }
+        else ctx.lineTo(p.sx, p.sy);
+      }
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+
+    // 层环（带强烈脉动发光效果）
+    for (let ring = 0; ring < rings; ring++) {
+      const t = (ring + 0.5) / rings;
+      const fy = FUNNEL_TOP_Y + t * FUNNEL_H;
+      const r = funnelRadius(fy);
+      const pulse = 0.25 + 0.15 * Math.sin(frame * 0.04 + ring * 1.0);
+      const glowSize = 15 + 10 * Math.sin(frame * 0.04 + ring * 1.0);
+
+      // 外发光环
+      ctx.beginPath();
+      for (let i = 0; i <= segments; i++) {
+        const angle = (Math.PI * 2 / segments) * i;
+        const p = project3D(r * Math.cos(angle), fy - cy, r * Math.sin(angle));
+        if (i === 0) ctx.moveTo(p.sx, p.sy);
+        else ctx.lineTo(p.sx, p.sy);
+      }
+      ctx.closePath();
+      ctx.shadowColor = goldColor(pulse * 0.8);
+      ctx.shadowBlur = glowSize;
+      ctx.strokeStyle = goldColor(pulse);
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // 内环
+      ctx.beginPath();
+      for (let i = 0; i <= segments; i++) {
+        const angle = (Math.PI * 2 / segments) * i;
+        const p = project3D(r * 0.85 * Math.cos(angle), fy - cy, r * 0.85 * Math.sin(angle));
+        if (i === 0) ctx.moveTo(p.sx, p.sy);
+        else ctx.lineTo(p.sx, p.sy);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = goldColor(pulse * 0.5);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // 半透明面
+      ctx.fillStyle = goldColor(0.03);
+      ctx.fill();
+
+      // 层标签（放在正面位置，带发光）
+      const labelAngle = rotY + Math.PI;
+      const lp = project3D(r * Math.cos(labelAngle) * 1.2, fy - cy, r * Math.sin(labelAngle) * 1.2);
+      ctx.fillStyle = getCSSColor('--gold-bright', 0.8 + pulse * 0.2);
+      ctx.font = 'bold 18px PingFang SC,Microsoft YaHei,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.shadowColor = goldColor(0.6);
+      ctx.shadowBlur = 10;
+      ctx.fillText(layerLabels[ring], lp.sx, lp.sy);
+      ctx.shadowBlur = 0;
+    }
+
+    // 上椭圆（带发光）
+    drawEllipse(FUNNEL_TOP_Y - cy, FUNNEL_TOP_R, 'rgba(77,184,255,0.4)', 2, true);
+    // 下椭圆（输出端，带强烈发光）
+    drawEllipse(FUNNEL_BOT_Y - cy, FUNNEL_BOT_R, goldColor(0.5), 3, true);
+
+    // 绘制环绕粒子流
+    drawStreamParticles();
+
+    ctx.restore();
+  }
+
+  function drawEllipse(y3d, radius, color, lineW, glow = false) {
+    ctx.beginPath();
+    const segs = 36;
+    for (let i = 0; i <= segs; i++) {
+      const a = (Math.PI * 2 / segs) * i;
+      const p = project3D(radius * Math.cos(a), y3d, radius * Math.sin(a));
+      if (i === 0) ctx.moveTo(p.sx, p.sy);
+      else ctx.lineTo(p.sx, p.sy);
+    }
+    ctx.closePath();
+    if (glow) {
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 15;
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineW;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  // ─── 绘制环绕粒子流 ───
+  function drawStreamParticles() {
+    streamParticles.forEach(p => {
+      p.angle += p.speed;
+      p.life++;
+      if (p.life > p.maxLife) {
+        p.life = 0;
+        p.height = Math.random() * FUNNEL_H;
+      }
+      
+      const fy = FUNNEL_TOP_Y + p.height;
+      const r = funnelRadius(fy) + 25 + p.radiusOffset;
+      const x3d = r * Math.cos(p.angle);
+      const z3d = r * Math.sin(p.angle);
+      const y3d = fy - cy;
+      
+      const proj = project3D(x3d, y3d, z3d);
+      const alpha = Math.sin((p.life / p.maxLife) * Math.PI) * 0.6;
+      const size = 2 + Math.sin(p.life * 0.1) * 1.5;
+      
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      
+      // 粒子光晕
+      const glowGrad = ctx.createRadialGradient(proj.sx, proj.sy, 0, proj.sx, proj.sy, size * 3);
+      glowGrad.addColorStop(0, goldColor(0.8));
+      glowGrad.addColorStop(0.5, 'rgba(77,184,255,0.3)');
+      glowGrad.addColorStop(1, goldColor(0));
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(proj.sx, proj.sy, size * 3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // 粒子核心
+      ctx.fillStyle = getCSSColor('--text', 0.9);
+      ctx.beginPath();
+      ctx.arc(proj.sx, proj.sy, size * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.restore();
+    });
+  }
+
+  // ─── 状态 ───
+  let frame = 0;
+  const state = {
+    balls: [],
+    completedWords: [],
+    currentRound: 0,
+    particles: [],
+    roundTimer: 0,
+  };
+
+  // ─── 3D 词球类 ───
+  class Ball3D {
+    constructor(word, isGolden, delay) {
+      this.word = word;
+      this.isGolden = isGolden;
+      // 3D 坐标：从漏斗顶部随机位置开始
+      const angle = Math.random() * Math.PI * 2;
+      const startR = FUNNEL_TOP_R * (0.3 + Math.random() * 0.5);
+      this.x3d = startR * Math.cos(angle);
+      this.z3d = startR * Math.sin(angle);
+      this.y3d = FUNNEL_TOP_Y - cy - 20 - Math.random() * 40;
+      this.vy = 0.5 + Math.random() * 0.5;
+      this.vx = 0; this.vz = 0;
+      this.r = isGolden ? 16 : 12;
+      this.layerIdx = 0;
+      this.alive = true;
+      this.delay = delay || 0;
+      this.started = false;
+      this.glow = 0;
+      this.opacity = isGolden ? 1 : 0.65;
+      this.fadingOut = false;
+      // 拖尾轨迹
+      this.trail = [];
+      this.trailMaxLength = isGolden ? 12 : 0;
+    }
+
+    update() {
+      if (!this.alive) return;
+      if (this.delay > 0) { this.delay--; return; }
+      this.started = true;
+
+      if (this.fadingOut) {
+        this.opacity -= 0.035;
+        this.vy += 0.15;
+        this.y3d += this.vy;
+        this.x3d += this.vx;
+        this.z3d += this.vz;
+        if (this.opacity <= 0) this.alive = false;
+        return;
+      }
+
+      // 重力下落
+      this.vy += 0.25;
+      this.y3d += this.vy;
+
+      // 记录拖尾轨迹（仅金色词球）
+      if (this.isGolden && this.trailMaxLength > 0) {
+        const currentP = project3D(this.x3d, this.y3d, this.z3d);
+        this.trail.push({ sx: currentP.sx, sy: currentP.sy });
+        if (this.trail.length > this.trailMaxLength) {
+          this.trail.shift();
+        }
+      }
+
+      // 漏斗收缩效果：x3d/z3d 向中心压缩
+      const currentY = this.y3d + cy;
+      if (currentY >= FUNNEL_TOP_Y && currentY <= FUNNEL_BOT_Y) {
+        const targetR = funnelRadius(currentY) * 0.55;
+        const currentR = Math.sqrt(this.x3d * this.x3d + this.z3d * this.z3d);
+        if (currentR > targetR && currentR > 0.1) {
+          const ratio = targetR / currentR;
+          this.x3d *= (1 + (ratio - 1) * 0.05);
+          this.z3d *= (1 + (ratio - 1) * 0.05);
+        }
+      }
+
+      // 层碰撞判定
+      if (this.layerIdx < 6) {
+        const layerY = FUNNEL_TOP_Y + ((this.layerIdx + 0.5) / 6) * FUNNEL_H - cy;
+        if (this.y3d >= layerY - this.r) {
+          if (this.isGolden) {
+            this.layerIdx++;
+            this.vy = Math.abs(this.vy) * 0.3 + 0.4;
+            this.glow = 1;
+            for (let i = 0; i < 6; i++) {
+              state.particles.push({
+                x3d: this.x3d, y3d: this.y3d, z3d: this.z3d,
+                vx3d: (Math.random() - 0.5) * 6,
+                vy3d: -3 + Math.random() * 2,
+                vz3d: (Math.random() - 0.5) * 6,
+                life: 22, color: 'var(--gold)', size: 2 + Math.random() * 3,
+              });
+            }
+          } else {
+            if (Math.random() < 0.6 + this.layerIdx * 0.06) {
+              this.fadingOut = true;
+              this.vy = -Math.random() * 1.5;
+              this.vx = (Math.random() - 0.5) * 4;
+              this.vz = (Math.random() - 0.5) * 4;
+            } else {
+              this.layerIdx++;
+              this.vy = Math.abs(this.vy) * 0.35 + 0.3;
+            }
+          }
+        }
+      }
+
+      // 金色词到达底部
+      if (this.isGolden && this.layerIdx >= 6 && this.y3d + cy >= FUNNEL_BOT_Y - 10) {
+        state.completedWords.push(this.word);
+        this.alive = false;
+        for (let i = 0; i < 14; i++) {
+          const a = (Math.PI * 2 / 14) * i;
+          state.particles.push({
+            x3d: this.x3d, y3d: this.y3d, z3d: this.z3d,
+            vx3d: Math.cos(a) * (2 + Math.random() * 3),
+            vy3d: -2 + Math.random(),
+            vz3d: Math.sin(a) * (2 + Math.random() * 3),
+            life: 28, color: 'var(--gold)', size: 3 + Math.random() * 2,
+          });
+        }
+      }
+
+      if (!this.isGolden && this.y3d + cy > FUNNEL_BOT_Y + 40) this.alive = false;
+      this.glow *= 0.93;
+    }
+
+    draw() {
+      if (!this.alive || !this.started) return;
+      const p = project3D(this.x3d, this.y3d, this.z3d);
+      const sz = this.r * p.scale;
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.opacity);
+
+      // 金色词球拖尾效果
+      if (this.isGolden && this.trail && this.trail.length > 1) {
+        ctx.beginPath();
+        for (let i = 0; i < this.trail.length - 1; i++) {
+          const tp = this.trail[i];
+          const nextTp = this.trail[i + 1];
+          const trailAlpha = (i / this.trail.length) * 0.4 * this.opacity;
+          ctx.strokeStyle = goldColor(trailAlpha);
+          ctx.lineWidth = sz * (0.3 + 0.4 * (i / this.trail.length));
+          ctx.beginPath();
+          ctx.moveTo(tp.sx, tp.sy);
+          ctx.lineTo(nextTp.sx, nextTp.sy);
+          ctx.stroke();
+        }
+      }
+
+      // 光晕（增强版）
+      if (this.glow > 0.05 || this.isGolden) {
+        const glowIntensity = this.isGolden ? 0.6 + this.glow * 0.4 : this.glow;
+        const gs = (this.isGolden ? 35 : 20 + this.glow * 25) * p.scale;
+        const grad = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, gs);
+        const gc = this.isGolden ? '255,215,100' : '100,100,100';
+        grad.addColorStop(0, 'rgba(' + gc + ',' + (glowIntensity * 0.6).toFixed(3) + ')');
+        grad.addColorStop(0.5, 'rgba(' + gc + ',' + (glowIntensity * 0.2).toFixed(3) + ')');
+        grad.addColorStop(1, 'rgba(' + gc + ',0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(p.sx, p.sy, gs, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // 球体外发光
+      if (this.isGolden) {
+        ctx.shadowColor = 'rgba(255,200,80,0.8)';
+        ctx.shadowBlur = 20 * p.scale;
+      }
+
+      // 球体
+      const grad = ctx.createRadialGradient(p.sx - sz * 0.2, p.sy - sz * 0.2, 0, p.sx, p.sy, sz);
+      if (this.isGolden) {
+        grad.addColorStop(0, '#fffae0');
+        grad.addColorStop(0.25, '#ffe066');
+        grad.addColorStop(0.5, goldColor(1));
+        grad.addColorStop(1, '#8a6020');
+      } else {
+        grad.addColorStop(0, '#999');
+        grad.addColorStop(0.3, '#555');
+        grad.addColorStop(1, '#222');
+      }
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(p.sx, p.sy, sz, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // 边框
+      ctx.strokeStyle = this.isGolden ? 'rgba(255,240,180,0.7)' : 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = this.isGolden ? 1.5 : 0.8;
+      ctx.stroke();
+
+      // 文字
+      ctx.fillStyle = this.isGolden ? '#fff' : 'rgba(255,255,255,0.4)';
+      const fontSize = Math.max(14, Math.round(sz * 0.9));
+      ctx.font = (this.isGolden ? 'bold ' : '') + fontSize + 'px PingFang SC,Microsoft YaHei,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(this.word, p.sx, p.sy);
+      ctx.restore();
+    }
+  }
+
+  // ─── 粒子 ───
+  function drawParticles() {
+    state.particles = state.particles.filter(p => {
+      p.x3d += p.vx3d;
+      p.y3d += p.vy3d;
+      p.z3d += p.vz3d;
+      p.vy3d += 0.1;
+      p.vx3d *= 0.97;
+      p.vz3d *= 0.97;
+      p.life--;
+      const pp = project3D(p.x3d, p.y3d, p.z3d);
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, (p.life / 22) * 0.6);
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(pp.sx, pp.sy, Math.max(0.5, p.size * pp.scale), 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      return p.life > 0;
+    });
+  }
+
+  // ─── 底部输出 ───
+  function drawOutputs() {
+    if (state.completedWords.length === 0) return;
+    ctx.save();
+    const shown = state.completedWords.slice(-8);
+    
+    // 底部发光背景（位置调整，更向上移动）
+    const glowPulse = 0.2 + 0.08 * Math.sin(frame * 0.05);
+    const outputY = FUNNEL_BOT_Y + 25;
+    const bgGrad = ctx.createRadialGradient(cx, outputY, 0, cx, outputY, 150);
+    bgGrad.addColorStop(0, goldColor(glowPulse));
+    bgGrad.addColorStop(0.5, goldColor(0.06));
+    bgGrad.addColorStop(1, goldColor(0));
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(cx - 150, FUNNEL_BOT_Y + 5, 300, 50);
+    
+    ctx.font = 'bold 22px PingFang SC,Microsoft YaHei,sans-serif';
+    let totalW = 0;
+    shown.forEach(w => { totalW += ctx.measureText(w).width + 8; });
+    totalW -= 8;
+    let x = cx - totalW / 2;
+    shown.forEach((word, idx) => {
+      const w = ctx.measureText(word).width;
+      const wordPulse = 0.8 + 0.2 * Math.sin(frame * 0.08 + idx * 0.5);
+      
+      // 卡片发光背景
+      ctx.shadowColor = goldColor(0.3);
+      ctx.shadowBlur = 4;
+      ctx.fillStyle = goldColor(0.1);
+      ctx.fillRect(x - 4, outputY - 12, w + 8, 24);
+      ctx.shadowBlur = 0;
+      
+      ctx.strokeStyle = goldColor(0.3 * wordPulse);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x - 4, outputY - 12, w + 8, 24);
+      ctx.fillStyle = getCSSColor('--gold-bright', wordPulse);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(word, x, outputY);
+      x += w + 8;
+    });
+
+    // 预测输出标签（带发光，位置上移，避免与下方文字重叠）
+    ctx.fillStyle = getCSSColor('--gold-bright', 0.8);
+    ctx.font = 'bold 16px PingFang SC,Microsoft YaHei,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.shadowColor = goldColor(0.5);
+    ctx.shadowBlur = 8;
+    ctx.fillText('预测输出', cx, FUNNEL_BOT_Y - 8);
+    ctx.shadowBlur = 0;
+
+    ctx.restore();
+  }
+
+  // ─── 生成一轮 ───
+  function spawnRound(roundIdx) {
+    if (roundIdx >= sentence.length) return;
+    state.balls.push(new Ball3D(sentence[roundIdx], true, 0));
+    const noiseCount = 8 + Math.floor(Math.random() * 5);
+    const shuffled = [...noisePool].sort(() => Math.random() - 0.5);
+    for (let i = 0; i < noiseCount; i++) {
+      state.balls.push(new Ball3D(shuffled[i % shuffled.length], false, 5 + i * 3));
+    }
+  }
+
+  // ─── 主循环 ───
+  spawnRound(0);
+  state.currentRound = 1;
+  state.roundTimer = 0;
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+
+    // 缓慢自转
+    rotY += 0.0015;
+
+    drawFunnel();
+
+    // 深度排序绘制球
+    state.balls = state.balls.filter(b => {
+      b.update();
+      return b.alive;
+    });
+    const sortedBalls = [...state.balls].sort((a, b) => {
+      const pa = project3D(a.x3d, a.y3d, a.z3d);
+      const pb = project3D(b.x3d, b.y3d, b.z3d);
+      return pb.sz - pa.sz;
+    });
+    sortedBalls.forEach(b => b.draw());
+
+    drawParticles();
+    drawOutputs();
+
+    // 检查下一轮
+    state.roundTimer++;
+    const active = state.balls.filter(b => b.alive).length;
+    if (active <= 2 && state.roundTimer > 60 && state.currentRound < sentence.length) {
+      spawnRound(state.currentRound);
+      state.currentRound++;
+      state.roundTimer = 0;
+    }
+
+    frame++;
+    pinballAnim = requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+// Step 5: 输出动画（动态）
+function generateOutput() {
+  const container = document.getElementById('outputText');
+  container.innerHTML = '';
+  const input = getUserInput() || globalInputText;
+
+  // 根据输入动态生成回答
+  let words;
+  if (input.includes('理财') || input.includes('产品')) {
+    words = ['根据', '您的', '需求', '分析', '如下：', '①', '稳健型', '产品', '占比', '60%，', '适合', '保守投资'];
+  } else if (input.includes('分析')) {
+    words = ['好的，', '我已', '为您', '完成', '分析，', '核心', '结论', '如下：', '当前', '整体', '趋势', '向好，', '建议', '关注', '关键', '指标', '变化...'];
+  } else if (input.includes('客户') || input.includes('服务')) {
+    words = ['针对', '客户', '服务', '需求，', '建议', '从以下', '方面', '优化：', '①', '提升', '响应', '速度；', '②', '个性化', '推荐', '方案...'];
+  } else if (input.includes('银行') || input.includes('建行')) {
+    words = ['建设银行', '相关', '业务', '数据', '已整理', '完毕：', '理财', '规模', '稳步', '增长，', '客户', '满意度', '持续', '提升...'];
+  } else if (input.includes('智能体') || input.includes('AI')) {
+    words = ['智能体', '系统', '已就绪，', '可以', '协助', '处理', '多种', '任务，', '包括', '数据', '分析、', '报告', '生成、', '客户', '服务等...'];
+  } else {
+    words = ['好的，', '让我', '来', '帮您', '处理', '这个问题。', '根据', '我的', '分析，', '以下是', '详细', '结果...'];
+  }
+
+  words.forEach((word, i) => {
+    setTimeout(() => {
+      const span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = word + ' ';
+      span.style.animationDelay = '0s';
+      container.appendChild(span);
+    }, i * 120);
+  });
+}
+
+// ===== 初始化函数 =====
+function initPage() {
+  // 按钮事件
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (currentStep < totalSteps) showStep(currentStep + 1);
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentStep > 0) showStep(currentStep - 1);
+  });
+  document.getElementById('autoBtn').addEventListener('click', () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+      document.getElementById('autoBtn').textContent = '▶ 自动演示';
+    } else {
+      showStep(1);
+      autoPlayInterval = setInterval(() => {
+        if (currentStep < totalSteps) {
+          showStep(currentStep + 1);
+        } else {
+          clearInterval(autoPlayInterval);
+          autoPlayInterval = null;
+          document.getElementById('autoBtn').textContent = '▶ 自动演示';
+        }
+      }, 4000);
+      document.getElementById('autoBtn').textContent = '⏸ 停止演示';
+    }
+  });
+
+  document.querySelectorAll('.step-dot').forEach((dot, i) => {
+    dot.addEventListener('click', () => showStep(i));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    // 只转发上下翻页键给父窗口
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
+      try { window.parent.postMessage({ type: 'iframeKeydown', key: e.key }, '*'); } catch(err) {}
+    }
+    // 如果在输入框中，不拦截其他键
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+    // 左右箭头/空格在内部处理场景切换
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (currentStep < totalSteps) showStep(currentStep + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (currentStep > 0) showStep(currentStep - 1);
+    }
+  });
+
+  // ===== 暂停/恢复动画 =====
+  let isPaused = false;
+  
+  function pauseAnimations() {
+    if (isPaused) return;
+    isPaused = true;
+    // 暂停所有requestAnimationFrame
+    if (window._semanticAnim) { cancelAnimationFrame(window._semanticAnim); window._semanticAnim = null; }
+    if (pinballAnim) { cancelAnimationFrame(pinballAnim); pinballAnim = null; }
+  }
+
+  function resumeAnimations() {
+    if (!isPaused) return;
+    isPaused = false;
+    // 重启当前 step 动画
+    triggerStepAnimation(currentStep);
+  }
+
+  // 消息监听器
+  window.addEventListener('message', (e) => {
+    // 父页面发来的消息
+    if (e.data && e.data.type === 'fontSize') {
+      const size = e.data.size || 'medium';
+      document.documentElement.setAttribute('data-font-level', size);
+    }
+    // 可见性控制：暂停/恢复Canvas动画
+    if (e.data && e.data.type === 'visibility') {
+      if (e.data.visible) {
+        resumeAnimations();
+      } else {
+        pauseAnimations();
+      }
+    }
+  });
+    // 显示第一步
+  showStep(0);
+}
+
+// 页面加载完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPage);
+} else {
+  initPage();
+}
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>
