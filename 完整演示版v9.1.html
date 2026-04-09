@@ -3865,12 +3865,12 @@
     </div>
   </div>
 
-  <div id="part3-email" class="section anchor-target">
-    <div class="section-title">场景三：邮件自动处理</div>
-    <div class="section-desc">全息终端风格，AI自动分类、摘要、回复邮件，释放重复性人力。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-email">
+  <div id="part3-skills" class="section anchor-target">
+    <div class="section-title">场景三：Skills智能体技能系统</div>
+    <div class="section-desc">AI Skills技能库如何驱动智能体协同工作，多角色对话与任务协作演示。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-skills">
       <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_邮件自动处理_动画版.html" id="iframe-email" class="lazy-iframe"></iframe>
+      <iframe data-src="03_广州实践_李东明Skills_v4.html" id="iframe-skills" class="lazy-iframe"></iframe>
     </div>
   </div>
 
@@ -3901,12 +3901,12 @@
     </div>
   </div>
 
-  <div id="part3-skills" class="section anchor-target">
-    <div class="section-title">场景七：Skills智能体技能系统</div>
-    <div class="section-desc">AI Skills技能库如何驱动智能体协同工作，多角色对话与任务协作演示。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-skills">
+  <div id="part3-email" class="section anchor-target">
+    <div class="section-title">场景七：邮件自动处理</div>
+    <div class="section-desc">全息终端风格，AI自动分类、摘要、回复邮件，释放重复性人力。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-email">
       <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_李东明Skills_v3.html" id="iframe-skills" class="lazy-iframe"></iframe>
+      <iframe data-src="03_广州实践_邮件自动处理_动画版.html" id="iframe-email" class="lazy-iframe"></iframe>
     </div>
   </div>
 
@@ -4496,6 +4496,7 @@
               updateDisplay();
               setTimeout(typeNext, 150);
             } else {
+              // gan输入完成，短停顿后变成"感"
               setTimeout(() => {
                 currentText = '感';
                 updateDisplay();
@@ -4514,50 +4515,11 @@
               updateDisplay();
               setTimeout(typeNext, 150);
             } else {
+              // xie输入完成（感xie），短停顿后从e开始删除
               setTimeout(() => {
-                currentText = '感谢';
-                updateDisplay();
-                setTimeout(() => {
-                  phase = 'typingLing';
-                  index = 0;
-                  typeNext();
-                }, 200);
-              }, 200);
-            }
-          } else if (phase === 'typingLing') {
-            const textLing = 'ling';
-            if (index < textLing.length) {
-              currentText = '感谢' + textLing.substring(0, index + 1);
-              index++;
-              updateDisplay();
-              setTimeout(typeNext, 150);
-            } else {
-              setTimeout(() => {
-                currentText = '感谢聆';
-                updateDisplay();
-                setTimeout(() => {
-                  phase = 'typingTing';
-                  index = 0;
-                  typeNext();
-                }, 200);
-              }, 200);
-            }
-          } else if (phase === 'typingTing') {
-            const textTing = 'ting';
-            if (index < textTing.length) {
-              currentText = '感谢聆' + textTing.substring(0, index + 1);
-              index++;
-              updateDisplay();
-              setTimeout(typeNext, 150);
-            } else {
-              setTimeout(() => {
-                currentText = '感谢聆听';
-                updateDisplay();
-                setTimeout(() => {
-                  phase = 'deleting';
-                  typeNext();
-                }, 300);
-              }, 200);
+                phase = 'deleting';
+                typeNext();
+              }, 300);
             }
           } else if (phase === 'deleting') {
             if (currentText.length > 0) {
@@ -4565,6 +4527,7 @@
               updateDisplay();
               setTimeout(typeNext, 100);
             } else {
+              // 删除完成，显示提示，等待点击
               typewriterComplete = true;
               titleEl.innerHTML = '';
               clickHint.style.animation = 'fadeInHint 0.5s ease forwards, pulseHint 2s ease-in-out 1s infinite';

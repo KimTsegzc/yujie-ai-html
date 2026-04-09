@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>李东明 Skills - 智能销售助手 v3</title>
+  <title>东明 - 销冠Skills 智能销售助手 v3</title>
   <style>
     :root {
       /* 黑金配色系统 */
@@ -83,6 +83,7 @@
       justify-content: space-between;
       padding: 0 24px;
       z-index: 100;
+      position: relative;
     }
 
     .brand {
@@ -112,6 +113,16 @@
 
     .brand-text span {
       color: var(--accent-light);
+    }
+
+    .header-center-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--accent-light);
+      letter-spacing: 2px;
     }
 
     .header-actions {
@@ -847,6 +858,66 @@
     }
 
     .tag.highlight {
+
+    /* AI Suggested Tags Section */
+    .suggested-tags-section {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(201,168,76,0.08);
+      border: 1px dashed var(--accent);
+      border-radius: 10px;
+    }
+    .suggested-tags-title {
+      font-size: var(--text-sm);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .suggested-tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .suggested-tag {
+      padding: 6px 12px;
+      background: rgba(201,168,76,0.12);
+      border-radius: 16px;
+      font-size: var(--text-sm);
+      color: var(--accent-light);
+      border: 1px solid rgba(201,168,76,0.3);
+      transition: all 0.25s;
+    }
+    .suggested-tag:hover {
+      background: rgba(201,168,76,0.2);
+      border-color: var(--accent);
+    }
+    .btn-confirm-tags {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #b8860b);
+      color: #0a0a0a;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-confirm-tags:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    }
+    .btn-confirm-tags:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-confirm-tags.confirmed {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+    }
       background: var(--accent-dim);
       border-color: var(--accent);
       color: var(--accent);
@@ -1458,10 +1529,11 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <div class="brand">
-      <div class="brand-icon">李</div>
-      <div class="brand-text">李东明 <span>Skills</span></div>
+      <div class="brand">
+      <div class="brand-icon">东</div>
+      <div class="brand-text">东明</div>
     </div>
+    <div class="header-center-title">销冠Skills</div>
     <div class="header-actions">
       <div class="status-indicator">
         <span class="status-dot"></span>
@@ -1518,18 +1590,6 @@
         </div>
       </div>
 
-      <!-- Stats Overview -->
-      <div class="stats-overview">
-        <div class="stat-card">
-          <div class="stat-value">5</div>
-          <div class="stat-label">今日对话</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">3</div>
-          <div class="stat-label">高意向客户</div>
-        </div>
-      </div>
-
       <!-- Score Card -->
       <div class="insight-card">
         <div class="insight-card-header">
@@ -1562,18 +1622,11 @@
         </div>
       </div>
 
-      <!-- Empty State - 默认显示 -->
-      <div class="empty-state" id="emptyState" style="display: none;">
-        <div class="empty-icon">📋</div>
-        <div class="empty-title">暂无复盘分析</div>
-        <div class="empty-desc">选择对话后，点击下方按钮生成 AI 复盘分析</div>
-      </div>
-
       <!-- Tags - 始终显示客户标签 -->
       <div class="tags-section">
         <div class="tags-section-title">
           客户标签
-          <span style="font-size: var(--text-xs); /* 13.5px */ color: var(--accent-light);">+3 新增</span>
+          <span id="newTagCount" style="font-size: var(--text-xs); color: var(--accent-light);"></span>
         </div>
         <div class="tags-grid" id="tagsGrid">
           <!-- Tags populated by JS -->
@@ -1598,6 +1651,15 @@
       <div class="actions-section" id="analysisBtnSection">
         <button class="btn btn-primary" onclick="startAnalysis()">
           <span>✨</span> 生成复盘分析
+        </button>
+      </div>
+
+      <!-- AI 建议标签 - 复盘完成后显示 -->
+      <div class="suggested-tags-section" id="suggestedTagsSection" style="display: none;">
+        <div class="suggested-tags-title">AI 建议添加标签</div>
+        <div class="suggested-tags-list" id="suggestedTagsList"></div>
+        <button class="btn btn-confirm-tags" id="confirmTagsBtn" onclick="confirmSuggestedTags()">
+          <span>✅</span> 确认添加到客户标签
         </button>
       </div>
 
@@ -1729,6 +1791,8 @@
         ],
         tagsList: ['稳健型', '半年期', '企业主', '基金经验', '高净值'],
         newTags: ['企业主', '高净值'],
+        suggestedTags: ['需求明确', '意向强烈', '待面签'],
+        confirmedSuggestedTags: [],
         reviews: [
           {type: 'warning', title: '跟进节奏过急', content: '第3句回复间隔仅1分钟，建议给客户更多思考时间', badge: '需改进'},
           {type: 'success', title: '需求挖掘到位', content: '成功获取资金期限和风险偏好两个关键信息', badge: '优秀'}
@@ -1764,6 +1828,8 @@
         ],
         tagsList: ['老客户', '定投客户', '追加投资', '风险意识强'],
         newTags: ['追加投资'],
+        suggestedTags: ['交叉销售成功', '长期信任'],
+        confirmedSuggestedTags: [],
         reviews: [
           {type: 'success', title: '合规提醒到位', content: '主动确认资金期限，体现专业负责态度', badge: '规范'},
           {type: 'success', title: '交叉销售成功', content: '顺势推荐债券基金，提升客户资产配置', badge: '优秀'}
@@ -1801,6 +1867,8 @@
         ],
         tagsList: ['高净值', '大额资金', '短期理财', '风险保守'],
         newTags: ['大额资金', '短期理财'],
+        suggestedTags: ['需深度跟进', '配置方案待定'],
+        confirmedSuggestedTags: [],
         reviews: [
           {type: 'warning', title: '未深挖需求', content: '客户提到800万时，未询问资金来源和用途细节', badge: '需改进'},
           {type: 'info', title: '专业度良好', content: '面对收益质疑，用市场数据回应，增强可信度', badge: '良好'}
@@ -1836,6 +1904,8 @@
         ],
         tagsList: ['退休客户', '风险教育', '防骗提醒', '预约到访'],
         newTags: ['风险教育', '预约到访'],
+        suggestedTags: ['防骗教育成功', '社区影响力客户'],
+        confirmedSuggestedTags: [],
         reviews: [
           {type: 'success', title: '风险意识强', content: '及时识别诈骗风险，有效保护客户资产', badge: '优秀'},
           {type: 'success', title: '邀约成功', content: '顺势邀约客户到访，为后续营销创造机会', badge: '良好'}
@@ -1874,6 +1944,8 @@
         ],
         tagsList: ['年轻客户', '首次理财', '保守型', '预约到访'],
         newTags: ['首次理财', '保守型'],
+        suggestedTags: ['需APP指导', '长期培育对象'],
+        confirmedSuggestedTags: [],
         reviews: [
           {type: 'info', title: '教育型销售', content: '针对理财小白耐心讲解，建立信任关系', badge: '良好'},
           {type: 'warning', title: '未留联系方式', content: '对话结束未确认客户手机号，建议补充', badge: '需改进'}
@@ -1917,10 +1989,10 @@
         item.classList.toggle('active', i === index);
       });
       
-      // Update chat header
-      document.getElementById('chatAvatar').textContent = conv.avatar;
-      document.getElementById('chatAvatar').className = `chat-avatar ${conv.avatarType}`;
-      document.getElementById('chatName').textContent = conv.name;
+      // Update chat header（客户名称固定为「陈先生」，不随切换变化）
+      document.getElementById('chatAvatar').textContent = '陈';
+      document.getElementById('chatAvatar').className = 'chat-avatar type-a';
+      // chatName 固定不修改
       document.getElementById('chatMeta').textContent = conv.meta;
       
       // Update messages - 只渲染普通对话消息，复盘洞察在右侧面板显示
@@ -1963,9 +2035,14 @@
       document.getElementById('metric4').className = `metric-value ${getScoreClass(metrics[3])}`;
       
       // Update tags
-      document.getElementById('tagsGrid').innerHTML = conv.tagsList.map(tag => 
-        `<span class="tag ${conv.newTags.includes(tag) ? 'new' : ''}">${tag}</span>`
+      const allTags = [...conv.tagsList, ...conv.confirmedSuggestedTags];
+      const allNewTags = [...conv.newTags, ...conv.confirmedSuggestedTags];
+      document.getElementById('tagsGrid').innerHTML = allTags.map(tag =>
+        `<span class="tag ${allNewTags.includes(tag) ? 'new' : ''}">${tag}</span>`
       ).join('');
+      // 更新新增标签计数
+      const newCount = allNewTags.length;
+      document.getElementById('newTagCount').textContent = newCount > 0 ? `+${newCount} 新增` : '';
       
       // Reset to initial state - 显示空状态提示和生成按钮
       resetAnalysisState();
@@ -1983,6 +2060,9 @@
       document.getElementById('reviewEmptyHint').style.display = 'flex';
       document.getElementById('reviewCards').innerHTML = '';
       document.getElementById('analysisBtnSection').style.display = 'block';
+
+      // 隐藏AI建议标签区域
+      document.getElementById('suggestedTagsSection').style.display = 'none';
       
       // 隐藏右侧面板的stat-overview中的分数，直到生成复盘后显示
       // 但现在保留显示，因为这是基础信息
@@ -2064,7 +2144,58 @@
           document.getElementById('summaryContent').classList.add('show');
           document.getElementById('summaryArrow').classList.add('rotated');
         }, 300);
+
+        // 显示AI建议标签
+        showSuggestedTags();
       }, 3000);
+    }
+
+    // 显示AI建议标签
+    function showSuggestedTags() {
+      const conv = conversations[currentChat];
+      if (!conv.suggestedTags || conv.suggestedTags.length === 0) return;
+      // 如果已全部确认，不再显示
+      if (conv.confirmedSuggestedTags.length > 0) return;
+
+      const section = document.getElementById('suggestedTagsSection');
+      const list = document.getElementById('suggestedTagsList');
+      const btn = document.getElementById('confirmTagsBtn');
+
+      list.innerHTML = conv.suggestedTags.map(tag =>
+        `<span class="suggested-tag">${tag}</span>`
+      ).join('');
+
+      btn.textContent = '';
+      btn.innerHTML = '<span>✅</span> 确认添加到客户标签';
+      btn.className = 'btn-confirm-tags';
+      btn.disabled = false;
+
+      section.style.display = 'block';
+    }
+
+    // 确认AI建议标签
+    function confirmSuggestedTags() {
+      const conv = conversations[currentChat];
+      if (!conv.suggestedTags || conv.suggestedTags.length === 0) return;
+
+      // 添加到已确认列表
+      conv.confirmedSuggestedTags = [...conv.suggestedTags];
+
+      // 更新按钮状态
+      const btn = document.getElementById('confirmTagsBtn');
+      btn.innerHTML = '<span>✅</span> 已添加';
+      btn.className = 'btn-confirm-tags confirmed';
+      btn.disabled = true;
+
+      // 更新客户标签区域
+      const allTags = [...conv.tagsList, ...conv.confirmedSuggestedTags];
+      const allNewTags = [...conv.newTags, ...conv.confirmedSuggestedTags];
+      document.getElementById('tagsGrid').innerHTML = allTags.map(tag =>
+        `<span class="tag ${allNewTags.includes(tag) ? 'new' : ''}">${tag}</span>`
+      ).join('');
+      // 更新新增计数
+      const newCount = allNewTags.length;
+      document.getElementById('newTagCount').textContent = newCount > 0 ? `+${newCount} 新增` : '';
     }
     
     // Populate Review Cards - 填充复盘洞察卡片

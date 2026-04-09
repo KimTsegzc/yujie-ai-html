@@ -1,0 +1,11 @@
+# Large media files (>3MB)
+*.mp4
+*.MOV
+*.mov
+
+# macOS
+.DS_Store
+
+# Dev tools
+*.py
+.workbuddy/

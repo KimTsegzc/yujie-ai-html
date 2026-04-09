@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+  /* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+  :root {
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+    --sidebar-w:      240px;
+  }
+
+  /* ─── 黑金 ─── */
+  html[data-theme="black-gold"] {
+    --bg:             #0A0A0F;
+    --bg2:            #111118;
+    --bg3:            #1C1C26;
+    --gold:           #C9A84C;
+    --gold-bright:    #E8C97A;
+    --gold-dim:       rgba(201,168,76,0.15);
+    --text:           #E8E4D8;
+    --text-dim:       #9A9080;
+    --border:         rgba(201,168,76,0.2);
+    --red:            #FF5252;
+    --green:          #2ED573;
+    --sidebar-bg:     #060608;
+    --sidebar-text:   #E8E4D8;
+    --sidebar-active: rgba(201,168,76,0.12);
+    --card-bg:        #111118;
+  }
+
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:             #031E36;
+    --bg2:            #04335A;
+    --bg3:            #4474A3;
+    --gold:           #9ABCE0;
+    --gold-bright:    #C4D4E6;
+    --gold-dim:       rgba(154,188,224,0.15);
+    --text:           #C4D4E6;
+    --text-dim:       #9ABCE0;
+    --border:         rgba(154,188,224,0.2);
+    --red:            #E07878;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #021628;
+    --sidebar-text:   #C4D4E6;
+    --sidebar-active: rgba(154,188,224,0.15);
+    --card-bg:        #04335A;
+  }
+
+  /* ─── 暖米白 ─── */
+  html[data-theme="warm-parchment"] {
+    --bg:             #F5F0E8;
+    --bg2:            #EDE6D6;
+    --bg3:            #E0D5C0;
+    --gold:           #8B6914;
+    --gold-bright:    #B8890A;
+    --gold-dim:       rgba(139,105,20,0.12);
+    --text:           #2D2410;
+    --text-dim:       #7A6840;
+    --border:         rgba(139,105,20,0.25);
+    --red:            #C0392B;
+    --green:          #27AE60;
+    --sidebar-bg:     #EDE6D6;
+    --sidebar-text:   #2D2410;
+    --sidebar-active: rgba(139,105,20,0.1);
+    --card-bg:        #EDE6D6;
+  }
+
+  /* ─── 暗夜绿 ─── */
+  html[data-theme="forest-night"] {
+    --bg:             #0D1F1A;
+    --bg2:            #142B22;
+    --bg3:            #1C3A2E;
+    --gold:           #7ECBA1;
+    --gold-bright:    #A8DFC0;
+    --gold-dim:       rgba(126,203,161,0.15);
+    --text:           #C8E6D8;
+    --text-dim:       #6A9E84;
+    --border:         rgba(126,203,161,0.2);
+    --red:            #FF7B6B;
+    --green:          #4FC08D;
+    --sidebar-bg:     #0A1814;
+    --sidebar-text:   #C8E6D8;
+    --sidebar-active: rgba(126,203,161,0.15);
+    --card-bg:        #142B22;
+  }
+
+  /* ─── 暮光玫瑰 ─── */
+  html[data-theme="dusk-rose"] {
+    --bg:             #1A0F14;
+    --bg2:            #2A1520;
+    --bg3:            #3D2030;
+    --gold:           #E8A0B0;
+    --gold-bright:    #F0C4CC;
+    --gold-dim:       rgba(232,160,176,0.15);
+    --text:           #F0D8E0;
+    --text-dim:       #C090A0;
+    --border:         rgba(232,160,176,0.2);
+    --red:            #FF6B8A;
+    --green:          #6ECFA4;
+    --sidebar-bg:     #120A0F;
+    --sidebar-text:   #F0D8E0;
+    --sidebar-active: rgba(232,160,176,0.12);
+    --card-bg:        #2A1520;
+  }
+
+  /* ─── 星云紫 ─── */
+  html[data-theme="nebula-purple"] {
+    --bg:             #0C0A1A;
+    --bg2:            #16103A;
+    --bg3:            #241858;
+    --gold:           #A78BFA;
+    --gold-bright:    #C4B5FD;
+    --gold-dim:       rgba(167,139,250,0.15);
+    --text:           #E8E0FF;
+    --text-dim:       #9D8FD0;
+    --border:         rgba(167,139,250,0.2);
+    --red:            #F87171;
+    --green:          #34D399;
+    --sidebar-bg:     #080618;
+    --sidebar-text:   #E8E0FF;
+    --sidebar-active: rgba(167,139,250,0.12);
+    --card-bg:        #16103A;
+  }
+
+  /* Legacy fallback */
+  body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+  h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+  a { color: var(--gold); }
+  .highlight, .accent { color: var(--gold-bright); }
+  .red-tag { color: var(--red); }
+  .green-tag { color: var(--green); }
+  
+  /* ===== 暖米白/浅色主题安全覆盖 =====
+     防止浅色背景下出现白字看不见的情况
+  ===== */
+  html[data-theme="warm-parchment"] body,
+  html[data-theme="warm-parchment"] .scene,
+  html[data-theme="warm-parchment"] .content-bg,
+  html[data-theme="warm-parchment"] .slide,
+  html[data-theme="warm-parchment"] .container {
+    color: var(--text) !important;
+  }
+  /* 强制白字元素在浅色主题下用深色 */
+  html[data-theme="warm-parchment"] [style*="color: white"],
+  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== v17 等比缩放字体系统（Type Scale）===== */
+  :root {
+    /* 行高配合 */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    
+    /* 基础7档字体变量 - 默认中号方案 (1.250) */
+    --text-h1:   48.8px;
+    --text-h2:   39.1px;
+    --text-h3:   31.3px;
+    --text-h4:   25.0px;
+    --text-lead: 20.0px;
+    --text-body: 16.0px;
+    --text-sm:   12.8px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+  }
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI友好型银行 - 时光倒流效果</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --gold: var(--gold);
+    --gold-bright: var(--gold);
+    --gold-dim: rgba(201,168,76,0.3);
+    --bg: var(--bg);
+    --bg-card: rgba(20, 20, 25, 0.6);
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --red: var(--red);
+    --red-glow: rgba(255, 71, 87, 0.3);
+    --green: var(--green);
+    --green-glow: rgba(46, 213, 115, 0.3);
+  }
+  
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  /* ===== 背景渐变 ===== */
+  .bg-gradient {
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(255,71,87,0.05) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 50%, rgba(46,213,115,0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* ===== 场景容器 ===== */
+  .scene-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  
+  /* ===== 顶部标题 ===== */
+  .header {
+    position: absolute;
+    top: 48px;
+    left: 60px;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .header-tag {
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .header-title {
+    font-size: var(--current-3xl2);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+  
+  /* ===== 状态指示器 ===== */
+  .status-indicator {
+    position: absolute;
+    top: 48px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-dim);
+    z-index: 100;
+    pointer-events: none;
+    background: var(--bg-card);
+    padding: 10px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 10px var(--red-glow);
+    transition: all 0.4s ease;
+  }
+  .status-dot.active {
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green-glow);
+  }
+  .status-dot.rewinding {
+    background: var(--gold);
+    box-shadow: 0 0 15px var(--gold-dim);
+    animation: dot-pulse 0.6s ease-in-out infinite;
+  }
+  
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  
+  /* ===== 主舞台 ===== */
+  .stage {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px;
+  }
+  
+  /* ===== 时间轴容器 ===== */
+  .timeline-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+  
+  /* ===== 场景标签 ===== */
+  .scene-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 20px;
+  }
+  
+  .scene-label-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease;
+  }
+  
+  .scene-label-item.reality {
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    color: var(--red);
+  }
+  .scene-label-item.reality.inactive {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  
+  .scene-label-item.alternate {
+    background: rgba(46, 213, 115, 0.1);
+    border: 1px solid rgba(46, 213, 115, 0.2);
+    color: var(--green);
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  .scene-label-item.alternate.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* ===== 横向时间轴 ===== */
+  .timeline-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      rgba(255,71,87,0.3) 0%, 
+      rgba(255,71,87,0.3) 45%,
+      transparent 45%,
+      transparent 55%,
+      rgba(46,213,115,0) 55%,
+      rgba(46,213,115,0.3) 100%
+    );
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+  }
+  
+  .timeline-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(90deg, var(--red), rgba(255,71,87,0.5));
+    border-radius: 2px;
+    transition: all 1s ease;
+  }
+  .timeline-progress.rewind {
+    animation: progress-rewind 2s ease-in-out forwards;
+  }
+  
+  @keyframes progress-rewind {
+    0% { width: 45%; background: linear-gradient(90deg, var(--red), rgba(255,71,87,0.5)); }
+    50% { width: 0%; }
+    100% { width: 55%; background: linear-gradient(90deg, rgba(46,213,115,0.5), var(--green)); }
+  }
+  
+  /* ===== 时间节点 ===== */
+  .timeline-nodes {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    pointer-events: none;
+  }
+  
+  .timeline-node {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+  
+  .timeline-node.reality-node {
+    border-color: var(--red);
+    box-shadow: 0 0 15px var(--red-glow);
+  }
+  .timeline-node.reality-node.inactive {
+    border-color: rgba(255,71,87,0.3);
+    box-shadow: none;
+  }
+  
+  .timeline-node.alternate-node {
+    border-color: var(--green);
+    box-shadow: 0 0 15px var(--green-glow);
+    opacity: 0;
+    transform: scale(0);
+  }
+  .timeline-node.alternate-node.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* ===== 卡片容器 ===== */
+  .cards-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 200px;
+  }
+  
+  /* ===== 流程卡片 ===== */
+  .flow-cards {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .flow-card {
+    flex: 1;
+    max-width: 220px;
+    padding: 28px 24px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .flow-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .flow-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* 现实场景卡片 */
+  .flow-card.reality-card {
+    border-color: rgba(255,71,87,0.15);
+  }
+  .flow-card.reality-card.missing {
+    border-color: rgba(255,71,87,0.3);
+    background: rgba(255, 71, 87, 0.05);
+  }
+  .flow-card.reality-card.missing::after {
+    content: '✕';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255,71,87,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--current-sm);
+    color: var(--red);
+  }
+  .flow-card.reality-card.fading {
+    opacity: 0.2;
+    transform: scale(0.9) translateX(-30px);
+    filter: blur(2px);
+  }
+  
+  /* 替代场景卡片 - 初始隐藏，与 reality-cards 同位置 */
+  #alternateCards {
+    opacity: 1;
+    pointer-events: none;
+  }
+  
+  .flow-card.alternate-card {
+    border-color: rgba(46,213,115,0.3);
+    background: rgba(46, 213, 115, 0.05);
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    pointer-events: auto;
+  }
+  .flow-card.alternate-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .flow-card.alternate-card.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+    box-shadow: 0 0 30px rgba(201,168,76,0.15);
+  }
+  .flow-card.alternate-card.highlight::after {
+    content: '✓';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: rgba(46,213,115,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--current-sm);
+    color: var(--green);
+  }
+  
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 1.5;
+  }
+  
+  /* 现实场景图标颜色 */
+  .reality-card .card-icon svg {
+    stroke: var(--red);
+  }
+  .reality-card.missing .card-icon svg {
+    stroke: rgba(255,71,87,0.5);
+  }
+  
+  /* 替代场景图标颜色 */
+  .alternate-card .card-icon svg {
+    stroke: var(--green);
+  }
+  .alternate-card.highlight .card-icon svg {
+    stroke: var(--gold);
+  }
+  
+  /* 图标发光效果 */
+  .alternate-card.highlight .card-icon {
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.5));
+  }
+  
+  .card-title {
+    font-size: var(--text-base); /* 18px */
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  
+  .card-subtitle {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    margin-top: 8px;
+  }
+  
+  /* ===== 动感进入动画 ===== */
+  .flow-card.alternate-card.pop-in {
+    animation: card-pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  
+  @keyframes card-pop-in {
+    0% {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-8px) scale(1.03);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .flow-card.alternate-card.flip-in {
+    animation: card-flip-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  @keyframes card-flip-in {
+    0% {
+      opacity: 0;
+      transform: perspective(400px) rotateX(-30deg) translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(400px) rotateX(0) translateY(0);
+    }
+  }
+  
+  .flow-card.alternate-card.bounce-in {
+    animation: card-bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+  
+  @keyframes card-bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(-10deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.08) rotate(2deg);
+    }
+    70% {
+      transform: scale(0.96) rotate(-1deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+  
+  .flow-card.alternate-card.glow-in {
+    animation: card-glow-in 0.6s ease-out forwards;
+  }
+  
+  @keyframes card-glow-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+      box-shadow: 0 0 0 rgba(46,213,115,0);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(46,213,115,0.4);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      box-shadow: 0 0 20px rgba(46,213,115,0.1);
+    }
+  }
+  
+  /* 脉冲发光效果 */
+  .flow-card.pulse-glow {
+    animation: card-pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes card-pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(201,168,76,0.2);
+    }
+    50% {
+      box-shadow: 0 0 35px rgba(201,168,76,0.4);
+    }
+  }
+  
+  /* ===== 时光倒流特效层 ===== */
+  .time-warp-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+  }
+  .time-warp-overlay.active {
+    opacity: 1;
+  }
+  
+  /* 漩涡效果 */
+  .vortex-container {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .vortex-container.active {
+    opacity: 1;
+  }
+  
+  .vortex-ring {
+    position: absolute;
+    border: 2px solid var(--gold-dim);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .vortex-ring.spinning {
+    animation: vortex-spin-shrink 2.5s ease-in-out forwards;
+  }
+  
+  @keyframes vortex-spin-shrink {
+    0% {
+      width: 400px;
+      height: 400px;
+      opacity: 0.3;
+      border-width: 2px;
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    50% {
+      opacity: 0.6;
+      border-color: var(--gold);
+    }
+    100% {
+      width: 0px;
+      height: 0px;
+      opacity: 0;
+      border-width: 8px;
+      transform: translate(-50%, -50%) rotate(720deg);
+    }
+  }
+  
+  /* 时钟 */
+  .clock-wrapper {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s;
+  }
+  .clock-wrapper.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .clock-face {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--gold-dim);
+    position: relative;
+    background: radial-gradient(circle at center, rgba(201,168,76,0.1), transparent 70%);
+    box-shadow: 
+      0 0 40px rgba(201,168,76,0.2),
+      inset 0 0 40px rgba(201,168,76,0.05);
+  }
+  
+  .clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px var(--gold);
+    z-index: 10;
+  }
+  
+  .clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 2px;
+  }
+  
+  .hour-hand {
+    width: 5px;
+    height: 50px;
+    background: linear-gradient(to top, var(--gold), var(--gold-bright));
+    margin-left: -2.5px;
+  }
+  .hour-hand.rewind {
+    animation: hour-rewind 2.5s ease-in-out forwards;
+  }
+  
+  .minute-hand {
+    width: 3px;
+    height: 70px;
+    background: linear-gradient(to top, var(--gold-dim), var(--gold));
+    margin-left: -1.5px;
+  }
+  .minute-hand.rewind {
+    animation: minute-rewind 2.5s ease-in-out forwards;
+  }
+  
+  .second-hand {
+    width: 2px;
+    height: 80px;
+    background: var(--red);
+    margin-left: -1px;
+    box-shadow: 0 0 8px var(--red);
+  }
+  .second-hand.rewind {
+    animation: second-rewind 2.5s ease-in-out forwards;
+  }
+  
+  @keyframes hour-rewind {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-720deg); }
+  }
+  
+  @keyframes minute-rewind {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-2160deg); }
+  }
+  
+  @keyframes second-rewind {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-10800deg); }
+  }
+  
+  .clock-tick {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background: var(--gold-dim);
+    left: 50%;
+    top: 8px;
+    transform-origin: center 82px;
+  }
+  
+  /* 时间标签 */
+  .time-label {
+    position: absolute;
+    font-size: var(--current-4xl);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(201,168,76,0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s;
+    z-index: 60;
+    letter-spacing: 4px;
+  }
+  .time-label.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ===== 提示文字 ===== */
+  .hint-text {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: var(--current-base);
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .hint-text.hidden {
+    opacity: 0;
+  }
+  
+  /* ===== 重置按钮 ===== */
+  .reset-btn {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 32px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    display: none;
+    letter-spacing: 1px;
+  }
+  .reset-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+  .reset-btn.visible {
+    display: block;
+  }
+  
+  /* ===== 点击提示 ===== */
+  .click-hint {
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gold);
+    opacity: 0.6;
+    animation: click-hint-pulse 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes click-hint-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+  
+  .click-hint-icon {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    position: relative;
+  }
+  .click-hint-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* ===== 响应式 ===== */
+  @media (max-width: 1024px) {
+    .header { left: 24px; top: 24px; }
+    .header-title { font-size: var(--current-2xl); }
+    .status-indicator { right: 24px; top: 24px; padding: 8px 16px; }
+    .stage { padding: 0 24px; }
+    .flow-cards { flex-wrap: wrap; justify-content: center; }
+    .flow-card { max-width: 180px; padding: 20px 16px; }
+    .card-icon { font-size: var(--current-2xl2); }
+    .card-title { font-size: 14px; }
+    .timeline-track { padding: 0 40px; }
+    .timeline-nodes { padding: 0 20px; }
+  }
+  
+  @media (max-width: 768px) {
+    body { overflow-y: auto !important; }
+    .flow-cards { flex-direction: column; align-items: center; }
+    .flow-card { max-width: 280px; width: 100%; }
+    .scene-labels { flex-direction: column; align-items: center; gap: 12px; }
+  }
+
+  @media (max-width: 480px) {
+    html { height: auto !important; overflow: visible !important; }
+    body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; }
+    .scene-container { height: auto !important; min-height: 100vh; }
+    .header { position: relative !important; top: auto !important; left: auto !important; padding: 16px 14px 8px; text-align: center; }
+    .header-title { font-size: var(--current-lg); }
+    .status-indicator { position: relative !important; top: auto !important; right: auto !important; margin: 0 14px; padding: 6px 10px; font-size: var(--current-xs); }
+    .stage { padding: 0 14px; min-height: auto !important; height: auto !important; overflow: visible !important; }
+    .flow-cards { flex-direction: column !important; align-items: center !important; }
+    .flow-card { max-width: 100% !important; width: 100% !important; padding: 16px 12px; height: auto !important; min-height: auto; }
+    .timeline-track { padding: 0 24px; }
+    .cards-container { height: auto !important; min-height: auto; overflow: visible !important; }
+    .scene-labels { flex-direction: column !important; align-items: center !important; gap: 12px !important; }
+  }
+</style>
+</head>
+<body onclick="handleBodyClick()">
+
+<div class="bg-gradient"></div>
+
+<div class="scene-container">
+  <!-- 顶部标题 -->
+  <div class="header">
+    <div class="header-tag">Part 05 · 深层洞察</div>
+    <div class="header-title">如果银行一开始就切入...</div>
+  </div>
+  
+  <!-- 状态指示器 -->
+  <div class="status-indicator">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">现实时间线</span>
+  </div>
+  
+  <!-- 主舞台 -->
+  <div class="stage">
+    <div class="timeline-wrapper">
+      <!-- 场景标签 -->
+      <div class="scene-labels">
+        <div class="scene-label-item reality" id="realityLabel">现实时间线</div>
+        <div class="scene-label-item alternate" id="alternateLabel">替代时间线</div>
+      </div>
+      
+      <!-- 时间轴轨道 -->
+      <div class="timeline-track">
+        <div class="timeline-progress" id="timelineProgress"></div>
+        <div class="timeline-nodes">
+          <div class="timeline-node reality-node" id="realityNode1"></div>
+          <div class="timeline-node reality-node" id="realityNode2"></div>
+          <div class="timeline-node reality-node missing" id="realityNode3"></div>
+          <div class="timeline-node reality-node" id="realityNode4"></div>
+          <div class="timeline-node alternate-node" id="alternateNode1"></div>
+          <div class="timeline-node alternate-node" id="alternateNode2"></div>
+          <div class="timeline-node alternate-node" id="alternateNode3"></div>
+          <div class="timeline-node alternate-node" id="alternateNode4"></div>
+        </div>
+      </div>
+      
+      <!-- 流程卡片容器 -->
+      <div class="cards-container">
+        <!-- 现实场景卡片 -->
+        <div class="flow-cards" id="realityCards">
+          <div class="flow-card reality-card" data-card="1">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <div class="card-title">一人公司老板</div>
+            <div class="card-subtitle">发起需求</div>
+          </div>
+          <div class="flow-card reality-card" data-card="2">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="9" x2="15" y2="9"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+                <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </span>
+            <div class="card-title">财务 Agent</div>
+            <div class="card-subtitle">处理请求</div>
+          </div>
+          <div class="flow-card reality-card missing" data-card="3">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="21" x2="21" y2="21"></line>
+                <line x1="5" y1="21" x2="7" y2="13"></line>
+                <line x1="9" y1="21" x2="11" y2="13"></line>
+                <line x1="13" y1="21" x2="15" y2="13"></line>
+                <line x1="17" y1="21" x2="19" y2="13"></line>
+                <path d="M4 13h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1z"></path>
+              </svg>
+            </span>
+            <div class="card-title">银行服务？</div>
+            <div class="card-subtitle">服务缺失</div>
+          </div>
+          <div class="flow-card reality-card" data-card="4">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+            </span>
+            <div class="card-title">第三方支付</div>
+            <div class="card-subtitle">替代方案</div>
+          </div>
+        </div>
+        
+        <!-- 替代场景卡片（叠加层） -->
+        <div class="flow-cards" id="alternateCards">
+          <div class="flow-card alternate-card" data-alt-card="1">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <div class="card-title">一人公司老板</div>
+            <div class="card-subtitle">发起需求</div>
+          </div>
+          <div class="flow-card alternate-card" data-alt-card="2">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+                <line x1="8" y1="22" x2="16" y2="22"></line>
+              </svg>
+            </span>
+            <div class="card-title">财务 Agent</div>
+            <div class="card-subtitle">处理请求</div>
+          </div>
+          <div class="flow-card alternate-card highlight" data-alt-card="3">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"></path>
+                <path d="M5 21V7l8-4 8 4v14"></path>
+                <path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"></path>
+              </svg>
+            </span>
+            <div class="card-title">银行 API/Skill</div>
+            <div class="card-subtitle">核心连接</div>
+          </div>
+          <div class="flow-card alternate-card" data-alt-card="4">
+            <span class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v4"></path>
+                <path d="m5 5 2.8 2.8"></path>
+                <path d="m19 5-2.8 2.8"></path>
+                <path d="M12 12v8"></path>
+                <path d="m9 16 3-3 3 3"></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+            </span>
+            <div class="card-title">自动支付·信贷·评级</div>
+            <div class="card-subtitle">完整服务</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 点击提示 -->
+  <div class="click-hint" id="clickHint">
+    <div class="click-hint-icon"></div>
+    <span>点击任意处启动时光倒流</span>
+  </div>
+  
+  <!-- 提示文字 -->
+  <div class="hint-text" id="hintText">
+    银行从一开始就成为AI生态的核心节点，掌握主动权
+  </div>
+  
+  <!-- 重置按钮 -->
+  <button class="reset-btn" id="resetBtn" onclick="event.stopPropagation(); resetScene()">
+    ↺ 重置时间线
+  </button>
+</div>
+
+<!-- 时光倒流特效层 -->
+<div class="time-warp-overlay" id="timeWarpOverlay">
+  <div class="vortex-container" id="vortexContainer">
+    <div class="vortex-ring" style="animation-delay: 0s;"></div>
+    <div class="vortex-ring" style="animation-delay: 0.2s;"></div>
+    <div class="vortex-ring" style="animation-delay: 0.4s;"></div>
+    <div class="vortex-ring" style="animation-delay: 0.6s;"></div>
+  </div>
+  
+  <div class="clock-wrapper" id="clockWrapper">
+    <div class="clock-face">
+      <script>
+        for(let i=0; i<12; i++) {
+          document.write(`<div class="clock-tick" style="transform: rotate(${i*30}deg);"></div>`);
+        }
+      
+  // v6三档字号切换
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'fontSize') {
+      const size = e.data.size || 'medium';
+      document.documentElement.setAttribute('data-font-level', size);
+    }
+    // 可见性控制（CSS动画页面暂不支持）
+    if (e.data && e.data.type === 'visibility') {
+      // CSS动画页面暂不支持暂停
+    }
+  });
+  parent.postMessage({ type: 'iframeReady' }, '*');
+
+</script>
+      <div class="clock-hand hour-hand" id="hourHand"></div>
+      <div class="clock-hand minute-hand" id="minuteHand"></div>
+      <div class="clock-hand second-hand" id="secondHand"></div>
+      <div class="clock-center"></div>
+    </div>
+  </div>
+  
+  <div class="time-label" id="timeLabel">时光倒流</div>
+</div>
+
+<script>
+  let isAnimating = false;
+  let hasPlayed = false;
+  
+  // 点击页面触发
+  function handleBodyClick() {
+    if (!isAnimating && !hasPlayed) {
+      startTimeRewind();
+    }
+  }
+  
+  // 启动时光倒流
+  function startTimeRewind() {
+    if (isAnimating) return;
+    isAnimating = true;
+    hasPlayed = true;
+    
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const clickHint = document.getElementById('clickHint');
+    
+    statusDot.className = 'status-dot rewinding';
+    statusText.textContent = '时光倒流中...';
+    clickHint.style.display = 'none';
+    
+    // 1. 显示特效层
+    document.getElementById('timeWarpOverlay').classList.add('active');
+    
+    // 2. 启动漩涡
+    setTimeout(() => {
+      document.getElementById('vortexContainer').classList.add('active');
+      document.querySelectorAll('.vortex-ring').forEach(ring => {
+        ring.classList.add('spinning');
+      });
+    }, 100);
+    
+    // 3. 显示时钟并开始倒转
+    setTimeout(() => {
+      document.getElementById('clockWrapper').classList.add('active');
+      document.getElementById('hourHand').classList.add('rewind');
+      document.getElementById('minuteHand').classList.add('rewind');
+      document.getElementById('secondHand').classList.add('rewind');
+    }, 300);
+    
+    // 4. 显示时间标签
+    setTimeout(() => {
+      document.getElementById('timeLabel').classList.add('visible');
+    }, 500);
+    
+    // 5. 时间轴进度条倒转
+    setTimeout(() => {
+      document.getElementById('timelineProgress').classList.add('rewind');
+    }, 600);
+    
+    // 6. 现实场景淡出
+    setTimeout(() => {
+      document.getElementById('realityLabel').classList.add('inactive');
+      document.querySelectorAll('.reality-card').forEach(card => {
+        card.classList.add('fading');
+      });
+      document.querySelectorAll('.reality-node').forEach(node => {
+        node.classList.add('inactive');
+      });
+    }, 1200);
+    
+    // 7. 显示替代场景标签
+    setTimeout(() => {
+      document.getElementById('alternateLabel').classList.add('visible');
+      document.querySelectorAll('.alternate-node').forEach(node => {
+        node.classList.add('visible');
+      });
+    }, 2000);
+    
+    // 8. 逐个显示替代场景卡片
+    setTimeout(() => {
+      document.getElementById('timeLabel').textContent = '全新可能';
+      animateAlternateCards();
+    }, 2200);
+    
+    // 9. 清理特效，显示最终结果
+    setTimeout(() => {
+      document.getElementById('timeWarpOverlay').classList.remove('active');
+      document.getElementById('vortexContainer').classList.remove('active');
+      document.getElementById('clockWrapper').classList.remove('active');
+      document.getElementById('timeLabel').classList.remove('visible');
+      
+      // 重置时钟动画
+      document.getElementById('hourHand').classList.remove('rewind');
+      document.getElementById('minuteHand').classList.remove('rewind');
+      document.getElementById('secondHand').classList.remove('rewind');
+      document.querySelectorAll('.vortex-ring').forEach(ring => {
+        ring.classList.remove('spinning');
+      });
+      
+      // 更新状态
+      statusDot.className = 'status-dot active';
+      statusText.textContent = '替代时间线';
+      document.getElementById('hintText').classList.remove('hidden');
+      document.getElementById('resetBtn').classList.add('visible');
+      
+      isAnimating = false;
+    }, 4500);
+  }
+  
+  // 逐个动画替代场景卡片
+  function animateAlternateCards() {
+    const cards = document.querySelectorAll('.alternate-card');
+    const animations = ['pop-in', 'flip-in', 'glow-in', 'bounce-in'];
+    
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('visible');
+        card.classList.add(animations[index]);
+        
+        // 银行卡片添加脉冲效果
+        if (index === 2) {
+          setTimeout(() => {
+            card.classList.add('pulse-glow');
+          }, 600);
+        }
+      }, index * 250);
+    });
+    
+    // 所有卡片显示完成后的微动效
+    setTimeout(() => {
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.transition = 'transform 0.3s ease';
+          card.style.transform = 'translateY(-5px)';
+          setTimeout(() => {
+            card.style.transform = 'translateY(0)';
+          }, 200);
+        }, index * 100);
+      });
+    }, 1800);
+  }
+  
+  // 重置场景
+  function resetScene() {
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const clickHint = document.getElementById('clickHint');
+    const hintText = document.getElementById('hintText');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    hasPlayed = false;
+    
+    // 重置标签
+    document.getElementById('realityLabel').classList.remove('inactive');
+    document.getElementById('alternateLabel').classList.remove('visible');
+    
+    // 重置时间轴
+    document.getElementById('timelineProgress').classList.remove('rewind');
+    
+    // 重置节点
+    document.querySelectorAll('.reality-node').forEach(node => {
+      node.classList.remove('inactive');
+    });
+    document.querySelectorAll('.alternate-node').forEach(node => {
+      node.classList.remove('visible');
+    });
+    
+    // 重置现实场景卡片
+    document.querySelectorAll('.reality-card').forEach(card => {
+      card.classList.remove('fading');
+    });
+    
+    // 重置替代场景卡片
+    document.querySelectorAll('.alternate-card').forEach(card => {
+      card.classList.remove('visible', 'pop-in', 'flip-in', 'glow-in', 'bounce-in', 'pulse-glow');
+      card.style.cssText = '';
+    });
+    
+    // 重置时间标签
+    document.getElementById('timeLabel').textContent = '时光倒流';
+    
+    // 更新状态
+    statusDot.className = 'status-dot';
+    statusText.textContent = '现实时间线';
+    
+    // 显示提示
+    clickHint.style.display = 'flex';
+    hintText.classList.add('hidden');
+    resetBtn.classList.remove('visible');
+  }
+
+  // v6三档字号切换
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'fontSize') {
+      const size = e.data.size || 'medium';
+      document.documentElement.setAttribute('data-font-level', size);
+    }
+    // 可见性控制（CSS动画页面暂不支持）
+    if (e.data && e.data.type === 'visibility') {
+      // CSS动画页面暂不支持暂停
+    }
+  });
+  parent.postMessage({ type: 'iframeReady' }, '*');
+
+</script>
+
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script></body>
+</html>
