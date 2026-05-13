@@ -33,16 +33,159 @@
     --sidebar-bg:#060608;--sidebar-text:#E8E4D8;--sidebar-active:rgba(201,168,76,0.12);--card-bg:#111118;
   }
 
+  /* ─── 深海蓝 ─── */
+  html[data-theme="deep-ocean"] {
+    --bg:#031E36;--bg2:#04335A;--bg3:#4474A3;
+    --gold:#9ABCE0;--gold-bright:#C4D4E6;--gold-dim:rgba(154,188,224,0.15);
+    --text:#C4D4E6;--text-dim:#9ABCE0;--border:rgba(154,188,224,0.2);
+    --red:#E07878;--green:#6FCFA0;
+    --sidebar-bg:#021628;--sidebar-text:#C4D4E6;--sidebar-active:rgba(154,188,224,0.15);--card-bg:#04335A;
+  }
+
+  /* ─── 冰川蓝 ─── */
+  html[data-theme="glacier-blue"] {
+    --bg:#F5F1EC;--bg2:#EAE4DD;--bg3:#A8B5C2;
+    --gold:#2E4265;--gold-bright:#1D3354;--gold-dim:rgba(46,66,101,0.12);
+    --text:#2E4265;--text-dim:#8599AB;--border:rgba(46,66,101,0.2);
+    --red:#C0392B;--green:#27AE60;
+    --sidebar-bg:#EAE4DD;--sidebar-text:#2E4265;--sidebar-active:rgba(46,66,101,0.1);--card-bg:#EAE4DD;
+  }
+
+  /* ─── 秋暮 ─── */
+  html[data-theme="autumn-dusk"] {
+    --bg:#151D2B;--bg2:#25344F;--bg3:#617891;
+    --gold:#D5B893;--gold-bright:#E8D4B8;--gold-dim:rgba(213,184,147,0.15);
+    --text:#E8D4B8;--text-dim:#D5B893;--border:rgba(213,184,147,0.2);
+    --red:#C04048;--green:#6FCFA0;
+    --sidebar-bg:#111828;--sidebar-text:#E8D4B8;--sidebar-active:rgba(213,184,147,0.12);--card-bg:#25344F;
+  }
+
+  /* ─── 落日余烬 ─── */
+  html[data-theme="sunset-ember"] {
+    --bg:#1A1814;--bg2:#2A261E;--bg3:#74601B;
+    --gold:#FF971E;--gold-bright:#FFB347;--gold-dim:rgba(255,151,30,0.15);
+    --text:#F0E8DC;--text-dim:#A8A7A3;--border:rgba(255,151,30,0.2);
+    --red:#DB4600;--green:#6FCFA0;
+    --sidebar-bg:#151210;--sidebar-text:#F0E8DC;--sidebar-active:rgba(255,151,30,0.12);--card-bg:#2A261E;
+  }
+
+  /* 浅色主题安全覆盖 */
+  html[data-theme="glacier-blue"] body,
+  html[data-theme="glacier-blue"] .scene,
+  html[data-theme="glacier-blue"] .content-bg,
+  html[data-theme="glacier-blue"] .slide,
+  html[data-theme="glacier-blue"] .container {
+    color: var(--text) !important;
+  }
+  html[data-theme="glacier-blue"] [style*="color: white"],
+  html[data-theme="glacier-blue"] [style*="color:#fff"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== 冰川蓝主题额外修复：浅色文字和线条 ===== */
+  /* 修复硬编码浅色文字 */
+  html[data-theme="glacier-blue"] .step-tab { color: var(--text-dim) !important; background: rgba(46,66,101,0.05) !important; }
+  html[data-theme="glacier-blue"] .step-tab:hover { background: rgba(46,66,101,0.08) !important; }
+  html[data-theme="glacier-blue"] .chart-container { background: rgba(46,66,101,0.05) !important; }
+  html[data-theme="glacier-blue"] .chart-grid-line { stroke: rgba(46,66,101,0.1) !important; }
+  html[data-theme="glacier-blue"] .chart-axis-text { fill: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .chart-legend-text { fill: var(--text) !important; }
+  html[data-theme="glacier-blue"] .chart-noon-label { fill: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .client-row { background: rgba(46,66,101,0.05) !important; }
+  html[data-theme="glacier-blue"] .client-row:hover { background: rgba(46,66,101,0.08) !important; }
+  html[data-theme="glacier-blue"] .client-detail { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .score-label { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .script-box { background: rgba(46,66,101,0.05) !important; border-color: rgba(46,66,101,0.2) !important; }
+  html[data-theme="glacier-blue"] .script-sub { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .reach-item { background: rgba(46,66,101,0.05) !important; border-color: rgba(46,66,101,0.2) !important; }
+  html[data-theme="glacier-blue"] .reach-label { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .bubble.ai { background: rgba(46,66,101,0.06) !important; color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .chat-input-box { background: rgba(46,66,101,0.04) !important; border-color: rgba(46,66,101,0.2) !important; }
+  html[data-theme="glacier-blue"] .chat-input-text { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .footer-info { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .wf-dot { background: rgba(46,66,101,0.15) !important; }
+  html[data-theme="glacier-blue"] .wf-line { background: rgba(46,66,101,0.12) !important; }
+  html[data-theme="glacier-blue"] .progress-bar { background: rgba(46,66,101,0.15) !important; }
+  html[data-theme="glacier-blue"] .mi-item { background: rgba(46,66,101,0.05) !important; }
+  html[data-theme="glacier-blue"] .mi-name { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .mini-chart { background: rgba(46,66,101,0.05) !important; }
+  html[data-theme="glacier-blue"] .cts-track { background: rgba(46,66,101,0.1) !important; }
+  html[data-theme="glacier-blue"] .kpi-bar-wrap { background: rgba(46,66,101,0.1) !important; }
+  html[data-theme="glacier-blue"] .chat-messages::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .side-panel::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.25) !important; }
+  html[data-theme="glacier-blue"] .workspace::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.3) !important; }
+  
+  /* 修复背景透明度过高 - 主要卡片/面板 */
+  html[data-theme="glacier-blue"] .step-tab { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .step-tab:hover { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .chart-container { background: rgba(234,228,221,0.85) !important; }
+  html[data-theme="glacier-blue"] .client-row { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .client-row:hover { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .script-box { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .reach-item { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .bubble.ai { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .chat-input-box { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .mi-item { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .mini-chart { background: rgba(234,228,221,0.85) !important; }
+  
+  /* 修复灰色文字看不清 */
+  html[data-theme="glacier-blue"] .chat-input-text { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .footer-info { color: var(--text-dim) !important; }
+
   /* ─── 字体变量 v17 ─── */
   :root {
-    --text-sm: 12.8px;
-    --current-base: 16px;
+    /* 基础7档字体变量 - v17大号方案 (销冠Skills标准) */
+    --text-h1:   56.9px;
+    --text-h2:   42.7px;
+    --text-h3:   32px;
+    --text-h4:   24px;
     --text-lead: 20px;
-    --text-body: 16px;
-    --text-h4: 25px;
-    --text-h3: 31.3px;
-    --text-h2: 39.1px;
-    --text-h1: 48.8px;
+    --text-body: 18px;
+    --text-sm:   16px;
+    
+    /* 12档兼容层映射 */
+    --font-xs:   var(--text-sm);
+    --font-sm:   var(--text-sm);
+    --font-base: var(--text-body);
+    --font-md:   var(--text-body);
+    --font-lg:   var(--text-h4);
+    --font-xl:   var(--text-h3);
+    --font-2xl:  var(--text-h2);
+    --font-2xl2: var(--text-h2);
+    --font-3xl:  var(--text-h1);
+    --font-3xl2: var(--text-h1);
+    --font-4xl:  var(--text-h1);
+    --font-hero: var(--text-h1);
+    
+    /* 当前选中档次 */
+    --current-xs:   var(--text-sm);
+    --current-sm:   var(--text-sm);
+    --current-base: var(--text-body);
+    --current-md:   var(--text-body);
+    --current-lg:   var(--text-h4);
+    --current-xl:   var(--text-h3);
+    --current-2xl:  var(--text-h2);
+    --current-2xl2: var(--text-h2);
+    --current-3xl:  var(--text-h1);
+    --current-3xl2: var(--text-h1);
+    --current-4xl:  var(--text-h1);
+    --current-hero: var(--text-h1);
+  }
+  
+  /* 小号方案 (1.200) */
+  html[data-font-level="small"] {
+    --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+    --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+  }
+  /* 中号方案 (1.250) - 默认 */
+  html[data-font-level="medium"] {
+    --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+    --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+  }
+  /* 大号方案 (1.333) */
+  html[data-font-level="large"] {
+    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -118,7 +261,58 @@
     width:100%; height:220px; background:rgba(0,0,0,0.2);
     border-radius:10px; position:relative; overflow:hidden;
   }
-  .chart-container canvas { width:100%; height:100%; }
+  .chart-container svg { width:100%; height:100%; }
+
+  /* SVG 图表样式 */
+  .chart-grid-line { stroke: rgba(255,255,255,0.06); stroke-width: 1; }
+  .chart-axis-text { fill: rgba(255,255,255,0.35); font-size: 14px; }
+  .chart-legend-text { font-size: 14px; font-weight: 500; }
+  .chart-noon-label { fill: rgba(255,255,255,0.4); font-size: 14px; }
+
+  /* 线条绘制动画 */
+  .chart-line-animate {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawLine 2s ease-out forwards;
+  }
+  @keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* 面积填充渐变 */
+  .chart-area-gradient-red {
+    fill: url(#gradRed);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
+  }
+  .chart-area-gradient-gold {
+    fill: url(#gradGold);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* 数据点动画 */
+  .chart-point {
+    opacity: 0;
+    transform-origin: center;
+    animation: popIn 0.4s ease-out forwards;
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0); }
+    70% { transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* 涨跌标签 */
+  .change-label {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 1.5s forwards;
+  }
 
   /* ===== 通报卡片 ===== */
   .bulletin-card {
@@ -258,10 +452,10 @@
   .chat-input-box:hover { border-color:rgba(201,168,76,0.3); }
   .chat-input-text { flex:1; font-size:var(--current-base); color:#888; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
   .chat-send {
-    width:28px; height:28px; border-radius:8px;
+    width:36px; height:32px; border-radius:8px;
     background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
     color:var(--gold); display:flex; align-items:center; justify-content:center;
-    cursor:pointer; font-size:16px; transition:all .3s;
+    cursor:pointer; font-size:16px; transition:all .3s; flex-shrink:0;
   }
   .chat-send:hover { background:rgba(201,168,76,0.3); }
 
@@ -287,6 +481,8 @@
   .kpi-change { font-size:var(--text-sm); margin-top:4px; }
   .kpi-change.pos { color:var(--green); }
   .kpi-change.neg { color:var(--red); }
+  .kpi-change.up { color:var(--red); }
+  .kpi-change.down { color:var(--green); }
 
   .kpi-bar-wrap { width:100%; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; margin-top:8px; overflow:hidden; }
   .kpi-bar { height:100%; border-radius:3px; transition:width 1.5s ease; width:0%; }
@@ -300,11 +496,15 @@
   .push-btn:hover { background:rgba(201,168,76,0.25); }
   .push-btn.sent { border-color:var(--green); color:var(--green); background:rgba(111,207,160,0.1); }
 
-  /* ===== 底部 ===== */
+  /* ===== FOOTER ===== */
   .footer {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:8px 24px; border-top:1px solid var(--border);
+    border-top:1px solid rgba(201,168,76,0.1);
+    padding:0 56px;
+    display:flex; align-items:center; gap:14px;
     font-size:var(--text-sm); color:var(--text-dim); flex-shrink:0;
+  }
+  .footer-info {
+    margin-left:auto; font-size:var(--text-sm); color:#555; letter-spacing:2px;
   }
   .workflow { display:flex; align-items:center; gap:6px; }
   .wf-dot {
@@ -313,15 +513,20 @@
   }
   .wf-dot.lit { background:var(--gold); box-shadow:0 0 6px rgba(201,168,76,0.4); }
   .wf-line { width:30px; height:2px; background:rgba(255,255,255,0.08); }
-  .progress-bar { width:120px; height:4px; background:rgba(255,255,255,0.06); border-radius:2px; overflow:hidden; }
-  .progress-fill { height:100%; background:var(--gold); transition:width .5s; width:0%; }
+  .progress-bar {
+    flex:1; max-width:160px; height:2px;
+    background:rgba(255,255,255,0.05); border-radius:1px; overflow:hidden;
+  }
+  .progress-fill { height:100%; background:var(--gold); transition:width 0.4s; }
 
   .ctrl-btn {
-    padding:4px 12px; border-radius:6px; font-size:var(--text-sm);
-    background:rgba(255,255,255,0.04); border:1px solid var(--border);
-    color:var(--text-dim); cursor:pointer; transition:all .3s;
+    padding:7px 18px; border-radius:20px;
+    border:1px solid rgba(201,168,76,0.3);
+    background:transparent; color:var(--gold); font-size:var(--text-sm);
+    cursor:pointer; transition:all 0.3s; font-family:inherit;
   }
-  .ctrl-btn:hover { background:rgba(255,255,255,0.08); color:var(--text); }
+  .ctrl-btn:hover { background:rgba(201,168,76,0.1); }
+  .ctrl-btn.primary { background:rgba(201,168,76,0.12); border-color:var(--gold); }
 
   /* ===== 背景装饰 ===== */
   canvas#bgCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2; pointer-events:none; }
@@ -341,12 +546,54 @@
     flex:1; min-width:100px; background:rgba(0,0,0,0.15);
     border-radius:8px; padding:10px 14px; text-align:center;
     border:1px solid var(--border);
+    transition:all 0.3s ease;
+  }
+  .mi-item:hover {
+    border-color:var(--gold);
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
   }
   .mi-name { font-size:var(--text-sm); color:var(--text-dim); }
-  .mi-val { font-size:var(--text-lead); font-weight:700; margin-top:2px; }
+  .mi-val {
+    font-size:var(--text-lead);
+    font-weight:700;
+    margin-top:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
   .mi-val.up { color:var(--red); }
   .mi-val.down { color:var(--green); }
-  .mi-change { font-size:var(--text-sm); margin-top:2px; }
+  .mi-change {
+    font-size:var(--text-sm);
+    margin-top:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+  .mi-change.up { color:var(--red); }
+  .mi-change.down { color:var(--green); }
+
+  /* 市场数据涨跌颜色 - 红涨绿跌(中国股市惯例) */
+  .market-up { color:var(--red) !important; }
+  .market-down { color:var(--green) !important; }
+  .market-up-arrow { color:var(--red); }
+  .market-down-arrow { color:var(--green); }
+
+  /* SVG 箭头图标 */
+  .mi-arrow {
+    width:12px;
+    height:12px;
+    animation: arrowPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes arrowPulse {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(var(--arrow-dir, 2px)); opacity: 0.7; }
+  }
+  .mi-arrow.up { --arrow-dir: -2px; }
+  .mi-arrow.down { --arrow-dir: 2px; }
 
   /* 收盘分析热点标签 */
   .hot-tag {
@@ -367,9 +614,64 @@
     border-bottom:1px solid rgba(255,255,255,0.05);
   }
   .cts-label { font-size:var(--text-sm); color:var(--text-dim); width:80px; }
-  .cts-track { flex:1; height:8px; background:rgba(255,255,255,0.06); border-radius:4px; overflow:hidden; }
-  .cts-fill { height:100%; border-radius:4px; transition:width 1.5s ease; }
-  .cts-val { font-size:var(--text-sm); color:var(--gold); font-weight:600; width:80px; text-align:right; }
+  .cts-track {
+    flex:1; height:10px;
+    background:rgba(255,255,255,0.06);
+    border-radius:5px;
+    overflow:hidden;
+    position:relative;
+  }
+  .cts-fill {
+    height:100%;
+    border-radius:5px;
+    transition:width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position:relative;
+    overflow:hidden;
+  }
+  /* 光泽扫过效果 */
+  .cts-fill::after {
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+  }
+  /* 渐变填充 */
+  .cts-fill.red {
+    background:linear-gradient(90deg, rgba(224,120,120,0.6), var(--red));
+    box-shadow:0 0 8px rgba(224,120,120,0.4);
+  }
+  .cts-fill.gold {
+    background:linear-gradient(90deg, rgba(154,188,224,0.4), var(--gold));
+    box-shadow:0 0 8px rgba(154,188,224,0.3);
+  }
+  .cts-fill.green {
+    background:linear-gradient(90deg, rgba(111,207,160,0.6), var(--green));
+    box-shadow:0 0 8px rgba(111,207,160,0.4);
+  }
+  .cts-val {
+    font-size:var(--text-sm);
+    color:var(--gold);
+    font-weight:600;
+    width:80px;
+    text-align:right;
+    font-variant-numeric: tabular-nums;
+  }
+  .cts-val.counting {
+    animation: countPulse 0.3s ease;
+  }
+  @keyframes countPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); color: var(--gold-bright); }
+    100% { transform: scale(1); }
+  }
 
 </style>
 </head>
@@ -379,11 +681,11 @@
 
 <div class="page" id="pageRoot">
   <!-- ★ 版本水印 ★ -->
-  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:11px;color:var(--gold);font-weight:bold;opacity:0.5;pointer-events:none;letter-spacing:2px;">v3.19.4</div>
+  <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:var(--text-sm);color:var(--gold);font-weight:bold;opacity:0.5;pointer-events:none;letter-spacing:2px;">v3.19.4</div>
 
   <div class="header">
     <div>
-      <div class="h-label">SCENE 04 · INTELLIGENT MARKET INTELLIGENCE</div>
+      <div class="h-label">SCENE 02 · INTELLIGENT MARKET INTELLIGENCE</div>
       <div class="h-title">智能情报 &nbsp;<em>每日市场情报官</em></div>
     </div>
     <div class="step-tabs">
@@ -405,27 +707,47 @@
           <div class="market-indicators">
             <div class="mi-item">
               <div class="mi-name">上证指数</div>
-              <div class="mi-val up" id="shVal">3,387.25</div>
-              <div class="mi-change" style="color:var(--red)">+0.82%</div>
+              <div class="mi-val up" id="shVal">
+                <svg class="mi-arrow up" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                3,238.23
+              </div>
+              <div class="mi-change up">+0.45%</div>
             </div>
             <div class="mi-item">
               <div class="mi-name">深证成指</div>
-              <div class="mi-val down" id="szVal">10,892.41</div>
-              <div class="mi-change" style="color:var(--green)">-0.35%</div>
+              <div class="mi-val up" id="szVal">
+                <svg class="mi-arrow up" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                9,834.44
+              </div>
+              <div class="mi-change up">+0.82%</div>
             </div>
             <div class="mi-item">
               <div class="mi-name">创业板指</div>
-              <div class="mi-val down" id="cyVal">2,156.78</div>
-              <div class="mi-change" style="color:var(--green)">-0.61%</div>
+              <div class="mi-val up" id="cyVal">
+                <svg class="mi-arrow up" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                1,926.37
+              </div>
+              <div class="mi-change up">+1.36%</div>
             </div>
             <div class="mi-item">
-              <div class="mi-name">科创50</div>
-              <div class="mi-val up" id="kcVal">982.34</div>
-              <div class="mi-change" style="color:var(--red)">+1.23%</div>
+              <div class="mi-name">沪深300</div>
+              <div class="mi-val up" id="kcVal">
+                <svg class="mi-arrow up" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                3,750.52
+              </div>
+              <div class="mi-change up">+0.41%</div>
             </div>
           </div>
-          <div class="chart-container">
-            <canvas id="chartIntraday" width="800" height="220"></canvas>
+          <div class="chart-container" id="intradayChartContainer">
+            <!-- SVG 分时图将由 JS 动态生成 -->
           </div>
         </div>
         <div class="ws-card" id="ws0b">
@@ -436,17 +758,19 @@
               <div class="bulletin-time">今日 14:30 自动生成</div>
             </div>
             <div class="bulletin-body" id="bulletinAM">
-              <strong>大盘分化明显</strong>：上证指数午后小幅走高，受权重股拉动上涨0.82%；但创业板和深成指持续承压，科技板块回调明显。
+              <strong>市场全面回暖</strong>：4月11日周五，A股三大指数集体收涨，创业板指领涨<span class="market-up">+1.36%</span>，全市场超4900只个股上涨，涨停或涨超10%的个股逾200只。两市成交额1.61万亿，较昨日缩量901亿。
               <br><br>
-              <strong>对证券转银行回流的影响预判：</strong>
+              <strong>风向感知要点：</strong>
               <br>
-              <span class="bulletin-tag red">⚠️ 权益波动加大</span> 科技股持有客户焦虑感上升，回流意愿增强
+              <span class="bulletin-tag green">✅ 地缘政治缓和</span> 美伊冲突暂时停歇，双方开始谈判，全球风险偏好抬升
               <br>
-              <span class="bulletin-tag gold">📌 机会窗口</span> 上证护盘但深市走弱，部分资金可能在尾盘选择离场观望
+              <span class="bulletin-tag gold">📌 央行政策</span> 继续实施适度宽松货币政策，7天期逆回购持续地量操作
               <br>
-              <span class="bulletin-tag green">✅ 稳健配置推荐</span> 通知存款、龙钱宝等低波产品吸引力上升
+              <span class="bulletin-tag green">✅ 交易制度优化</span> 4月10日上交所、北交所优化交易制度，盘后固定价格交易扩大至全部A股
+              <br>
+              <span class="bulletin-tag red">🔥 业绩爆发</span> 固态电池概念5大龙头一季度净利润暴涨，最高同比增<span class="market-up">32100%</span>
               <br><br>
-              <strong>建议行动：</strong>优先触达持仓以科技股为主的CTS客户，推荐中短债或通知存款作为资金避风港。
+              <strong>建议行动：</strong>关注电商、消费电子、婴童、免税、半导体等<span class="market-up">涨幅居前</span>板块的客户，适时推荐产品配置。
             </div>
           </div>
         </div>
@@ -456,19 +780,19 @@
       <div class="step-scene" id="stepScene1">
         <div class="ws-card" id="ws1a">
           <div class="ws-card-title">📈 近5日市场走势 <span class="badge">收盘</span></div>
-          <div class="chart-container">
-            <canvas id="chart5Day" width="800" height="220"></canvas>
+          <div class="chart-container" id="fiveDayChartContainer">
+            <!-- SVG 5日走势图将由 JS 动态生成 -->
           </div>
         </div>
         <div class="ws-card" id="ws1b">
           <div class="ws-card-title">🌐 内外部信息聚合</div>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-            <span class="hot-tag">🇺🇸 美联储议息会议</span>
-            <span class="hot-tag">🏦 央行MLF操作</span>
-            <span class="hot-tag">📉 北向资金净流出</span>
-            <span class="hot-tag">📊 社融数据超预期</span>
-            <span class="hot-tag">🌐 地缘局势缓和</span>
-            <span class="hot-tag">💰 债市利率下行</span>
+            <span class="hot-tag">🌐 地缘政治缓和</span>
+            <span class="hot-tag">🏦 央行适度宽松</span>
+            <span class="hot-tag">📈 创业板周涨9.5%</span>
+            <span class="hot-tag">🔥 固态电池业绩爆发</span>
+            <span class="hot-tag">📊 杠杆资金加仓274亿</span>
+            <span class="hot-tag">📉 北向资金谨慎</span>
           </div>
           <div class="bulletin-card">
             <div class="bulletin-head">
@@ -476,16 +800,16 @@
               <div class="bulletin-time">今日 15:00 自动生成</div>
             </div>
             <div class="bulletin-body" id="bulletinPM">
-              <strong>今日收盘：</strong>上证指数收于3,387.25点（+0.82%），深证成指收于10,892.41点（-0.35%），两市成交额1.12万亿，较昨日放量8%。
+              <strong>今日收盘：</strong>上证指数收于3,238.23点（<span class="market-up">+0.45%</span>），深证成指收于9,834.44点（<span class="market-up">+0.82%</span>），创业板指收于1,926.37点（<span class="market-up">+1.36%</span>），沪深300收于3,750.52点（<span class="market-up">+0.41%</span>）。两市成交额1.61万亿，较昨日缩量901亿。
               <br><br>
-              <strong>近5日趋势：</strong>A股整体呈震荡分化格局，权重股托底但成长股持续调整。北向资金连续3日净流出，累计达126亿元。
+              <strong>本周表现（4月7日-11日）：</strong>创业板指周涨<span class="market-up">+9.5%</span>（创2021年12月以来新高），深证成指周涨<span class="market-up">+7.16%</span>，上证指数周涨<span class="market-up">+2.74%</span>（盘中一度收复4000点）。
               <br><br>
-              <strong>外部环境：</strong>美联储6月议息会议释放偏鹰信号，但国内央行MLF超额续作释放流动性对冲。社融数据超预期，信贷需求边际改善。债市利率下行趋势确认，10Y国债收益率降至2.68%。
+              <strong>板块表现：</strong><span class="market-up">涨幅前五</span>为电商、消费电子、婴童、免税、半导体/贵金属；养鸡板块为少数<span class="market-down">下跌</span>板块。
               <br><br>
-              <strong>回流预判：</strong>
-              <span class="bulletin-tag gold">📌 降息预期升温</span> 存款利率下调预期下，提前锁定定期/大额存单窗口期
-              <span class="bulletin-tag red">⚠️ 权益信心不足</span> 连续调整后客户观望情绪浓，证券资金沉淀风险加大
-              <span class="bulletin-tag green">✅ 配置建议</span> 建议主推通知存款（灵活）+ 龙钱宝（T+0）+ 3个月定期（锁定收益）
+              <strong>资金动向：</strong>
+              <span class="bulletin-tag gold">📌 北向资金</span> 一季度末持股市值2.58万亿（近3个季度新低），持股约1,037亿股（环比<span class="market-down">降4%</span>），整体趋于谨慎
+              <span class="bulletin-tag green">✅ 杠杆资金</span> 本周大幅加仓逾<span class="market-up">274亿元</span>，终结连续3周净卖出，电子行业获融资净买入超<span class="market-up">124亿</span>，通信超<span class="market-up">51亿</span>
+              <span class="bulletin-tag red">🔥 业绩亮点</span> 固态电池概念5大龙头一季度净利润暴涨，最高同比增<span class="market-up">32100%</span>
             </div>
           </div>
         </div>
@@ -497,17 +821,17 @@
           <div class="ws-card-title">💰 CTS实时余额监控 <span class="badge">15:10</span></div>
           <div class="cts-bar">
             <div class="cts-label">证券沉淀</div>
-            <div class="cts-track"><div class="cts-fill" id="ctsFill1" style="width:0%;background:var(--red);"></div></div>
+            <div class="cts-track"><div class="cts-fill red" id="ctsFill1" style="width:0%;"></div></div>
             <div class="cts-val" id="ctsVal1">2.38亿</div>
           </div>
           <div class="cts-bar">
             <div class="cts-label">观望资金</div>
-            <div class="cts-track"><div class="cts-fill" id="ctsFill2" style="width:0%;background:var(--gold);"></div></div>
+            <div class="cts-track"><div class="cts-fill gold" id="ctsFill2" style="width:0%;"></div></div>
             <div class="cts-val" id="ctsVal2">8,600万</div>
           </div>
           <div class="cts-bar">
             <div class="cts-label">已回流</div>
-            <div class="cts-track"><div class="cts-fill" id="ctsFill3" style="width:0%;background:var(--green);"></div></div>
+            <div class="cts-track"><div class="cts-fill green" id="ctsFill3" style="width:0%;"></div></div>
             <div class="cts-val" id="ctsVal3">1,520万</div>
           </div>
         </div>
@@ -518,7 +842,7 @@
             <div class="client-avatar">王</div>
             <div class="client-info">
               <div class="client-name">王建国 · CTS余额 <span style="color:var(--gold)">186万</span></div>
-              <div class="client-detail">持仓科技股占比78%，近3日亏损-4.2%，焦虑度极高</div>
+              <div class="client-detail">持仓科技股占比78%，近3日亏损<span class="market-down">-4.2%</span>，焦虑度极高</div>
               <div class="client-product product-notice">推荐：通知存款 · 7天</div>
             </div>
             <div class="client-score">
@@ -530,7 +854,7 @@
             <div class="client-avatar">李</div>
             <div class="client-info">
               <div class="client-name">李慧芳 · CTS余额 <span style="color:var(--gold)">92万</span></div>
-              <div class="client-detail">满仓半导体ETF，今日-2.8%，已连续3日致电咨询</div>
+              <div class="client-detail">满仓半导体ETF，今日<span class="market-down">-2.8%</span>，已连续3日致电咨询</div>
               <div class="client-product product-deposit">推荐：3个月定期</div>
             </div>
             <div class="client-score">
@@ -542,7 +866,7 @@
             <div class="client-avatar">张</div>
             <div class="client-info">
               <div class="client-name">张明远 · CTS余额 <span style="color:var(--gold)">325万</span></div>
-              <div class="client-detail">混合持仓，权益部分-1.5%，风险偏好降低明显</div>
+              <div class="client-detail">混合持仓，权益部分<span class="market-down">-1.5%</span>，风险偏好降低明显</div>
               <div class="client-product product-long">推荐：龙钱宝 · T+0</div>
             </div>
             <div class="client-score">
@@ -558,14 +882,14 @@
             "王总您好，今天市场波动挺大的，我注意到您的科技板块持仓今天跌了不少，特意来跟您同步一下情况。"
             <br><br>
             <span class="script-highlight">【痛点共鸣】</span>
-            "最近半导体板块连续调整，您持仓的那几只ETF这周已经回撤4%以上了，我知道您一直比较在意风险控制。"
+            "最近半导体板块连续调整，您持仓的那几只ETF这周已经回撤<span class="market-down">4%</span>以上了，我知道您一直比较在意风险控制。"
             <br><br>
             <span class="script-highlight">【产品推荐 · 通知存款】</span>
-            "建议您先把部分资金转回银行，配置7天通知存款——年化1.65%，T+1到账，灵活度很高。等市场企稳了随时可以再转回去，不耽误您的机会。"
+            "建议您先把部分资金转回银行，配置7天通知存款——年化<span class="market-up">1.65%</span>，T+1到账，灵活度很高。等市场企稳了随时可以再转回去，不耽误您的机会。"
             <br><br>
             <span class="script-highlight">【异议处理】</span>
             <span class="script-sub">
-            Q："收益太低了" → A："通知存款的定位不是跟股票比收益，而是帮您锁住利润、控制回撤。您现在的浮亏4%要涨回来需要4.2%的涨幅，但通知存款的1.65%是确定性收益。"
+            Q："收益太低了" → A："通知存款的定位不是跟股票比收益，而是帮您锁住利润、控制回撤。您现在的浮亏<span class="market-down">4%</span>要涨回来需要<span class="market-up">4.2%</span>的涨幅，但通知存款的<span class="market-up">1.65%</span>是确定性收益。"
             <br>
             Q："我等等看" → A："可以理解，但7天通知存款完全支持随时取消，相当于给资金一个'安全停机坪'，不影响您后续操作。"
             </span>
@@ -661,14 +985,14 @@
       <div class="kpi-card">
         <div class="kpi-title">CTS沉淀资金</div>
         <div class="kpi-val">2.38<span style="font-size:var(--current-base)">亿</span></div>
-        <div class="kpi-change neg">↑ 较昨日+320万</div>
+        <div class="kpi-change up">↑ 较昨日<span class="market-up">+320万</span></div>
         <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb1" style="background:var(--red);"></div></div>
       </div>
 
       <div class="kpi-card">
         <div class="kpi-title">回流概率>80%客户</div>
         <div class="kpi-val">23<span style="font-size:var(--current-base)">户</span></div>
-        <div class="kpi-change pos">↓ 较昨日-5户</div>
+        <div class="kpi-change down">↓ 较昨日<span class="market-down">-5户</span></div>
         <div class="kpi-bar-wrap"><div class="kpi-bar" id="kb2" style="background:var(--green);"></div></div>
       </div>
 
@@ -689,29 +1013,20 @@
       <button class="push-btn" id="pushBtn0" onclick="pushBulletin(0)">📨 推送通报给全体客户经理</button>
       <button class="push-btn" id="pushBtn1" onclick="pushBulletin(1)" style="display:none;">📨 推送收盘分析通报</button>
       <button class="push-btn" id="pushBtn2" onclick="pushBulletin(2)" style="display:none;">📨 发送话术至客户经理工作台</button>
-
-      <button class="ctrl-btn" id="playBtn" onclick="togglePlay()" style="margin-top:auto;">▶ 自动演示</button>
     </div>
 
   </div><!-- /main -->
 
+  <!-- FOOTER -->
   <div class="footer">
-    <div class="workflow">
-      <div class="wf-dot lit" id="wf1"></div>
-      <div class="wf-line"></div>
-      <div class="wf-dot" id="wf2"></div>
-      <div class="wf-line"></div>
-      <div class="wf-dot" id="wf3"></div>
-      <div class="wf-line"></div>
-      <div class="wf-dot" id="wf4"></div>
+    <button class="ctrl-btn" onclick="prevStep()">← 上一步</button>
+    <button class="ctrl-btn primary" id="playBtn" onclick="togglePlay()">▶ 自动演示</button>
+    <button class="ctrl-btn" onclick="resetAll()" id="resetBtn">↺ 重置</button>
+    <button class="ctrl-btn" onclick="nextStep()">下一步 →</button>
+    <div class="progress-bar">
+      <div class="progress-fill" id="pgFill" style="width:25%"></div>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="pgFill" style="width:25%"></div></div>
-    <div id="footerInfo">第1步 / 共4步</div>
-    <div style="display:flex;gap:6px;">
-      <button class="ctrl-btn" onclick="prevStep()">← 上一步</button>
-      <button class="ctrl-btn" onclick="nextStep()">下一步 →</button>
-      <button class="ctrl-btn" onclick="resetAll()" id="resetBtn">↺ 重置</button>
-    </div>
+    <div class="footer-info" id="footerInfo">第1步 / 共4步</div>
   </div>
 </div>
 
@@ -731,19 +1046,19 @@ const chatConvos=[
   [
     {u:'查看今日市场风向'},
     {a:'正在对接行情数据源，抓取今日大盘分时走势、板块资金流向和北向资金变动…'},
-    {a:'📈 午后市场快报已生成！\n\n今日大盘分化明显：上证+0.82%但创业板-0.61%，科技板块承压回调。北向资金午后继续净流出。\n\n⚠️ 对CTS回流的影响：\n• 科技股客户焦虑度大幅上升，回流意愿增强\n• 尾盘可能有资金选择离场观望\n• 建议优先触达持仓科技股的CTS客户\n\n右侧已展示分时走势和通报详情。需要我推送通报给全体客户经理吗？'}
+    {a:'📈 午后市场快报已生成！\n\n【4月11日 周五】市场全面回暖！\n• 上证指数 3,238.23（<span class="market-up">+0.45%</span>）\n• 深证成指 9,834.44（<span class="market-up">+0.82%</span>）\n• 创业板指 1,926.37（<span class="market-up">+1.36%</span>）领涨\n\n两市成交1.61万亿，超4900只个股上涨！\n\n🌟 风向感知要点：\n• 地缘政治缓和：美伊谈判，风险偏好抬升\n• 央行适度宽松政策延续\n• 固态电池龙头业绩爆发，最高同比增<span class="market-up">32100%</span>\n\n右侧已展示分时走势和通报详情。需要我推送通报给全体客户经理吗？'}
   ],
   // 场景2：15:00 收盘综合分析
   [
     {u:'生成收盘综合分析'},
     {a:'正在聚合近5日走势数据 + 北向资金流向 + 国内外政策信号…'},
-    {a:'📊 收盘分析完成！\n\n今日收盘：上证3,387（+0.82%），深证10,892（-0.35%），成交1.12万亿。北向资金连续3日净流出，累计126亿。\n\n关键信号：\n• 美联储偏鹰但国内MLF超额续作对冲\n• 社融超预期，信贷边际改善\n• 债市利率下行确认，10Y国债降至2.68%\n\n回流预判：降息预期下定期存款窗口期缩短，建议主推通知存款+龙钱宝+3个月定期组合方案。\n\n右侧已展示完整通报。需要我推送并启动回流客户识别吗？'}
+    {a:'📊 收盘分析完成！\n\n【4月11日 收盘数据】\n• 上证指数 3,238.23（<span class="market-up">+0.45%</span>）\n• 深证成指 9,834.44（<span class="market-up">+0.82%</span>）\n• 创业板指 1,926.37（<span class="market-up">+1.36%</span>）\n• 两市成交 1.61万亿（缩量901亿）\n\n🌟 本周表现：\n• 创业板指周涨<span class="market-up">+9.5%</span>，创2021年12月以来新高\n• 深证成指周涨<span class="market-up">+7.16%</span>\n• 上证指数周涨<span class="market-up">+2.74%</span>\n\n💰 资金动向：\n• 杠杆资金本周加仓<span class="market-up">274亿</span>，电子行业获融资净买入<span class="market-up">124亿</span>\n• 北向资金一季度末持股市值2.58万亿，趋于谨慎\n\n右侧已展示完整通报。需要我推送并启动回流客户识别吗？'}
   ],
   // 场景3：15:10 CTS回流识别
   [
     {u:'查找CTS回流客户'},
     {a:'正在扫描CTS实时余额数据，结合持仓结构、近期亏损幅度、历史行为特征进行回流概率建模…'},
-    {a:'🎯 已识别出23户高回流概率客户！TOP3如下：\n\n① 王建国 — CTS余额186万，回流概率96%\n   持仓科技股78%，本周亏损4.2%\n   推荐方案：7天通知存款\n\n② 李慧芳 — CTS余额92万，回流概率91%\n   满仓半导体ETF，今日-2.8%\n   推荐方案：3个月定期\n\n③ 张明远 — CTS余额325万，回流概率84%\n   混合持仓，权益部分-1.5%\n   推荐方案：龙钱宝T+0\n\n右侧已展示完整客户列表和话术建议。需要我发送话术到客户经理工作台吗？'}
+    {a:'🎯 已识别出23户高回流概率客户！TOP3如下：\n\n① 王建国 — CTS余额186万，回流概率96%\n   持仓科技股78%，本周亏损<span class="market-down">4.2%</span>\n   推荐方案：7天通知存款\n\n② 李慧芳 — CTS余额92万，回流概率91%\n   满仓半导体ETF，今日<span class="market-down">-2.8%</span>\n   推荐方案：3个月定期\n\n③ 张明远 — CTS余额325万，回流概率84%\n   混合持仓，权益部分<span class="market-down">-1.5%</span>\n   推荐方案：龙钱宝T+0\n\n右侧已展示完整客户列表和话术建议。需要我发送话术到客户经理工作台吗？'}
   ],
   // 场景4：触达完成
   [
@@ -756,7 +1071,8 @@ const chatConvos=[
 function goStep(n){
   document.getElementById('stepScene'+currentStep).classList.remove('active');
   document.getElementById('tab'+currentStep).classList.remove('active');
-  document.getElementById('wf'+(currentStep+1)).classList.remove('lit');
+  const oldWf = document.getElementById('wf'+(currentStep+1));
+  if(oldWf) oldWf.classList.remove('lit');
 
   // 重置工作区
   if(currentStep===0) resetStep0();
@@ -767,7 +1083,8 @@ function goStep(n){
   currentStep=n;
   document.getElementById('stepScene'+n).classList.add('active');
   document.getElementById('tab'+n).classList.add('active');
-  document.getElementById('wf'+(n+1)).classList.add('lit');
+  const newWf = document.getElementById('wf'+(n+1));
+  if(newWf) newWf.classList.add('lit');
   document.getElementById('pgFill').style.width=((n+1)/4*100)+'%';
   document.getElementById('footerInfo').textContent=`第${n+1}步 / 共4步`;
   document.getElementById('chatInputPreview').textContent=inputs[n];
@@ -796,11 +1113,6 @@ function resetAll(){
   // 清空所有工作区动画
   resetStep0(); resetStep1(); resetStep2(); resetStep3();
 
-  // 重置CTS余额条
-  ['ctsFill1','ctsFill2','ctsFill3'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.style.width='0%';
-  });
-
   // 重置推送按钮
   for(let i=0;i<3;i++){
     const btn=document.getElementById('pushBtn'+i);
@@ -811,10 +1123,30 @@ function resetAll(){
   goStep(0);
 }
 
-function resetStep0(){ ['ws0a','ws0b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
-function resetStep1(){ ['ws1a','ws1b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
-function resetStep2(){ ['ws2a','ws2b','ws2c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); ['cr1','cr2','cr3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
-function resetStep3(){ ['ws3a','ws3b','ws3c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); ['ri1','ri2','ri3','ri4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');}); }
+function resetStep0(){
+  ['ws0a','ws0b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  // 清空分时图
+  const chartContainer=document.getElementById('intradayChartContainer');
+  if(chartContainer) chartContainer.innerHTML='';
+}
+function resetStep1(){
+  ['ws1a','ws1b'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  // 清空5日走势图
+  const chartContainer=document.getElementById('fiveDayChartContainer');
+  if(chartContainer) chartContainer.innerHTML='';
+}
+function resetStep2(){
+  ['ws2a','ws2b','ws2c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  ['cr1','cr2','cr3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  // 重置CTS余额条
+  ['ctsFill1','ctsFill2','ctsFill3'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.width='0%';
+  });
+}
+function resetStep3(){
+  ['ws3a','ws3b','ws3c'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+  ['ri1','ri2','ri3','ri4'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('show');});
+}
 
 // ===== CHAT =====
 function pushChat(convos){
@@ -843,7 +1175,7 @@ function pushChat(convos){
           container.scrollTop=container.scrollHeight;
           setTimeout(()=>{
             typing.className='bubble ai';
-            typing.textContent=msg.a;
+            typing.innerHTML=msg.a;
             container.scrollTop=container.scrollHeight;
           },800);
         }, msg.u?400:0);
@@ -897,7 +1229,7 @@ function playAiRepliesOnly(convos, container){
         container.scrollTop=container.scrollHeight;
         setTimeout(()=>{
           typing.className='bubble ai';
-          typing.textContent=msg.a;
+          typing.innerHTML=msg.a;
           container.scrollTop=container.scrollHeight;
         },800);
       }, i*1200);
@@ -936,11 +1268,13 @@ function sendChat(){
     const nextN=currentStep+1;
     document.getElementById('stepScene'+currentStep).classList.remove('active');
     document.getElementById('tab'+currentStep).classList.remove('active');
-    document.getElementById('wf'+(currentStep+1)).classList.remove('lit');
+    const oldWfTrans = document.getElementById('wf'+(currentStep+1));
+    if(oldWfTrans) oldWfTrans.classList.remove('lit');
     currentStep=nextN;
     document.getElementById('stepScene'+nextN).classList.add('active');
     document.getElementById('tab'+nextN).classList.add('active');
-    document.getElementById('wf'+(nextN+1)).classList.add('lit');
+    const newWfTrans = document.getElementById('wf'+(nextN+1));
+    if(newWfTrans) newWfTrans.classList.add('lit');
     document.getElementById('pgFill').style.width=((nextN+1)/4*100)+'%';
     document.getElementById('footerInfo').textContent=`第${nextN+1}步 / 共4步`;
     document.getElementById('chatInputPreview').textContent=inputs[nextN];
@@ -1008,11 +1342,28 @@ function animStep2(){
     const el=document.getElementById(id);
     if(el) setTimeout(()=>el.classList.add('show'), i*300+200);
   });
-  // CTS余额条动画
+  // CTS余额条动画 - 带计数效果
   setTimeout(()=>{
-    document.getElementById('ctsFill1').style.width='72%';
-    document.getElementById('ctsFill2').style.width='36%';
-    document.getElementById('ctsFill3').style.width='12%';
+    const fill1=document.getElementById('ctsFill1');
+    const fill2=document.getElementById('ctsFill2');
+    const fill3=document.getElementById('ctsFill3');
+    const val1=document.getElementById('ctsVal1');
+    const val2=document.getElementById('ctsVal2');
+    const val3=document.getElementById('ctsVal3');
+
+    if(fill1) fill1.style.width='72%';
+    if(fill2) fill2.style.width='36%';
+    if(fill3) fill3.style.width='12%';
+
+    // 数值计数动画
+    [val1,val2,val3].forEach((el,i)=>{
+      if(el){
+        setTimeout(()=>{
+          el.classList.add('counting');
+          setTimeout(()=>el.classList.remove('counting'), 300);
+        }, i*150+600);
+      }
+    });
   },600);
   // 客户列表
   setTimeout(()=>{
@@ -1053,174 +1404,236 @@ function animStep3(){
   },1800);
 }
 
-// ===== 图表绘制 =====
+// ===== SVG 图表绘制 =====
 function drawIntradayChart(){
-  const c=document.getElementById('chartIntraday');
-  if(!c) return;
-  const ctx=c.getContext('2d');
-  const w=c.width, h=c.height;
-  ctx.clearRect(0,0,w,h);
+  const container=document.getElementById('intradayChartContainer');
+  if(!container) return;
 
-  // 上证分时（模拟）
+  // 上证分时数据（模拟）
   const shPoints=[];
-  let val=3350;
+  let val=3210;
   for(let i=0;i<60;i++){
-    val+=(Math.random()-0.48)*5;
+    val+=(Math.random()-0.45)*5;
     shPoints.push(val);
   }
-  // 午后走高
   for(let i=0;i<30;i++){
-    val+=(Math.random()-0.38)*4;
+    val+=(Math.random()-0.35)*4;
     shPoints.push(val);
   }
 
+  // 创业板数据（模拟）
+  const cyPoints=[];
+  let cv=1890;
+  for(let i=0;i<60;i++){
+    cv+=(Math.random()-0.40)*4;
+    cyPoints.push(cv);
+  }
+  for(let i=0;i<30;i++){
+    cv+=(Math.random()-0.35)*3;
+    cyPoints.push(cv);
+  }
+
+  const w=800, h=220;
   const pad={t:20,b:30,l:50,r:20};
   const cw=w-pad.l-pad.r, ch=h-pad.t-pad.b;
   const minV=Math.min(...shPoints)-5, maxV=Math.max(...shPoints)+5;
-
-  // 零线
-  const zeroY=pad.t+ch*(1-(3350-minV)/(maxV-minV));
-  ctx.strokeStyle='rgba(255,255,255,0.08)';
-  ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(pad.l,zeroY); ctx.lineTo(w-pad.r,zeroY); ctx.stroke();
-
-  // 面积
-  const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);
-  grad.addColorStop(0,'rgba(224,120,120,0.2)');
-  grad.addColorStop(1,'rgba(224,120,120,0.01)');
-  ctx.beginPath();
-  ctx.moveTo(pad.l,h-pad.b);
-  shPoints.forEach((v,i)=>{
-    const x=pad.l+i*cw/(shPoints.length-1);
-    const y=pad.t+ch*(1-(v-minV)/(maxV-minV));
-    ctx.lineTo(x,y);
-  });
-  ctx.lineTo(w-pad.r,h-pad.b); ctx.closePath();
-  ctx.fillStyle=grad; ctx.fill();
-
-  // 线
-  ctx.beginPath();
-  shPoints.forEach((v,i)=>{
-    const x=pad.l+i*cw/(shPoints.length-1);
-    const y=pad.t+ch*(1-(v-minV)/(maxV-minV));
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle='var(--red)'; ctx.lineWidth=2; ctx.stroke();
-
-  // 创业板（叠加）
-  const cyPoints=[];
-  let cv=2180;
-  for(let i=0;i<60;i++){
-    cv-=(Math.random()-0.45)*4;
-    cyPoints.push(cv);
-  }
-  for(let i=0;i<30;i++){
-    cv-=(Math.random()-0.55)*3;
-    cyPoints.push(cv);
-  }
   const minC=Math.min(...cyPoints)-5, maxC=Math.max(...cyPoints)+5;
-  ctx.beginPath();
-  cyPoints.forEach((v,i)=>{
-    const x=pad.l+i*cw/(cyPoints.length-1);
-    const y=pad.t+ch*(1-(v-minC)/(maxC-minC));
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle='var(--green)'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]); ctx.stroke();
-  ctx.setLineDash([]);
 
-  // 图例
-  ctx.font='12px sans-serif';
-  ctx.fillStyle='var(--red)'; ctx.fillText('● 上证指数',pad.l+10,pad.t+14);
-  ctx.fillStyle='var(--green)'; ctx.fillText('● 创业板指',pad.l+120,pad.t+14);
+  // 生成路径数据
+  function makePath(points, min, max){
+    return points.map((v,i)=>{
+      const x=pad.l+i*cw/(points.length-1);
+      const y=pad.t+ch*(1-(v-min)/(max-min));
+      return (i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1);
+    }).join(' ');
+  }
 
-  // 时间轴
+  function makeAreaPath(points, min, max){
+    const linePath=makePath(points, min, max);
+    const lastX=pad.l+cw;
+    const bottomY=h-pad.b;
+    return linePath+` L${lastX.toFixed(1)},${bottomY.toFixed(1)} L${pad.l},${bottomY.toFixed(1)} Z`;
+  }
+
+  const shPath=makePath(shPoints, minV, maxV);
+  const shArea=makeAreaPath(shPoints, minV, maxV);
+  const cyPath=makePath(cyPoints, minC, maxC);
+
+  // 零线Y坐标
+  const zeroY=pad.t+ch*(1-(3210-minV)/(maxV-minV));
+
+  // 时间轴位置
   const times=['9:30','10:30','11:30','13:00','14:00','15:00'];
-  ctx.fillStyle='rgba(255,255,255,0.3)';
-  ctx.font='11px sans-serif';
-  times.forEach((t,i)=>{
+  const timeLabels=times.map((t,i)=>{
     const x=pad.l+i*cw/(times.length-1);
-    ctx.fillText(t,x-15,h-pad.b+16);
-  });
+    return `<text x="${x}" y="${h-pad.b+16}" class="chart-axis-text" text-anchor="middle">${t}</text>`;
+  }).join('');
 
-  // 午盘分隔线
+  // 午盘分隔线位置
   const noonX=pad.l+(60/90)*cw;
-  ctx.strokeStyle='rgba(255,255,255,0.1)';
-  ctx.setLineDash([3,3]);
-  ctx.beginPath(); ctx.moveTo(noonX,pad.t); ctx.lineTo(noonX,h-pad.b); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fillText('午盘',noonX-12,pad.t+14);
+
+  const svgHTML=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gradRed" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:var(--red);stop-opacity:0.25" />
+        <stop offset="100%" style="stop-color:var(--red);stop-opacity:0.02" />
+      </linearGradient>
+      <linearGradient id="gradGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:var(--green);stop-opacity:0.15" />
+        <stop offset="100%" style="stop-color:var(--green);stop-opacity:0.02" />
+      </linearGradient>
+      <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- 网格线 -->
+    <line x1="${pad.l}" y1="${zeroY.toFixed(1)}" x2="${w-pad.r}" y2="${zeroY.toFixed(1)}" class="chart-grid-line"/>
+    <line x1="${noonX.toFixed(1)}" y1="${pad.t}" x2="${noonX.toFixed(1)}" y2="${h-pad.b}" stroke="rgba(255,255,255,0.1)" stroke-dasharray="3,3"/>
+
+    <!-- 上证指数面积 -->
+    <path d="${shArea}" class="chart-area-gradient-red"/>
+
+    <!-- 上证指数线 -->
+    <path d="${shPath}" fill="none" stroke="var(--red)" stroke-width="2.5" filter="url(#glowRed)" class="chart-line-animate" style="animation-delay:0.2s"/>
+
+    <!-- 创业板线 -->
+    <path d="${cyPath}" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-dasharray="4,3" filter="url(#glowGreen)" class="chart-line-animate" style="animation-delay:0.5s"/>
+
+    <!-- 时间轴标签 -->
+    ${timeLabels}
+
+    <!-- 午盘标签 -->
+    <text x="${noonX-12}" y="${pad.t+14}" class="chart-noon-label">午盘</text>
+
+    <!-- 图例 -->
+    <g transform="translate(${pad.l+10}, ${pad.t+10})">
+      <circle cx="0" cy="0" r="4" fill="var(--red)"/>
+      <text x="10" y="4" class="chart-legend-text" fill="var(--red)">上证指数</text>
+    </g>
+    <g transform="translate(${pad.l+120}, ${pad.t+10})">
+      <circle cx="0" cy="0" r="3" fill="var(--green)"/>
+      <text x="10" y="4" class="chart-legend-text" fill="var(--green)">创业板指</text>
+    </g>
+  </svg>`;
+
+  container.innerHTML=svgHTML;
 }
 
 function draw5DayChart(){
-  const c=document.getElementById('chart5Day');
-  if(!c) return;
-  const ctx=c.getContext('2d');
-  const w=c.width, h=c.height;
-  ctx.clearRect(0,0,w,h);
+  const container=document.getElementById('fiveDayChartContainer');
+  if(!container) return;
 
   const data=[
-    {label:'3/22',sh:3342,sz:10985,cy:2198},
-    {label:'3/25',sh:3358,sz:11012,cy:2180},
-    {label:'3/26',sh:3340,sz:10945,cy:2170},
-    {label:'3/27',sh:3360,sz:10920,cy:2165},
-    {label:'3/28',sh:3387,sz:10892,cy:2157},
+    {label:'4/7',sh:3147,sz:9108,cy:1759},
+    {label:'4/8',sh:3150,sz:9150,cy:1780},
+    {label:'4/9',sh:3185,sz:9420,cy:1830},
+    {label:'4/10',sh:3220,sz:9680,cy:1880},
+    {label:'4/11',sh:3238,sz:9834,cy:1926},
   ];
 
+  const w=800, h=220;
   const pad={t:25,b:35,l:55,r:20};
   const cw=w-pad.l-pad.r, ch=h-pad.t-pad.b;
   const allVals=data.map(d=>d.sh);
   const minV=Math.min(...allVals)-15, maxV=Math.max(...allVals)+15;
 
-  // 网格
+  // 生成网格线
+  let gridLines='';
+  let yAxisLabels='';
   for(let i=0;i<5;i++){
     const y=pad.t+ch*i/4;
-    ctx.strokeStyle='rgba(255,255,255,0.05)';
-    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke();
     const val=maxV-(maxV-minV)*i/4;
-    ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.font='11px sans-serif';
-    ctx.fillText(val.toFixed(0),5,y+4);
+    gridLines+=`<line x1="${pad.l}" y1="${y}" x2="${w-pad.r}" y2="${y}" class="chart-grid-line"/>`;
+    yAxisLabels+=`<text x="5" y="${y+4}" class="chart-axis-text">${val.toFixed(0)}</text>`;
   }
 
-  // 面积+线
-  const grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);
-  grad.addColorStop(0,'rgba(201,168,76,0.2)');
-  grad.addColorStop(1,'rgba(201,168,76,0.01)');
-  ctx.beginPath();
-  ctx.moveTo(pad.l,h-pad.b);
-  data.forEach((d,i)=>{
-    const x=pad.l+i*cw/(data.length-1);
-    const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
-    ctx.lineTo(x,y);
-  });
-  ctx.lineTo(pad.l+(data.length-1)*cw,h-pad.b); ctx.closePath();
-  ctx.fillStyle=grad; ctx.fill();
+  // 生成曲线路径（使用贝塞尔曲线平滑）
+  function makeSmoothPath(points){
+    if(points.length<2) return '';
+    let path=`M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+    for(let i=1;i<points.length;i++){
+      const prev=points[i-1];
+      const curr=points[i];
+      const cpx1=prev.x+(curr.x-prev.x)*0.3;
+      const cpy1=prev.y;
+      const cpx2=curr.x-(curr.x-prev.x)*0.3;
+      const cpy2=curr.y;
+      path+=` C${cpx1.toFixed(1)},${cpy1.toFixed(1)} ${cpx2.toFixed(1)},${cpy2.toFixed(1)} ${curr.x.toFixed(1)},${curr.y.toFixed(1)}`;
+    }
+    return path;
+  }
 
-  ctx.beginPath();
-  data.forEach((d,i)=>{
-    const x=pad.l+i*cw/(data.length-1);
-    const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle='var(--gold)'; ctx.lineWidth=2.5; ctx.stroke();
+  const points=data.map((d,i)=>({
+    x:pad.l+i*cw/(data.length-1),
+    y:pad.t+ch*(1-(d.sh-minV)/(maxV-minV))
+  }));
 
-  // 点
+  const linePath=makeSmoothPath(points);
+
+  // 面积路径
+  const areaPath=linePath+` L${points[points.length-1].x.toFixed(1)},${h-pad.b} L${points[0].x.toFixed(1)},${h-pad.b} Z`;
+
+  // 数据点和标签
+  let pointsHTML='';
+  let labelsHTML='';
   data.forEach((d,i)=>{
     const x=pad.l+i*cw/(data.length-1);
     const y=pad.t+ch*(1-(d.sh-minV)/(maxV-minV));
-    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
-    ctx.fillStyle=i===data.length-1?'var(--gold)':'rgba(201,168,76,0.6)';
-    ctx.fill();
+    const isLast=i===data.length-1;
+
+    // 数据点
+    pointsHTML+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isLast?5:4}" fill="${isLast?'var(--gold)':'rgba(154,188,224,0.6)'}" stroke="${isLast?'var(--gold-bright)':'none'}" stroke-width="${isLast?2:0}" class="chart-point" style="animation-delay:${i*0.15}s"/>`;
+
+    // X轴标签
+    labelsHTML+=`<text x="${x}" y="${h-pad.b+18}" class="chart-axis-text" text-anchor="middle">${d.label}</text>`;
+
     // 涨跌标注
     if(i>0){
       const change=((d.sh-data[i-1].sh)/data[i-1].sh*100).toFixed(2);
       const color=change>=0?'var(--red)':'var(--green)';
-      ctx.fillStyle=color; ctx.font='11px sans-serif';
-      ctx.fillText((change>=0?'+':'')+change+'%',x-18,y-12);
+      const sign=change>=0?'+':'';
+      pointsHTML+=`<text x="${x}" y="${y-12}" fill="${color}" class="change-label" text-anchor="middle" style="animation-delay:${1+i*0.1}s">${sign}${change}%</text>`;
     }
-    // X轴标签
-    ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font='12px sans-serif';
-    ctx.fillText(d.label,x-12,h-pad.b+18);
   });
+
+  const svgHTML=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gradGold" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:var(--gold);stop-opacity:0.3" />
+        <stop offset="100%" style="stop-color:var(--gold);stop-opacity:0.02" />
+      </linearGradient>
+      <filter id="glowGold" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- 网格线 -->
+    ${gridLines}
+
+    <!-- Y轴标签 -->
+    ${yAxisLabels}
+
+    <!-- 面积填充 -->
+    <path d="${areaPath}" class="chart-area-gradient-gold"/>
+
+    <!-- 主线条 -->
+    <path d="${linePath}" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" filter="url(#glowGold)" class="chart-line-animate"/>
+
+    <!-- 数据点和涨跌标注 -->
+    ${pointsHTML}
+
+    <!-- X轴标签 -->
+    ${labelsHTML}
+  </svg>`;
+
+  container.innerHTML=svgHTML;
 }
 
 // ===== 背景粒子 =====

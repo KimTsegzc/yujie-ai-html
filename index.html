@@ -714,9 +714,8 @@
       label: '完整演示版',
       description: '主入口和不同版本的完整演示文件。',
       items: [
-        { file: '完整演示版v9.1.html', title: '完整演示版 v9.1', type: 'html', desc: '当前较新的完整演示主页面，含主题系统与 4:3 固定画布。', tags: ['主入口', '4:3', 'v9.1'] },
-        { file: '完整演示版v9.html', title: '完整演示版 v9', type: 'html', desc: '完整演示版 v9 迭代版本。', tags: ['主入口', '版本页', 'v9'] },
-        { file: '完整演示版v8.html', title: '完整演示版 v8', type: 'html', desc: '完整演示版 v8，适合对比主题系统早期版本。', tags: ['主入口', '历史版本', 'v8'] }
+        { file: '完整演示版v9.3.html', title: '完整演示版 v9.3', type: 'html', desc: '最新完整演示主页面，含主题系统与 4:3 固定画布。', tags: ['主入口', '4:3', 'v9.3'] },
+        { file: '完整演示版v9.3_16x9.html', title: '完整演示版 v9.3 (16:9)', type: 'html', desc: '最新完整演示主页面，16:9 宽屏画布版本。', tags: ['主入口', '16:9', 'v9.3'] }
       ]
     },
     {
@@ -742,10 +741,19 @@
       description: '围绕业务场景的实践型演示页面。',
       items: [
         { file: '03_广州实践_SOP智能升级_动画版.html', title: 'SOP 智能升级', type: 'html', desc: '展示 SOP 流程智能升级的场景动画。', tags: ['广州实践', 'SOP', '运营'] },
+        { file: '03_广州实践_SOP智能升级_动画版_v3.4.html', title: 'SOP 智能升级 v3.4', type: 'html', desc: 'SOP 智能升级最新版本。', tags: ['广州实践', 'SOP', 'v3.4'] },
         { file: '03_广州实践_智能客户运营_动画版.html', title: '智能客户运营', type: 'html', desc: '客户经营与触达自动化场景。', tags: ['广州实践', '客户运营', '业务场景'] },
-        { file: '03_广州实践_李东明Skills_v3.html', title: '李东明 Skills v3', type: 'html', desc: 'Skills 能力展示页面。', tags: ['广州实践', 'Skills', 'v3'] },
+        { file: '03_广州实践_销冠Skills_v5.html', title: '销冠 Skills v5', type: 'html', desc: '销冠 Skills 能力展示页面。', tags: ['广州实践', 'Skills', 'v5'] },
         { file: '03_广州实践_跨部门协同_动画版_v2.html', title: '跨部门协同 v2', type: 'html', desc: '跨团队任务协同流程的动画展示。', tags: ['广州实践', '协同', 'v2'] },
         { file: '03_广州实践_邮件自动处理_动画版.html', title: '邮件自动处理', type: 'html', desc: '邮件分类、处理与自动流转场景。', tags: ['广州实践', '邮件', '自动化'] }
+      ]
+    },
+    {
+      id: 'ai-bank',
+      label: 'AI友好型银行',
+      description: 'AI 友好型银行场景演示页面。',
+      items: [
+        { file: '05_AI友好型银行_时光倒流_动画版.html', title: '时光倒流 · 动画版', type: 'html', desc: 'AI 友好型银行时光倒流场景动画演示。', tags: ['AI友好型银行', '时光倒流', '动画版'] }
       ]
     },
     {
@@ -761,8 +769,7 @@
       label: '数据智能',
       description: '数据分析与自动简报类页面。',
       items: [
-        { file: '05_数据智能_自动分析简报_动画版_v2.html', title: '自动分析简报 v2', type: 'html', desc: '数据智能主题的新版自动分析简报。', tags: ['数据智能', '简报', 'v2'] },
-        { file: '05_数据智能_自动分析简报_动画版.html', title: '自动分析简报', type: 'html', desc: '数据智能主题的自动分析简报页面。', tags: ['数据智能', '简报', '动画版'] }
+        { file: '05_数据智能_自动分析简报_动画版_v2.html', title: '自动分析简报 v2', type: 'html', desc: '数据智能主题的自动分析简报。', tags: ['数据智能', '简报', 'v2'] }
       ]
     },
     {
@@ -773,16 +780,6 @@
         { file: 'theme-config.js', title: '主题配置中心', type: 'js', desc: '统一管理 6 套主题配色，并提供主题应用函数。', tags: ['配置', '主题', 'JavaScript'] },
         { file: '颜色主题设计手册.md', title: '颜色主题设计手册', type: 'md', desc: '记录主题变量、颜色原则和扩展方法。', tags: ['文档', '颜色系统', 'Markdown'] },
         { file: '字体系统配置说明.md', title: '字体系统配置说明', type: 'md', desc: '说明 Type Scale 字体体系与字号映射。', tags: ['文档', '字体系统', 'Markdown'] }
-      ]
-    },
-    {
-      id: 'tools-assets',
-      label: '工具与素材',
-      description: '辅助脚本与本地素材文件。',
-      items: [
-        { file: 'fix_font_system.py', title: '字体系统修正脚本', type: 'py', desc: '用于批量修正页面内字体系统设置。', tags: ['工具脚本', 'Python', '字体'] },
-        { file: 'replace_font_sizes.py', title: '字号替换脚本', type: 'py', desc: '用于批量调整或替换字号配置。', tags: ['工具脚本', 'Python', '字号'] },
-        { file: '977DB301-DB67-4F92-9122-6BB2121F00E9_meta.MOV', title: '本地视频素材', type: 'mov', desc: '项目目录中的本地媒体素材文件。', tags: ['素材', '视频', 'MOV'] }
       ]
     }
   ];

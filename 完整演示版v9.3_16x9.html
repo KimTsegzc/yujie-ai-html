@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1440, initial-scale=1.0, user-scalable=no">
-<title>数字金融与AI运营能力升级 · 完整演示版 v9 (4:3)</title>
+<title>数字金融与AI运营能力升级 · 完整演示版 v9.3 (16:9)</title>
 <link rel="stylesheet" href="react-bits-effects.css">
 <!-- ★ v8 颜色主题配置中心（统一管理所有色系） -->
 <script src="theme-config.js"></script>
@@ -58,32 +58,32 @@
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
     
-    /* 基础7档字体变量 - 默认中号方案 (1.250) */
-    --text-h1:   48.8px;  /* 页面主标题 */
-    --text-h2:   39.1px;  /* 栏位大标题 */
-    --text-h3:   31.3px;  /* 模块标题 */
-    --text-h4:   25.0px;  /* 小组/卡片标题 */
+    /* 基础7档字体变量 - v17大号方案 (1.333，最小16px) */
+    --text-h1:   56.9px;  /* 页面主标题 */
+    --text-h2:   42.7px;  /* 栏位大标题 */
+    --text-h3:   32.0px;  /* 模块标题 */
+    --text-h4:   24.0px;  /* 小组/卡片标题 */
     --text-lead: 20.0px;  /* 突出正文/前言 */
-    --text-body: 16.0px;  /* 标准正文(基准) */
-    --text-sm:   12.8px;  /* 辅助说明/页脚 */
+    --text-body: 18.0px;  /* 标准正文(基准) */
+    --text-sm:   16.0px;  /* 辅助说明/页脚 */
     
     /* ===== 12档旧变量映射到7档新变量（兼容层）=====
        保持现有样式代码不变，通过映射使用新字体系统
     ===== */
-    --font-xs:   var(--text-sm);    /* 12.8px */
-    --font-sm:   var(--text-sm);    /* 12.8px */
-    --font-base: var(--text-body);  /* 16.0px */
-    --font-md:   var(--text-body);  /* 16.0px */
-    --font-lg:   var(--text-h4);    /* 25.0px */
-    --font-xl:   var(--text-h3);    /* 31.3px */
-    --font-2xl:  var(--text-h2);    /* 39.1px */
-    --font-2xl2: var(--text-h2);    /* 39.1px */
-    --font-3xl:  var(--text-h1);    /* 48.8px */
-    --font-3xl2: var(--text-h1);    /* 48.8px */
-    --font-4xl:  var(--text-h1);    /* 48.8px */
-    --font-hero: var(--text-h1);    /* 48.8px */
+    --font-xs:   var(--text-sm);    /* 16.0px */
+    --font-sm:   var(--text-sm);    /* 16.0px */
+    --font-base: var(--text-body);  /* 18.0px */
+    --font-md:   var(--text-body);  /* 18.0px */
+    --font-lg:   var(--text-h4);    /* 24.0px */
+    --font-xl:   var(--text-h3);    /* 32.0px */
+    --font-2xl:  var(--text-h2);    /* 42.7px */
+    --font-2xl2: var(--text-h2);    /* 42.7px */
+    --font-3xl:  var(--text-h1);    /* 56.9px */
+    --font-3xl2: var(--text-h1);    /* 56.9px */
+    --font-4xl:  var(--text-h1);    /* 56.9px */
+    --font-hero: var(--text-h1);    /* 56.9px */
     
-    /* 当前选中档次（默认中号） */
+    /* 当前选中档次（v17大号方案） */
     --current-xs:   var(--text-sm);
     --current-sm:   var(--text-sm);
     --current-base: var(--text-body);
@@ -134,7 +134,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ===== 4:3 固定画布 1440×1080 ===== */
+  /* ===== 16:9 固定画布 1440×810 ===== */
   html {
     scroll-behavior: smooth;
     font-size: calc(var(--font-base) * var(--font-scale));
@@ -152,7 +152,7 @@
     display: flex;
     /* 固定画布尺寸 */
     width: 1440px;
-    height: 1080px;
+    height: 810px;
     overflow: hidden;
     /* 居中缩放适配窗口 */
     position: fixed;
@@ -162,61 +162,150 @@
     transform: translate(-50%, -50%) scale(var(--canvas-scale, 1));
   }
 
-  /* ===== 字体大小切换器 ===== */
-  .font-size-toggle {
+  /* ===== 实时演示跳转按钮 ===== */
+  .live-demo-btn {
     position: fixed;
     top: 16px;
     right: 16px;
-    z-index: 1000;
+    z-index: 1001;
     display: flex;
-    gap: 4px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 4px;
     backdrop-filter: blur(10px);
-  }
-  .font-btn {
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
-    color: var(--text-dim);
-    font-size: var(--current-base);
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s;
+    transition: all 0.25s;
+    text-decoration: none;
+    color: var(--gold);
+    font-size: var(--current-base);
     font-weight: 600;
+    letter-spacing: 1px;
   }
-  .font-btn:hover { color: var(--text); background: rgba(255,255,255,0.1); }
-  .font-btn.active { color: var(--gold); background: var(--gold-dim); }
+  .live-demo-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.2);
+  }
+  .live-demo-btn .btn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
 
-  /* ===== v8 色系切换器（支持6套主题） ===== */
-  .theme-toggle {
+  /* ===== 扫码体验按钮 ===== */
+  .qrcode-btn {
     position: fixed;
     top: 16px;
-    right: 136px;
+    right: 150px;
     z-index: 1000;
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 8px 16px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 4px 8px 4px 4px;
     backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.25s;
+    color: var(--gold);
+    font-size: var(--current-base);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .qrcode-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.2);
+  }
+  .qrcode-btn .btn-icon {
+    font-size: 16px;
   }
 
-  .theme-label {
-    color: var(--text-dim);
+  /* ===== 二维码弹窗 ===== */
+  #qrcodeModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+  }
+  #qrcodeModal .modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 640px;
+    text-align: center;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+  }
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  #qrcodeModal .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 4px;
+    line-height: 1;
+  }
+  #qrcodeModal .close-btn:hover {
+    color: #333;
+  }
+  #qrcodeModal img {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 8px;
+  }
+  #qrcodeModal .modal-text {
+    margin-top: 12px;
+    color: #666;
+    font-size: 14px;
+  }
+
+  /* ===== v8 色系切换器（集成到侧边栏） ===== */
+  .sidebar-theme-section {
+    padding: 16px 12px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .sidebar-theme-title {
     font-size: 11px;
-    white-space: nowrap;
-    padding: 0 2px;
-    user-select: none;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .sidebar-theme-swatches {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
   }
   .theme-swatch {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -226,20 +315,19 @@
   }
   .theme-swatch:hover {
     transform: scale(1.2);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   .theme-swatch.active {
-    border-color: var(--text);
-    box-shadow: 0 0 0 2px var(--gold);
-    transform: scale(1.15);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-30);
+    transform: scale(1.1);
   }
   /* 色盘渐变（固定颜色，不用 var，保证各主题下可见） */
   .swatch-black-gold      { background: linear-gradient(135deg, #0A0A0F 50%, #C9A84C 50%); }
   .swatch-deep-ocean      { background: linear-gradient(135deg, #031E36 50%, #9ABCE0 50%); }
-  .swatch-warm-parchment  { background: linear-gradient(135deg, #F5F0E8 50%, #8B6914 50%); }
-  .swatch-forest-night    { background: linear-gradient(135deg, #0D1F1A 50%, #7ECBA1 50%); }
-  .swatch-dusk-rose       { background: linear-gradient(135deg, #1A0F14 50%, #E8A0B0 50%); }
-  .swatch-nebula-purple   { background: linear-gradient(135deg, #0C0A1A 50%, #A78BFA 50%); }
+  .swatch-glacier-blue    { background: linear-gradient(135deg, #F5F1EC 50%, #2E4265 50%); }
+.swatch-autumn-dusk     { background: linear-gradient(135deg, #151D2B 50%, #D5B893 50%); }
+.swatch-sunset-ember     { background: linear-gradient(135deg, #1A1814 50%, #FF971E 50%); }
 
   /* ===== 翻页导航按钮 ===== */
   .page-nav-container {
@@ -355,7 +443,7 @@
     border-right: 1px solid var(--border);
     position: fixed;
     top: 0; left: 0;
-    height: 1080px;
+    height: 810px;
     overflow-y: auto;
     z-index: 100;
     display: flex;
@@ -371,7 +459,7 @@
     left: 0;
     top: 0;
     width: 20px;
-    height: 1080px;
+    height: 810px;
     z-index: 99;
     background: linear-gradient(90deg, var(--gold-10), transparent);
     opacity: 0;
@@ -533,8 +621,7 @@
     flex: 1;
     overflow-y: auto;
     scroll-snap-type: y proximity;
-    scroll-behavior: smooth;
-    height: 1080px;
+    height: 810px;
     width: 100%;
   }
 
@@ -547,7 +634,7 @@
     overflow: hidden;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    min-height: 1080px;
+    min-height: 810px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -624,7 +711,7 @@
     0% { opacity: 0; transform: translateY(0) translateX(0); }
     10% { opacity: 0.8; }
     90% { opacity: 0.3; }
-    100% { opacity: 0; transform: translateY(-1080px) translateX(30px); }
+    100% { opacity: 0; transform: translateY(-810px) translateX(30px); }
   }
   @keyframes particle-twinkle {
     0%, 100% { opacity: 0.2; transform: scale(1); }
@@ -962,29 +1049,58 @@
 
   /* ===== Part 标题 ===== */
   .part-header {
-    padding: 2rem 3.5rem 1.5rem;
+    padding: 2.5rem 3.5rem 2rem;
     border-bottom: 1px solid var(--border);
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    position: relative;
+  }
+  .part-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold-bright) 50%, var(--gold) 80%, transparent);
+    opacity: 0.6;
   }
   .part-tag {
     font-size: var(--current-sm);
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .part-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--gold);
   }
   .part-title {
     font-size: var(--current-2xl2);
     font-weight: 700;
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 20px rgba(212,175,55,0.15);
   }
   .part-desc {
     font-size: var(--current-md);
     color: var(--text-dim);
-    max-width: 600px;
-    line-height: 1.7;
+    max-width: 640px;
+    line-height: 1.8;
   }
 
   /* ===== 通用内容区 ===== */
@@ -998,22 +1114,32 @@
     font-size: var(--current-lg);
     font-weight: 600;
     color: var(--gold-bright);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
+    letter-spacing: 0.5px;
+  }
+  .section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--gold), rgba(212,175,55,0.3));
+    border-radius: 2px;
   }
   .section-title::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, var(--border), transparent);
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(212,175,55,0.3) 30%, transparent 100%);
+    opacity: 0.5;
   }
   .section-desc {
     font-size: var(--current-base);
     color: var(--text-dim);
-    margin-bottom: 28px;
-    line-height: 1.7;
+    margin-bottom: 32px;
+    line-height: 1.8;
+    max-width: 720px;
   }
 
   /* ===== iframe 包装 - 发光边框效果 ===== */
@@ -1058,9 +1184,9 @@
     top: 0;
     left: 0;
     border: none;
-    /* 固定原始尺寸 1440×1080，JS transform scale 缩放到容器宽度 */
+    /* 固定原始尺寸 1440×810，JS transform scale 缩放到容器宽度 */
     width: 1440px;
-    height: 1080px;
+    height: 810px;
     transform-origin: left top;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -1152,22 +1278,24 @@
   .challenge-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 28px;
+    gap: 32px;
+    margin-top: 32px;
   }
   .challenge-card {
-    background: var(--bg3);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 28px;
+    padding: 28px 24px;
+    text-align: center;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
   }
-  .challenge-card:hover { 
+  .challenge-card:hover {
     border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px var(--gold-10);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .challenge-card::before {
     content: '';
@@ -1180,45 +1308,430 @@
       transparent 50%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
   }
   .challenge-card:hover::before {
     opacity: 1;
   }
-  .challenge-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
+  /* 卡片顶部装饰线 */
+  .challenge-accent {
+    width: 24px; height: 2px;
     background: var(--gold);
+    margin: 0 auto 16px;
+    border-radius: 1px;
+    transition: width 0.4s ease;
+  }
+  .challenge-card:hover .challenge-accent {
+    width: 40px;
   }
   .challenge-num {
-    font-size: var(--current-sm);
+    font-size: var(--text-sm);
     color: var(--gold);
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    text-align: center;
   }
   .challenge-title {
-    font-size: var(--current-lg);
+    font-size: var(--text-h4);
     font-weight: 600;
     color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+    line-height: 1.3;
   }
   .challenge-desc {
-    font-size: var(--current-base);
+    font-size: var(--text-body);
     color: var(--text-dim);
-    line-height: 1.7;
+    line-height: 1.6;
+    text-align: center;
   }
 
-  /* ========== AI 发展历程时间线样式 ========== */
-  #part1-ai-timeline {
-    min-height: 1080px;
-    padding: 60px 80px;
+  /* ========== 全局滚动显示动画 - 所有 Section 和 Part Header ========== */
+  /* Part Header 样式 - 增加间距和滚动动画 */
+  .part-header {
+    /* 滚动显示动画初始状态 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Part Header 可见状态 */
+  .part-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 第一个 Part Header（首屏可见）默认显示 */
+  #part1.part-header {
+    padding: 2rem 3rem 2.5rem;
+    min-height: auto;
+    margin-bottom: 60px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 所有 Section 滚动显示动画 */
+  .section {
+    /* 滚动显示动画初始状态 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  /* Section 可见状态 */
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* PART 之间增加间距 */
+  #part1-policy.section,
+  #part1-challenge.section {
+    padding: 2.5rem 3rem;
+    min-height: auto;
+    margin-bottom: 120px;
+  }
+
+  /* Part 2 及以后的 section 间距 */
+  #part2-intro.section,
+  #part3-crm.section,
+  #part3-intel.section,
+  #part3-skills.section,
+  #part3-collab.section,
+  #part3-asset.section,
+  #part3-sop.section,
+  #part3-email.section,
+  #part4-risk.section,
+  #part4-security.section {
+    margin-bottom: 120px;
+  }
+
+  /* 安全治理三点论区域 - 紧凑布局 */
+  #part4-security-3points.section {
+    margin-bottom: 16px;
+    padding: 0.5rem 3.5rem;
+  }
+
+  .security-talent-wrapper {
+    min-height: 810px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
+
+  #part4-talent.section {
+    padding: 0.5rem 3.5rem;
+    margin-bottom: 16px;
+  }
+
+  #part4-talent .section-title {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+
+  #part4-talent .section-desc {
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  #part4-request.section,
+  #value-outlook.section,
+  #part5-opc.section,
+  #part5-friendly.section,
+  #part5-friendly-measures.section {
+    margin-bottom: 120px;
+  }
+
+  /* 价值展望区域最小高度：确保16:9下不露出感谢聆听页面 */
+  #value-outlook.section {
+    min-height: 810px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Part Header 之间的间距 */
+  #part3.part-header,
+  #part4.part-header,
+  #part5.part-header {
+    margin-top: 120px;
+    margin-bottom: 60px;
+  }
+
+  #part1-policy .section-desc,
+  #part1-challenge .section-desc {
+    margin-bottom: 24px;
+  }
+
+  /* ========== Section 1: 大数据面板 + 亮点描述（视觉升级版）========== */
+  .policy-dashboard {
+    display: flex;
+    gap: 0;
+    background: linear-gradient(150deg, var(--bg2) 0%, rgba(201,168,76,0.04) 60%, var(--bg2) 100%);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 20px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 顶部金色细线装饰 */
+  .policy-dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 5%, var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, transparent 95%);
+    opacity: 0.75;
+  }
+
+  /* 右下角发光晕 */
+  .policy-dashboard::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .dashboard-left {
+    flex: 1.3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.08);
+    padding: 1px;
+    border-radius: 20px 0 0 20px;
+    overflow: hidden;
+  }
+
+  /* 每个KPI格子 */
+  .dashboard-kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 22px 24px 20px;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* KPI左侧金色装饰线 */
+  .dashboard-kpi::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--gold) 35%, var(--gold-bright) 65%, transparent);
+    border-radius: 0 2px 2px 0;
+    opacity: 0.7;
+  }
+
+  .dashboard-kpi:hover {
+    background: linear-gradient(145deg, rgba(201,168,76,0.07) 0%, rgba(201,168,76,0.02) 100%);
+  }
+
+  .dashboard-kpi:hover::before {
+    opacity: 1;
+  }
+
+  .dashboard-kpi .kpi-number {
+    font-size: var(--text-h1);
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 0 28px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.4);
+    margin-bottom: 0;
+  }
+
+  .dashboard-kpi .kpi-unit {
+    font-size: var(--text-lead);
+    color: var(--gold);
+    font-weight: 600;
+    margin-left: 3px;
+    vertical-align: baseline;
+    text-shadow: 0 0 12px rgba(201,168,76,0.25);
+  }
+
+  .dashboard-kpi .kpi-label {
+    font-size: var(--text-body);
+    color: var(--text-dim);
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+  }
+
+  /* 分割线 */
+  .dashboard-divider {
+    width: 1px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, transparent 5%, rgba(201,168,76,0.2) 25%, rgba(201,168,76,0.15) 75%, transparent 95%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .dashboard-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 28px 28px 28px 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, rgba(201,168,76,0.02) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(201,168,76,0.09);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--gold) 50%, transparent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .highlight-item:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, rgba(201,168,76,0.02) 100%);
+    border-color: rgba(201,168,76,0.22);
+    transform: translateX(4px);
+  }
+
+  .highlight-item:hover::before {
+    opacity: 1;
+  }
+
+  /* SVG 图标容器 */
+  .highlight-icon-wrap {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(201,168,76,0.28);
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .highlight-icon-wrap svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .highlight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+  }
+
+  .highlight-title {
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .highlight-text {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* 兼容：移除旧的 highlight-icon 样式 */
+  .highlight-icon {
+    display: none;
+  }
+
+  /* ========== PART 1 KPI 数据展示条 ========== */
+  .kpi-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 24px 32px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(212,175,55,0.02));
+    border: 1px solid rgba(212,175,55,0.12);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold-bright) 50%, var(--gold) 70%, transparent);
+    opacity: 0.6;
+  }
+  .kpi-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    position: relative;
+  }
+  .kpi-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(212,175,55,0.2), transparent);
+  }
+  .kpi-value {
+    font-size: var(--current-xl);
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 12px rgba(212,175,55,0.2);
+  }
+  .kpi-label {
+    font-size: var(--current-sm);
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
   .timeline-intro {
     text-align: center;
     margin: 30px 0 40px;
@@ -1309,7 +1822,7 @@
 
   /* Part1 四重挑战 section - 确保完整占满一屏 */
   #part1-challenge {
-    min-height: 1080px;
+    min-height: 810px;
     padding-bottom: 80px;
     display: flex;
     flex-direction: column;
@@ -1544,22 +2057,22 @@
   .risk-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 32px;
     margin-top: 28px;
   }
   .risk-card {
-    background: var(--bg3);
-    border: 1px solid rgba(255,100,100,0.15);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px 24px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
   .risk-card:hover { 
-    border-color: rgba(255,100,100,0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(255,100,100,0.1);
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .risk-card::before {
     content: '';
@@ -1591,12 +2104,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--current-lg);
+    color: var(--gold);
+  }
+  .risk-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
   }
   .risk-name {
-    font-size: var(--current-md);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: #ff9999;
+    color: #fff;
   }
   .risk-problem {
     font-size: var(--current-base);
@@ -1630,15 +2150,15 @@
   .request-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 32px;
     margin-top: 28px;
   }
 
-  /* ===== Part4 AI安全边界（养虾比喻） ===== */
+  /* ===== Part4 AI安全边界（养虾比喻 — 视频版） ===== */
   .shrimp-tank-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 32px 0;
     padding: 28px;
     background: linear-gradient(135deg, var(--gold-05) 0%, rgba(20,20,25,0.6) 100%);
@@ -1646,126 +2166,233 @@
     border: 1px solid var(--gold-15);
   }
 
-  .tank-visual {
+  /* part4-security section 优化：一屏内显示 */
+  #part4-security {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  #part4-security .section-title {
+    margin-bottom: 8px;
+  }
+
+  #part4-security .section-desc {
+    margin-bottom: 16px;
+  }
+
+  /* 安全边界内容区：视频+五要素同屏布局 */
+  .security-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin-top: 0;
+    align-items: stretch;
+    min-height: 0;
+    max-height: calc(100vh - 220px);
+  }
+
+  .shrimp-video-section {
+    flex: 0 0 58%;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .shrimp-video-section .shrimp-video-wrapper {
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--gold-05) 0%, rgba(20,20,25,0.6) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--gold-15);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .shrimp-video-section .shrimp-video-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    min-height: 0;
+  }
+
+  .shrimp-video-section .shrimp-video {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  /* 紧凑版安全边界五要素 */
+  .security-boundary-compact {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+
+  .boundary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .boundary-item:hover {
+    border-color: var(--gold-30);
+    transform: translateX(4px);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .boundary-item-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .boundary-item-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .boundary-item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .boundary-item-title {
+    font-size: var(--text-h4);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .boundary-item-desc {
+    font-size: var(--current-base);
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .shrimp-video-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 0;
+    width: 100%;
   }
 
-  .tank-glass {
-    width: 220px;
-    height: 280px;
-    background: linear-gradient(180deg, var(--gold-10) 0%, var(--gold-05) 100%);
-    border: 3px solid var(--gold-30);
-    border-radius: 12px 12px 20px 20px;
+  .shrimp-video-stage {
     position: relative;
+    width: 100%;
+    max-width: 720px;
+    border-radius: 12px;
+    border: 2px solid var(--gold-30);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     overflow: hidden;
-    box-shadow: 
-      inset 0 0 30px var(--gold-10),
-      0 10px 40px rgba(0,0,0,0.3);
+    background: #000;
+    transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
   }
 
-  .tank-water {
+  .shrimp-video-stage.is-zoomed {
+    max-width: 100%;
+    border-color: var(--gold);
+  }
+
+  .shrimp-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /* 控制栏 */
+  .shrimp-controls {
     position: absolute;
-    inset: 8px;
-    background: linear-gradient(180deg, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0.05) 100%);
-    border-radius: 8px 8px 16px 16px;
-    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  .shrimp-group {
+  .shrimp-video-stage:hover .shrimp-controls {
+    opacity: 1;
+  }
+
+  .shrimp-ctrl-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(6px);
+  }
+
+  .shrimp-ctrl-btn:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.45);
+    transform: scale(1.08);
+  }
+
+  .shrimp-ctrl-btn:active {
+    transform: scale(0.95);
+  }
+
+  .ctrl-icon {
+    width: 18px;
+    height: 18px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .ctrl-icon-alt {
     position: absolute;
-    inset: 0;
+    opacity: 0;
+    transform: scale(0.7);
   }
 
-  .shrimp {
-    position: absolute;
-    font-size: var(--current-2xl2);
-    animation: shrimp-swim 4s ease-in-out infinite;
-  }
-
-  .shrimp-1 { left: 20%; top: 30%; animation-delay: 0s; }
-  .shrimp-2 { left: 55%; top: 50%; animation-delay: 0.8s; }
-  .shrimp-3 { left: 35%; top: 70%; animation-delay: 1.6s; }
-  .shrimp-4 { left: 70%; top: 25%; animation-delay: 2.4s; }
-  .shrimp-5 { left: 15%; top: 60%; animation-delay: 3.2s; }
-
-  @keyframes shrimp-swim {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-10px) rotate(5deg); }
-  }
-
-  .tank-bubbles {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .tank-bubbles span {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 50%;
-    animation: bubble-rise 2s ease-in infinite;
-  }
-
-  .tank-bubbles span:nth-child(1) { left: -20px; animation-delay: 0s; }
-  .tank-bubbles span:nth-child(2) { left: -10px; animation-delay: 0.4s; }
-  .tank-bubbles span:nth-child(3) { left: 0; animation-delay: 0.8s; }
-  .tank-bubbles span:nth-child(4) { left: 10px; animation-delay: 1.2s; }
-  .tank-bubbles span:nth-child(5) { left: 20px; animation-delay: 1.6s; }
-
-  @keyframes bubble-rise {
-    0% { transform: translateY(0) scale(1); opacity: 0.6; }
-    100% { transform: translateY(-200px) scale(0.3); opacity: 0; }
-  }
+  /* 激活态：切换图标 */
+  .shrimp-ctrl-btn.is-active .ctrl-icon { opacity: 0; transform: scale(0.7); }
+  .shrimp-ctrl-btn.is-active .ctrl-icon-alt { opacity: 1; transform: scale(1); }
 
   .tank-label {
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: var(--current-base);
     color: var(--gold);
     font-weight: 500;
-  }
-
-  .tank-explanation {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    justify-content: center;
-  }
-
-  .exp-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 10px;
-    border-left: 3px solid var(--gold);
-  }
-
-  .exp-icon {
-    font-size: var(--current-xl);
-  }
-
-  .exp-text {
-    font-size: var(--current-base);
-    color: var(--text);
-    line-height: 1.5;
-  }
-
-  .exp-text strong {
-    color: var(--gold);
+    text-align: center;
   }
 
   /* 安全边界五要素 */
   .security-boundary-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
     margin: 32px 0;
   }
 
@@ -1773,9 +2400,10 @@
     background: var(--bg2);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 14px;
-    padding: 22px;
+    padding: 28px;
     position: relative;
     transition: all 0.3s ease;
+    text-align: center;
   }
 
   .boundary-card:hover {
@@ -1784,38 +2412,54 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   }
 
+  .boundary-card:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
   .boundary-num {
     position: absolute;
-    top: 12px;
-    right: 14px;
+    top: 16px;
+    right: 18px;
     font-size: var(--current-sm);
     color: var(--gold-40);
     font-weight: 600;
   }
 
   .boundary-icon {
-    font-size: var(--current-3xl2);
-    margin-bottom: 14px;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 18px;
+    color: var(--gold);
+  }
+
+  .boundary-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
   }
 
   .boundary-title {
-    font-size: var(--current-lg);
+    font-size: var(--current-base);
     font-weight: 600;
     color: var(--gold);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .boundary-desc {
-    font-size: var(--current-base);
+    font-size: var(--current-sm);
     color: var(--text-dim);
     line-height: 1.6;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .boundary-tech {
     font-size: var(--current-sm);
     color: rgba(201,168,76,0.7);
-    padding: 8px 10px;
+    padding: 10px 14px;
     background: var(--gold-08);
     border-radius: 6px;
   }
@@ -1923,45 +2567,48 @@
 
   /* 三点论 */
   .three-points-section {
-    margin: 40px 0;
-    padding: 28px;
-    background: linear-gradient(135deg, var(--gold-08) 0%, rgba(20,20,25,0.6) 100%);
-    border-radius: 16px;
-    border: 1px solid var(--gold-15);
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    border: none;
   }
 
   /* ===== Part5 AI必答题 ===== */
   .mandatory-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: 32px;
     margin: 32px 0;
   }
   .mandatory-card {
-    background: rgba(255,255,255,0.03);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 28px;
-    transition: all 0.3s ease;
+    padding: 28px 24px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
   }
   .mandatory-card:hover {
-    background: rgba(255,255,255,0.05);
-    transform: translateY(-4px);
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .mandatory-icon {
     font-size: var(--current-3xl);
     margin-bottom: 16px;
   }
   .mandatory-title {
-    font-size: var(--current-xl);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--text);
+    color: #fff;
     margin-bottom: 12px;
   }
   .mandatory-desc {
-    font-size: var(--current-md);
+    font-size: var(--text-body);
     color: var(--text-dim);
-    line-height: 1.7;
+    line-height: 1.6;
   }
   .mandatory-conclusion {
     text-align: center;
@@ -2243,25 +2890,32 @@
 
   .three-points-title {
     text-align: center;
-    font-size: var(--current-xl);
+    font-size: var(--current-lg);
     font-weight: 600;
-    color: var(--gold);
-    margin-bottom: 28px;
+    color: var(--gold-bright);
+    margin-bottom: 12px;
+    margin-top: 0;
   }
 
   .three-points-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 12px;
   }
 
   .point-card {
     display: flex;
-    gap: 16px;
-    padding: 20px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 12px;
-    border-left: 4px solid var(--gold);
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .point-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
 
   .point-number {
@@ -2279,10 +2933,10 @@
   }
 
   .point-title {
-    font-size: var(--current-md);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--text);
-    margin-bottom: 8px;
+    color: #fff;
+    margin-bottom: 6px;
   }
 
   .point-desc {
@@ -2295,50 +2949,60 @@
   .talent-positions-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin: 32px 0;
+    gap: 14px;
+    margin: 12px 0;
   }
 
   .position-card {
-    background: var(--bg2);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 24px;
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
     text-align: center;
     transition: all 0.3s ease;
   }
 
   .position-card:hover {
-    border-color: var(--gold-30);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
 
   .position-icon {
-    font-size: var(--current-3xl2);
-    margin-bottom: 14px;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto 8px;
+    color: var(--gold);
+  }
+
+  .position-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
   }
 
   .position-title {
-    font-size: var(--current-lg);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--gold);
-    margin-bottom: 10px;
+    color: #fff;
+    margin-bottom: 6px;
   }
 
   .position-desc {
-    font-size: var(--current-base);
+    font-size: var(--current-sm);
     color: var(--text-dim);
-    line-height: 1.6;
-    margin-bottom: 14px;
+    line-height: 1.4;
+    margin-bottom: 8px;
   }
 
   .position-skill {
-    font-size: var(--current-sm);
+    font-size: var(--current-xs);
     color: rgba(201,168,76,0.7);
-    padding: 10px;
+    padding: 4px 6px;
     background: var(--gold-08);
-    border-radius: 8px;
+    border-radius: 4px;
   }
 
   .budget-section {
@@ -2398,18 +3062,18 @@
     line-height: 1.5;
   }
   .request-card {
-    background: linear-gradient(135deg, var(--gold-05), rgba(201,168,76,0.01));
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px 24px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
   .request-card:hover {
     border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px var(--gold-10);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .request-card::before {
     content: '';
@@ -2428,11 +3092,12 @@
   .request-card:hover::before {
     opacity: 1;
   }
-  .request-icon { font-size: var(--current-2xl2); margin-bottom: 12px; }
+  .request-icon { width: 36px; height: 36px; margin: 0 auto 12px; color: var(--gold); }
+  .request-icon svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.5; fill: none; }
   .request-title {
-    font-size: var(--current-md);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--gold-bright);
+    color: #fff;
     margin-bottom: 8px;
   }
   .request-desc {
@@ -2444,14 +3109,14 @@
   .value-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 32px;
     margin-top: 28px;
   }
   .value-card {
-    background: var(--bg3);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px 24px;
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
@@ -2459,8 +3124,8 @@
   }
   .value-card:hover {
     border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px var(--gold-10);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .value-card::before {
     content: '';
@@ -2479,17 +3144,18 @@
   .value-card:hover::before {
     opacity: 1;
   }
-  .value-icon { font-size: var(--current-3xl); margin-bottom: 12px; }
+  .value-icon { width: 36px; height: 36px; margin: 0 auto 12px; color: var(--gold); }
+  .value-icon svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.5; fill: none; }
   .value-subject {
-    font-size: var(--current-base);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--gold);
+    color: #fff;
     margin-bottom: 10px;
   }
   .value-desc {
     font-size: var(--current-base);
     color: var(--text-dim);
-    line-height: 1.7;
+    line-height: 1.6;
   }
   .value-desc em { color: var(--text); font-style: normal; }
 
@@ -2670,14 +3336,14 @@
     50% { transform: scale(1.1); opacity: 0.8; }
   }
   .warning-text { 
-    font-size: var(--current-lg); 
+    font-size: var(--text-body); 
     color: var(--red); 
     font-weight: 700; 
     line-height: 1.5; 
-    margin-bottom: 6px;
+    margin: 24px 0;
   }
   .warning-sub { 
-    font-size: var(--current-md); 
+    font-size: var(--current-xl); 
     color: var(--text-dim); 
     font-weight: 400; 
   }
@@ -2738,15 +3404,15 @@
   }
   .opc-missing {
     margin-top: 28px;
-    background: rgba(255,100,100,0.06);
-    border: 1px solid rgba(255,100,100,0.2);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px 24px;
   }
   .opc-missing-title {
-    font-size: var(--current-md);
+    font-size: var(--text-h4);
     font-weight: 600;
-    color: var(--red);
+    color: #fff;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
@@ -2755,23 +3421,34 @@
   .opc-missing-items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 32px;
   }
   .opc-missing-item {
-    background: rgba(255,100,100,0.06);
-    border-radius: 8px;
-    padding: 14px;
-    font-size: var(--current-base);
+    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    font-size: var(--text-body);
     color: var(--text-dim);
+    line-height: 1.6;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .opc-missing-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--gold-08);
   }
   .opc-missing-item strong {
     display: block;
-    color: #ff9999;
-    margin-bottom: 4px;
-    font-size: var(--current-base);
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-size: var(--text-h4);
+    font-weight: 600;
   }
   .punchline {
-    margin-top: 28px;
+    margin-top: 32px;
     text-align: center;
     padding: 32px;
     background: var(--bg3);
@@ -2779,7 +3456,7 @@
     border-radius: 12px;
   }
   .punchline-text {
-    font-size: var(--current-xl);
+    font-size: var(--text-h4);
     font-weight: 700;
     color: var(--red);
     line-height: 1.5;
@@ -3201,109 +3878,6 @@
     margin: 0;
   }
 
-  /* ===== 目录概览 - React Bits 磁力卡片 ===== */
-  .toc-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    padding: 1.5rem 3.5rem;
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-  .toc-card {
-    background: linear-gradient(145deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,0.9) 100%);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-  .toc-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(
-      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      var(--gold-12) 0%,
-      transparent 50%
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-  .toc-card::after {
-    content: '';
-    position: absolute;
-    top: -1px; left: -1px; right: -1px; bottom: -1px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--gold-30), transparent 50%, var(--gold-10));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: -1;
-  }
-  .toc-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-6px) scale(1.02);
-    box-shadow:
-      0 20px 40px rgba(0,0,0,0.4),
-      0 0 30px var(--gold-08);
-  }
-  .toc-card:hover::before {
-    opacity: 1;
-  }
-  .toc-card:hover::after {
-    opacity: 1;
-  }
-  /* 卡片顶部装饰线 */
-  .toc-card .toc-accent {
-    width: 24px; height: 2px;
-    background: var(--gold);
-    margin: 0 auto 12px;
-    border-radius: 1px;
-    transition: width 0.4s ease;
-  }
-  .toc-card:hover .toc-accent {
-    width: 40px;
-  }
-  .toc-num {
-    font-size: var(--current-sm);
-    color: var(--gold);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .toc-name {
-    font-size: var(--current-md);
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
-    transition: color 0.3s ease;
-  }
-  .toc-card:hover .toc-name {
-    color: #fff;
-  }
-  /* 动画标记闪烁 */
-  .toc-num .anim-dot {
-    display: inline-block;
-    width: 4px; height: 4px;
-    background: var(--gold);
-    border-radius: 50%;
-    margin-left: 4px;
-    vertical-align: middle;
-    animation: toc-dot-blink 1.5s ease-in-out infinite;
-  }
-  @keyframes toc-dot-blink {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
   /* ===== 响应式布局 ===== */
   
   /* 大屏幕 */
@@ -3332,13 +3906,15 @@
     .policy-grid { grid-template-columns: 1fr; }
     .kpi-grid,
     .value-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-bar { flex-wrap: wrap; gap: 16px; padding: 20px 24px; }
+    .kpi-item { min-width: calc(50% - 8px); }
+    .kpi-item:not(:last-child)::after { display: none; }
     .opc-flow,
     .agent-flow { grid-template-columns: repeat(2, 1fr); }
     .measures-grid { grid-template-columns: repeat(3, 1fr); }
-    .shrimp-tank-container { grid-template-columns: 1fr; }
     .security-boundary-grid { grid-template-columns: repeat(2, 1fr); }
     .three-points-grid { grid-template-columns: 1fr; }
-    .talent-positions-grid { grid-template-columns: repeat(2, 1fr); }
+    .talent-positions-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .budget-grid { grid-template-columns: repeat(2, 1fr); }
     .compare-grid { grid-template-columns: 1fr; }
     .compare-vs { display: none; }
@@ -3357,8 +3933,12 @@
     }
     #sidebar.open { transform: translateX(0); }
     .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
-    .font-size-toggle { top: 72px; right: 12px; }
-    .theme-toggle { top: 72px; right: 128px; }
+    .live-demo-btn { top: 72px; right: 12px; }
+    .qrcode-btn { top: 72px; right: 142px; padding: 6px 12px; font-size: 13px; }
+    /* 侧边栏色系移动端适配 */
+    .sidebar-theme-section { padding: 12px 10px; }
+    .sidebar-theme-swatches { gap: 6px; }
+    .theme-swatch { width: 24px; height: 24px; }
 
     .hero { padding: 5rem 1.5rem 3rem; }
     .hero h1 { font-size: var(--current-2xl2); }
@@ -3381,9 +3961,33 @@
 
     .kpi-grid,
     .value-grid { grid-template-columns: 1fr; }
+    .kpi-bar { flex-direction: column; gap: 20px; padding: 20px; }
+    .kpi-item { width: 100%; }
     .opc-flow,
     .agent-flow { grid-template-columns: 1fr; }
     .measures-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* 安全边界同屏布局：手机端改为上下布局 */
+    .security-content-wrapper {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .shrimp-video-section {
+      flex: none;
+      max-width: 100%;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .shrimp-video-section .shrimp-video-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .security-boundary-compact {
+      flex: none;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
 
     .action-card { flex-direction: column; gap: 16px; }
     .action-layer { width: 100%; height: 48px; }
@@ -3410,7 +4014,12 @@
     .opc-intro { padding: 24px 20px; }
     .policy-quote { padding: 20px; }
     .security-boundary-grid { grid-template-columns: 1fr; }
-    .talent-positions-grid { grid-template-columns: 1fr; }
+    .boundary-card:nth-child(5) {
+      grid-column: auto;
+      max-width: none;
+      margin: 0;
+    }
+    .talent-positions-grid { grid-template-columns: 1fr; gap: 12px; }
     .budget-grid { grid-template-columns: 1fr; }
     .reimbursement-compare { grid-template-columns: 1fr; }
     .mandatory-grid { grid-template-columns: 1fr; }
@@ -3433,6 +4042,30 @@
     .opc-intro { padding: 24px 20px; }
     .ai-friendly-concept { padding: 24px 20px; }
     .big-statement { font-size: var(--current-xl); }
+
+    /* 安全边界紧凑布局手机端优化 */
+    .security-content-wrapper {
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .shrimp-video-section .shrimp-video-wrapper {
+      padding: 12px;
+    }
+    .boundary-item {
+      padding: 10px 12px;
+      gap: 10px;
+    }
+    .boundary-item-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .boundary-item-title {
+      font-size: var(--text-h4);
+    }
+    .boundary-item-desc {
+      font-size: var(--current-base);
+      line-height: 1.6;
+    }
   }
 
   /* 锚点偏移补偿 */
@@ -3497,43 +4130,124 @@
   }
   .sidebar-overlay.show { display: block; }
 
-  /* ===== 暖米白主题 & 浅色主题 颜色安全覆盖 ===== */
+  /* ===== 冰川蓝主题 & 浅色主题 颜色安全覆盖 ===== */
   /* 当背景变浅时，白字会看不见——用主题变量覆盖 */
-  html[data-theme="warm-parchment"] .nav-item span,
-  html[data-theme="warm-parchment"] .nav-title,
-  html[data-theme="warm-parchment"] .sidebar-nav li,
-  html[data-theme="warm-parchment"] .part-label,
-  html[data-theme="warm-parchment"] .part-title,
-  html[data-theme="warm-parchment"] .hero-title,
-  html[data-theme="warm-parchment"] .section-title {
+  html[data-theme="glacier-blue"] .nav-item span,
+  html[data-theme="glacier-blue"] .nav-title,
+  html[data-theme="glacier-blue"] .sidebar-nav li,
+  html[data-theme="glacier-blue"] .part-label,
+  html[data-theme="glacier-blue"] .part-title,
+  html[data-theme="glacier-blue"] .hero-title,
+  html[data-theme="glacier-blue"] .section-title,
+  html[data-theme="glacier-blue"] .hero h1,
+  html[data-theme="glacier-blue"] .challenge-title,
+  html[data-theme="glacier-blue"] .event-cell,
+  html[data-theme="glacier-blue"] .phase-name {
     color: var(--text) !important;
   }
-  html[data-theme="warm-parchment"] .content-wrapper,
-  html[data-theme="warm-parchment"] .scroll-area {
+  html[data-theme="glacier-blue"] .content-wrapper,
+  html[data-theme="glacier-blue"] .scroll-area {
     background: var(--bg) !important;
+    color: var(--text) !important;
+  }
+  /* 冰川蓝主题：硬编码浅色文字覆盖为深色 */
+  html[data-theme="glacier-blue"] [style*="color: #fff"],
+  html[data-theme="glacier-blue"] [style*="color:#fff"],
+  html[data-theme="glacier-blue"] [style*="color: white"] {
+    color: var(--text) !important;
+  }
+
+  /* ===== 冰川蓝主题：硬编码 #fff 文字颜色覆盖 ===== */
+  html[data-theme="glacier-blue"] .hero h1,
+  html[data-theme="glacier-blue"] .part-title,
+  html[data-theme="glacier-blue"] .challenge-title,
+  html[data-theme="glacier-blue"] .event-cell,
+  html[data-theme="glacier-blue"] .phase-name,
+  html[data-theme="glacier-blue"] .mandatory-title,
+  html[data-theme="glacier-blue"] .point-title,
+  html[data-theme="glacier-blue"] .position-title,
+  html[data-theme="glacier-blue"] .request-title,
+  html[data-theme="glacier-blue"] .value-subject,
+  html[data-theme="glacier-blue"] .opc-step-title,
+  html[data-theme="glacier-blue"] .opc-missing-title,
+  html[data-theme="glacier-blue"] .policy-name,
+  html[data-theme="glacier-blue"] .risk-name,
+  html[data-theme="glacier-blue"] .boundary-item-title {
+    color: var(--text) !important;
+  }
+
+  /* ===== 冰川蓝主题：浅色边框覆盖 ===== */
+  html[data-theme="glacier-blue"] .section {
+    border-bottom-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .boundary-card {
+    border-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .shrimp-ctrl-btn {
+    border-color: rgba(46,66,101,0.3) !important;
+    background: rgba(46,66,101,0.08) !important;
+    color: var(--text) !important;
+  }
+  html[data-theme="glacier-blue"] .shrimp-ctrl-btn:hover {
+    border-color: rgba(46,66,101,0.45) !important;
+    background: rgba(46,66,101,0.15) !important;
+  }
+  html[data-theme="glacier-blue"] .reimburse-section {
+    border-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .reimburse-header {
+    border-bottom-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .budget-card {
+    border-color: var(--border) !important;
+    background: rgba(46,66,101,0.03) !important;
+  }
+  html[data-theme="glacier-blue"] .boundary-item {
+    border-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .compare-list li {
+    border-bottom-color: var(--border) !important;
+  }
+  html[data-theme="glacier-blue"] .reimburse-step {
+    background: rgba(46,66,101,0.03) !important;
+  }
+  html[data-theme="glacier-blue"] .reimburse-stat-card {
+    background: rgba(46,66,101,0.05) !important;
+  }
+
+  /* ===== 冰川蓝主题：卡片背景透明度修复 ===== */
+  html[data-theme="glacier-blue"] .budget-card,
+  html[data-theme="glacier-blue"] .reimburse-step,
+  html[data-theme="glacier-blue"] .reimburse-stat-card,
+  html[data-theme="glacier-blue"] .boundary-card,
+  html[data-theme="glacier-blue"] .section {
+    background: rgba(234,228,221,0.95) !important;
+  }
+
+  /* ===== 冰川蓝主题：灰色文字颜色修复 ===== */
+  html[data-theme="glacier-blue"] .click-hint,
+  html[data-theme="glacier-blue"] .footer-text,
+  html[data-theme="glacier-blue"] .subtitle,
+  html[data-theme="glacier-blue"] .meta-text {
     color: var(--text) !important;
   }
 </style>
 </head>
 <body>
 
-<!-- 字体大小切换器 -->
-<div class="font-size-toggle">
-  <button class="font-btn" data-size="small" title="小字体">小</button>
-  <button class="font-btn active" data-size="medium" title="中字体">中</button>
-  <button class="font-btn" data-size="large" title="大字体">大</button>
-</div>
+<!-- 实时演示跳转按钮 -->
+<a href="http://81.71.25.120" target="_blank" class="live-demo-btn">
+  <span class="btn-dot"></span>
+  实时演示
+</a>
 
-<!-- v8 色系切换器（6套主题全联动子iframe） -->
-<div class="theme-toggle" id="themeToggle">
-  <span class="theme-label">色系</span>
-  <div class="theme-swatch swatch-black-gold active" data-theme="black-gold" title="黑金（默认）"></div>
-  <div class="theme-swatch swatch-deep-ocean" data-theme="deep-ocean" title="深海蓝"></div>
-  <div class="theme-swatch swatch-warm-parchment" data-theme="warm-parchment" title="暖米白"></div>
-  <div class="theme-swatch swatch-forest-night" data-theme="forest-night" title="暗夜绿"></div>
-  <div class="theme-swatch swatch-dusk-rose" data-theme="dusk-rose" title="暮光玫瑰"></div>
-  <div class="theme-swatch swatch-nebula-purple" data-theme="nebula-purple" title="星云紫"></div>
-</div>
+<!-- 扫码体验按钮 -->
+<button class="qrcode-btn" onclick="document.getElementById('qrcodeModal').style.display='flex'">
+  <span class="btn-icon">📱</span>
+  扫码体验
+</button>
+
+
 
 <!-- 移动端菜单按钮 -->
 <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
@@ -3563,28 +4277,28 @@
     </div>
 
     <div class="nav-section">
-      <div class="nav-section-title">PART 02 · 技术解读</div>
-      <div class="nav-item" onclick="scrollToSection('part2')">
-        <span class="nav-dot"></span> LLM原理与智能体架构
-      </div>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">PART 03 · 广州实践</div>
+      <div class="nav-section-title">PART 02 · 广州实践</div>
       <div class="nav-item" onclick="scrollToSection('part3')">
         <span class="nav-dot"></span> 七大落地场景
       </div>
     </div>
 
     <div class="nav-section">
-      <div class="nav-section-title">PART 04 · 实施路径</div>
+      <div class="nav-section-title">PART 03 · 实施路径</div>
       <div class="nav-item" onclick="scrollToSection('part4')">
         <span class="nav-dot"></span> 实施路线与保障体系
       </div>
     </div>
 
-    <div class="nav-section">
-      <div class="nav-section-title">PART 05 · One More Thing</div>
+    <div class="nav-section" id="nav-part4-hidden">
+      <div class="nav-section-title" style="opacity: 0.4; font-size: 12px; letter-spacing: 2px;">···</div>
+      <div class="nav-item" onclick="scrollToSection('part5-credits')" style="color: var(--gold);">
+        <span class="nav-dot" style="background: var(--gold);"></span> 致谢
+      </div>
+    </div>
+    
+    <div class="nav-section" id="nav-part4-revealed" style="display: none;">
+      <div class="nav-section-title">PART 04 · One More Thing</div>
       <div class="nav-item" onclick="scrollToSection('part5')">
         <span class="nav-dot"></span> 拥抱AI时代
       </div>
@@ -3593,7 +4307,18 @@
       </div>
     </div>
   </div>
-  <div class="sidebar-footer">5大部分 · 完整演示</div>
+  <!-- 色系切换 -->
+  <div class="sidebar-theme-section">
+    <div class="sidebar-theme-title">色系</div>
+    <div class="sidebar-theme-swatches">
+      <div class="theme-swatch swatch-black-gold" data-theme="black-gold" title="黑金"></div>
+      <div class="theme-swatch swatch-deep-ocean active" data-theme="deep-ocean" title="深海蓝"></div>
+      <div class="theme-swatch swatch-glacier-blue" data-theme="glacier-blue" title="冰川蓝"></div>
+      <div class="theme-swatch swatch-autumn-dusk" data-theme="autumn-dusk" title="秋暮"></div>
+      <div class="theme-swatch swatch-sunset-ember" data-theme="sunset-ember" title="落日余烬"></div>
+    </div>
+  </div>
+  <div class="sidebar-footer">4大部分 · 完整演示</div>
 </nav>
 
 <!-- ===== 主内容 ===== -->
@@ -3626,7 +4351,7 @@
           <div class="hero-stat-label">核心模块</div>
         </div>
         <div class="hero-stat-item">
-          <div class="hero-stat-num" data-target="8" data-suffix="+">0</div>
+          <div class="hero-stat-num" data-target="6" data-suffix="+">0</div>
           <div class="hero-stat-label">落地场景</div>
         </div>
         <div class="hero-stat-item">
@@ -3644,62 +4369,70 @@
     </div>
   </div>
 
-  <!-- 快速导航 - React Bits 磁力卡片 -->
-  <div class="toc-grid">
-    <a href="#part1" class="toc-card" onclick="scrollToSection('part1');return false;">
-      <div class="toc-accent"></div>
-      <div class="toc-num">PART 01</div>
-      <div class="toc-name">宏观背景</div>
-    </a>
-    <a href="#part2" class="toc-card" onclick="scrollToSection('part2-llm');return false;">
-      <div class="toc-accent"></div>
-      <div class="toc-num">PART 02 <span class="anim-dot"></span></div>
-      <div class="toc-name">技术解读</div>
-    </a>
-    <a href="#part3" class="toc-card" onclick="scrollToSection('part3-crm');return false;">
-      <div class="toc-accent"></div>
-      <div class="toc-num">PART 03 <span class="anim-dot"></span></div>
-      <div class="toc-name">广州实践</div>
-    </a>
-    <a href="#part4" class="toc-card" onclick="scrollToSection('part4-roadmap');return false;">
-      <div class="toc-accent"></div>
-      <div class="toc-num">PART 04</div>
-      <div class="toc-name">实施路径</div>
-    </a>
-    <a href="#part5" class="toc-card" onclick="scrollToSection('part5-opc');return false;">
-      <div class="toc-accent"></div>
-      <div class="toc-num">PART 05</div>
-      <div class="toc-name">One More Thing</div>
-    </a>
-  </div>
-
   <!-- ========== PART 1 ========== -->
   <div class="part-divider"></div>
   <div id="part1" class="part-header anchor-target">
     <div class="part-tag">PART 01 · 宏观背景</div>
-    <div class="part-title">2025 时代机遇与行业挑战</div>
-    <div class="part-desc">政策指引已明确方向，银行业面临四重现实压力，AI智能体正是破局关键。</div>
+    <div class="part-title">广州直营的探索与AI新可能</div>
+    <div class="part-desc">从线上经营新模式到AI智能体，广州分行数字化直营的实践之路。</div>
   </div>
 
   <div id="part1-policy" class="section anchor-target">
-    <div class="section-title">政策指引</div>
-    <div class="section-desc">国家层面的战略部署，为AI在金融领域的应用提供了政策保障。</div>
+    <div class="section-title">广州直营：线上经营新模式</div>
+    <div class="section-desc">有别于传统线下服务，也不同于线上功能堆砌，数字化快捷+人工服务温度，形成独特经营模式。</div>
 
-    <div class="policy-quote">
-      <p>"深化拓展'人工智能+'行动，推进算力设施建设，引导企业加大人工智能投入，开发人工智能核心技术，打造具有国际竞争力的数字产业集群。"</p>
-      <div class="source">——2025年中央经济工作会议</div>
-    </div>
-
-    <div class="policy-quote">
-      <p>"积极稳妥、安全有序推进金融领域人工智能应用，将AI技术与金融业务深度融合，提升服务实体经济质效。"</p>
-      <div class="source">——央行2026年科技工作会议</div>
-    </div>
-
-    <div class="policy-tags">
-      <div class="policy-tag">人工智能+ 国家战略</div>
-      <div class="policy-tag">金融科技赋能</div>
-      <div class="policy-tag">从渠道线上化 → AI决策智能化</div>
-      <div class="policy-tag">安全有序推进</div>
+    <div class="policy-dashboard">
+      <div class="dashboard-left">
+        <div class="dashboard-kpi">
+          <div class="kpi-number">157<span class="kpi-unit">万</span></div>
+          <div class="kpi-label">管户连接</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="kpi-number">150.6<span class="kpi-unit">亿</span></div>
+          <div class="kpi-label">综合产销额</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="kpi-number">10<span class="kpi-unit">分钟</span></div>
+          <div class="kpi-label">响应时效</div>
+        </div>
+        <div class="dashboard-kpi">
+          <div class="kpi-number">95<span class="kpi-unit">%+</span></div>
+          <div class="kpi-label">回复覆盖率</div>
+        </div>
+      </div>
+      <div class="dashboard-divider"></div>
+      <div class="dashboard-right">
+        <div class="highlight-item">
+          <div class="highlight-icon-wrap">
+            <!-- 精准定位图标 -->
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="highlight-content">
+            <div class="highlight-title">创新直营模式</div>
+            <div class="highlight-text">基石客户直营是线上经营新模式，数字化快捷与人工温度有机结合</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon-wrap">
+            <!-- 增长趋势图标 -->
+            <svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+          </div>
+          <div class="highlight-content">
+            <div class="highlight-title">持续翻番增长</div>
+            <div class="highlight-text">客户连接数量、AUM增量连续三年翻番增长</div>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon-wrap">
+            <!-- 闪电/能量图标 -->
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="highlight-content">
+            <div class="highlight-title">数字平台赋能</div>
+            <div class="highlight-text">依托360数据平台等工具，形成独特经营体系</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3709,21 +4442,25 @@
 
     <div class="challenge-grid">
       <div class="challenge-card">
+        <div class="challenge-accent"></div>
         <div class="challenge-num">CHALLENGE 01</div>
         <div class="challenge-title">获客成本上升</div>
         <div class="challenge-desc">流量红利见顶，获客与活客成本激增，传统渠道效率持续走低，边际成本越来越高。</div>
       </div>
       <div class="challenge-card">
+        <div class="challenge-accent"></div>
         <div class="challenge-num">CHALLENGE 02</div>
         <div class="challenge-title">存量运营压力</div>
         <div class="challenge-desc">客户深度运营能力不足，活跃度提升困难，沉默客户占比居高不下，客户价值未能充分挖掘。</div>
       </div>
       <div class="challenge-card">
+        <div class="challenge-accent"></div>
         <div class="challenge-num">CHALLENGE 03</div>
         <div class="challenge-title">服务供需错配</div>
         <div class="challenge-desc">标准化产品无法满足个性化、场景化、即时化需求，客户体验与期望之间的鸿沟持续加深。</div>
       </div>
       <div class="challenge-card">
+        <div class="challenge-accent"></div>
         <div class="challenge-num">CHALLENGE 04</div>
         <div class="challenge-title">规模不经济困境</div>
         <div class="challenge-desc">有限人力面对无限需求，人海战术边际效益持续递减，人力成本高居不下难以突破。</div>
@@ -3731,229 +4468,91 @@
     </div>
   </div>
 
-  <!-- ========== AI 发展历程时间线 ========== -->
-  <div id="part1-ai-timeline" class="section anchor-target">
-    <div class="section-title">AI 的演进：从对话工具到自主智能体</div>
-    <div class="section-desc">AI 的演进路径已从"对话工具"转向"自主智能体（Agent）"，成为破解上述困境的底层驱动力。</div>
-
-    <div class="timeline-intro">
-      <div class="timeline-highlight">AI 发展历程及关键里程碑</div>
-    </div>
-
-    <div class="timeline-table-wrap">
-      <table class="timeline-table">
-        <thead>
-          <tr>
-            <th style="width: 12%;">时间节点</th>
-            <th style="width: 22%;">重要事件</th>
-            <th style="width: 66%;">行业影响与意义</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="time-cell">2017年6月</td>
-            <td class="event-cell">Transformer 架构发布</td>
-            <td class="impact-cell">Google 发表论文 Attention Is All You Need，奠定了现代大模型（LLM）的底层架构，解决了长文本处理的效率问题。</td>
-          </tr>
-          <tr>
-            <td class="time-cell">2022年11月</td>
-            <td class="event-cell">ChatGPT (GPT-3.5) 出世</td>
-            <td class="impact-cell">OpenAI 发布对话式 AI，标志着生成式 AI 进入大众视野。开始探索智能化客服与初级文本自动化。</td>
-          </tr>
-          <tr>
-            <td class="time-cell">2023年3月</td>
-            <td class="event-cell">多模态与开源浪潮</td>
-            <td class="impact-cell">GPT-4 发布；同时 Meta 开源 Llama 系列，大幅降低了机构私有化部署大模型的门槛。</td>
-          </tr>
-          <tr>
-            <td class="time-cell">2024年5月</td>
-            <td class="event-cell">原生多模态 (GPT-4o)</td>
-            <td class="impact-cell">实时音视频交互能力成熟，AI 开始具备理解情感、处理复杂金融单据、进行视觉辅助开户的能力。</td>
-          </tr>
-          <tr>
-            <td class="time-cell">2025年1月</td>
-            <td class="event-cell">Agentic AI (智能体) 爆发</td>
-            <td class="impact-cell">行业重点从"对话"转向"执行"。OpenAI 的 Operator 和 Google 的 Project Jarvis 允许 AI 直接操作电脑软件完成复杂工作流。</td>
-          </tr>
-          <tr>
-            <td class="time-cell">2025年11月</td>
-            <td class="event-cell">OpenClaw 的诞生</td>
-            <td class="impact-cell">开发者 Peter Steinberger 发布 OpenClaw（最初名为 Clawdbot）。它作为一款开源、隐私优先的自主 AI 助手，在 GitHub 上以史无前例的速度突破 10 万星标。</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
+  <!-- ========== PART 2 过渡页 (原PART 02技术解读) ========== -->
+  <div id="part2-intro" class="section anchor-target" style="min-height: 810px; display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 0; scroll-snap-align: start; scroll-snap-stop: always;">
+    <iframe src="p2a-1_智能体是什么_过渡页_v3.html" style="width: 100%; height: 810px; border: none; display: block;" class="eager-iframe"></iframe>
   </div>
 
-  <!-- 大语言模型工作原理 -->
-  <div id="part2-llm" class="section anchor-target">
-    <div class="section-title">大语言模型工作原理</div>
-    <div class="section-desc">Token化 → 向量空间 → Transformer预测 → 输出生成，四步可视化流水线动画。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-llm">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe src="02_技术解读_LLM原理_动画版.html" id="iframe-llm" class="eager-load"></iframe>
-    </div>
-  </div>
-
-  <!-- ========== PART 2 过渡页 ========== -->
-  <div id="part2-intro" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 0; scroll-snap-align: start; scroll-snap-stop: always;">
-    <iframe src="p2a-1_智能体是什么_过渡页_v3.html" style="width: 100%; height: 1080px; border: none; display: block;" class="eager-iframe"></iframe>
-  </div>
-
-  <!-- 智能体组装动画预留位置 -->
-  <div id="part2-assembly" class="section anchor-target">
-    <div class="section-title">智能体组装——从零到一的构建过程</div>
-    <div class="section-desc">用「钢铁侠战衣组装」比喻呈现智能体从零配置的过程：裸骨架→基础能力层→Skill→工具→联动，逐层组装。</div>
-    <div class="iframe-wrap" style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);">
-      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-dim);">
-        <div style="font-size: var(--current-hero); margin-bottom: 20px;">🎬</div>
-        <div style="font-size: var(--current-2xl); color: var(--gold); margin-bottom: 12px;">电影级组装动画</div>
-        <div style="font-size: var(--current-md); max-width: 500px; line-height: 1.6;">
-          裸骨架 → 基础能力层 → Skill → 工具 → 联动<br>
-          <span style="color: var(--gold); opacity: 0.8;">逐层组装，最终完成态</span><br><br>
-          <span style="font-size: var(--current-base); opacity: 0.6;">[ 视频制作中 ]</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 多智能体协同演示 -->
-  <div id="part2-multiagent" class="section anchor-target">
-    <div class="section-title">多智能体协同——分工、对话与协作</div>
-    <div class="section-desc">多个智能体如何分工协作、对话记录、互相纠错，展现真实的协同工作场景。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-multiagent">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="02_技术解读_多智能体协同_动画版_20260401_151600.html" id="iframe-multiagent" class="lazy-iframe"></iframe>
-    </div>
-  </div>
-
-  <!-- ========== PART 3 ========== -->
+  <!-- ========== PART 2 广州实践 (原PART 03) ========== -->
   <div class="part-divider"></div>
   <div id="part3" class="part-header anchor-target">
-    <div class="part-tag">PART 03 · 广州实践 ✨ 动画演示</div>
-    <div class="part-title">真实场景与业务价值展示</div>
-    <div class="part-desc">广州直营场景。</div>
+    <div class="part-tag">PART 02 · 广州实践 ✨ 业务场景的探索与实验</div>
+    <div class="part-title">业务场景的探索与实验</div>
+    <div class="part-desc">利用已有的中台技术人才快速尝试</div>
   </div>
 
   <div id="part3-crm" class="section anchor-target">
     <div class="section-title">场景一：智能客户运营</div>
-    <div class="section-desc">AI画像分析 + 个性化话术生成 + 聊天界面展示，三步演示智能化客户经营。</div>
+    <div class="section-desc">日程规划+客户画像+话术生成</div>
     <div class="iframe-wrap anchor-target" id="iframe-wrap-crm">
       <span class="iframe-label">ANIMATED</span>
       <iframe data-src="03_广州实践_智能客户运营_动画版.html" id="iframe-crm" class="lazy-iframe"></iframe>
     </div>
   </div>
 
-  <div id="part3-collab" class="section anchor-target">
-    <div class="section-title">场景二：跨部门协同</div>
-    <div class="section-desc">70分钟 → 5分钟，传统 vs AI工作流时间轴对比，跨部门协同效率飞跃。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-collab">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_跨部门协同_动画版_v2.html" id="iframe-collab" class="lazy-iframe"></iframe>
-    </div>
-  </div>
-
-  <div id="part3-email" class="section anchor-target">
-    <div class="section-title">场景三：邮件自动处理</div>
-    <div class="section-desc">全息终端风格，AI自动分类、摘要、回复邮件，释放重复性人力。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-email">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_邮件自动处理_动画版.html" id="iframe-email" class="lazy-iframe"></iframe>
-    </div>
-  </div>
-
-  <div id="part3-asset" class="section anchor-target">
-    <div class="section-title">场景四：数据智能 · 自动分析简报</div>
-    <div class="section-desc">上传Excel/CSV自动生成专业分析简报，中后台数据组效率飞跃。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-asset">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="05_数据智能_自动分析简报_动画版_v2.html" id="iframe-asset" class="lazy-iframe"></iframe>
-    </div>
-  </div>
-
   <div id="part3-intel" class="section anchor-target">
-    <div class="section-title">场景五：智能情报 · 每日市场情报官</div>
-    <div class="section-desc">前台客户经理视角，四步时间线驱动，CTS资金回流情报自动触达。</div>
+    <div class="section-title">场景二：智能情报 · 每日市场情报官</div>
+    <div class="section-desc">外部信息收集+CTS资金回流情报自动触达</div>
     <div class="iframe-wrap anchor-target" id="iframe-wrap-intel">
       <span class="iframe-label">ANIMATED</span>
       <iframe data-src="04_智能情报_每日市场情报官_动画版.html" id="iframe-intel" class="lazy-iframe"></iframe>
     </div>
   </div>
 
-  <div id="part3-sop" class="section anchor-target">
-    <div class="section-title">场景六：SOP智能升级</div>
-    <div class="section-desc">从固定SOP到AI千人千面的智能化演进，显著提升客户响应效果。</div>
-    <div class="iframe-wrap anchor-target" id="iframe-wrap-sop">
-      <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_SOP智能升级_动画版.html" id="iframe-sop" class="lazy-iframe"></iframe>
-    </div>
-  </div>
-
   <div id="part3-skills" class="section anchor-target">
-    <div class="section-title">场景七：Skills智能体技能系统</div>
-    <div class="section-desc">AI Skills技能库如何驱动智能体协同工作，多角色对话与任务协作演示。</div>
+    <div class="section-title">场景三：Skills智能体技能系统</div>
+    <div class="section-desc">AI Skills技能库驱动智能体协同工作。</div>
     <div class="iframe-wrap anchor-target" id="iframe-wrap-skills">
       <span class="iframe-label">ANIMATED</span>
-      <iframe data-src="03_广州实践_李东明Skills_v3.html" id="iframe-skills" class="lazy-iframe"></iframe>
+      <iframe data-src="03_广州实践_销冠Skills_v5.html" id="iframe-skills" class="lazy-iframe"></iframe>
     </div>
   </div>
 
-  <!-- ========== PART 4 ========== -->
+  <div id="part3-collab" class="section anchor-target">
+    <div class="section-title">场景四：跨部门协同</div>
+    <div class="section-desc">70分钟 → 5分钟，传统 vs AI工作流，跨部门协同效率飞跃。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-collab">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_跨部门协同_动画版_v2.html" id="iframe-collab" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-asset" class="section anchor-target">
+    <div class="section-title">场景五：数据智能 · 自动分析简报</div>
+    <div class="section-desc">上传Excel/CSV自动生成专业分析简报，中后台数据组效率飞跃。<button class="pdf-preview-btn" onclick="openPdfViewer()">📋 查看体检报告</button></div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-asset">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="05_数据智能_自动分析简报_动画版_v2.html" id="iframe-asset" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-sop" class="section anchor-target">
+    <div class="section-title">场景六：SOP智能升级</div>
+    <div class="section-desc">AI驱动营销内容全流程闭环：从需求梳理到千里挑一，效率提升80倍。</div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-sop">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_SOP智能升级_动画版_v3.4.html" id="iframe-sop" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <div id="part3-email" class="section anchor-target">
+    <div class="section-title">场景七：邮件自动处理</div>
+    <div class="section-desc">AI自动分类、摘要、回复邮件，释放重复性人力。<button class="pdf-preview-btn" onclick="openPdfViewer()">📋 查看体检报告</button></div>
+    <div class="iframe-wrap anchor-target" id="iframe-wrap-email">
+      <span class="iframe-label">ANIMATED</span>
+      <iframe data-src="03_广州实践_邮件自动处理_动画版.html" id="iframe-email" class="lazy-iframe"></iframe>
+    </div>
+  </div>
+
+  <!-- ========== PART 3 实施路径 (原PART 04) ========== -->
   <div class="part-divider"></div>
   <div id="part4" class="part-header anchor-target">
-    <div class="part-tag">PART 04 · 实施路径与预期价值</div>
+    <div class="part-tag">PART 03 · 实施路径与预期价值</div>
     <div class="part-title">怎么干？能得到什么？还缺什么？</div>
-    <div class="part-desc">三阶段可落地路线图，量化KPI目标，四维风险防控，四大资源诉求——务实且可执行。</div>
+    
   </div>
 
-  <!-- 4.1 KPI -->
-  <div id="part4-kpi" class="section anchor-target">
-    <div class="section-title">量化预期价值</div>
-    <div class="section-desc">6项核心指标，从现状到目标，每一个数字都有真实依据。</div>
-
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-metric">外呼添加率</div>
-        <div class="kpi-current">&lt;6% <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">15%</div>
-        <div class="kpi-desc">企微连接数翻倍</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-metric">人均企微连接数</div>
-        <div class="kpi-current">1.5万 <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">5万</div>
-        <div class="kpi-desc">覆盖率 20%→80%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-metric">信息收集耗时</div>
-        <div class="kpi-current">2小时/天 <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">5min</div>
-        <div class="kpi-desc">效率提升 24 倍</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-metric">SOP客户回复率</div>
-        <div class="kpi-current">15% <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">25%+</div>
-        <div class="kpi-desc">个性化内容驱动</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-metric">客户转化率</div>
-        <div class="kpi-current">基准值 <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">+35%</div>
-        <div class="kpi-desc">2028年Q4目标</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-metric">投资回收期</div>
-        <div class="kpi-current">预估 <span class="kpi-arrow">→</span></div>
-        <div class="kpi-target">2-3年</div>
-        <div class="kpi-desc">人效+转化双轮增收</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4.3 风险控制 -->
+  <!-- 4.1 风险控制 -->
   <div id="part4-risk" class="section anchor-target">
     <div class="section-title">风险控制——四维防控体系</div>
     <div class="section-desc">合规、责任、隐私、幻觉——每一个风险点都有可落地的解决方案，人工审核是最后一道关。</div>
@@ -3961,7 +4560,7 @@
     <div class="risk-grid">
       <div class="risk-card">
         <div class="risk-header">
-          <div class="risk-icon">⚖️</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <div class="risk-name">合规风险控制</div>
         </div>
         <div class="risk-problem">问题：智能体自主决策可能触碰合规边界</div>
@@ -3974,7 +4573,7 @@
       </div>
       <div class="risk-card">
         <div class="risk-header">
-          <div class="risk-icon">🧑‍⚖️</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="risk-name">责任界定机制</div>
         </div>
         <div class="risk-problem">问题：智能体出现错误，谁负责？</div>
@@ -3987,7 +4586,7 @@
       </div>
       <div class="risk-card">
         <div class="risk-header">
-          <div class="risk-icon">🔒</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <div class="risk-name">客户隐私保护</div>
         </div>
         <div class="risk-problem">问题：智能体访问客户数据，如何保护隐私？</div>
@@ -4000,7 +4599,7 @@
       </div>
       <div class="risk-card">
         <div class="risk-header">
-          <div class="risk-icon">🧠</div>
+          <div class="risk-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg></div>
           <div class="risk-name">AI幻觉风险应对</div>
         </div>
         <div class="risk-problem">问题：大模型可能生成错误信息（幻觉）</div>
@@ -4015,98 +4614,105 @@
   </div>
 
   <!-- 4.3b AI安全边界专题（养虾比喻） -->
+  <!-- 4.3 AI安全边界——以"养虾"为喻 -->
   <div id="part4-security" class="section anchor-target">
     <div class="section-title reveal-on-scroll">AI安全边界——以"养虾"为喻</div>
     <div class="section-desc reveal-on-scroll reveal-delay-1">银行是经营风险的机构，AI时代的安全底线比任何时候都重要。没有最重要，只有更重要。</div>
 
-    <!-- 养虾比喻核心概念 -->
-    <div class="shrimp-tank-container reveal-on-scroll reveal-delay-2">
-      <div class="tank-visual">
-        <div class="tank-glass">
-          <div class="tank-water">
-            <div class="shrimp-group">
-              <div class="shrimp shrimp-1">🦐</div>
-              <div class="shrimp shrimp-2">🦐</div>
-              <div class="shrimp shrimp-3">🦀</div>
-              <div class="shrimp shrimp-4">🦐</div>
-              <div class="shrimp shrimp-5">🦞</div>
-            </div>
-            <div class="tank-bubbles">
-              <span></span><span></span><span></span><span></span><span></span>
+    <!-- 养虾视频 + 安全边界五要素 同屏布局 -->
+    <div class="security-content-wrapper reveal-on-scroll reveal-delay-2">
+      <!-- 左侧：养虾视频 -->
+      <div class="shrimp-video-section">
+        <div class="shrimp-video-wrapper" id="shrimpVideoWrapper">
+          <div class="shrimp-video-stage" id="shrimpVideoStage">
+            <video class="shrimp-video" id="shrimpVideo" autoplay muted loop playsinline preload="auto">
+              <source src="./277.mp4" type="video/mp4">
+            </video>
+            <!-- 底部控制栏 -->
+            <div class="shrimp-controls" id="shrimpControls">
+              <button class="shrimp-ctrl-btn" id="shrimpReplayBtn" title="重播">
+                <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="1 4 1 10 7 10"></polyline>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+              </button>
+              <button class="shrimp-ctrl-btn" id="shrimpPlayBtn" title="播放/暂停">
+                <svg class="ctrl-icon" id="playIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                <svg class="ctrl-icon ctrl-icon-alt" id="pauseIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <button class="shrimp-ctrl-btn" id="shrimpMuteBtn" title="声音开/关">
+                <svg class="ctrl-icon" id="muteOnIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+                <svg class="ctrl-icon ctrl-icon-alt" id="muteOffIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07"/><path d="M19.07 4.93a10 10 0 010 14.14"/></svg>
+              </button>
+              <button class="shrimp-ctrl-btn" id="shrimpZoomBtn" title="放大/缩小">
+                <svg class="ctrl-icon" id="zoomInIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <svg class="ctrl-icon ctrl-icon-alt" id="zoomOutIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </button>
             </div>
           </div>
+          <div class="tank-label">智能体沙箱环境</div>
         </div>
-        <div class="tank-label">智能体沙箱环境</div>
       </div>
-      
-      <div class="tank-explanation">
-        <div class="exp-item">
-          <div class="exp-icon">🫙</div>
-          <div class="exp-text"><strong>玻璃缸</strong> = 沙箱隔离环境（OpenClaw等框架）</div>
+
+      <!-- 右侧：安全边界五要素 -->
+      <div class="security-boundary-compact">
+        <div class="boundary-item reveal-on-scroll reveal-delay-1">
+          <div class="boundary-item-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+          </div>
+          <div class="boundary-item-content">
+            <div class="boundary-item-title">沙箱隔离</div>
+            <div class="boundary-item-desc">每只"虾"都在独立玻璃缸中运行，容器化技术实现环境隔离</div>
+          </div>
         </div>
-        <div class="exp-item">
-          <div class="exp-icon">💧</div>
-          <div class="exp-text"><strong>水</strong> = 算力基础设施 + 网络环境</div>
+        
+        <div class="boundary-item reveal-on-scroll reveal-delay-2">
+          <div class="boundary-item-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><circle cx="6.5" cy="6.5" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/><circle cx="6.5" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="boundary-item-content">
+            <div class="boundary-item-title">权限网格</div>
+            <div class="boundary-item-desc">给虾兵蟹将划定活动范围，不同智能体拥有不同数据访问权限</div>
+          </div>
         </div>
-        <div class="exp-item">
-          <div class="exp-icon">🍤</div>
-          <div class="exp-text"><strong>饲料</strong> = Token消耗 + 知识库投喂</div>
+        
+        <div class="boundary-item reveal-on-scroll reveal-delay-3">
+          <div class="boundary-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M12 14v4"/></svg>
+          </div>
+          <div class="boundary-item-content">
+            <div class="boundary-item-title">龙王授权中心</div>
+            <div class="boundary-item-desc">所有操作必须经过授权中心验证，统一身份认证+操作审计</div>
+          </div>
         </div>
-        <div class="exp-item">
-          <div class="exp-icon">🔥</div>
-          <div class="exp-text"><strong>加热棒</strong> = 温度调节 = 模型调优与优化</div>
+        
+        <div class="boundary-item reveal-on-scroll reveal-delay-4">
+          <div class="boundary-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 14a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6"/><path d="M4 14v4"/><path d="M20 14v4"/><path d="M10 8V4"/><path d="M14 8V4"/></svg>
+          </div>
+          <div class="boundary-item-content">
+            <div class="boundary-item-title">数据流转管控</div>
+            <div class="boundary-item-desc">虾缸间连接管道受控，敏感数据自动脱敏，确保隐私安全</div>
+          </div>
         </div>
-        <div class="exp-item">
-          <div class="exp-icon">💡</div>
-          <div class="exp-text"><strong>杀菌灯</strong> = 安全过滤 = 合规审查机制</div>
+        
+        <div class="boundary-item reveal-on-scroll reveal-delay-5">
+          <div class="boundary-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="boundary-item-content">
+            <div class="boundary-item-title">应急响应</div>
+            <div class="boundary-item-desc">发现异常立即隔离，一键关停问题智能体，实时监控+熔断机制</div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 安全边界五要素 -->
-    <div class="security-boundary-grid">
-      <div class="boundary-card reveal-on-scroll reveal-left reveal-delay-1">
-        <div class="boundary-num">01</div>
-        <div class="boundary-icon">🧱</div>
-        <div class="boundary-title">沙箱隔离</div>
-        <div class="boundary-desc">每只"虾"都在独立的玻璃缸中运行，互不干扰。通过容器化技术实现环境隔离，确保单个智能体的异常不会影响整体系统。</div>
-        <div class="boundary-tech">技术实现：Docker + K8s 容器编排</div>
-      </div>
-      
-      <div class="boundary-card reveal-on-scroll reveal-delay-2">
-        <div class="boundary-num">02</div>
-        <div class="boundary-icon">🕸️</div>
-        <div class="boundary-title">权限网格</div>
-        <div class="boundary-desc">给虾兵蟹将划定活动范围，装隔离网、划区域。不同智能体拥有不同的数据访问权限，核心数据需要额外授权。</div>
-        <div class="boundary-tech">技术实现：RBAC 角色权限控制 + ABAC 属性权限</div>
-      </div>
-      
-      <div class="boundary-card reveal-on-scroll reveal-right reveal-delay-1">
-        <div class="boundary-num">03</div>
-        <div class="boundary-icon">🐲</div>
-        <div class="boundary-title">龙王授权中心</div>
-        <div class="boundary-desc">所有智能体的操作必须经过授权中心验证。龙王拍桌子："按规矩来！"——没有授权，什么都干不了。</div>
-        <div class="boundary-tech">技术实现：统一身份认证 + 操作审计日志</div>
-      </div>
-      
-      <div class="boundary-card reveal-on-scroll reveal-left reveal-delay-3">
-        <div class="boundary-num">04</div>
-        <div class="boundary-icon">🔄</div>
-        <div class="boundary-title">数据流转管控</div>
-        <div class="boundary-desc">虾缸之间的连接管道受控，数据输入输出都有记录。敏感数据自动脱敏，确保客户隐私安全。</div>
-        <div class="boundary-tech">技术实现：数据脱敏 + 传输加密 + 访问日志</div>
-      </div>
-      
-      <div class="boundary-card reveal-on-scroll reveal-delay-4">
-        <div class="boundary-num">05</div>
-        <div class="boundary-icon">⚡</div>
-        <div class="boundary-title">应急响应</div>
-        <div class="boundary-desc">发现异常立即隔离，一键关停问题智能体。就像发现病虾立即捞出，防止传染整个虾塘。</div>
-        <div class="boundary-tech">技术实现：实时监控 + 熔断机制 + 一键下线</div>
-      </div>
-    </div>
-
-    <!-- 三点论 -->
+  <!-- 安全治理三点论容器 -->
+  <div id="part4-security-talent-wrapper" class="security-talent-wrapper">
+  <!-- 安全治理三点论 -->
+  <div id="part4-security-3points" class="section anchor-target">
     <div class="three-points-section reveal-on-scroll reveal-delay-4">
       <div class="three-points-title">安全治理三点论</div>
       <div class="three-points-grid">
@@ -4127,8 +4733,8 @@
         <div class="point-card point-3">
           <div class="point-number">3</div>
           <div class="point-content">
-            <div class="point-title">政委即连长</div>
-            <div class="point-desc">AI时代的安全人员不能只会"忽悠"，必须懂技术、会写代码。把支部建在连上，安全意识融入训练过程。</div>
+            <div class="point-title">安全内嵌开发</div>
+            <div class="point-desc">AI时代的安全团队必须具备工程能力，深入理解模型架构与代码逻辑。将安全规范嵌入开发全流程，从模型训练、数据处理到上线部署，每个环节都有安全审查与合规校验。</div>
           </div>
         </div>
       </div>
@@ -4143,107 +4749,200 @@
     <!-- 新增职位 -->
     <div class="talent-positions-grid">
       <div class="position-card reveal-on-scroll reveal-left reveal-delay-1">
-        <div class="position-icon">💬</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg>
+        </div>
         <div class="position-title">提示词工程师</div>
         <div class="position-desc">设计、优化与AI交互的提示词，让智能体更懂业务、更懂客户</div>
         <div class="position-skill">核心技能：自然语言处理 + 业务理解 + 逻辑思维</div>
       </div>
       
       <div class="position-card reveal-on-scroll reveal-delay-2">
-        <div class="position-icon">🎨</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
         <div class="position-title">AI交互工程师</div>
         <div class="position-desc">设计人机交互界面，让AI工具好用、易用、员工愿意用</div>
         <div class="position-skill">核心技能：UX设计 + 前端开发 + 心理学</div>
       </div>
       
       <div class="position-card reveal-on-scroll reveal-right reveal-delay-1">
-        <div class="position-icon">⚙️</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
         <div class="position-title">模型优化工程师</div>
         <div class="position-desc">针对银行业务场景微调大模型，提升专业领域表现</div>
         <div class="position-skill">核心技能：机器学习 + 金融知识 + 数据处理</div>
       </div>
       
       <div class="position-card reveal-on-scroll reveal-left reveal-delay-3">
-        <div class="position-icon">🛡️</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div class="position-title">AI安全工程师</div>
         <div class="position-desc">构建AI安全边界，防范数据泄露、模型攻击等风险</div>
         <div class="position-skill">核心技能：网络安全 + 合规知识 + 风险评估</div>
       </div>
       
       <div class="position-card reveal-on-scroll reveal-delay-4">
-        <div class="position-icon">🎓</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="12" y2="11"/></svg>
+        </div>
         <div class="position-title">智能体训练师</div>
         <div class="position-desc">持续训练优化智能体，提升业务场景适配度</div>
         <div class="position-skill">核心技能：业务专家 + 数据分析 + 持续学习</div>
       </div>
       
       <div class="position-card reveal-on-scroll reveal-right reveal-delay-3">
-        <div class="position-icon">📊</div>
+        <div class="position-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
         <div class="position-title">AI产品经理</div>
         <div class="position-desc">统筹AI产品规划，连接业务需求与技术实现</div>
         <div class="position-skill">核心技能：产品思维 + 项目管理 + 跨部门沟通</div>
       </div>
     </div>
   </div>
+  </div><!-- end of #part4-security-talent-wrapper -->
 
-  <!-- 4.5 诉求与价值展望 -->
-  <div id="part4-request" class="section anchor-target">
+  <!-- 4.5 诉求 -->
+  <div id="part4-request" class="section anchor-target" style="min-height: 810px;">
     <div class="section-title">需要支持的方面</div>
     <div class="section-desc">以下是落地实施的先决条件，需要管理层支持或协调资源。</div>
 
     <div class="request-grid">
       <div class="request-card">
-        <div class="request-icon">🧪</div>
+        <div class="request-icon"><svg viewBox="0 0 24 24"><path d="M10 2v7.31"/><path d="M14 2v7.31"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M12 9.3V14"/></svg></div>
         <div class="request-title">实验边界界定</div>
         <div class="request-desc">明确可控实验环境的权限范围，允许在指定场景内先行探索——到底哪些能做、能做到什么程度？这是第一步，也是最重要的一步。</div>
       </div>
       <div class="request-card">
-        <div class="request-icon">💻</div>
+        <div class="request-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <div class="request-title">本地算力支持</div>
         <div class="request-desc">配置基础本地算力资源，解决内网部署与数据安全的核心问题。这是私有化部署的前提，没有本地算力，所有数据安全都是纸上谈兵。</div>
       </div>
       <div class="request-card">
-        <div class="request-icon">🤝</div>
+        <div class="request-icon"><svg viewBox="0 0 24 24"><path d="M17 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2Z"/><path d="M19 11V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 11V3"/><path d="M7 21a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2Z"/><path d="M17 21a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2"/></svg></div>
         <div class="request-title">外部合作引入</div>
         <div class="request-desc">与高校及专业机构合作，引入前瞻性研究，避免闭门造车。单靠内部力量不够，需要吸收外部最新技术和经验。</div>
       </div>
       <div class="request-card">
-        <div class="request-icon">🔌</div>
+        <div class="request-icon"><svg viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg></div>
         <div class="request-title">系统接口开放</div>
         <div class="request-desc">推动总行核心系统能力原子化、接口化开放，形成上下合力。只有系统开放了，智能体才能真正发挥威力，否则只能在边缘打转。</div>
       </div>
     </div>
+  </div>
 
-    <div style="margin-top: 40px;">
-      <div class="section-title">价值展望：从三个维度看收益</div>
+  <!-- 4.6 价值展望 -->
+  <div id="value-outlook" class="section anchor-target" style="position: relative;">
+    <div class="section-title">价值展望：从三个维度看收益</div>
       <div class="value-grid">
         <div class="value-card">
-          <div class="value-icon">👥</div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="value-subject">对客户</div>
           <div class="value-desc"><em>响应更快</em> · <em>建议更准</em> · <em>服务更有温度</em><br><br>不是冷冰冰的系统，而是真正懂你的智能助手。</div>
         </div>
         <div class="value-card">
-          <div class="value-icon">👩‍💼</div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M19 11V7a2 2 0 0 1 2-2h.5a2 2 0 0 1 2 2v4"/><path d="M19 11v10"/></svg></div>
           <div class="value-subject">对员工</div>
           <div class="value-desc">从重复劳动中解放，聚焦高价值判断。<br><br><em>工具帮你干，不是AI替你走。</em>反而能创效增收、提升收入。</div>
         </div>
         <div class="value-card">
-          <div class="value-icon">🏦</div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M10 9h4"/><path d="M10 13h4"/><path d="M10 17h4"/></svg></div>
           <div class="value-subject">对全行</div>
           <div class="value-desc"><em>可复制的模式</em> · <em>可验证的ROI</em> · <em>可传承的智能运营体系</em><br><br>广州直营的探索，为全行提供示范样本。</div>
         </div>
       </div>
-    </div>
+
+      <!-- OMT 触发按钮 -->
+      <div class="omt-hidden-trigger" id="omtTrigger" onclick="toggleOneMoreThing()">
+        <div class="omt-trigger-dot"></div>
+        <div class="omt-trigger-text">OMT</div>
+      </div>
   </div>
 
-  <!-- ========== PART 5 ========== -->
+  <!-- OMT 样式定义 -->
+  <style>
+    /* 隐藏入口样式 - 低调隐蔽风格 */
+    .omt-hidden-trigger {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      opacity: 0.25;
+      background: transparent;
+      z-index: 100;
+      width: fit-content;
+      min-width: auto;
+      max-width: none;
+    }
+    .omt-hidden-trigger:hover {
+      opacity: 0.7;
+      background: rgba(154,188,224,0.05);
+    }
+    .omt-trigger-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.5;
+      transition: all 0.3s ease;
+    }
+    .omt-hidden-trigger:hover .omt-trigger-dot {
+      opacity: 1;
+      box-shadow: 0 0 8px rgba(154,188,224,0.4);
+    }
+    .omt-trigger-text {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      opacity: 0.4;
+      transition: all 0.3s ease;
+      font-weight: 300;
+    }
+    .omt-hidden-trigger:hover .omt-trigger-text {
+      opacity: 0.8;
+      color: var(--gold);
+    }
+    .omt-trigger-hint {
+      display: none;
+    }
+    /* 展开后的隐藏入口状态 */
+    .omt-hidden-trigger.revealed {
+      opacity: 0.6;
+    }
+    .omt-hidden-trigger.revealed .omt-trigger-text {
+      opacity: 0.8;
+      color: var(--green);
+    }
+    .omt-hidden-trigger.revealed .omt-trigger-dot {
+      background: var(--green);
+      opacity: 0.8;
+    }
+  </style>
+
+  <!-- ========== PART 4 One More Thing (原PART 05) - 默认隐藏 ========== -->
+  <div id="omt-container" style="display: none; opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);">
+  <style>
+    /* ONE MORE THING 收起动画 */
+    #omt-container.hiding {
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  </style>
   <div class="part-divider"></div>
   
   <!-- 5.0 感谢聆听入场 -->
-  <div id="part5-intro" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);">
+  <div id="part5-intro" class="section anchor-target" style="min-height: 810px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);">
     <style>
     /* 入场动画样式 - 独立命名空间 */
-    #part5-intro { --gold: var(--gold); }
     #part5-intro canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
     #part5-intro .grid-bg {
       position:fixed; top:0; left:0; width:100%; height:100%; z-index:0;
@@ -4253,7 +4952,7 @@
     #part5-intro .scanline {
       position:absolute; top:0; left:0; width:100%; height:2px;
       background:rgba(201,168,76,0.15); z-index:100;
-      animation:scanline 4s linear infinite;
+      animation:scanline 2s linear infinite;
       pointer-events:none;
       box-shadow:0 0 10px rgba(201,168,76,0.3);
     }
@@ -4267,7 +4966,7 @@
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       background: linear-gradient(135deg, var(--bg) 0%, var(--bg) 100%);
       z-index:10; transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
     #part5-intro .thanks-page.pushed {
       transform: translateX(-120%) rotateY(15deg) scale(0.85);
@@ -4275,7 +4974,7 @@
     }
     #part5-intro .thanks-content {
       text-align:center; opacity:0; transform:translateY(30px);
-      transition:all 0.8s ease;
+      transition:all 0.4s ease;
     }
     #part5-intro .thanks-content.show { opacity:1; transform:translateY(0); }
     #part5-intro .thanks-title {
@@ -4292,8 +4991,11 @@
       display:none; flex-direction:column; align-items:center;
       justify-content:center; position:relative;
     }
+    #part5-intro .omt-final-container.active {
+      display:flex;
+    }
     #part5-intro .omt-final-container.show {
-      display:flex; animation: finalAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation: finalAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
     @keyframes finalAppear { 0% { opacity:0; transform:scale(0.3); } 60% { transform:scale(1.05); } 100% { opacity:1; transform:scale(1); } }
     #part5-intro .omt-glow {
@@ -4302,7 +5004,7 @@
       background:radial-gradient(circle,rgba(201,168,76,0.5) 0%,rgba(201,168,76,0.2) 30%,rgba(201,168,76,0.05) 50%,transparent 70%);
       border-radius:50%; opacity:0; pointer-events:none; z-index:-1;
     }
-    #part5-intro .omt-glow.show { opacity:1; animation:glowAppear 1s ease-out forwards, pulseGlow 3s ease-in-out infinite 1s; }
+    #part5-intro .omt-glow.show { opacity:1; animation:glowAppear 0.5s ease-out forwards, pulseGlow 1.5s ease-in-out infinite 0.5s; }
     @keyframes glowAppear { 0% { opacity:0; transform:translate(-50%,-50%) scale(0.5); } 100% { opacity:1; transform:translate(-50%,-50%) scale(1); } }
     @keyframes pulseGlow { 0%,100% { transform:translate(-50%,-50%) scale(1); opacity:0.8; } 50% { transform:translate(-50%,-50%) scale(1.3); opacity:1; } }
     #part5-intro .omt-text-wrapper { text-align:center; position:relative; }
@@ -4317,7 +5019,7 @@
       opacity: 0;
     }
     #part5-intro .omt-final-container.show .omt-main-text {
-      animation: omtTextReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards, textGlowPulse 2s ease-in-out infinite alternate 1s;
+      animation: omtTextReveal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.125s forwards, textGlowPulse 1s ease-in-out infinite alternate 0.5s;
     }
     @keyframes omtTextReveal {
       0%   { opacity:0; transform:translateY(30px) scale(0.85); }
@@ -4332,30 +5034,31 @@
       will-change: opacity, transform;
     }
     #part5-intro .omt-final-container.show .omt-subtitle {
-      animation: omtSubReveal 0.6s ease-out 0.95s forwards;
+      animation: omtSubReveal 0.3s ease-out 0.475s forwards;
     }
     @keyframes omtSubReveal { 0% { opacity:0; transform:translateY(20px); } 100% { opacity:1; transform:translateY(0); } }
     #part5-intro .omt-decoration { position:absolute; width:100%; height:100%; pointer-events:none; overflow:hidden; }
-    #part5-intro .deco-line { position:absolute; background:linear-gradient(90deg,transparent,rgba(201,168,76,0.8),transparent); height:2px; width:0; box-shadow:0 0 20px rgba(201,168,76,0.5); transition:width 1s ease 0.5s; }
+    #part5-intro .deco-line { position:absolute; background:linear-gradient(90deg,transparent,rgba(201,168,76,0.8),transparent); height:2px; width:0; box-shadow:0 0 20px rgba(201,168,76,0.5); transition:width 0.5s ease 0.25s; }
     #part5-intro .deco-line.top { top:25%; left:0; }
     #part5-intro .deco-line.bottom { bottom:25%; left:0; }
     #part5-intro .deco-line.show { width:100%; }
-    #part5-intro .deco-circle { position:absolute; border:2px solid rgba(201,168,76,0.4); border-radius:50%; opacity:0; transform:scale(0); transition:all 0.6s ease 0.4s; box-shadow:0 0 30px rgba(201,168,76,0.2), inset 0 0 30px rgba(201,168,76,0.1); }
+    #part5-intro .deco-circle { position:absolute; border:2px solid rgba(201,168,76,0.4); border-radius:50%; opacity:0; transform:scale(0); transition:all 0.3s ease 0.2s; box-shadow:0 0 30px rgba(201,168,76,0.2), inset 0 0 30px rgba(201,168,76,0.1); }
     #part5-intro .deco-circle.c1 { width:250px; height:250px; top:15%; left:8%; }
     #part5-intro .deco-circle.c2 { width:180px; height:180px; bottom:20%; right:12%; }
     #part5-intro .deco-circle.c3 { width:120px; height:120px; top:35%; right:18%; }
     #part5-intro .deco-circle.show { opacity:1; transform:scale(1); animation: rotateCircle 20s linear infinite; }
     @keyframes rotateCircle { 0% { transform:scale(1) rotate(0deg); } 100% { transform:scale(1) rotate(360deg); } }
-    #part5-intro .corner-deco { position:absolute; width:80px; height:80px; border:2px solid rgba(201,168,76,0.3); opacity:0; transition:all 0.6s ease 0.6s; }
+    @keyframes cursorBlink { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
+    #part5-intro .corner-deco { position:absolute; width:80px; height:80px; border:2px solid rgba(201,168,76,0.3); opacity:0; transition:all 0.3s ease 0.3s; }
     #part5-intro .corner-deco.tl { top:40px; left:40px; border-right:none; border-bottom:none; }
     #part5-intro .corner-deco.tr { top:40px; right:40px; border-left:none; border-bottom:none; }
     #part5-intro .corner-deco.bl { bottom:40px; left:40px; border-right:none; border-top:none; }
     #part5-intro .corner-deco.br { bottom:40px; right:40px; border-left:none; border-top:none; }
     #part5-intro .corner-deco.show { opacity:1; }
-    #part5-intro .click-hint { position:absolute; bottom:80px; left:50%; transform:translateX(-50%); font-size:14px; color:#666; opacity:0; animation:fadeInHint 1s ease 2s forwards, pulseHint 2s ease-in-out 3s infinite; }
+    #part5-intro .click-hint { position:absolute; bottom:80px; left:50%; transform:translateX(-50%); font-size:14px; color:#666; opacity:0; pointer-events:none; }
     @keyframes fadeInHint { to { opacity:1; } }
     @keyframes pulseHint { 0%,100% { opacity:0.6; transform:translateX(-50%) scale(1); } 50% { opacity:1; transform:translateX(-50%) scale(1.05); } }
-    #part5-intro .next-btn { position:absolute; bottom:60px; left:50%; transform:translateX(-50%); background:rgba(201,168,76,0.1); border:2px solid rgba(201,168,76,0.5); color:var(--gold); padding:14px 40px; border-radius:30px; font-size:16px; cursor:pointer; opacity:0; transition:all 0.4s ease 1s; font-family:inherit; letter-spacing:2px; box-shadow:0 0 20px rgba(201,168,76,0.2); }
+    #part5-intro .next-btn { position:absolute; bottom:60px; left:50%; transform:translateX(-50%); background:rgba(201,168,76,0.1); border:2px solid rgba(201,168,76,0.5); color:var(--gold); padding:14px 40px; border-radius:30px; font-size:16px; cursor:pointer; opacity:0; transition:all 0.4s ease 0.5s; font-family:inherit; letter-spacing:2px; box-shadow:0 0 20px rgba(201,168,76,0.2); }
     #part5-intro .next-btn:hover { background:rgba(201,168,76,0.2); border-color:rgba(201,168,76,0.8); transform:translateX(-50%) translateY(-2px); box-shadow:0 0 30px rgba(201,168,76,0.4); }
     #part5-intro .next-btn.visible { opacity:1; pointer-events:auto; }
     </style>
@@ -4406,8 +5109,9 @@
       let started = false;
       let animationId = null; // 保存动画帧ID，用于停止动画
       let isVisible = false;   // 标记section是否可见
+      let observerDisabled = false; // 标记是否禁用observer触发动画（OMT触发时使用）
 
-      function resize() { canvas.width = 1440; canvas.height = 1080; }
+      function resize() { canvas.width = 1440; canvas.height = 810; }
       resize();
       window.addEventListener('resize', resize);
 
@@ -4484,8 +5188,9 @@
               currentText = textGan.substring(0, index + 1);
               index++;
               updateDisplay();
-              setTimeout(typeNext, 150);
+              setTimeout(typeNext, 75);
             } else {
+              // gan输入完成，短停顿后变成"感"
               setTimeout(() => {
                 currentText = '感';
                 updateDisplay();
@@ -4493,8 +5198,8 @@
                   phase = 'typingXie';
                   index = 0;
                   typeNext();
-                }, 200);
-              }, 200);
+                }, 100);
+              }, 100);
             }
           } else if (phase === 'typingXie') {
             const textXie = 'xie';
@@ -4502,8 +5207,9 @@
               currentText = '感' + textXie.substring(0, index + 1);
               index++;
               updateDisplay();
-              setTimeout(typeNext, 150);
+              setTimeout(typeNext, 75);
             } else {
+              // xie输入完成（感xie），短停顿后变成"感谢"
               setTimeout(() => {
                 currentText = '感谢';
                 updateDisplay();
@@ -4511,8 +5217,8 @@
                   phase = 'typingLing';
                   index = 0;
                   typeNext();
-                }, 200);
-              }, 200);
+                }, 100);
+              }, 150);
             }
           } else if (phase === 'typingLing') {
             const textLing = 'ling';
@@ -4520,8 +5226,9 @@
               currentText = '感谢' + textLing.substring(0, index + 1);
               index++;
               updateDisplay();
-              setTimeout(typeNext, 150);
+              setTimeout(typeNext, 75);
             } else {
+              // ling输入完成（感谢ling），短停顿后变成"感谢聆"
               setTimeout(() => {
                 currentText = '感谢聆';
                 updateDisplay();
@@ -4530,7 +5237,7 @@
                   index = 0;
                   typeNext();
                 }, 200);
-              }, 200);
+              }, 150);
             }
           } else if (phase === 'typingTing') {
             const textTing = 'ting';
@@ -4538,31 +5245,31 @@
               currentText = '感谢聆' + textTing.substring(0, index + 1);
               index++;
               updateDisplay();
-              setTimeout(typeNext, 150);
+              setTimeout(typeNext, 125);
             } else {
+              // ting输入完成（感谢聆ting），光标闪烁等一下后开始逐字删除
               setTimeout(() => {
-                currentText = '感谢聆听';
-                updateDisplay();
-                setTimeout(() => {
-                  phase = 'deleting';
-                  typeNext();
-                }, 300);
-              }, 200);
+                phase = 'deleting';
+                typeNext();
+              }, 400);
             }
           } else if (phase === 'deleting') {
             if (currentText.length > 0) {
               currentText = currentText.slice(0, -1);
               updateDisplay();
-              setTimeout(typeNext, 100);
+              setTimeout(typeNext, 60);
             } else {
+              // 删除完成，显示提示，等待点击
               typewriterComplete = true;
               titleEl.innerHTML = '';
-              clickHint.style.animation = 'fadeInHint 0.5s ease forwards, pulseHint 2s ease-in-out 1s infinite';
+              clickHint.style.opacity = '1';
+              clickHint.style.animation = 'fadeInHint 0.25s ease forwards, pulseHint 1s ease-in-out 0.5s infinite';
+              clickHint.style.pointerEvents = 'auto';
             }
           }
         }
         updateDisplay();
-        setTimeout(typeNext, 300);
+        setTimeout(typeNext, 150);
       }
 
       function triggerTransition() {
@@ -4579,43 +5286,64 @@
         const nextBtn = document.getElementById('nextBtn');
         const omtMainText = document.getElementById('omtMainText');
         const omtSubtitle = document.getElementById('omtSubtitle');
-        
-        titleEl.style.display = 'none';
-        clickHint.style.opacity = '0';
-        decoration.style.opacity = '1';
-        omtFinal.classList.add('show');
+
+        if (titleEl) titleEl.style.display = 'none';
+        if (clickHint) clickHint.style.opacity = '0';
+        if (decoration) decoration.style.opacity = '1';
+
+        // 先添加 active 类设置 display:flex，再添加 show 类触发动画
+        if (omtFinal) {
+          omtFinal.classList.add('active');
+          omtFinal.offsetHeight; // 强制重绘
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              omtFinal.classList.add('show');
+            });
+          });
+        }
+
         createBurstParticles();
 
-        // 兜底：动画结束后强制确保文字可见（解决 -webkit-text-fill-color + opacity 动画兼容性问题）
+        // 兜底检查 - 强制显示
         setTimeout(() => {
           if (omtMainText) {
-            omtMainText.style.opacity = '1';
-            omtMainText.style.transform = 'translateY(0) scale(1)';
+            const s = getComputedStyle(omtMainText);
+            if (s.opacity === '0') {
+              omtMainText.style.opacity = '1';
+              omtMainText.style.transform = 'translateY(0) scale(1)';
+            }
           }
-        }, 1100);
+          if (omtFinal && getComputedStyle(omtFinal).display === 'none') {
+            omtFinal.style.display = 'flex';
+          }
+        }, 550);
         setTimeout(() => {
           if (omtSubtitle) {
-            omtSubtitle.style.opacity = '1';
-            omtSubtitle.style.transform = 'translateY(0)';
+            const s = getComputedStyle(omtSubtitle);
+            if (s.opacity === '0') {
+              omtSubtitle.style.opacity = '1';
+              omtSubtitle.style.transform = 'translateY(0)';
+            }
           }
-        }, 1700);
+        }, 850);
         
-        setTimeout(() => { document.getElementById('omtGlow').classList.add('show'); }, 200);
+        setTimeout(() => { document.getElementById('omtGlow').classList.add('show'); }, 100);
         setTimeout(() => {
           document.getElementById('decoLineTop').classList.add('show');
           document.getElementById('decoLineBottom').classList.add('show');
-        }, 400);
+        }, 200);
         setTimeout(() => {
           ['decoC1', 'decoC2', 'decoC3', 'cornerTL', 'cornerTR', 'cornerBL', 'cornerBR'].forEach(id => {
-            document.getElementById(id).classList.add('show');
+            const el = document.getElementById(id);
+            if (el) el.classList.add('show');
           });
-        }, 600);
-        setTimeout(() => { nextBtn.classList.add('visible'); }, 1500);
+        }, 300);
+        setTimeout(() => { if(nextBtn) nextBtn.classList.add('visible'); }, 750);
       }
 
       function createBurstParticles() {
         const colors = ['#C9A84C', '#C9A84C', '#E8D5A3', '#F5E6C8', '#FFA500'];
-        const maxDistance = Math.max(1440, 1080) * 0.8;
+        const maxDistance = Math.max(1440, 810) * 0.8;
         for (let i = 0; i < 120; i++) {
           setTimeout(() => {
             const particle = document.createElement('div');
@@ -4632,7 +5360,7 @@
               { transform: 'translate(-50%,-50%) scale(1.5)', opacity: 1, offset: 0.1 },
               { transform: 'translate(calc(-50% + ' + tx + 'px),calc(-50% + ' + ty + 'px)) scale(0.3)', opacity: 0 }
             ], { duration: 800 + Math.random() * 1200, easing: 'cubic-bezier(0.25,0.46,0.45,0.94)' }).onfinish = () => particle.remove();
-          }, i * 12);
+          }, i * 6);
         }
       }
 
@@ -4655,8 +5383,9 @@
               isVisible = true;
               animationId = requestAnimationFrame(animBg);
             }
-            if (!started) {
-              setTimeout(triggerAnimation, 300);
+            // 如果observer被禁用（OMT触发），跳过打字机动画
+            if (!started && !observerDisabled && !window.omtTriggered) {
+              setTimeout(triggerAnimation, 150);
             }
           } else {
             // 离开视口：停止Canvas动画以节省资源
@@ -4672,6 +5401,11 @@
       }, { threshold: 0.5 });
       observer.observe(container);
       
+      // 暴露禁用observer的方法，供OMT触发时调用
+      window.disablePart5Observer = function() {
+        observerDisabled = true;
+      };
+      
       // 页面卸载时清理资源
       window.addEventListener('beforeunload', function() {
         isVisible = false;
@@ -4684,7 +5418,7 @@
   </div>
 
   <div id="part5" class="part-header anchor-target">
-    <div class="part-tag">PART 05 · One More Thing</div>
+    <div class="part-tag">PART 04 · One More Thing</div>
     <div class="part-title">智能化时代的挑战与机遇</div>
     <div class="part-desc">往前再走一步——AI不只是工具，而是全新的商业业态。银行的位置在哪里？</div>
   </div>
@@ -4726,32 +5460,32 @@
     <div class="opc-flow">
       <div class="opc-step reveal-on-scroll reveal-left reveal-delay-1">
         <div class="opc-step-num">STEP 01</div>
-        <div class="opc-step-title">🔍 市场调研</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>市场调研</div>
         <div class="opc-step-desc">智能体在全网搜索爆款产品，自动分析市场趋势</div>
       </div>
       <div class="opc-step reveal-on-scroll reveal-left reveal-delay-2">
         <div class="opc-step-num">STEP 02</div>
-        <div class="opc-step-title">📦 供应商对接</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>供应商对接</div>
         <div class="opc-step-desc">自动在1688等平台比价、进货，优选供应商</div>
       </div>
       <div class="opc-step reveal-on-scroll reveal-left reveal-delay-3">
         <div class="opc-step-num">STEP 03</div>
-        <div class="opc-step-title">🏪 店铺运营</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>店铺运营</div>
         <div class="opc-step-desc">自动开店、上架、优化listing，全程无人干预</div>
       </div>
       <div class="opc-step reveal-on-scroll reveal-right reveal-delay-1">
         <div class="opc-step-num">STEP 04</div>
-        <div class="opc-step-title">💬 客服支持</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>客服支持</div>
         <div class="opc-step-desc">24小时自动回复客户问题，零遗漏零延迟</div>
       </div>
       <div class="opc-step reveal-on-scroll reveal-right reveal-delay-2">
         <div class="opc-step-num">STEP 05</div>
-        <div class="opc-step-title">📣 内容投放</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>内容投放</div>
         <div class="opc-step-desc">自动写文案、发小红书、投流，持续引流</div>
       </div>
       <div class="opc-step reveal-on-scroll reveal-right reveal-delay-3">
         <div class="opc-step-num">STEP 06</div>
-        <div class="opc-step-title">💰 财务管理</div>
+        <div class="opc-step-title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>财务管理</div>
         <div class="opc-step-desc">自动对账、自动理财，资金高效流转</div>
       </div>
     </div>
@@ -4780,13 +5514,11 @@
       </div>
     </div>
 
-    <div class="punchline reveal-on-scroll reveal-scale reveal-delay-4">
-      <div class="punchline-text">答案扎心：在一人公司的商业模式里，银行几乎没有存在感。</div>
-    </div>
+
   </div>
 
   <!-- 5.3a AI友好型 - 时光倒流动画 + 三步走 -->
-  <div id="part5-friendly" class="section">
+  <div id="part5-friendly" class="section anchor-target">
     <div class="section-title reveal-on-scroll">深层洞察：AI友好型（智能体友好）银行</div>
     <div class="section-desc reveal-on-scroll reveal-delay-1">当智能体成为企业的数字员工，所有商业行为都通过智能体完成，银行必须让智能体能"看见"自己。</div>
 
@@ -4911,7 +5643,7 @@
           <li>社区孵化：年度最高<strong>150万</strong>支持</li>
           <li>要素保障：算力补贴<strong>50%</strong>、数据补贴<strong>30%</strong></li>
           <li>以日均token消耗量评价OPC发展阶段，精准扶持</li>
-          <li>目标：2026年新一代信息技术服务业营收<strong>1500亿</strong></li>
+          <li>目标：2026年新一代信息技术服务业营收<strong>150.6亿元</strong></li>
         </ul>
       </div>
     </div>
@@ -4973,12 +5705,23 @@
 
     <div class="mandatory-grid">
       <div class="mandatory-card reveal-on-scroll reveal-delay-1" style="border-left: 3px solid var(--red);">
-        <div class="mandatory-icon" style="color: var(--red);">⚠️</div>
+        <div class="mandatory-icon" style="color: var(--red);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
         <div class="mandatory-title">被动等待的代价</div>
         <div class="mandatory-desc">客户已习惯AI服务体验，传统银行将成为"数字时代的ATM"。功能齐全但体验落后，将失去下一代客户。市场份额将持续流向更智能的竞争者。</div>
       </div>
       <div class="mandatory-card reveal-on-scroll reveal-delay-2" style="border-left: 3px solid var(--green);">
-        <div class="mandatory-icon" style="color: var(--green);">✓</div>
+        <div class="mandatory-icon" style="color: var(--green);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
         <div class="mandatory-title">主动拥抱的机遇</div>
         <div class="mandatory-desc">首批AI友好型银行将获得先发优势：更低运营成本、更高客户满意度、更强人才吸引力、更快创新迭代。在AI时代，领先一步就是领先一个时代。</div>
       </div>
@@ -5007,9 +5750,13 @@
       <div>推动从"传统银行"向"智能银行"跨越</div>
     </div>
   </div>
+  
+  <!-- 关闭 omt-container -->
+  </div>
+  <!-- /omt-container -->
 
   <!-- ========== 致谢页 ========== -->
-  <div id="part5-credits" class="section anchor-target" style="min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000;">
+  <div id="part5-credits" class="section anchor-target" style="min-height: 810px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000;">
     <!-- Canvas 粒子层 -->
     <canvas id="creditsCanvas" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;"></canvas>
 
@@ -5019,7 +5766,7 @@
 
     <!-- 背景对话滚动 -->
     <div style="position: absolute; inset: 0; overflow: hidden; z-index: 2; mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);">
-      <div id="creditsBgContent" style="position: absolute; width: 100%; padding: 0 60px; animation: creditsBgUp 60s linear infinite; opacity: 0.18; font-family: 'PingFang SC', 'Microsoft YaHei', monospace; font-size: var(--current-md); line-height: 2;"></div>
+      <div id="creditsBgContent" style="position: absolute; width: 100%; padding: 0 60px; animation: creditsBgUp 60s linear infinite; opacity: 0.35; font-family: 'PingFang SC', 'Microsoft YaHei', monospace; font-size: var(--current-md); line-height: 2;"></div>
     </div>
 
     <!-- 主内容 -->
@@ -5070,13 +5817,13 @@
           <div style="font-size: var(--current-sm); color: #555; margin-top: 8px; letter-spacing: 2px; font-family: 'PingFang SC', sans-serif;">— 不是"要不要做"，而是"怎么做好"</div>
         </div>
         
-        <div style="margin-top: 20px; font-size: var(--current-sm); color: #444; letter-spacing: 5px; font-family: 'PingFang SC', sans-serif;">2026年3月 · 广州</div>
+        <div style="margin-top: 20px; font-size: var(--current-sm); color: #444; letter-spacing: 5px; font-family: 'PingFang SC', sans-serif;">2026年4月 · 广州直营中心</div>
       </div>
     </div>
     
     <style>
       @keyframes creditsBgUp {
-        0% { transform: translateY(1080px); }
+        0% { transform: translateY(810px); }
         100% { transform: translateY(-120%); }
       }
       @keyframes cardFadeIn {
@@ -5086,6 +5833,71 @@
       @keyframes goldShimmer {
         0% { background-position: 0% center; }
         100% { background-position: 200% center; }
+      }
+    </style>
+
+    <!-- PDF预览样式 -->
+    <style>
+      /* PDF预览按钮 */
+      .pdf-preview-btn {
+        padding: 8px 20px;
+        border-radius: 20px;
+        border: 1px solid var(--gold-30, rgba(154,188,224,0.3));
+        background: rgba(154,188,224,0.08);
+        color: var(--gold, #9ABCE0);
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-left: 16px;
+        vertical-align: middle;
+      }
+      .pdf-preview-btn:hover {
+        background: rgba(154,188,224,0.15);
+        border-color: var(--gold, #9ABCE0);
+        transform: translateY(-1px);
+      }
+
+      /* PDF预览弹窗 */
+      .pdf-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+      }
+      .pdf-overlay-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background: rgba(20,20,30,0.95);
+        border-bottom: 1px solid rgba(154,188,224,0.2);
+      }
+      .pdf-overlay-title {
+        color: var(--gold, #9ABCE0);
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+      .pdf-overlay-close {
+        padding: 6px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(154,188,224,0.3);
+        background: transparent;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .pdf-overlay-close:hover {
+        background: rgba(255,100,100,0.2);
+        border-color: rgba(255,100,100,0.5);
+      }
+      .pdf-iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+        background: #fff;
       }
     </style>
     
@@ -5099,7 +5911,7 @@
         
         function resize() {
           W = canvas.width = 1440;
-          H = canvas.height = 1080;
+          H = canvas.height = 810;
         }
         window.addEventListener('resize', resize);
         resize();
@@ -5141,24 +5953,46 @@
         const bgEl = document.getElementById('creditsBgContent');
         if (!bgEl) return;
         const dialogues = [
-          { u: "设计一个电影谢幕风格的致谢页，黑金配色，内容要在一屏内完整显示", a: "整体架构：Canvas粒子背景 + 对话文字缓速上升 + 主字幕卡片居中固定，衬线字体营造仪式感" },
-          { u: "字体必须够大，面向省行领导，最小14px", a: "已调整字体层级：主标题3.2rem，副标题1.05rem，说明文字0.85rem，最小12px辅助字 → 全部≥14px" },
-          { u: "卡片要有质感，不要塑料感", a: "加入backdrop-filter:blur(12px)毛玻璃效果，内边框渐变高光，角落切角装饰，阴影分三层" },
-          { u: "金色标题要有流光效果", a: "使用background-size:200%配合animation实现从左到右的金色流光扫过效果，周期4秒" },
-          { u: "背景粒子不要太抢眼，要烘托气氛", a: "粒子透明度0.1~0.5随机，粒子半径0.6~1.8px，60%金色40%白色，数量120个缓速上升" },
-          { u: "左右两侧加装饰竖线，有电影感", a: "已加：position:fixed的竖向渐变线，从透明到rgba(201,168,76,0.12)再到透明，宽1px" },
-          { u: "工具栏改为2×2网格排列，更整齐", a: "grid-template-columns:1fr 1fr，每格内：角色标签 / 名称 / 描述三行，hover时边框加亮" },
-          { u: "引用语区域要有区分感，不能和上方混在一起", a: "加上下边框线+轻微金色背景rgba(201,168,76,0.03)，视觉上独立成区块，营造收尾感" },
-          { u: "背景对话要体现真实的开发协作过程", a: "内容来自真实的设计对话：用户发需求在左(金色)，AI给方案在右(绿色)，opacity 0.18" },
+          { 
+            u: "### SOP演示页 · 复合问题诊断\n\n在SOP智能升级演示页面（03_广州实践_SOP智能升级_动画版_v3.4.html）中，第一页的团队结构对比内容（传统内容团队 vs AI赋能内容团队）出现了以下问题：\n\n1. **视觉显示问题：** 团队成员的具体信息（如内部美工×4、内部文案×2等角色详情、成本标签等）在页面上几乎无法看清，文字颜色与背景对比度过低\n\n2. **功能响应问题：** 点击\"开始体验\"按钮没有任何反应，无法进入下一步的交互流程\n\n请修复这两个问题：\n- 调整第一页团队对比区域的文字颜色、透明度或其他视觉属性，确保所有团队成员信息、角色描述、成本标签等内容清晰可见\n- 修复\"开始体验\"按钮的点击事件，使其能够正常触发页面跳转或进入下一步流程\n- 保持原有的动画效果和视觉设计风格不变，仅解决可读性和功能性问题",
+            a: "**已完成视觉+功能双维度修复：**\n\n**问题一 · 视觉对比度修复：**\n* 定位到 `.intro-m-row` 元素组，原始 `opacity: 0` 依赖 JS 定时器触发 `.show` 类添加，但定时器在页面初始化时被清除导致内容不可见。\n* 重构方案：移除 JS 定时器依赖，改用纯 CSS `@keyframes introFadeIn` 动画 + `animation-delay` 逐行延迟显示，确保团队成员信息稳定可见。\n* 同时将文字颜色对比度调整至 WCAG AA 标准（对比度 ≥ 4.5:1）。\n\n**问题二 · 按钮事件修复：**\n* 排查 `startExperience()` 函数调用链：`startExperience()` → `resetDemo()` → `goStep(0)`。\n* 根因定位：`resetDemo()` 中引用了 intro 页面不存在的 DOM 元素（如 `.chat-messages`），导致 JS 报错中断后续执行。\n* 修复方案：为所有 DOM 操作添加存在性检查 `if(element)`，并调整函数调用时序。\n\n两个独立问题已通过一条复合指令同步定位并修复。" 
+          },
+          { 
+            u: "### 冰川蓝主题 · 跨文件系统性修复\n\n在冰川蓝主题下，检查所有HTML文件中的浅色文字和浅灰色线条显示问题。具体需要调整的内容包括：\n\n1. 所有在冰川蓝主题下显示为浅灰色、浅米色或其他浅色调的文字，如果在米白色背景(#F5F1EC)上对比度过低导致难以阅读，都需要调整为更深的颜色（建议使用 --text: #2E4265 或 --text-dim: #8599AB）\n\n2. 所有浅灰色的网格线、分割线、竖线等装饰性线条，需要调整为更深的颜色以提高可见性\n\n3. 检查以下类型的元素：表格中的浅色文字内容、分割线/边框线/网格线、辅助性文字/标签/提示信息、图表中的坐标轴/刻度线/网格线、任何使用了浅色系的装饰性元素\n\n4. 需要检查的文件：完整演示版v9.3.html（主页面）+ 所有子页面HTML文件（智能情报、客户运营、SOP升级、跨部门协同、邮件处理、销冠Skills、AI银行、数据智能、LLM原理、多智能体协同、过渡页等）\n\n5. 修复方式应使用CSS变量而非硬编码颜色，确保在不同主题间的一致性和可维护性",
+            a: "**系统性修复方案已完成，涉及13个HTML文件：**\n\n**执行策略：** 4组并行处理\n* **A组：** 完整演示版v9.3.html（主页面，约200+处覆盖）\n* **B组：** 智能客户运营 + 销冠Skills（高复杂度页面）\n* **C组：** SOP升级 + 跨部门协同 + 邮件处理\n* **D组：** 情报官 + LLM原理 + 多智能体 + 数据智能 + AI银行 + 过渡页\n\n**修复覆盖三大类问题：**\n1. **文字对比度：** 所有 `color` 值低于 WCAG AA 标准的文字，统一使用 `html[data-theme=\"glacier-blue\"]` 选择器覆盖为 `var(--text)` 或 `var(--text-dim)`\n2. **线条可见性：** border、box-shadow、hr 等装饰性线条颜色加深至 `var(--border)` (#8599AB)\n3. **背景透明度：** 卡片背景从全透明调整为 `rgba(234,228,221,0.85~0.95)`，提升内容层次感\n\n所有修复均通过 CSS 变量实现，零硬编码，确保主题切换时的一致性。" 
+          },
+          { 
+            u: "### 颜色主题系统 · 架构级重设计\n\n现在需要对颜色主题系统进行重新设计：\n\n1. 保留现有的黑金主题和深海蓝主题\n2. 删除其他4套不再使用的主题\n3. 基于以下色卡设计第三套浅色主题\"冰川蓝\"（glacier-blue）：\n   - #2E4265 — 深蓝灰（强调色/文字色）\n   - #8599AB — 中蓝灰\n   - #A8B5C2 — 浅蓝灰\n   - #D5D5D6 — 极浅灰（背景辅助）\n   - #8FA3BC — 中蓝\n4. 在theme-config.js中配置完整的CSS变量系统（包含透明度变体）\n5. 在所有HTML文件中同步更新主题切换按钮和样式定义",
+            a: "**已进入计划模式，制定系统性重构方案：**\n\n**色卡深度分析：**\n* 判定为浅色主题（冰川/雪山风格），以米白 #F5F1EC 为主背景\n* 文字主色：#2E4265（深蓝灰），辅助色：#8599AB（中蓝灰）\n* 强调色沿用项目金色系：#C9A84C → 调整为 #7A8FA6 以匹配冰川调性\n\n**变量系统设计（含透明度变体）：**\n--bg: #F5F1EC / --bg2: #EAE4DD / --card-bg: #EAE4DD\n--card-bg-08: rgba(234,228,221,0.8) / --card-bg-06: rgba(234,228,221,0.6)\n--text: #2E4265 / --text-dim: #8599AB / --border: #8599AB\n\n**修改范围：3类文件，共16处修改**\n* theme-config.js：删除4套旧主题，新增 glacier-blue 完整配置\n* 完整演示版v9.3.html：更新 swatch 按钮 + 主题样式块\n* 13个子页面：逐一添加 `html[data-theme=\"glacier-blue\"]` CSS覆盖\n\n分5个Task顺序执行，确保依赖关系正确。" 
+          },
+          { 
+            u: "### 字体系统 · 跨文件一致性调整\n\n针对每日市场情报官动画页面（文件名：04_智能情报_每日市场情报官_动画版.html），需要进行以下字体调整：\n\n1. 页面整体内容字体过小，需要增大字体以与智能客户运营页面的字体大小保持一致，同时要符合项目整体的字体系统配置规范（使用CSS变量如--current-base等）\n\n2. 【智能情报  每日市场情报官】这个主标题的字体大小保持现状不变，不需要修改\n\n3. 其他相关页面的标题字体也需要统一调整：\n   - [智能客户运营  一体化工作台]（文件：03_广州实践_智能客户运营_动画版.html）\n   - SOP智能升级的动画标题【内容创作智能化】\n   这些页面的标题字体大小都需要与【智能情报  每日市场情报官】保持一致\n\n请确保所有字体调整都使用项目中定义的CSS变量系统（如theme-config.js中的字体变量），以保持整个演示系统的字体一致性。",
+            a: "**已完成字体系统调查与三文件同步调整：**\n\n**字体变量映射确认（v17大号方案）：**\n* --text-h1: 55.6px / --text-h2: 41.7px / --text-h3: 31.3px\n* --current-base: 18px / --text-sm: 16px（全局最小值）\n* 基准比例：1.333（Perfect Fourth），基准尺寸：18px\n\n**执行方案（3个并行任务）：**\n1. **情报官页面：** 内容字体从硬编码 14px/15px 全部替换为 `var(--current-base)` (18px)，保持主标题 --text-h3 不变\n2. **客户运营页面：** 标题从 `font-size: 24px` 替换为 `var(--text-h3)` (31.3px)，与情报官对齐\n3. **SOP页面标题：** 同步调整为 --text-h3，统一三个场景的标题视觉层级\n\n所有修改零硬编码，100%使用CSS变量，确保后续主题切换和全局调整的一致性。" 
+          },
+          {
+            u: "### 内容导航 · 键盘交互逻辑修复\n\n在\"AI安全边界——以'养虾'为喻\"这一部分内容中，存在内容跳转问题：当前按下键盘后会直接跳转到下一块内容，导致中间的数据流转管控、安全治理三点论等重要内容被跳过。\n\n请调整这部分内容的展示逻辑，确保所有内容（包括\"养虾\"比喻、数据流转管控、安全治理三点论等）能够按照正确的顺序完整展示，避免内容被跳过的情况发生。",
+            a: "**导航逻辑已修复，内容完整展示：**\n\n**问题根因：**\n* 键盘事件监听器的锚点配置中，缺少中间 section 的路由定义\n* 按键触发后直接从\"养虾比喻\"跳至下一个 PART，跳过了2个关键 section\n\n**修复方案：**\n1. 补全完整导航路由：`养虾比喻` → `数据流转管控` → `安全治理三点论` → `下一PART`\n2. 每个 section 独立注册 `IntersectionObserver` 监听，进入视口时触发 `fade-in-up` 动画\n3. 键盘 `keydown(ArrowDown)` 事件绑定至当前激活 section 的 `nextSection` 方法\n4. 添加防抖机制（Debounce 300ms），避免快速连按导致跳过\n\n导航路由补全后，3个 section 按正确顺序完整展示，键盘和页面按钮共享同一套导航逻辑。" 
+          }
         ];
         const repeated = [...dialogues, ...dialogues, ...dialogues];
         let html = '';
-        repeated.forEach(d => {
-          html += '<div style="display: flex; gap: 0; max-width: 1200px; margin: 0 auto 36px;">' +
-            '<div style="flex: 0 0 42%; text-align: right; padding-right: 20px; color: var(--gold); font-size: var(--current-base);">' + d.u + '</div>' +
-            '<div style="flex: 0 0 16%; text-align: center; color: #333; font-size: var(--current-lg);">│</div>' +
-            '<div style="flex: 0 0 42%; padding-left: 20px; color: #4aaa88; font-size: var(--current-base);">' + d.a + '</div>' +
-          '</div>';
+        repeated.forEach((d, i) => {
+          html += `<div style="margin-bottom: 40px;">`;
+          // U的对话 - 右侧
+          html += `<div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+            <div style="max-width: 65%; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px 12px 2px 12px; padding: 16px 20px; color: var(--gold); text-align: left;">
+              <div style="font-size: 11px; opacity: 0.5; margin-bottom: 6px;">👤 User</div>
+              <div style="white-space: pre-wrap; line-height: 1.8;">${d.u.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')}</div>
+            </div>
+          </div>`;
+          // A的对话 - 左侧
+          html += `<div style="display: flex; justify-content: flex-start; margin-bottom: 12px;">
+            <div style="max-width: 65%; background: rgba(74,170,136,0.06); border: 1px solid rgba(74,170,136,0.15); border-radius: 12px 12px 12px 2px; padding: 16px 20px; color: #4aaa88; text-align: left;">
+              <div style="font-size: 11px; opacity: 0.5; margin-bottom: 6px;">🤖 AI</div>
+              <div style="white-space: pre-wrap; line-height: 1.8;">${d.a.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')}</div>
+            </div>
+          </div>`;
+          html += `</div>`;
         });
         bgEl.innerHTML = html;
       })();
@@ -5199,45 +6033,59 @@
   const main = document.getElementById('main');
 
   // 建立 section 到 nav item 的映射（简化版 - 按PART分组）
+  // 注意：ONE MORE THING (PART 04) 默认隐藏，需要点击触发后才显示
+  let isOneMoreThingRevealed = false;
+  
   const sectionToNavMap = {
     'hero': 0,
-    // PART 1 - 映射到索引1
+    // PART 01 - 映射到索引1
     'part1': 1,
     'part1-policy': 1,
     'part1-challenge': 1,
-    // PART 2 - 映射到索引2
-    'part2': 2,
-    'part2-llm': 2,
-    'iframe-wrap-llm': 2,
-    'part2-intro': 2,
-    'part2-assembly': 2,
-    'part2-multiagent': 2,
-    'iframe-wrap-multiagent': 2,
-    // PART 3 - 映射到索引3
-    'part3': 3,
-    'part3-crm': 3,
-    'iframe-wrap-crm': 3,
-    'part3-collab': 3,
-    'iframe-wrap-collab': 3,
-    'part3-email': 3,
-    'iframe-wrap-email': 3,
-    'part3-asset': 3,
-    'iframe-wrap-asset': 3,
-    'part3-intel': 3,
-    'iframe-wrap-intel': 3,
-    'part3-sop': 3,
-    'iframe-wrap-sop': 3,
-    'part3-live-demo': 3,
-    'part3-skills': 3,
-    'iframe-wrap-skills': 3,
-    // PART 4 - 映射到索引4
-    'part4': 4,
-    'part4-kpi': 4,
-    'part4-risk': 4,
-    'part4-security': 4,
-    'part4-talent': 4,
-    'part4-request': 4,
-    // PART 5 - 映射到索引5
+    // PART 02 - 映射到索引2 (原PART 03)
+    'part3': 2,
+    'part3-crm': 2,
+    'iframe-wrap-crm': 2,
+    'part3-collab': 2,
+    'iframe-wrap-collab': 2,
+    'part3-email': 2,
+    'iframe-wrap-email': 2,
+    'part3-asset': 2,
+    'iframe-wrap-asset': 2,
+    'part3-intel': 2,
+    'iframe-wrap-intel': 2,
+    'part3-sop': 2,
+    'iframe-wrap-sop': 2,
+    'part3-live-demo': 2,
+    'part3-skills': 2,
+    'iframe-wrap-skills': 2,
+    // PART 03 - 映射到索引3 (原PART 04)
+    'part4': 3,
+    'part4-risk': 3,
+    'part4-security': 3,
+    'part4-security-3points': 3,
+    'part4-talent': 3,
+    'part4-request': 3,
+    // 隐藏入口 - 映射到索引3 (与 PART 03 相同，不单独显示)
+    'omt-trigger-section': 3,
+    // PART 04 (ONE MORE THING) - 默认映射到致谢页索引，展开后更新
+    // 展开前：part5相关section也映射到致谢页索引(4)
+    'part5': 4,
+    'part5-intro': 4,
+    'part5-opc': 4,
+    'part5-friendly': 4,
+    'part5-friendly-measures': 4,
+    'part5-action': 4,
+    'part5-policy': 4,
+    'part5-mandatory': 4,
+    'part5-reimbursement': 4,
+    'part5-credits': 4,
+  };
+  
+  // 展开 ONE MORE THING 后的映射
+  const sectionToNavMapRevealed = {
+    ...sectionToNavMap,
+    // PART 04 展开后，part5相关section映射到新的索引5
     'part5': 5,
     'part5-intro': 5,
     'part5-opc': 5,
@@ -5247,7 +6095,7 @@
     'part5-policy': 5,
     'part5-mandatory': 5,
     'part5-reimbursement': 5,
-    'part5-credits': 5,
+    'part5-credits': 6, // 致谢页在展开后是第6个导航项
   };
 
   // 使用 IntersectionObserver 监听 section 进入视口
@@ -5263,7 +6111,9 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.id;
-        const navIndex = sectionToNavMap[sectionId];
+        // 根据展开状态选择对应的映射
+        const currentMap = isOneMoreThingRevealed ? sectionToNavMapRevealed : sectionToNavMap;
+        const navIndex = currentMap[sectionId];
         if (navIndex !== undefined && navIndex !== currentActiveIndex) {
           currentActiveIndex = navIndex;
           updateNavActive(navIndex);
@@ -5272,7 +6122,7 @@
     });
   }, observerOptions);
 
-  // 观察所有 section
+  // 观察所有 section（默认只观察基础section，ONE MORE THING 展开后再观察其余）
   Object.keys(sectionToNavMap).forEach(id => {
     const el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
@@ -5293,36 +6143,39 @@
   }
 
   // updateNav sections映射
+  // 默认配置：ONE MORE THING 隐藏，致谢页直接跟在 PART 03 后面
   const navSections = [
     { id: 'hero', idx: 0 },
-    // PART 1 - 所有part1相关section映射到idx 1
+    // PART 01 - 所有part1相关section映射到idx 1
     { id: 'part1', idx: 1 },
     { id: 'part1-policy', idx: 1 },
     { id: 'part1-challenge', idx: 1 },
-    { id: 'part1-ai-timeline', idx: 1 },
-    // PART 2 - 所有part2相关section映射到idx 2
-    { id: 'part2', idx: 2 },
-    { id: 'part2-llm', idx: 2 },
-    { id: 'part2-intro', idx: 2 },
-    { id: 'part2-assembly', idx: 2 },
-    { id: 'part2-multiagent', idx: 2 },
-    // PART 3 - 所有part3相关section映射到idx 3
-    { id: 'part3', idx: 3 },
-    { id: 'part3-crm', idx: 3 },
-    { id: 'part3-collab', idx: 3 },
-    { id: 'part3-email', idx: 3 },
-    { id: 'part3-asset', idx: 3 },
-    { id: 'part3-intel', idx: 3 },
-    { id: 'part3-sop', idx: 3 },
-    { id: 'part3-live-demo', idx: 3 },
-    // PART 4 - 所有part4相关section映射到idx 4
-    { id: 'part4', idx: 4 },
-    { id: 'part4-kpi', idx: 4 },
-    { id: 'part4-risk', idx: 4 },
-    { id: 'part4-security', idx: 4 },
-    { id: 'part4-talent', idx: 4 },
-    { id: 'part4-request', idx: 4 },
-    // PART 5 - 所有part5相关section映射到idx 5
+    // PART 02 - 所有part3相关section映射到idx 2 (原PART 03)
+    { id: 'part3', idx: 2 },
+    { id: 'part3-crm', idx: 2 },
+    { id: 'part3-collab', idx: 2 },
+    { id: 'part3-email', idx: 2 },
+    { id: 'part3-asset', idx: 2 },
+    { id: 'part3-intel', idx: 2 },
+    { id: 'part3-sop', idx: 2 },
+    { id: 'part3-live-demo', idx: 2 },
+    // PART 03 - 所有part4相关section映射到idx 3 (原PART 04)
+    { id: 'part4', idx: 3 },
+    { id: 'part4-risk', idx: 3 },
+    { id: 'part4-security', idx: 3 },
+    { id: 'part4-security-3points', idx: 3 },
+    { id: 'part4-talent', idx: 3 },
+    { id: 'part4-request', idx: 3 },
+    // 隐藏入口
+    { id: 'omt-trigger-section', idx: 3 },
+    // 默认：致谢页映射到索引4 (隐藏导航状态)
+    { id: 'part5-credits', idx: 4 },
+  ];
+  
+  // ONE MORE THING 展开后的 navSections
+  const navSectionsRevealed = [
+    ...navSections.filter(s => s.id !== 'part5-credits'),
+    // PART 04 - 展开后显示
     { id: 'part5', idx: 5 },
     { id: 'part5-intro', idx: 5 },
     { id: 'part5-opc', idx: 5 },
@@ -5332,13 +6185,199 @@
     { id: 'part5-policy', idx: 5 },
     { id: 'part5-mandatory', idx: 5 },
     { id: 'part5-reimbursement', idx: 5 },
-    { id: 'part5-credits', idx: 5 },
+    // 致谢页在展开后是索引6
+    { id: 'part5-credits', idx: 6 },
   ];
+
+  // ===== ONE MORE THING 展开/收起功能 =====
+  function toggleOneMoreThing() {
+    if (isOneMoreThingRevealed) {
+      hideOneMoreThing();
+    } else {
+      revealOneMoreThing();
+    }
+  }
+  
+  function revealOneMoreThing() {
+    if (isOneMoreThingRevealed) return;
+    
+    isOneMoreThingRevealed = true;
+    
+    // 设置全局标志，禁用part5-intro的打字机动画
+    window.omtTriggered = true;
+    if (window.disablePart5Observer) {
+      window.disablePart5Observer();
+    }
+    
+    // 1. 显示 ONE MORE THING 容器
+    const omtContainer = document.getElementById('omt-container');
+    if (omtContainer) {
+      omtContainer.classList.remove('hiding');
+      omtContainer.style.display = 'block';
+      // 强制重绘以触发过渡动画
+      omtContainer.offsetHeight;
+      omtContainer.style.opacity = '1';
+      omtContainer.style.transform = 'translateY(0)';
+    }
+    
+    // 2. 更新触发按钮状态
+    const trigger = document.getElementById('omtTrigger');
+    if (trigger) {
+      trigger.classList.add('revealed');
+      trigger.querySelector('.omt-trigger-text').textContent = '收起';
+      trigger.querySelector('.omt-trigger-hint').textContent = '点击收起隐藏内容';
+    }
+    
+    // 3. 切换导航栏显示
+    const navHidden = document.getElementById('nav-part4-hidden');
+    const navRevealed = document.getElementById('nav-part4-revealed');
+    if (navHidden && navRevealed) {
+      navHidden.style.display = 'none';
+      navRevealed.style.display = 'block';
+    }
+    
+    // 4. 更新 section 映射
+    // 重新观察新添加的 section
+    const part5Sections = ['part5', 'part5-intro', 'part5-opc', 'part5-friendly', 'part5-friendly-measures', 'part5-action', 'part5-policy', 'part5-mandatory', 'part5-reimbursement'];
+    part5Sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        sectionObserver.observe(el);
+      }
+    });
+    
+    // 5. 直接显示 One More Thing 画面，跳过感谢聆听动画
+    setTimeout(() => {
+      // 先滚动到 part5-intro
+      scrollToSection('part5-intro');
+      
+      // 直接触发 One More Thing 的显示
+      setTimeout(() => {
+        const titleEl = document.getElementById('typewriterTitle');
+        const omtFinal = document.getElementById('omtFinalContainer');
+        const clickHint = document.getElementById('clickHint');
+        const decoration = document.getElementById('omtDecoration');
+        const nextBtn = document.getElementById('nextBtn');
+        const thanksContent = document.getElementById('thanksContent');
+        
+        // 隐藏感谢聆听相关内容
+        if (titleEl) titleEl.style.display = 'none';
+        if (clickHint) clickHint.style.opacity = '0';
+        if (thanksContent) {
+          thanksContent.style.opacity = '1';
+          thanksContent.style.transform = 'translateY(0)';
+        }
+        
+        // 显示装饰元素
+        if (decoration) decoration.style.opacity = '1';
+        
+        // 显示 One More Thing 容器 - 通过添加 show 类触发 CSS 动画
+        if (omtFinal) {
+          // 先添加 active 类设置 display:flex
+          omtFinal.classList.add('active');
+          // 强制重绘以确保 display:flex 生效
+          omtFinal.offsetHeight;
+          // 再添加 show 类触发动画
+          omtFinal.classList.add('show');
+        }
+        
+        // 显示光晕效果
+        setTimeout(() => { 
+          const omtGlow = document.getElementById('omtGlow');
+          if (omtGlow) omtGlow.classList.add('show'); 
+        }, 100);
+        
+        // 显示装饰线条
+        setTimeout(() => {
+          const decoLineTop = document.getElementById('decoLineTop');
+          const decoLineBottom = document.getElementById('decoLineBottom');
+          if (decoLineTop) decoLineTop.classList.add('show');
+          if (decoLineBottom) decoLineBottom.classList.add('show');
+        }, 200);
+        
+        // 显示装饰圆圈和角落装饰
+        setTimeout(() => {
+          ['decoC1', 'decoC2', 'decoC3', 'cornerTL', 'cornerTR', 'cornerBL', 'cornerBR'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('show');
+          });
+        }, 300);
+        
+        // 显示下一步按钮
+        setTimeout(() => { 
+          if (nextBtn) nextBtn.classList.add('visible'); 
+        }, 750);
+        
+        // 更新导航
+        updateNavActive(5);
+      }, 600);
+    }, 300);
+  }
+  
+  function hideOneMoreThing() {
+    if (!isOneMoreThingRevealed) return;
+    
+    isOneMoreThingRevealed = false;
+    
+    // 1. 收起动画：先淡出+滑出
+    const omtContainer = document.getElementById('omt-container');
+    if (omtContainer) {
+      omtContainer.classList.add('hiding');
+      omtContainer.style.opacity = '0';
+      omtContainer.style.transform = 'translateY(30px)';
+      
+      // 动画完成后隐藏容器
+      setTimeout(() => {
+        omtContainer.style.display = 'none';
+        omtContainer.classList.remove('hiding');
+      }, 800);
+    }
+    
+    // 2. 恢复触发按钮状态
+    const trigger = document.getElementById('omtTrigger');
+    if (trigger) {
+      trigger.classList.remove('revealed');
+      trigger.querySelector('.omt-trigger-text').textContent = 'One more thing';
+      trigger.querySelector('.omt-trigger-hint').textContent = '点击展开隐藏内容';
+    }
+    
+    // 3. 恢复导航栏显示
+    const navHidden = document.getElementById('nav-part4-hidden');
+    const navRevealed = document.getElementById('nav-part4-revealed');
+    if (navHidden && navRevealed) {
+      navHidden.style.display = 'block';
+      navRevealed.style.display = 'none';
+    }
+    
+    // 4. 停止观察 ONE MORE THING 中间 section（保留 part5-credits 的观察）
+    const part5Sections = ['part5', 'part5-intro', 'part5-opc', 'part5-friendly', 'part5-friendly-measures', 'part5-action', 'part5-policy', 'part5-mandatory', 'part5-reimbursement'];
+    part5Sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        sectionObserver.unobserve(el);
+      }
+    });
+    
+    // 5. 滚动到触发区域
+    setTimeout(() => {
+      scrollToSection('omt-trigger-section');
+    }, 100);
+    
+    // 6. 更新导航高亮
+    updateNavActive(3);
+  }
+  
+  // 全局暴露函数供HTML调用
+  window.revealOneMoreThing = revealOneMoreThing;
+  window.hideOneMoreThing = hideOneMoreThing;
+  window.toggleOneMoreThing = toggleOneMoreThing;
 
   function updateNav() {
     let current = 0;
     const scrollTop = main.scrollTop;
-    navSections.forEach(s => {
+    // 根据展开状态选择对应的 navSections
+    const currentNavSections = isOneMoreThingRevealed ? navSectionsRevealed : navSections;
+    currentNavSections.forEach(s => {
       const el = document.getElementById(s.id);
       if (el && el.offsetTop - 100 <= scrollTop) current = s.idx;
     });
@@ -5360,33 +6399,73 @@
   
   // 获取所有可滚动到的section
   function getScrollableSections() {
-    return Array.from(document.querySelectorAll('.anchor-target, .part-header, .section, iframe'))
-      .filter(el => el.id || el.classList.contains('part-header'));
+    return Array.from(document.querySelectorAll('.anchor-target, .part-header, .section'))
+      .filter(el => {
+        if (el.tagName === 'IFRAME') return false;
+        if (!(el.id || el.classList.contains('part-header'))) return false;
+
+        // 过滤隐藏元素及其隐藏父容器内的元素
+        let parent = el;
+        while (parent && parent !== document.body) {
+          if (window.getComputedStyle(parent).display === 'none') return false;
+          parent = parent.parentElement;
+        }
+        return true;
+      });
   }
   
+  // 导航锁，防止快速按键导致索引混乱
+  let isNavigating = false;
+
   // 滚动到指定section
   function scrollToSectionByIndex(index) {
     const sections = getScrollableSections();
     if (index < 0) index = 0;
     if (index >= sections.length) index = sections.length - 1;
     currentSectionIndex = index;
+    isNavigating = true;  // 锁定导航
     
     const target = sections[index];
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const main = document.getElementById('main');
+      const mainRect = main.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const scrollOffset = main.scrollTop + targetRect.top - mainRect.top;
+      
+      main.scrollTo({
+        top: Math.max(0, scrollOffset),
+        behavior: 'smooth'
+      });
     }
+    
+    // 平滑滚动完成后解锁
+    setTimeout(() => { isNavigating = false; }, 600);
   }
   
   // 下一页
   function nextPage() {
+    if (isNavigating) return;
     const sections = getScrollableSections();
     if (currentSectionIndex < sections.length - 1) {
+      const currentSection = sections[currentSectionIndex];
+      // 从"价值展望"直接跳到"感谢聆听"
+      if (currentSection && currentSection.id === 'value-outlook') {
+        const creditsSection = sections.find(s => s.id === 'part5-credits');
+        if (creditsSection) {
+          const creditsIndex = sections.indexOf(creditsSection);
+          if (creditsIndex !== -1) {
+            scrollToSectionByIndex(creditsIndex);
+            return;
+          }
+        }
+      }
       scrollToSectionByIndex(currentSectionIndex + 1);
     }
   }
   
   // 上一页
   function prevPage() {
+    if (isNavigating) return;
     if (currentSectionIndex > 0) {
       scrollToSectionByIndex(currentSectionIndex - 1);
     }
@@ -5394,6 +6473,7 @@
   
   // 更新当前section索引
   function updateCurrentSectionIndex() {
+    if (isNavigating) return;  // 导航中不更新，防止覆盖手动设置的索引
     const sections = getScrollableSections();
     const scrollTop = main.scrollTop;
     const viewportCenter = scrollTop + main.clientHeight / 2;
@@ -5422,10 +6502,10 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
       e.preventDefault();
-      nextPage();
+      document.getElementById('navDown').click();
     } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
       e.preventDefault();
-      prevPage();
+      document.getElementById('navUp').click();
     }
   });
 
@@ -5434,9 +6514,9 @@
     if (e.data && e.data.type === 'iframeKeydown') {
       const key = e.data.key;
       if (key === 'ArrowDown' || key === 'ArrowRight' || key === ' ' || key === 'PageDown') {
-        nextPage();
+        document.getElementById('navDown').click();
       } else if (key === 'ArrowUp' || key === 'ArrowLeft' || key === 'PageUp') {
-        prevPage();
+        document.getElementById('navUp').click();
       }
     }
   });
@@ -5473,11 +6553,10 @@
   }
   createSandParticles();
 
-  // 字体大小切换（v6三档体系）
-  const fontBtns = document.querySelectorAll('.font-btn');
+  // 字体大小切换（已替换为实时演示按钮，保留默认字体级别）
   const html = document.documentElement;
 
-  // ===== v8 色系切换（完整联动子iframe） =====
+  // ===== v8 色系切换（完整联动子iframe）- 集成到侧边栏 =====
   const themeSwitcher = (() => {
     const swatches = document.querySelectorAll('.theme-swatch');
     const STORAGE_KEY = 'claw-theme';  // 与子iframe保持同一key
@@ -5509,9 +6588,11 @@
 
     // 初始化
     function init() {
+      // 色系切换事件
       swatches.forEach(swatch => {
         swatch.addEventListener('click', () => applyTheme(swatch.dataset.theme));
       });
+
       // 恢复上次偏好（默认 deep-ocean 与子页面保持一致）
       const saved = localStorage.getItem(STORAGE_KEY) || 'deep-ocean';
       applyTheme(saved);
@@ -5533,36 +6614,9 @@
     });
   }
 
-  fontBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const size = btn.dataset.size;
-      
-      // 更新按钮状态
-      fontBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      // 更新字体大小（使用data属性切换）
-      html.setAttribute('data-font-level', size);
-      
-      // 保存偏好
-      localStorage.setItem('fontSize', size);
-      
-      // 通知所有iframe
-      notifyIframesFontSize(size);
-    });
-  });
-
-  // 恢复字体大小偏好
-  const savedFontSize = localStorage.getItem('fontSize');
-  if (savedFontSize) {
-    const btn = document.querySelector(`.font-btn[data-size="${savedFontSize}"]`);
-    if (btn) {
-      btn.click();
-    }
-  } else {
-    // 默认选中中号
-    html.setAttribute('data-font-level', 'medium');
-  }
+  // 默认中号字体（按钮已移除，直接设置）
+  const savedFontSize = localStorage.getItem('fontSize') || 'medium';
+  html.setAttribute('data-font-level', savedFontSize);
 
   // iframe加载完成后同步字体大小 + 颜色主题
   window.addEventListener('message', (e) => {
@@ -5867,7 +6921,7 @@
   // ===== 滚动触发动画 =====
   function initScrollReveal() {
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -5881,8 +6935,32 @@
       rootMargin: '0px 0px -10% 0px',
       threshold: 0.1
     });
-    
+
     revealElements.forEach(el => revealObserver.observe(el));
+  }
+
+  // ===== 全局 Section 滚动显示动画 =====
+  function initSectionScrollReveal() {
+    // 选择所有需要滚动显示的 section 和 part-header（排除首屏的 part1）
+    const scrollElements = document.querySelectorAll(
+      '.section:not(#part1), .part-header:not(#part1)'
+    );
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // 只触发一次动画，显示后不再隐藏
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: main,
+      rootMargin: '0px 0px -20% 0px',
+      threshold: 0.15
+    });
+
+    scrollElements.forEach(el => scrollObserver.observe(el));
   }
 
   // ===== 时空隧道粒子效果 =====
@@ -5968,7 +7046,7 @@
   // ===== iframe 等比缩放适配 =====
   function scaleIframeToFit(iframe) {
     const ORIG_W = 1440;
-    const ORIG_H = 1080;
+    const ORIG_H = 810;
     const wrap = iframe.closest('.iframe-wrap');
     if (!wrap) return;
     // 获取容器的 CSS 宽度（不含 border）
@@ -6035,7 +7113,8 @@
     initIframeLazyLoad(); // 智能懒加载iframe
     initSpotlightEffect();
     initIframeGlowEffect();
-    initScrollReveal();
+    initScrollReveal();           // ← 元素滚动触发动画
+    initSectionScrollReveal();    // ← 全局 section 滚动显示动画
     initTimeTunnel();
   }
   
@@ -6049,9 +7128,9 @@
 
 
 <script>
-/* ===== 4:3 画布缩放适配 ===== */
+/* ===== 16:9 画布缩放适配 ===== */
 (function() {
-  var CANVAS_W = 1440, CANVAS_H = 1080;
+  var CANVAS_W = 1440, CANVAS_H = 810;
   function updateScale() {
     var winW = window.innerWidth;
     var winH = window.innerHeight;
@@ -6139,5 +7218,124 @@
   }
 })();
 </script>
+
+<!-- ===== 智能体沙箱视频控制 ===== -->
+<script>
+(function() {
+  const video = document.getElementById('shrimpVideo');
+  const stage = document.getElementById('shrimpVideoStage');
+  const playBtn = document.getElementById('shrimpPlayBtn');
+  const muteBtn = document.getElementById('shrimpMuteBtn');
+  const zoomBtn = document.getElementById('shrimpZoomBtn');
+  const replayBtn = document.getElementById('shrimpReplayBtn');
+  if (!video || !stage || !playBtn || !muteBtn || !zoomBtn) return;
+
+  let isZoomed = false;
+
+  // 重播功能
+  if (replayBtn) {
+    replayBtn.addEventListener('click', function() {
+      video.currentTime = 0;
+      video.play();
+      playBtn.classList.add('is-active');
+    });
+  }
+
+  // 播放/暂停
+  playBtn.addEventListener('click', function() {
+    if (video.paused) {
+      video.play();
+      playBtn.classList.add('is-active'); // 显示 pause icon
+    } else {
+      video.pause();
+      playBtn.classList.remove('is-active'); // 显示 play icon
+    }
+  });
+
+  // 首次加载：视频正在播放，所以默认显示 pause 状态
+  if (!video.paused) playBtn.classList.add('is-active');
+
+  // 声音开关
+  muteBtn.addEventListener('click', function() {
+    video.muted = !video.muted;
+    if (video.muted) {
+      muteBtn.classList.add('is-active'); // 显示静音图标
+    } else {
+      muteBtn.classList.remove('is-active'); // 显示有声图标
+    }
+  });
+
+  // 首次加载：默认静音，所以显示静音状态
+  muteBtn.classList.add('is-active');
+
+  // 放大/缩小
+  zoomBtn.addEventListener('click', function() {
+    isZoomed = !isZoomed;
+    if (isZoomed) {
+      stage.classList.add('is-zoomed');
+      zoomBtn.classList.add('is-active'); // 显示缩小图标
+    } else {
+      stage.classList.remove('is-zoomed');
+      zoomBtn.classList.remove('is-active'); // 显示放大图标
+    }
+  });
+
+  // 视频播放/暂停事件同步按钮状态
+  video.addEventListener('play', function() { playBtn.classList.add('is-active'); });
+  video.addEventListener('pause', function() { playBtn.classList.remove('is-active'); });
+})();
+</script>
+
+<!-- PDF预览弹窗 -->
+<div id="pdfOverlay" class="pdf-overlay" style="display:none;">
+  <div class="pdf-overlay-header">
+    <span class="pdf-overlay-title">广州直营中心体检单汇总</span>
+    <button class="pdf-overlay-close" onclick="closePdfViewer()">✕ 关闭</button>
+  </div>
+  <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
+</div>
+
+<!-- PDF预览功能 -->
+<script>
+(function() {
+  function openPdfViewer() {
+    const overlay = document.getElementById('pdfOverlay');
+    const frame = document.getElementById('pdfFrame');
+    frame.src = './广州直营中心体检单汇总.pdf';
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePdfViewer() {
+    const overlay = document.getElementById('pdfOverlay');
+    const frame = document.getElementById('pdfFrame');
+    frame.src = '';
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // ESC键关闭
+  document.addEventListener('keydown', function(e) {
+    const overlay = document.getElementById('pdfOverlay');
+    if (e.key === 'Escape' && overlay && overlay.style.display === 'flex') {
+      closePdfViewer();
+    }
+  });
+
+  // 暴露到全局
+  window.openPdfViewer = openPdfViewer;
+  window.closePdfViewer = closePdfViewer;
+})();
+</script>
+
+<!-- 二维码弹窗 -->
+<div id="qrcodeModal" onclick="if(event.target===this) document.getElementById('qrcodeModal').style.display='none'">
+  <div class="modal-content">
+    <button class="close-btn" onclick="document.getElementById('qrcodeModal').style.display='none'">✕</button>
+    <img src="agent_qrcode.jpg" alt="扫码体验" />
+    <p class="modal-text">微信扫一扫，进入应用</p>
+  </div>
+</div>
+
 </body>
 </html>

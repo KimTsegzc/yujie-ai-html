@@ -7,37 +7,179 @@
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <style>
-/* ========== v17 等比缩放字体系统 ========== */
+/* ===== CLAW v8 颜色主题系统（3套，由 theme-config.js 统一管理） =====
+   修改颜色请编辑 theme-config.js，无需改动此文件
+   ====================================================================== */
+
+/* ─── 默认主题：黑金 ─── */
 :root{
   --base-size:18px;--scale:1.333;
-  --text-sm:calc(var(--base-size)/1.333);
-  --current-base:var(--base-size);
-  --text-body:var(--base-size);
-  --text-lead:calc(var(--base-size)*1.111);
-  --text-h4:calc(var(--base-size)*1.333^1);
-  --text-h3:calc(var(--base-size)*1.333^2);
-  --text-h2:calc(var(--base-size)*1.333^3);
-  --text-h1:calc(var(--base-size)*1.333^4);
-  --bg-primary:var(--bg,#0a0e1a);
-  --bg-secondary:var(--bg2,#111827);
-  --bg-card:var(--bg3,#1a2236);
-  --bg-hover:var(--bg3,#243049);
-  --text-primary:var(--text,#e8e8e8);
-  --text-secondary:var(--text-dim,#9ca3af);
-  --accent:var(--gold,#c9a84c);
-  --accent-light:var(--gold-bright,#e8c97a);
-  --accent-bg:var(--gold-dim,rgba(201,168,76,0.1));
-  --danger:var(--red,#ef4444);
-  --success:var(--green,#22c55e);
-  --border:var(--border,rgba(255,255,255,0.08));
-  --border-accent:var(--border,rgba(201,168,76,0.3));
+  --text-sm:16px;
+  --current-base:18px;
+  --text-body:18px;
+  --text-lead:20px;
+  --text-h4:24px;
+  --text-h3:32px;
+  --text-h2:42.7px;
+  --text-h1:56.9px;
+  
+  --bg: #0a0e1a;
+  --bg2: #111827;
+  --bg3: #1a2236;
+  --text: #e8e8e8;
+  --text-dim: #9ca3af;
+  --gold: #c9a84c;
+  --gold-bright: #e8c97a;
+  --gold-dim: rgba(201,168,76,0.1);
+  --red: #ef4444;
+  --green: #22c55e;
+  --border: rgba(255,255,255,0.08);
+  
+  --bg-primary:var(--bg);
+  --bg-secondary:var(--bg2);
+  --bg-card:var(--bg3);
+  --bg-hover:var(--bg3);
+  --text-primary:var(--text);
+  --text-secondary:var(--text-dim);
+  --accent:var(--gold);
+  --accent-light:var(--gold-bright);
+  --accent-bg:var(--gold-dim);
+  --danger:var(--red);
+  --success:var(--green);
+  --border-accent:var(--border);
 }
+
+/* ─── 黑金（与默认一致） ─── */
+html[data-theme="black-gold"] {
+  --bg: #0a0e1a;
+  --bg2: #111827;
+  --bg3: #1a2236;
+  --text: #e8e8e8;
+  --text-dim: #9ca3af;
+  --gold: #c9a84c;
+  --gold-bright: #e8c97a;
+  --gold-dim: rgba(201,168,76,0.1);
+  --red: #ef4444;
+  --green: #22c55e;
+  --border: rgba(255,255,255,0.08);
+}
+
+/* ─── 深海蓝 ─── */
+html[data-theme="deep-ocean"] {
+  --bg: #031E36;
+  --bg2: #04335A;
+  --bg3: #0a4a7a;
+  --text: #C4D4E6;
+  --text-dim: #9ABCE0;
+  --gold: #9ABCE0;
+  --gold-bright: #C4D4E6;
+  --gold-dim: rgba(154,188,224,0.15);
+  --red: #E07878;
+  --green: #6FCFA0;
+  --border: rgba(154,188,224,0.2);
+}
+
+/* ─── 冰川蓝 ─── */
+html[data-theme="glacier-blue"] {
+  --bg: #F5F1EC;
+  --bg2: #EAE4DD;
+  --bg3: #A8B5C2;
+  --text: #2E4265;
+  --text-dim: #8599AB;
+  --gold: #2E4265;
+  --gold-bright: #1D3354;
+  --gold-dim: rgba(46,66,101,0.12);
+  --red: #C0392B;
+  --green: #27AE60;
+  --border: rgba(46,66,101,0.2);
+}
+
+/* ─── 秋暮 ─── */
+html[data-theme="autumn-dusk"] {
+  --bg: #151D2B;
+  --bg2: #25344F;
+  --bg3: #617891;
+  --text: #E8D4B8;
+  --text-dim: #D5B893;
+  --gold: #D5B893;
+  --gold-bright: #E8D4B8;
+  --gold-dim: rgba(213,184,147,0.15);
+  --red: #C04048;
+  --green: #6FCFA0;
+  --border: rgba(213,184,147,0.2);
+}
+
+/* ─── 落日余烬 ─── */
+html[data-theme="sunset-ember"] {
+  --bg: #1A1814;
+  --bg2: #2A261E;
+  --bg3: #74601B;
+  --text: #F0E8DC;
+  --text-dim: #A8A7A3;
+  --gold: #FF971E;
+  --gold-bright: #FFB347;
+  --gold-dim: rgba(255,151,30,0.15);
+  --red: #DB4600;
+  --green: #6FCFA0;
+  --border: rgba(255,151,30,0.2);
+}
+
+/* 浅色主题安全覆盖 */
+html[data-theme="glacier-blue"] body {
+  color: var(--text) !important;
+}
+
+/* ===== 冰川蓝主题额外修复：浅色文字和线条 ===== */
+/* 修复硬编码浅色文字 */
+html[data-theme="glacier-blue"] .header-badge { color: var(--red) !important; border-color: rgba(192,57,43,0.3) !important; background: rgba(192,57,43,0.05) !important; }
+html[data-theme="glacier-blue"] .msg-ai .msg-bubble { background: rgba(46,66,101,0.05) !important; border-color: rgba(46,66,101,0.2) !important; color: var(--text) !important; }
+html[data-theme="glacier-blue"] .input-box { background: rgba(46,66,101,0.04) !important; border-color: rgba(46,66,101,0.2) !important; }
+html[data-theme="glacier-blue"] .input-preview { color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .step-item { color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .step-num { background: rgba(46,66,101,0.1) !important; color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .brief-panel { background: rgba(46,66,101,0.03) !important; }
+html[data-theme="glacier-blue"] .brief-text { color: var(--text) !important; }
+html[data-theme="glacier-blue"] .chart-card { background: rgba(46,66,101,0.05) !important; }
+html[data-theme="glacier-blue"] .chart-title { color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .upload-box { border-color: rgba(46,66,101,0.3) !important; background: rgba(46,66,101,0.03) !important; }
+html[data-theme="glacier-blue"] .upload-hint { color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .data-preview { background: rgba(46,66,101,0.03) !important; }
+html[data-theme="glacier-blue"] .preview-header { color: var(--text-dim) !important; }
+html[data-theme="glacier-blue"] .preview-table th { color: var(--gold) !important; border-bottom-color: rgba(46,66,101,0.2) !important; }
+html[data-theme="glacier-blue"] .preview-table td { color: var(--text-dim) !important; border-bottom-color: rgba(46,66,101,0.05) !important; }
+html[data-theme="glacier-blue"] .export-bar { background: rgba(46,66,101,0.03) !important; }
+html[data-theme="glacier-blue"] .suggest-btn { background: rgba(46,66,101,0.06) !important; border-color: rgba(46,66,101,0.25) !important; }
+html[data-theme="glacier-blue"] .chat-msgs::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.3) !important; }
+html[data-theme="glacier-blue"] .brief-body::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.3) !important; }
+html[data-theme="glacier-blue"] .chart-panel::-webkit-scrollbar-thumb { background: rgba(46,66,101,0.25) !important; }
+html[data-theme="glacier-blue"] .steps-bar { background: rgba(46,66,101,0.04) !important; }
+html[data-theme="glacier-blue"] .msg-system { color: var(--text-dim) !important; }
+
+/* 修复背景透明度过高 - 主要卡片/面板 */
+html[data-theme="glacier-blue"] .header-badge { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .msg-ai .msg-bubble { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .input-box { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .step-num { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .brief-panel { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .chart-card { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .upload-box { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .data-preview { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .export-bar { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .suggest-btn { background: rgba(234,228,221,0.95) !important; }
+html[data-theme="glacier-blue"] .steps-bar { background: rgba(234,228,221,0.85) !important; }
+
+/* 修复灰色文字看不清 */
+html[data-theme="glacier-blue"] .brief-text { color: var(--text) !important; }
+
+/* ========== v17 字体系统 ========== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:var(--base-size);}
 body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;background:var(--bg-primary);color:var(--text-primary);height:100vh;overflow:hidden;}
 .page{display:flex;flex-direction:column;height:100vh;}
 .header{display:flex;align-items:center;gap:12px;padding:12px 24px;background:var(--bg-secondary);border-bottom:1px solid var(--border);flex-shrink:0;}
-.header-title{font-size:var(--text-h3);font-weight:700;color:var(--accent);letter-spacing:2px;flex-shrink:0;}
+.h-label{font-size:var(--text-sm);color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;}
+.h-title{font-size:var(--text-h3);color:var(--gold);font-weight:700;margin-top:2px;}
+.h-title em{font-style:normal;color:var(--text);font-weight:400;}
 .header-badge{font-size:var(--text-sm);color:var(--text-secondary);background:var(--accent-bg);padding:4px 12px;border-radius:20px;border:1px solid var(--border-accent);flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .header-reset-btn{padding:6px 16px;border-radius:8px;font-size:var(--current-base);background:var(--accent-bg,#1a1810);border:1px solid var(--border-accent,rgba(201,168,76,0.3));color:var(--accent,#c9a84c);cursor:pointer;transition:all .3s;flex-shrink:0;margin-left:auto;font-weight:500;}
 .header-reset-btn:hover{background:rgba(201,168,76,0.2);color:var(--accent-light,#e8c97a);transform:translateY(-1px);}
@@ -122,7 +264,10 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;backg
 <div class="page" id="pageRoot">
   <div style="position:fixed;top:6px;right:12px;z-index:99999;font-size:12px;color:#c9a84c;font-weight:bold;opacity:0.7;pointer-events:none;letter-spacing:2px;">v3.19.5-v2</div>
   <div class="header">
-    <div class="header-title">数据智能 · 客户经营分析</div>
+    <div>
+      <div class="h-label">SCENE 05 · DATA INTELLIGENCE REPORTS</div>
+      <div class="h-title">数据智能 · 客户经营分析</div>
+    </div>
     <div class="header-badge" style="color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06);">虚拟演示数据</div>
     <button class="header-reset-btn" onclick="resetAll()" title="重置演示">↺ 重置</button>
   </div>
@@ -186,7 +331,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;backg
         <div class="export-bar" id="exportBar" style="display:none;">
           <button class="export-btn primary" onclick="alert('演示模式：已生成Word文档')">导出 Word</button>
           <button class="export-btn" onclick="alert('演示模式：已生成PDF文档')">导出 PDF</button>
-          <button class="export-btn" onclick="alert('演示模式：已推送至运营管理层')">推送管理层</button>
+          <button class="export-btn" onclick="alert('演示模式：已发送邮件')">发送邮件</button>
           <button class="export-btn" onclick="alert('演示模式：已保存至简报库')">保存至简报库</button>
         </div>
       </div>
@@ -282,7 +427,7 @@ let currentStep=0,chatAnimating=false,pendingTransition=null,uploaded=false,char
 
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
-async function typeAIMsg(text,speed=22){
+async function typeAIMsg(text,speed=5){
   const msgs=document.getElementById('chatMsgs');
   const div=document.createElement('div');
   div.className='msg msg-ai';
@@ -306,7 +451,25 @@ async function typeAIMsg(text,speed=22){
       }
     }
     msgs.scrollTop=msgs.scrollHeight;
-    await sleep(80);
+    await sleep(15);
+  }
+}
+
+async function typeHtmlText(container,html,speed=3){
+  container.innerHTML=html;
+  const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null,false);
+  const textNodes=[];
+  let node;
+  while(node=walker.nextNode()){
+    textNodes.push({node:node,full:node.textContent});
+    node.textContent='';
+  }
+  for(let ti=0;ti<textNodes.length;ti++){
+    const tn=textNodes[ti];
+    for(let ci=0;ci<tn.full.length;ci++){
+      tn.node.textContent=tn.full.slice(0,ci+1);
+      await sleep(speed);
+    }
   }
 }
 
@@ -399,7 +562,7 @@ async function simulateUpload(){
   await sleep(500);currentStep=0;
   addUserMsg('上传了「广州企微客户经营_Q1.xlsx」');
   await sleep(300);chatAnimating=true;
-  await typeAIMsg(chatConvos[0].ai);
+  await typeAIMsg(chatConvos[0].ai,5);
   chatAnimating=false;
   setInputHint(chatConvos[0].pendingHint);
   showSuggests(chatConvos[0].suggests);
@@ -438,22 +601,31 @@ async function sendChat(){
   if(convIndex===0){
     currentStep=1;updateSteps();
     addUserMsg(conv.pendingHint.replace('✨ ',''));
-    chatAnimating=true;await typeAIMsg(chatConvos[1].ai);chatAnimating=false;
-    await renderBriefAndCharts(1);
+    chatAnimating=true;
+    const typePromise=typeAIMsg(chatConvos[1].ai,5);
+    const renderPromise=renderBriefAndCharts(1);
+    await Promise.all([typePromise,renderPromise]);
+    chatAnimating=false;
     setInputHint(chatConvos[1].pendingHint);
     showSuggests(chatConvos[1].suggests);pulseInput();return;
   }
   if(convIndex===1){
     addUserMsg(conv.pendingHint);currentStep=2;updateSteps();
-    chatAnimating=true;await typeAIMsg(chatConvos[2].ai);chatAnimating=false;
-    await renderBriefAndCharts(2);
+    chatAnimating=true;
+    const typePromise=typeAIMsg(chatConvos[2].ai,5);
+    const renderPromise=renderBriefAndCharts(2);
+    await Promise.all([typePromise,renderPromise]);
+    chatAnimating=false;
     setInputHint(chatConvos[2].pendingHint);
     showSuggests(chatConvos[2].suggests);pulseInput();return;
   }
   if(convIndex===2){
     addUserMsg(conv.pendingHint.replace('✨ ',''));currentStep=3;updateSteps();
-    chatAnimating=true;await typeAIMsg(chatConvos[3].ai);chatAnimating=false;
-    await renderBriefAndCharts(3);
+    chatAnimating=true;
+    const typePromise=typeAIMsg(chatConvos[3].ai,5);
+    const renderPromise=renderBriefAndCharts(3);
+    await Promise.all([typePromise,renderPromise]);
+    chatAnimating=false;
     setInputHint(null);showSuggests([]);
     document.getElementById('exportBar').style.display='flex';return;
   }
@@ -477,19 +649,33 @@ async function renderBriefAndCharts(step){
   const chartPanel=document.getElementById('chartPanel'+step);
   briefBody.innerHTML='';chartPanel.innerHTML='';
   const sections=briefContents[step];
+  
+  let chartPromise;
+  if(step===1) chartPromise = renderStep1Charts(chartPanel);
+  if(step===2) chartPromise = renderStep2Charts(chartPanel);
+  if(step===3) chartPromise = renderStep3Charts(chartPanel);
+  
   for(let i=0;i<sections.length;i++){
     const s=sections[i];
     const div=document.createElement('div');
     div.className='brief-section';
-    if(s.title==='封面') div.innerHTML=s.text;
-    else div.innerHTML=`<div class="brief-section-title">▎${s.title}</div><div class="brief-text">${s.text}</div>`;
+    if(s.title==='封面'){
+      div.innerHTML=s.text;
+    }else{
+      div.innerHTML=`<div class="brief-section-title">▎${s.title}</div><div class="brief-text"></div>`;
+      briefBody.appendChild(div);
+      briefBody.scrollTop=briefBody.scrollHeight;
+      const textContainer=div.querySelector('.brief-text');
+      await typeHtmlText(textContainer,s.text,3);
+      briefBody.scrollTop=briefBody.scrollHeight;
+      continue;
+    }
     briefBody.appendChild(div);
-    await sleep(400);briefBody.scrollTop=briefBody.scrollHeight;
+    briefBody.scrollTop=briefBody.scrollHeight;
+    await sleep(80);
   }
-  await sleep(300);
-  if(step===1) await renderStep1Charts(chartPanel);
-  if(step===2) await renderStep2Charts(chartPanel);
-  if(step===3) await renderStep3Charts(chartPanel);
+  
+  if(chartPromise) await chartPromise;
 }
 
 const chartTheme={
@@ -520,9 +706,9 @@ async function renderStep1Charts(panel){
     xAxis:{type:'value',axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
     yAxis:{type:'category',data:districts,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
     series:[{type:'bar',data:gmv.map(v=>({value:v,itemStyle:{color:v>80000?'#c9a84c':v>50000?'rgba(201,168,76,0.6)':'rgba(201,168,76,0.35)'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
-  await sleep(500);
+  await sleep(200);
 
   // 图2：客户活跃率趋势
   const c2=createChartCard(panel,'各区域月度活跃率趋势(%)','c1_2');
@@ -538,9 +724,9 @@ async function renderStep1Charts(panel){
       {name:'番禺',type:'line',data:[58.1,58.4,55.0],smooth:true,lineStyle:{color:'#f97316',width:2},itemStyle:{color:'#f97316'}},
       {name:'白云',type:'line',data:[58.0,58.1,53.9],smooth:true,lineStyle:{color:'#ef4444',width:2},itemStyle:{color:'#ef4444'}}
     ],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
-  await sleep(500);
+  await sleep(200);
 
   // 图3：企微好友增长与流失
   const c3=createChartCard(panel,'月度好友新增 vs 流失(人)','c1_3');
@@ -553,9 +739,9 @@ async function renderStep1Charts(panel){
       {name:'新增好友',type:'bar',data:[84770,89370,94630],barWidth:24,itemStyle:{color:'#22c55e',borderRadius:[4,4,0,0]}},
       {name:'流失好友',type:'bar',data:[17970,19840,32780],barWidth:24,itemStyle:{color:'#ef4444',borderRadius:[4,4,0,0]}}
     ],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
-  await sleep(500);
+  await sleep(200);
 
   // 图4：复购率对比
   const c4=createChartCard(panel,'各区域Q1复购率(%)','c1_4');
@@ -565,7 +751,7 @@ async function renderStep1Charts(panel){
     xAxis:{type:'value',min:20,max:35,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}},splitLine:{lineStyle:{color:'rgba(255,255,255,0.05)'}}},
     yAxis:{type:'category',data:districts,axisLine:{lineStyle:{color:'rgba(255,255,255,0.1)'}}},
     series:[{type:'bar',data:[30.2,30.3,27.8,26.3,25.7,29.3,25.7].map(v=>({value:v,itemStyle:{color:v>29?'#22c55e':v>27?'#c9a84c':'#ef4444'}})),barWidth:16,itemStyle:{borderRadius:[0,4,4,0]}}],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
 }
 
@@ -584,9 +770,9 @@ async function renderStep2Charts(panel){
       {name:'流失人数',type:'bar',data:[7600,5920,4910,4390,4060,3050,2710],barWidth:20,itemStyle:{color:'rgba(239,68,68,0.7)',borderRadius:[4,4,0,0]}},
       {name:'流失率(%)',type:'line',yAxisIndex:1,data:[2.2,2.2,2.3,2.1,2.3,2.1,2.1],smooth:true,lineStyle:{color:'#f97316',width:2},itemStyle:{color:'#f97316'}}
     ],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
-  await sleep(500);
+  await sleep(200);
 
   // 流失客户标签画像饼图
   const c2=createChartCard(panel,'流失客户企微标签画像','c2_2');
@@ -603,7 +789,7 @@ async function renderStep2Charts(panel){
       label:{color:'#9ca3af',fontSize:12},
       emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}
     }],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
 }
 
@@ -626,9 +812,9 @@ async function renderStep3Charts(panel){
       label:{color:'#9ca3af',fontSize:11},
       emphasis:{itemStyle:{shadowBlur:10,shadowColor:'rgba(0,0,0,0.5)'}}
     }],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
-  await sleep(500);
+  await sleep(200);
 
   // 单聊响应率 vs 复购率散点图
   const c2=createChartCard(panel,'响应率 vs 复购率 · 区域运营质量矩阵','c3_2');
@@ -651,7 +837,7 @@ async function renderStep3Charts(panel){
       ].map(d=>({value:d,itemStyle:{color:d[0]>75&&d[1]>29?'#22c55e':d[0]>75||d[1]>29?'#c9a84c':'#ef4444'}})),
       label:{show:true,formatter:function(p){return p.data[3];},color:'#9ca3af',fontSize:11,position:'top'}
     }],
-    animationDuration:1200,animationEasing:'cubicOut'
+    animationDuration:800,animationEasing:'cubicOut'
   });
 }
 

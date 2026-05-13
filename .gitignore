@@ -1,7 +1,9 @@
-# Large media files (>3MB)
+# Large media files
 *.mp4
 *.MOV
 *.mov
+*.zip
+*.pdf
 
 # macOS
 .DS_Store
@@ -9,3 +11,8 @@
 # Dev tools
 *.py
 .workbuddy/
+.qoder/
+
+# Old version directories
+yujie_ai_html*/
+yujie_ai_html_*/

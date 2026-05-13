@@ -63,80 +63,61 @@
     --card-bg:        #04335A;
   }
 
-  /* ─── 暖米白 ─── */
-  html[data-theme="warm-parchment"] {
-    --bg:             #F5F0E8;
-    --bg2:            #EDE6D6;
-    --bg3:            #E0D5C0;
-    --gold:           #8B6914;
-    --gold-bright:    #B8890A;
-    --gold-dim:       rgba(139,105,20,0.12);
-    --text:           #2D2410;
-    --text-dim:       #7A6840;
-    --border:         rgba(139,105,20,0.25);
+  /* ─── 冰川蓝 ─── */
+  html[data-theme="glacier-blue"] {
+    --bg:             #F5F1EC;
+    --bg2:            #EAE4DD;
+    --bg3:            #A8B5C2;
+    --gold:           #2E4265;
+    --gold-bright:    #1D3354;
+    --gold-dim:       rgba(46,66,101,0.12);
+    --text:           #2E4265;
+    --text-dim:       #8599AB;
+    --border:         rgba(46,66,101,0.2);
     --red:            #C0392B;
     --green:          #27AE60;
-    --sidebar-bg:     #EDE6D6;
-    --sidebar-text:   #2D2410;
-    --sidebar-active: rgba(139,105,20,0.1);
-    --card-bg:        #EDE6D6;
+    --sidebar-bg:     #EAE4DD;
+    --sidebar-text:   #2E4265;
+    --sidebar-active: rgba(46,66,101,0.1);
+    --card-bg:        #EAE4DD;
   }
 
-  /* ─── 暗夜绿 ─── */
-  html[data-theme="forest-night"] {
-    --bg:             #0D1F1A;
-    --bg2:            #142B22;
-    --bg3:            #1C3A2E;
-    --gold:           #7ECBA1;
-    --gold-bright:    #A8DFC0;
-    --gold-dim:       rgba(126,203,161,0.15);
-    --text:           #C8E6D8;
-    --text-dim:       #6A9E84;
-    --border:         rgba(126,203,161,0.2);
-    --red:            #FF7B6B;
-    --green:          #4FC08D;
-    --sidebar-bg:     #0A1814;
-    --sidebar-text:   #C8E6D8;
-    --sidebar-active: rgba(126,203,161,0.15);
-    --card-bg:        #142B22;
+  /* ─── 秋暮 ─── */
+  html[data-theme="autumn-dusk"] {
+    --bg:             #151D2B;
+    --bg2:            #25344F;
+    --bg3:            #617891;
+    --gold:           #D5B893;
+    --gold-bright:    #E8D4B8;
+    --gold-dim:       rgba(213,184,147,0.15);
+    --text:           #E8D4B8;
+    --text-dim:       #D5B893;
+    --border:         rgba(213,184,147,0.2);
+    --red:            #C04048;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #111828;
+    --sidebar-text:   #E8D4B8;
+    --sidebar-active: rgba(213,184,147,0.12);
+    --card-bg:        #25344F;
   }
 
-  /* ─── 暮光玫瑰 ─── */
-  html[data-theme="dusk-rose"] {
-    --bg:             #1A0F14;
-    --bg2:            #2A1520;
-    --bg3:            #3D2030;
-    --gold:           #E8A0B0;
-    --gold-bright:    #F0C4CC;
-    --gold-dim:       rgba(232,160,176,0.15);
-    --text:           #F0D8E0;
-    --text-dim:       #C090A0;
-    --border:         rgba(232,160,176,0.2);
-    --red:            #FF6B8A;
-    --green:          #6ECFA4;
-    --sidebar-bg:     #120A0F;
-    --sidebar-text:   #F0D8E0;
-    --sidebar-active: rgba(232,160,176,0.12);
-    --card-bg:        #2A1520;
-  }
-
-  /* ─── 星云紫 ─── */
-  html[data-theme="nebula-purple"] {
-    --bg:             #0C0A1A;
-    --bg2:            #16103A;
-    --bg3:            #241858;
-    --gold:           #A78BFA;
-    --gold-bright:    #C4B5FD;
-    --gold-dim:       rgba(167,139,250,0.15);
-    --text:           #E8E0FF;
-    --text-dim:       #9D8FD0;
-    --border:         rgba(167,139,250,0.2);
-    --red:            #F87171;
-    --green:          #34D399;
-    --sidebar-bg:     #080618;
-    --sidebar-text:   #E8E0FF;
-    --sidebar-active: rgba(167,139,250,0.12);
-    --card-bg:        #16103A;
+  /* ─── 落日余烬 ─── */
+  html[data-theme="sunset-ember"] {
+    --bg:             #1A1814;
+    --bg2:            #2A261E;
+    --bg3:            #74601B;
+    --gold:           #FF971E;
+    --gold-bright:    #FFB347;
+    --gold-dim:       rgba(255,151,30,0.15);
+    --text:           #F0E8DC;
+    --text-dim:       #A8A7A3;
+    --border:         rgba(255,151,30,0.2);
+    --red:            #DB4600;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #151210;
+    --sidebar-text:   #F0E8DC;
+    --sidebar-active: rgba(255,151,30,0.12);
+    --card-bg:        #2A261E;
   }
 
   /* Legacy fallback */
@@ -147,117 +128,174 @@
   .red-tag { color: var(--red); }
   .green-tag { color: var(--green); }
   
-  /* ===== 浅色主题（warm-parchment）全面安全覆盖 =====
+  /* ===== 浅色主题（glacier-blue）全面安全覆盖 =====
      防止浅色背景下出现白字/深色背景框看不见的情况
   ===== */
 
   /* 1. 通用文字颜色 */
-  html[data-theme="warm-parchment"] body,
-  html[data-theme="warm-parchment"] .scene,
-  html[data-theme="warm-parchment"] .content-bg,
-  html[data-theme="warm-parchment"] .slide,
-  html[data-theme="warm-parchment"] .container,
-  html[data-theme="warm-parchment"] * {
+  html[data-theme="glacier-blue"] body,
+  html[data-theme="glacier-blue"] .scene,
+  html[data-theme="glacier-blue"] .content-bg,
+  html[data-theme="glacier-blue"] .slide,
+  html[data-theme="glacier-blue"] .container,
+  html[data-theme="glacier-blue"] * {
     color: inherit;
   }
-  html[data-theme="warm-parchment"] body { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] body { color: var(--text) !important; }
 
   /* 2. 强制白字改为深色文字 */
-  html[data-theme="warm-parchment"] [style*="color: white"],
-  html[data-theme="warm-parchment"] [style*="color:#fff"],
-  html[data-theme="warm-parchment"] [style*="color: #fff"],
-  html[data-theme="warm-parchment"] [style*="color:#FFF"],
-  html[data-theme="warm-parchment"] [style*="color: #FFF"] {
+  html[data-theme="glacier-blue"] [style*="color: white"],
+  html[data-theme="glacier-blue"] [style*="color:#fff"],
+  html[data-theme="glacier-blue"] [style*="color: #fff"],
+  html[data-theme="glacier-blue"] [style*="color:#FFF"],
+  html[data-theme="glacier-blue"] [style*="color: #FFF"] {
     color: var(--text) !important;
   }
 
   /* 3. 硬编码白色文字的类名 */
-  html[data-theme="warm-parchment"] .embed-card .e-word,
-  html[data-theme="warm-parchment"] .vector-word-label,
-  html[data-theme="warm-parchment"] .pinball-flying-word,
-  html[data-theme="warm-parchment"] .output-text,
-  html[data-theme="warm-parchment"] .user-input,
-  html[data-theme="warm-parchment"] .user-input:focus,
-  html[data-theme="warm-parchment"] .user-input:active {
+  html[data-theme="glacier-blue"] .embed-card .e-word,
+  html[data-theme="glacier-blue"] .vector-word-label,
+  html[data-theme="glacier-blue"] .pinball-flying-word,
+  html[data-theme="glacier-blue"] .output-text,
+  html[data-theme="glacier-blue"] .user-input,
+  html[data-theme="glacier-blue"] .user-input:focus,
+  html[data-theme="glacier-blue"] .user-input:active {
     color: var(--text) !important;
   }
 
   /* 4. 深色半透明背景框 → 改为浅色 */
-  html[data-theme="warm-parchment"] .process-box {
-    background: rgba(139,105,20,0.05) !important;
-    border-color: rgba(139,105,20,0.25) !important;
+  html[data-theme="glacier-blue"] .process-box {
+    background: rgba(46,66,101,0.05) !important;
+    border-color: rgba(46,66,101,0.25) !important;
   }
-  html[data-theme="warm-parchment"] .step-input-box {
-    background: rgba(139,105,20,0.04) !important;
+  html[data-theme="glacier-blue"] .step-input-box {
+    background: rgba(46,66,101,0.04) !important;
   }
-  html[data-theme="warm-parchment"] .user-input {
-    background: rgba(139,105,20,0.06) !important;
-    border-color: rgba(139,105,20,0.35) !important;
+  html[data-theme="glacier-blue"] .user-input {
+    background: rgba(46,66,101,0.06) !important;
+    border-color: rgba(46,66,101,0.35) !important;
   }
-  html[data-theme="warm-parchment"] .user-input::placeholder { color: #9A8460 !important; }
-  html[data-theme="warm-parchment"] .token-card {
-    background: rgba(139,105,20,0.07) !important;
-    border-color: rgba(139,105,20,0.35) !important;
+  html[data-theme="glacier-blue"] .user-input::placeholder { color: #8599AB !important; }
+  html[data-theme="glacier-blue"] .token-card {
+    background: rgba(46,66,101,0.07) !important;
+    border-color: rgba(46,66,101,0.35) !important;
   }
-  html[data-theme="warm-parchment"] .embed-card {
-    background: rgba(139,105,20,0.05) !important;
-    border-color: rgba(139,105,20,0.25) !important;
+  html[data-theme="glacier-blue"] .embed-card {
+    background: rgba(46,66,101,0.05) !important;
+    border-color: rgba(46,66,101,0.25) !important;
   }
-  html[data-theme="warm-parchment"] .vector-space-box,
-  html[data-theme="warm-parchment"] .pinball-box,
-  html[data-theme="warm-parchment"] .filter-box {
-    background: rgba(139,105,20,0.03) !important;
-    border-color: rgba(139,105,20,0.2) !important;
+  html[data-theme="glacier-blue"] .vector-space-box,
+  html[data-theme="glacier-blue"] .pinball-box,
+  html[data-theme="glacier-blue"] .filter-box {
+    background: rgba(46,66,101,0.03) !important;
+    border-color: rgba(46,66,101,0.2) !important;
   }
-  html[data-theme="warm-parchment"] #pinballCanvas,
-  html[data-theme="warm-parchment"] #semanticCanvas {
-    background: rgba(139,105,20,0.03) !important;
+  html[data-theme="glacier-blue"] #pinballCanvas,
+  html[data-theme="glacier-blue"] #semanticCanvas {
+    background: rgba(46,66,101,0.03) !important;
   }
-  html[data-theme="warm-parchment"] .pinball-output-bar {
-    background: rgba(139,105,20,0.05) !important;
-    border-bottom-color: rgba(139,105,20,0.25) !important;
+  html[data-theme="glacier-blue"] .pinball-output-bar {
+    background: rgba(46,66,101,0.05) !important;
+    border-bottom-color: rgba(46,66,101,0.25) !important;
   }
-  html[data-theme="warm-parchment"] .pinball-layer {
-    border-top-color: rgba(139,105,20,0.2) !important;
+  html[data-theme="glacier-blue"] .pinball-layer {
+    border-top-color: rgba(46,66,101,0.2) !important;
   }
-  html[data-theme="warm-parchment"] .pinball-layer-label,
-  html[data-theme="warm-parchment"] .pinball-char-pile span {
-    color: rgba(139,105,20,0.55) !important;
+  html[data-theme="glacier-blue"] .pinball-layer-label,
+  html[data-theme="glacier-blue"] .pinball-char-pile span {
+    color: rgba(46,66,101,0.55) !important;
   }
-  html[data-theme="warm-parchment"] .pinball-layer-label.edge {
-    color: rgba(139,105,20,0.8) !important;
+  html[data-theme="glacier-blue"] .pinball-layer-label.edge {
+    color: rgba(46,66,101,0.8) !important;
   }
-  html[data-theme="warm-parchment"] .pinball-peg {
-    background: rgba(139,105,20,0.4) !important;
+  html[data-theme="glacier-blue"] .pinball-peg {
+    background: rgba(46,66,101,0.4) !important;
   }
 
   /* 5. 固定灰色文字改为主题色 */
-  html[data-theme="warm-parchment"] .input-label,
-  html[data-theme="warm-parchment"] .pinball-title {
+  html[data-theme="glacier-blue"] .input-label,
+  html[data-theme="glacier-blue"] .pinball-title {
     color: var(--text-dim) !important;
   }
-  html[data-theme="warm-parchment"] .token-vec,
-  html[data-theme="warm-parchment"] .embed-card .e-id,
-  html[data-theme="warm-parchment"] .vector-hint,
-  html[data-theme="warm-parchment"] .vector-legend,
-  html[data-theme="warm-parchment"] .vector-source-hint {
+  html[data-theme="glacier-blue"] .token-vec,
+  html[data-theme="glacier-blue"] .embed-card .e-id,
+  html[data-theme="glacier-blue"] .vector-hint,
+  html[data-theme="glacier-blue"] .vector-legend,
+  html[data-theme="glacier-blue"] .vector-source-hint {
     color: var(--text-dim) !important;
   }
-  html[data-theme="warm-parchment"] .embed-card .e-vec { color: #4A7A9B !important; }
+  html[data-theme="glacier-blue"] .embed-card .e-vec { color: #4A7A9B !important; }
 
   /* 6. filter-gate-label 深黑背景 → 浅色 */
-  html[data-theme="warm-parchment"] .filter-gate-label {
-    background: rgba(240,235,220,0.9) !important;
+  html[data-theme="glacier-blue"] .filter-gate-label {
+    background: rgba(232,236,240,0.9) !important;
     color: var(--text-dim) !important;
   }
 
   /* 7. vector-dot 白色边框 → 深色 */
-  html[data-theme="warm-parchment"] .vector-dot {
+  html[data-theme="glacier-blue"] .vector-dot {
     border-color: var(--text) !important;
   }
 
   /* 8. output-text */
-  html[data-theme="warm-parchment"] .output-text { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .output-text { color: var(--text) !important; }
+
+  /* ===== 冰川蓝主题额外修复：浅色文字和线条 ===== */
+  /* 修复硬编码浅色文字 */
+  html[data-theme="glacier-blue"] .user-input { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .user-input::placeholder { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .input-label { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .token-card .t-word { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .embed-card .e-word { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .vector-word-label { color: var(--text) !important; text-shadow: 0 0 8px rgba(245,241,236,0.8) !important; }
+  html[data-theme="glacier-blue"] .vector-hint { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .vector-legend { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .vector-source-hint { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .pinball-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .pinball-rain-word { color: rgba(46,66,101,0.5) !important; }
+  html[data-theme="glacier-blue"] .pinball-flying-word { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .pinball-char-pile span { color: rgba(46,66,101,0.4) !important; }
+  html[data-theme="glacier-blue"] .filter-drop-zone-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .filter-pass-zone-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .filter-status-bar { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .footer-info { color: var(--text-dim) !important; }
+  
+  /* 修复背景透明度过高 - 主要卡片/面板 */
+  html[data-theme="glacier-blue"] .step-input-box { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .process-box { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .token-card { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .embed-card { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .vector-space-box,
+  html[data-theme="glacier-blue"] .pinball-box,
+  html[data-theme="glacier-blue"] .filter-box { background: rgba(234,228,221,0.85) !important; }
+  html[data-theme="glacier-blue"] #pinballCanvas,
+  html[data-theme="glacier-blue"] #semanticCanvas { background: rgba(234,228,221,0.85) !important; }
+  html[data-theme="glacier-blue"] .pinball-output-bar { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .user-input { background: rgba(234,228,221,0.95) !important; }
+  
+  /* 修复灰色文字看不清 */
+  html[data-theme="glacier-blue"] .input-label { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .user-input::placeholder { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .token-vec { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .embed-card .e-id { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .vector-hint { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .vector-legend { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .vector-source-hint { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .pinball-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .filter-drop-zone-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .filter-pass-zone-title { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .filter-status-bar { color: var(--text-dim) !important; }
+  
+  /* 修复浅色线条/边框 */
+  html[data-theme="glacier-blue"] .progress-bar { background: rgba(46,66,101,0.15) !important; }
+  html[data-theme="glacier-blue"] .step-input-box { border-color: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .vector-space-box { border-color: rgba(46,66,101,0.25) !important; }
+  html[data-theme="glacier-blue"] .pinball-box { border-color: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] #pinballCanvas { border-color: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .filter-box { border-color: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .pinball-layer { border-top-color: rgba(46,66,101,0.25) !important; }
+  html[data-theme="glacier-blue"] .pinball-output-bar { border-bottom-color: rgba(46,66,101,0.25) !important; }
+  html[data-theme="glacier-blue"] .vector-dot { border-color: var(--text) !important; }
   
   /* ===== v17 等比缩放字体系统（Type Scale）===== */
   :root {
@@ -266,14 +304,14 @@
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
     
-    /* 基础7档字体变量 - 默认中号方案 (1.250) */
-    --text-h1:   48.8px;
-    --text-h2:   39.1px;
-    --text-h3:   31.3px;
-    --text-h4:   25.0px;
-    --text-lead: 20.0px;
-    --text-body: 16.0px;
-    --text-sm:   12.8px;
+    /* 基础7档字体变量 - 销冠Skills v17大号方案 (1.200比例，18px基准) */
+    --text-h1:   56.9px;
+    --text-h2:   42.7px;
+    --text-h3:   32px;
+    --text-h4:   24px;
+    --text-lead: 20px;
+    --text-body: 18px;
+    --text-sm:   16px;
     
     /* 12档兼容层映射 */
     --font-xs:   var(--text-sm);
@@ -342,24 +380,27 @@ body {
 .header-label { font-size: var(--current-xl); letter-spacing: 4px; color: var(--gold); margin-bottom: 12px; }
 .header-title { font-size: 58px; font-weight: 200; letter-spacing: 2px; }
 .header-title em { color: var(--gold); font-style: normal; }
-.controls {
-  position: absolute; bottom: 40px;
-  display: flex; gap: 20px; align-items: center;
+.footer {
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 0 56px; display: flex; align-items: center; gap: 14px;
+  height: 68px; flex-shrink: 0;
 }
-.btn {
-  padding: 12px 32px; background: transparent;
-  border: 1px solid var(--gold); color: var(--gold);
-  font-size: var(--current-xl); letter-spacing: 2px; cursor: pointer; transition: all 0.3s;
+.ctrl-btn {
+  padding: 7px 18px; border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent; color: var(--gold); font-size: var(--text-sm);
+  cursor: pointer; transition: all 0.3s; font-family: inherit;
 }
-.btn:hover { background: rgba(201,168,76,0.1); }
-.btn.primary { background: var(--gold); color: var(--bg); }
-.btn.primary:hover { background: var(--gold); }
-.step-indicator { display: flex; gap: 6px; }
-.step-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(201,168,76,0.3); transition: all 0.3s; cursor: pointer;
+.ctrl-btn:hover { background: rgba(201,168,76,0.1); }
+.ctrl-btn.primary { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+.progress-bar {
+  flex: 1; max-width: 160px; height: 2px;
+  background: rgba(255,255,255,0.05); border-radius: 1px; overflow: hidden;
 }
-.step-dot.active { background: var(--gold); transform: scale(1.3); }
+.progress-fill { height: 100%; background: var(--gold); transition: width 0.4s; }
+.footer-info {
+  margin-left: auto; font-size: var(--text-sm); color: #555; letter-spacing: 2px;
+}
 .stage {
   width: 1320px; height: 860px;
   position: relative; display: flex;
@@ -676,8 +717,7 @@ body {
   .stage { width: 100% !important; height: auto !important; min-height: 550px; padding: 16px; }
   .step { flex-direction: column !important; gap: 20px !important; padding: 0 16px; }
   .process-box { width: 100% !important; max-width: 100% !important; }
-  .controls { position: relative !important; bottom: auto !important; padding: 16px; justify-content: center; }
-  .btn { padding: 10px 20px; font-size: var(--current-sm); }
+  .footer { height: auto; padding: 10px 20px; flex-wrap: wrap; gap: 10px; }
   .particles { display: none; }
 }
 @media (max-width: 480px) {
@@ -689,8 +729,7 @@ body {
   .stage { width: 100% !important; height: auto !important; min-height: 500px; padding: 12px; max-height: none !important; }
   .step { flex-direction: column !important; gap: 14px !important; padding: 0 12px; }
   .process-box { width: 100% !important; max-width: 100% !important; padding: 12px; }
-  .controls { position: relative !important; padding: 12px; gap: 10px; flex-wrap: wrap; }
-  .btn { padding: 8px 16px; font-size: var(--text-sm); }
+  .footer { height: auto; padding: 8px 16px; gap: 8px; flex-wrap: wrap; }
   .token-card .t-word { font-size: var(--current-lg); }
   .embed-card .e-word { font-size: var(--text-body); }
   .embed-card .e-vec { font-size: var(--text-sm); max-width: 120px; }
@@ -810,19 +849,15 @@ body {
 
   </div>
 
-  <div class="controls">
-    <button class="btn" id="prevBtn">← 上一步</button>
-    <div class="step-indicator">
-      <div class="step-dot active" data-step="0"></div>
-      <div class="step-dot" data-step="1"></div>
-      <div class="step-dot" data-step="2"></div>
-      <div class="step-dot" data-step="3"></div>
-      <div class="step-dot" data-step="4"></div>
-      <div class="step-dot" data-step="5"></div>
-      <div class="step-dot" data-step="6"></div>
+  <div class="footer">
+    <button class="ctrl-btn" id="prevBtn">← 上一步</button>
+    <button class="ctrl-btn primary" id="playBtn">▶ 自动演示</button>
+    <button class="ctrl-btn" id="resetBtn">↺ 重置</button>
+    <button class="ctrl-btn" id="nextBtn">下一步 →</button>
+    <div class="progress-bar">
+      <div class="progress-fill" id="pgFill" style="width:0%"></div>
     </div>
-    <button class="btn primary" id="nextBtn">下一步 →</button>
-    <button class="btn" id="autoBtn">▶ 自动演示</button>
+    <div class="footer-info" id="footerInfo">第1步 / 共7步</div>
   </div>
 </div>
 
@@ -890,9 +925,8 @@ function showStep(step) {
     if (i < step) s.classList.add('prev');
     else if (i === step) s.classList.add('active');
   });
-  document.querySelectorAll('.step-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === step);
-  });
+  document.getElementById('footerInfo').textContent = `第${step + 1}步 / 共${totalSteps + 1}步`;
+  document.getElementById('pgFill').style.width = `${(step / totalSteps) * 100}%`;
   triggerStepAnimation(step);
   currentStep = step;
 }
@@ -2140,28 +2174,33 @@ function initPage() {
   document.getElementById('prevBtn').addEventListener('click', () => {
     if (currentStep > 0) showStep(currentStep - 1);
   });
-  document.getElementById('autoBtn').addEventListener('click', () => {
+  document.getElementById('playBtn').addEventListener('click', () => {
     if (autoPlayInterval) {
       clearInterval(autoPlayInterval);
       autoPlayInterval = null;
-      document.getElementById('autoBtn').textContent = '▶ 自动演示';
+      document.getElementById('playBtn').textContent = '▶ 自动演示';
     } else {
-      showStep(1);
+      if (currentStep >= totalSteps) showStep(0);
       autoPlayInterval = setInterval(() => {
         if (currentStep < totalSteps) {
           showStep(currentStep + 1);
         } else {
           clearInterval(autoPlayInterval);
           autoPlayInterval = null;
-          document.getElementById('autoBtn').textContent = '▶ 自动演示';
+          document.getElementById('playBtn').textContent = '▶ 自动演示';
         }
       }, 4000);
-      document.getElementById('autoBtn').textContent = '⏸ 停止演示';
+      document.getElementById('playBtn').textContent = '⏸ 暂停演示';
     }
   });
 
-  document.querySelectorAll('.step-dot').forEach((dot, i) => {
-    dot.addEventListener('click', () => showStep(i));
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+      document.getElementById('playBtn').textContent = '▶ 自动演示';
+    }
+    showStep(0);
   });
 
   document.addEventListener('keydown', (e) => {

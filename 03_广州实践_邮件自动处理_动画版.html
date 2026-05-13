@@ -63,80 +63,61 @@
     --card-bg:        #04335A;
   }
 
-  /* ─── 暖米白 ─── */
-  html[data-theme="warm-parchment"] {
-    --bg:             #F5F0E8;
-    --bg2:            #EDE6D6;
-    --bg3:            #E0D5C0;
-    --gold:           #8B6914;
-    --gold-bright:    #B8890A;
-    --gold-dim:       rgba(139,105,20,0.12);
-    --text:           #2D2410;
-    --text-dim:       #7A6840;
-    --border:         rgba(139,105,20,0.25);
+  /* ─── 冰川蓝 ─── */
+  html[data-theme="glacier-blue"] {
+    --bg:             #F5F1EC;
+    --bg2:            #EAE4DD;
+    --bg3:            #A8B5C2;
+    --gold:           #2E4265;
+    --gold-bright:    #1D3354;
+    --gold-dim:       rgba(46,66,101,0.12);
+    --text:           #2E4265;
+    --text-dim:       #8599AB;
+    --border:         rgba(46,66,101,0.2);
     --red:            #C0392B;
     --green:          #27AE60;
-    --sidebar-bg:     #EDE6D6;
-    --sidebar-text:   #2D2410;
-    --sidebar-active: rgba(139,105,20,0.1);
-    --card-bg:        #EDE6D6;
+    --sidebar-bg:     #EAE4DD;
+    --sidebar-text:   #2E4265;
+    --sidebar-active: rgba(46,66,101,0.1);
+    --card-bg:        #EAE4DD;
   }
 
-  /* ─── 暗夜绿 ─── */
-  html[data-theme="forest-night"] {
-    --bg:             #0D1F1A;
-    --bg2:            #142B22;
-    --bg3:            #1C3A2E;
-    --gold:           #7ECBA1;
-    --gold-bright:    #A8DFC0;
-    --gold-dim:       rgba(126,203,161,0.15);
-    --text:           #C8E6D8;
-    --text-dim:       #6A9E84;
-    --border:         rgba(126,203,161,0.2);
-    --red:            #FF7B6B;
-    --green:          #4FC08D;
-    --sidebar-bg:     #0A1814;
-    --sidebar-text:   #C8E6D8;
-    --sidebar-active: rgba(126,203,161,0.15);
-    --card-bg:        #142B22;
+  /* ─── 秋暮 ─── */
+  html[data-theme="autumn-dusk"] {
+    --bg:             #151D2B;
+    --bg2:            #25344F;
+    --bg3:            #617891;
+    --gold:           #D5B893;
+    --gold-bright:    #E8D4B8;
+    --gold-dim:       rgba(213,184,147,0.15);
+    --text:           #E8D4B8;
+    --text-dim:       #D5B893;
+    --border:         rgba(213,184,147,0.2);
+    --red:            #C04048;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #111828;
+    --sidebar-text:   #E8D4B8;
+    --sidebar-active: rgba(213,184,147,0.12);
+    --card-bg:        #25344F;
   }
 
-  /* ─── 暮光玫瑰 ─── */
-  html[data-theme="dusk-rose"] {
-    --bg:             #1A0F14;
-    --bg2:            #2A1520;
-    --bg3:            #3D2030;
-    --gold:           #E8A0B0;
-    --gold-bright:    #F0C4CC;
-    --gold-dim:       rgba(232,160,176,0.15);
-    --text:           #F0D8E0;
-    --text-dim:       #C090A0;
-    --border:         rgba(232,160,176,0.2);
-    --red:            #FF6B8A;
-    --green:          #6ECFA4;
-    --sidebar-bg:     #120A0F;
-    --sidebar-text:   #F0D8E0;
-    --sidebar-active: rgba(232,160,176,0.12);
-    --card-bg:        #2A1520;
-  }
-
-  /* ─── 星云紫 ─── */
-  html[data-theme="nebula-purple"] {
-    --bg:             #0C0A1A;
-    --bg2:            #16103A;
-    --bg3:            #241858;
-    --gold:           #A78BFA;
-    --gold-bright:    #C4B5FD;
-    --gold-dim:       rgba(167,139,250,0.15);
-    --text:           #E8E0FF;
-    --text-dim:       #9D8FD0;
-    --border:         rgba(167,139,250,0.2);
-    --red:            #F87171;
-    --green:          #34D399;
-    --sidebar-bg:     #080618;
-    --sidebar-text:   #E8E0FF;
-    --sidebar-active: rgba(167,139,250,0.12);
-    --card-bg:        #16103A;
+  /* ─── 落日余烬 ─── */
+  html[data-theme="sunset-ember"] {
+    --bg:             #1A1814;
+    --bg2:            #2A261E;
+    --bg3:            #74601B;
+    --gold:           #FF971E;
+    --gold-bright:    #FFB347;
+    --gold-dim:       rgba(255,151,30,0.15);
+    --text:           #F0E8DC;
+    --text-dim:       #A8A7A3;
+    --border:         rgba(255,151,30,0.2);
+    --red:            #DB4600;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #151210;
+    --sidebar-text:   #F0E8DC;
+    --sidebar-active: rgba(255,151,30,0.12);
+    --card-bg:        #2A261E;
   }
 
   /* Legacy fallback */
@@ -147,20 +128,74 @@
   .red-tag { color: var(--red); }
   .green-tag { color: var(--green); }
   
-  /* ===== 暖米白/浅色主题安全覆盖 =====
+  /* ===== 冰川蓝/浅色主题安全覆盖 =====
      防止浅色背景下出现白字看不见的情况
   ===== */
-  html[data-theme="warm-parchment"] body,
-  html[data-theme="warm-parchment"] .scene,
-  html[data-theme="warm-parchment"] .content-bg,
-  html[data-theme="warm-parchment"] .slide,
-  html[data-theme="warm-parchment"] .container {
+  html[data-theme="glacier-blue"] body,
+  html[data-theme="glacier-blue"] .scene,
+  html[data-theme="glacier-blue"] .content-bg,
+  html[data-theme="glacier-blue"] .slide,
+  html[data-theme="glacier-blue"] .container {
     color: var(--text) !important;
   }
   /* 强制白字元素在浅色主题下用深色 */
-  html[data-theme="warm-parchment"] [style*="color: white"],
-  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+  html[data-theme="glacier-blue"] [style*="color: white"],
+  html[data-theme="glacier-blue"] [style*="color:#fff"] {
     color: var(--text) !important;
+  }
+
+  /* 冰川蓝主题：硬编码灰色文字覆盖为深色 */
+  html[data-theme="glacier-blue"] .sh-metric,
+  html[data-theme="glacier-blue"] .ih-title,
+  html[data-theme="glacier-blue"] .mail-item.done-skip,
+  html[data-theme="glacier-blue"] .mi-from,
+  html[data-theme="glacier-blue"] .mi-subject,
+  html[data-theme="glacier-blue"] .type-meeting,
+  html[data-theme="glacier-blue"] .type-spam,
+  html[data-theme="glacier-blue"] .mi-time,
+  html[data-theme="glacier-blue"] .bi-task,
+  html[data-theme="glacier-blue"] .ao-banner-text,
+  html[data-theme="glacier-blue"] .ao-cal-header,
+  html[data-theme="glacier-blue"] .ao-cal-day,
+  html[data-theme="glacier-blue"] .ao-cal-day.head,
+  html[data-theme="glacier-blue"] .ao-cal-day.event,
+  html[data-theme="glacier-blue"] .ao-cal-event-title,
+  html[data-theme="glacier-blue"] .ao-cal-event-time,
+  html[data-theme="glacier-blue"] .ev-from,
+  html[data-theme="glacier-blue"] .ev-time,
+  html[data-theme="glacier-blue"] .ev-body,
+  html[data-theme="glacier-blue"] .cbtn.reset,
+  html[data-theme="glacier-blue"] .ara-text {
+    color: var(--text) !important;
+  }
+  
+  /* 冰川蓝主题：浅色边框覆盖 */
+  html[data-theme="glacier-blue"] .mail-item.done-skip,
+  html[data-theme="glacier-blue"] .cbtn.reset {
+    border-color: rgba(46,66,101,0.3) !important;
+  }
+
+  /* ===== 冰川蓝主题：卡片背景透明度修复 ===== */
+  html[data-theme="glacier-blue"] .mail-item,
+  html[data-theme="glacier-blue"] .mail-item.done-skip,
+  html[data-theme="glacier-blue"] .mail-content,
+  html[data-theme="glacier-blue"] .sidebar-panel,
+  html[data-theme="glacier-blue"] .calendar-panel,
+  html[data-theme="glacier-blue"] .task-panel,
+  html[data-theme="glacier-blue"] .ao-calendar,
+  html[data-theme="glacier-blue"] .ao-cal-day,
+  html[data-theme="glacier-blue"] .event-card,
+  html[data-theme="glacier-blue"] .action-btn,
+  html[data-theme="glacier-blue"] .cbtn.reset,
+  html[data-theme="glacier-blue"] .input-box,
+  html[data-theme="glacier-blue"] .search-box {
+    background: rgba(234,228,221,0.95) !important;
+  }
+
+  /* ===== 冰川蓝主题：次要区域背景 ===== */
+  html[data-theme="glacier-blue"] .sep,
+  html[data-theme="glacier-blue"] .divider {
+    background: rgba(234,228,221,0.85) !important;
   }
 
   /* ===== v17 等比缩放字体系统（Type Scale）===== */
@@ -170,14 +205,14 @@
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
     
-    /* 基础7档字体变量 - 默认中号方案 (1.250) */
-    --text-h1:   48.8px;
-    --text-h2:   39.1px;
-    --text-h3:   31.3px;
-    --text-h4:   25.0px;
-    --text-lead: 20.0px;
-    --text-body: 16.0px;
-    --text-sm:   12.8px;
+    /* 基础7档字体变量 - v17大号方案 (销冠Skills标准) - 16:9适配 */
+    --text-h1:   48px;
+    --text-h2:   36px;
+    --text-h3:   28px;
+    --text-h4:   22px;
+    --text-lead: 18px;
+    --text-body: 16px;
+    --text-sm:   14px;
     
     /* 12档兼容层映射 */
     --font-xs:   var(--text-sm);
@@ -218,10 +253,10 @@
     --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
     --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
   }
-  /* 大号方案 (1.333) */
+  /* 大号方案 (1.333) - 16:9适配 */
   html[data-font-level="large"] {
-    --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
-    --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+    --text-h1: 64px; --text-h2: 48px; --text-h3: 36px; --text-h4: 28px;
+    --text-lead: 20px; --text-body: 16px; --text-sm: 12px;
   }
 
 </style>
@@ -256,7 +291,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 
 .page {
   position: relative; z-index: 1;
-  width: 1440px; height: 1080px;
+  width: 1440px; height: 810px;
   display: flex; flex-direction: column;
 }
 
@@ -270,9 +305,10 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   padding: 0 clamp(16px, 3vw, 44px);
 }
 .sh-left { display: flex; align-items: center; gap: 14px; }
+.h-label { font-size:var(--text-sm); color:var(--text-dim); letter-spacing:2px; text-transform:uppercase; }
 .sh-badge { font-size: var(--current-sm); letter-spacing: 2px; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 3px 10px; border-radius: 3px; }
-.sh-title { font-size: var(--current-md); font-weight: 300; }
-.sh-title em { color: var(--gold); font-style: normal; font-weight: 500; }
+.h-title { font-size:var(--text-h3); color:var(--gold); font-weight:700; margin-top:2px; }
+.h-title em { font-style:normal; color:var(--text); font-weight:400; }
 .sh-right { display: flex; align-items: center; gap: 16px; font-size: 14px; }
 .sh-metric { color: #666; display: flex; align-items: center; gap: 6px; }
 .sh-metric .val { color: var(--gold); font-size: var(--text-base); /* 18px */ font-weight: 500; }
@@ -290,7 +326,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   background: rgba(255,255,255,0.01);
 }
 .inbox-header {
-  padding: clamp(10px,1.5vh,14px) clamp(12px,1.5vw,18px);
+  padding: clamp(8px,1.2vh,12px) clamp(12px,1.5vw,18px);
   border-bottom: 1px solid rgba(255,255,255,0.04);
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -298,7 +334,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .ih-count { font-size: var(--current-sm); color: var(--gold); padding: 2px 8px; background: rgba(201,168,76,0.1); border-radius: 10px; }
 .mail-list { flex:1; overflow-y:auto; padding: 6px 0; }
 .mail-item {
-  padding: clamp(8px,1vh,12px) clamp(12px,1.5vw,18px);
+  padding: clamp(6px,0.8vh,10px) clamp(12px,1.5vw,18px);
   border-left: 3px solid transparent;
   display: flex; flex-direction: column; gap: 4px;
   cursor: default;
@@ -325,8 +361,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 /* ===== 中：AI处理面板 ===== */
 .center {
   display: flex; flex-direction: column;
-  padding: clamp(14px,2vh,20px) clamp(16px,2vw,28px);
-  gap: clamp(10px,1.5vh,16px);
+  padding: clamp(10px,1.5vh,16px) clamp(16px,2vw,28px);
+  gap: clamp(8px,1.2vh,12px);
   overflow: hidden;
   position: relative;
 }
@@ -401,8 +437,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   background: transparent;
 }
 .action-anim-box {
-  width: 70vw; height: 70vh;
-  max-width: 800px; max-height: 600px;
+  width: 70vw; height: 60vh;
+  max-width: 800px; max-height: 450px;
   position: relative;
   display: flex; align-items: center; justify-content: center;
 }
@@ -458,8 +494,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 
 /* --- 通知动效：手机+通知横幅 --- */
 .ao-notify .ao-phone {
-  width: 220px;
-  height: 90%;
+  width: 200px;
+  height: 85%;
   border: 4px solid rgba(255,255,255,0.25);
   border-radius: 28px;
   background: rgba(255,255,255,0.05);
@@ -483,7 +519,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .ao-notify .ao-banner-text { font-size: var(--current-lg); color: #eee; font-weight: 500; }
 .ao-notify .ao-banner-icon { position: absolute; top: 16px; right: 16px; font-size: var(--current-3xl); }
 .ao-notify .ao-label {
-  position: absolute; bottom: -50px;
+  position: absolute; bottom: -40px;
   font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
   opacity: 0; animation: fadeUp 0.5s 0.8s forwards;
 }
@@ -491,11 +527,11 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 
 /* --- 归档动效：文件夹 --- */
 .ao-archive .ao-folder {
-  width: 280px; height: 190px;
+  width: 260px; height: 170px;
   position: relative;
 }
 .ao-archive .ao-folder-back {
-  width: 280px; height: 160px;
+  width: 260px; height: 145px;
   background: rgba(201,168,76,0.15);
   border: 3px solid rgba(201,168,76,0.3);
   border-radius: 0 0 12px 12px;
@@ -510,11 +546,11 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   position: absolute; top: 7px; left: 24px;
 }
 .ao-archive .ao-file {
-  width: 80px; height: 105px;
+  width: 75px; height: 95px;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
-  position: absolute; top: -90px; left: 95px;
+  position: absolute; top: -80px; left: 92px;
   opacity: 0;
   animation: fileFly 1s 0.3s ease forwards;
 }
@@ -524,12 +560,12 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   box-shadow: 0 12px 0 rgba(255,255,255,0.1), 0 24px 0 rgba(255,255,255,0.1);
 }
 .ao-archive .ao-folder-label {
-  position: absolute; bottom: 18px; left: 0; right: 0; text-align: center;
+  position: absolute; bottom: 14px; left: 0; right: 0; text-align: center;
   font-size: var(--current-md); color: var(--gold); letter-spacing: 1px;
   opacity: 0; animation: fadeUp 0.5s 0.9s forwards;
 }
 .ao-archive .ao-label {
-  position: absolute; bottom: -52px; left: 0; right: 0; text-align: center;
+  position: absolute; bottom: -42px; left: 0; right: 0; text-align: center;
   font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
   opacity: 0; animation: fadeUp 0.5s 1s forwards;
 }
@@ -595,7 +631,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   animation: shatterFly 0.8s 0.5s forwards;
 }
 .ao-block .ao-label {
-  position: absolute; bottom: -56px;
+  position: absolute; bottom: -46px;
   font-size: var(--current-lg); color: var(--red); font-weight: 500; letter-spacing: 1px;
   opacity: 0; animation: fadeUp 0.5s 0.8s forwards;
 }
@@ -642,7 +678,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .ao-dispatch .ao-line.l5 { width: 140px; transform: translateY(-50%) rotate(135deg); animation: lineGrowIn 0.3s 0.9s forwards; }
 
 .ao-dispatch .ao-label {
-  position: absolute; bottom: -60px;
+  position: absolute; bottom: -48px;
   font-size: var(--current-lg); color: var(--green); font-weight: 500; letter-spacing: 1px;
   opacity: 0; animation: fadeUp 0.5s 1.1s forwards;
   text-align: center;
@@ -663,7 +699,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 @keyframes fadeUp { 0%{opacity:0;transform:translateY(8px);} 100%{opacity:1;transform:translateY(0);} }
 
 .ev-header {
-  padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  padding: clamp(8px,1vh,12px) clamp(12px,1.5vw,16px);
   background: rgba(201,168,76,0.04);
   border-bottom: 1px solid rgba(201,168,76,0.1);
   display: flex; gap: 12px; align-items: flex-start;
@@ -674,7 +710,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .ev-subject { font-size: var(--current-md); font-weight: 500; margin-top: 3px; }
 .ev-time { font-size: 14px; color: #555; margin-top: 2px; }
 .ev-body {
-  padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  padding: clamp(8px,1vh,12px) clamp(12px,1.5vw,16px);
   font-size: var(--text-base); /* 18px */ color: #999; line-height: 1.8;
 }
 .ev-body .hl { color: var(--gold); font-weight: 500; }
@@ -683,7 +719,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .ai-reply-area {
   background: rgba(74,222,128,0.03);
   border: 1px solid rgba(74,222,128,0.12);
-  border-radius: 10px; padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,16px);
+  border-radius: 10px; padding: clamp(8px,1vh,12px) clamp(12px,1.5vw,16px);
   flex-shrink: 0;
   opacity: 0; transform: translateY(10px);
   transition: all 0.5s;
@@ -699,8 +735,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .af-title { font-size: var(--current-sm); letter-spacing: 2px; color: #444; flex-shrink: 0; }
 .analysis-steps { flex:1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
 .as-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: clamp(8px,1vh,12px) clamp(10px,1.2vw,14px);
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: clamp(6px,0.8vh,10px) clamp(10px,1.2vw,14px);
   border: 1px solid rgba(255,255,255,0.04);
   border-radius: 8px; background: rgba(255,255,255,0.02);
   opacity: 0.25; transition: all 0.4s;
@@ -728,13 +764,13 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
   background: rgba(255,255,255,0.01);
   overflow-y: auto;
 }
-.pr-section { padding: clamp(12px,1.5vh,16px) clamp(12px,1.5vw,18px); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.pr-section { padding: clamp(10px,1.2vh,14px) clamp(12px,1.5vw,18px); border-bottom: 1px solid rgba(255,255,255,0.04); }
 .prs-title { font-size: var(--current-sm); letter-spacing: 2px; color: #444; margin-bottom: 12px; }
 
 .action-card {
   background: rgba(74,222,128,0.04);
   border: 1px solid rgba(74,222,128,0.15);
-  border-radius: 12px; padding: clamp(16px,2vh,22px) clamp(16px,2vw,22px);
+  border-radius: 12px; padding: clamp(12px,1.5vh,18px) clamp(16px,2vw,22px);
   opacity: 0; transform: translateY(8px);
   transition: all 0.5s;
 }
@@ -754,7 +790,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 }
 
 /* 处理记录流 */
-.action-log { display: flex; flex-direction: column; gap: 7px; max-height: 220px; overflow-y: auto; }
+.action-log { display: flex; flex-direction: column; gap: 7px; max-height: 140px; overflow-y: auto; }
 .log-entry {
   display: flex; gap: 10px; align-items: flex-start;
   font-size: 14px; opacity: 0; transform: translateX(-6px);
@@ -808,7 +844,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 
 /* ===== 结尾聊天窗口 ===== */
 .chat-popup {
-  position: absolute; bottom: 80px; right: clamp(20px,3vw,60px);
+  position: absolute; bottom: 60px; right: clamp(20px,3vw,60px);
   width: clamp(320px, 30vw, 420px);
   background: rgba(10,10,14,0.96);
   border: 1px solid rgba(201,168,76,0.2);
@@ -822,7 +858,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 }
 .chat-popup.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 .chat-header {
-  padding: 12px 16px;
+  padding: 10px 14px;
   background: rgba(201,168,76,0.08);
   border-bottom: 1px solid rgba(201,168,76,0.15);
   display: flex; align-items: center; gap: 10px;
@@ -831,8 +867,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 .chat-name { font-size: var(--text-base); /* 18px */ font-weight: 500; }
 .chat-status { font-size: var(--current-sm); color: var(--green); margin-left: auto; }
 .chat-messages {
-  padding: 16px;
-  max-height: 280px; overflow-y: auto;
+  padding: 12px;
+  max-height: 180px; overflow-y: auto;
   display: flex; flex-direction: column; gap: 12px;
 }
 .chat-messages::-webkit-scrollbar { width: 3px; }
@@ -865,7 +901,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 
 /* 聊天输入区 */
 .chat-input-area {
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-top: 1px solid rgba(255,255,255,0.06);
   display: flex; flex-direction: column; gap: 8px;
 }
@@ -985,7 +1021,7 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 @media (max-width: 600px) {
   html { height: auto !important; overflow: visible !important; }
   body { height: auto !important; overflow-y: auto !important; overflow-x: hidden !important; font-size: var(--current-md) !important; }
-  .page { height: auto !important; min-height: 1080px; }
+  .page { height: auto !important; min-height: 810px; }
   .main { min-height: 80vh; }
   .inbox { max-height: none !important; overflow: visible !important; border-right: none !important; border-bottom: 1px solid rgba(201,168,76,0.07); }
   .panel-right { max-height: none !important; overflow: visible !important; border-left: none !important; border-top: 1px solid rgba(201,168,76,0.07); }
@@ -1002,8 +1038,8 @@ canvas#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; 
 <div class="page">
   <div class="sys-header">
     <div class="sh-left">
-      <div class="sh-badge">MAIL CENTER</div>
-      <div class="sh-title">智能邮件中枢 · <em>AI 全自动分类处理</em></div>
+      <div class="h-label">SCENE 07 · EMAIL AUTO PROCESSING</div>
+      <div class="h-title">智能邮件中枢 · <em>AI 全自动分类处理</em></div>
     </div>
     <div class="sh-right">
       <div class="sh-metric">今日已处: <span class="val" id="totalCount">0</span></div>
@@ -1217,7 +1253,7 @@ const emails = [
     id: 1, icon: '🚨', from: '张总 · 对公业务部', subject: '【紧急】大额转账授权确认',
     time: '09:02',
     body: '需要确认一笔 <span class="hl">500万元</span> 的大额转账授权，客户已在柜台等候，请尽快处理。',
-    type: '紧急', analysis: ['发件人：张总（对公部）', '关键词：紧急/大额授权', '紧急度：9.8/10', '判定：立即人工处理'],
+    type: '紧急', analysis: ['发件人：张总（公司业务部）', '关键词：紧急/大额授权', '紧急度：9.8/10', '判定：立即人工处理'],
     action: '通知', actionType: '🔔 立即通知', actionTitle: '推送紧急提醒',
     actionDetail: '已发送手机推送通知，标记为 <span class="hl">最高优先级</span>，同时转发直属上级。',
     actionTag: '⚡ 高优先级', doneClass: 'done-ok',

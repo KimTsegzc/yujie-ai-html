@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>SOP智能升级 · 千里挑一 · v2b</title>
+<style>
+/* ===== CLAW v8 颜色主题系统（6套，由 theme-config.js 统一管理） ===== */
+
+/* ─── 默认主题：深海蓝（与主页面保持一致） ─── */
+:root {
+  --gold:           #9ABCE0;
+  --gold-bright:    #C4D4E6;
+  --gold-dim:       rgba(154,188,224,0.15);
+  --red:            #E07878;
+  --green:          #6FCFA0;
+  --bg:             #031E36;
+  --bg2:            #04335A;
+  --bg3:            #4474A3;
+  --text:           #C4D4E6;
+  --text-dim:       #9ABCE0;
+  --border:         rgba(154,188,224,0.2);
+  --sidebar-bg:     #021628;
+  --sidebar-text:   #C4D4E6;
+  --sidebar-active: rgba(154,188,224,0.15);
+  --card-bg:        #04335A;
+  --sidebar-w:      240px;
+  /* Extended colors */
+  --blue: #60a5fa;
+  --purple: #a78bfa;
+  --orange: #fb923c;
+}
+
+/* ─── 黑金 ─── */
+html[data-theme="black-gold"] {
+  --bg:             #0A0A0F;
+  --bg2:            #111118;
+  --bg3:            #1C1C26;
+  --gold:           #C9A84C;
+  --gold-bright:    #E8C97A;
+  --gold-dim:       rgba(201,168,76,0.15);
+  --text:           #E8E4D8;
+  --text-dim:       #9A9080;
+  --border:         rgba(201,168,76,0.2);
+  --red:            #FF5252;
+  --green:          #2ED573;
+  --sidebar-bg:     #060608;
+  --sidebar-text:   #E8E4D8;
+  --sidebar-active: rgba(201,168,76,0.12);
+  --card-bg:        #111118;
+}
+
+/* ─── 深海蓝 ─── */
+html[data-theme="deep-ocean"] {
+  --bg:             #031E36;
+  --bg2:            #04335A;
+  --bg3:            #4474A3;
+  --gold:           #9ABCE0;
+  --gold-bright:    #C4D4E6;
+  --gold-dim:       rgba(154,188,224,0.15);
+  --text:           #C4D4E6;
+  --text-dim:       #9ABCE0;
+  --border:         rgba(154,188,224,0.2);
+  --red:            #E07878;
+  --green:          #6FCFA0;
+  --sidebar-bg:     #021628;
+  --sidebar-text:   #C4D4E6;
+  --sidebar-active: rgba(154,188,224,0.15);
+  --card-bg:        #04335A;
+}
+
+/* ─── 暖米白 ─── */
+html[data-theme="warm-parchment"] {
+  --bg:             #F5F0E8;
+  --bg2:            #EDE6D6;
+  --bg3:            #E0D5C0;
+  --gold:           #8B6914;
+  --gold-bright:    #B8890A;
+  --gold-dim:       rgba(139,105,20,0.12);
+  --text:           #2D2410;
+  --text-dim:       #7A6840;
+  --border:         rgba(139,105,20,0.25);
+  --red:            #C0392B;
+  --green:          #27AE60;
+  --sidebar-bg:     #EDE6D6;
+  --sidebar-text:   #2D2410;
+  --sidebar-active: rgba(139,105,20,0.1);
+  --card-bg:        #EDE6D6;
+}
+
+/* ─── 暗夜绿 ─── */
+html[data-theme="forest-night"] {
+  --bg:             #0D1F1A;
+  --bg2:            #142B22;
+  --bg3:            #1C3A2E;
+  --gold:           #7ECBA1;
+  --gold-bright:    #A8DFC0;
+  --gold-dim:       rgba(126,203,161,0.15);
+  --text:           #C8E6D8;
+  --text-dim:       #6A9E84;
+  --border:         rgba(126,203,161,0.2);
+  --red:            #FF7B6B;
+  --green:          #4FC08D;
+  --sidebar-bg:     #0A1814;
+  --sidebar-text:   #C8E6D8;
+  --sidebar-active: rgba(126,203,161,0.15);
+  --card-bg:        #142B22;
+}
+
+/* ─── 暮光玫瑰 ─── */
+html[data-theme="dusk-rose"] {
+  --bg:             #1A0F14;
+  --bg2:            #2A1520;
+  --bg3:            #3D2030;
+  --gold:           #E8A0B0;
+  --gold-bright:    #F0C4CC;
+  --gold-dim:       rgba(232,160,176,0.15);
+  --text:           #F0D8E0;
+  --text-dim:       #C090A0;
+  --border:         rgba(232,160,176,0.2);
+  --red:            #FF6B8A;
+  --green:          #6ECFA4;
+  --sidebar-bg:     #120A0F;
+  --sidebar-text:   #F0D8E0;
+  --sidebar-active: rgba(232,160,176,0.12);
+  --card-bg:        #2A1520;
+}
+
+/* ─── 星云紫 ─── */
+html[data-theme="nebula-purple"] {
+  --bg:             #0C0A1A;
+  --bg2:            #16103A;
+  --bg3:            #241858;
+  --gold:           #A78BFA;
+  --gold-bright:    #C4B5FD;
+  --gold-dim:       rgba(167,139,250,0.15);
+  --text:           #E8E0FF;
+  --text-dim:       #9D8FD0;
+  --border:         rgba(167,139,250,0.2);
+  --red:            #F87171;
+  --green:          #34D399;
+  --sidebar-bg:     #080618;
+  --sidebar-text:   #E8E0FF;
+  --sidebar-active: rgba(167,139,250,0.12);
+  --card-bg:        #16103A;
+}
+
+/* Legacy fallback */
+body, .content-bg { background-color: var(--bg) !important; color: var(--text); }
+h1, h2, h3, h4, h5, h6 { color: var(--gold); }
+a { color: var(--gold); }
+.highlight, .accent { color: var(--gold-bright); }
+.red-tag { color: var(--red); }
+.green-tag { color: var(--green); }
+
+/* ===== 暖米白/浅色主题安全覆盖 ===== */
+html[data-theme="warm-parchment"] body,
+html[data-theme="warm-parchment"] .scene,
+html[data-theme="warm-parchment"] .content-bg,
+html[data-theme="warm-parchment"] .slide,
+html[data-theme="warm-parchment"] .container {
+  color: var(--text) !important;
+}
+html[data-theme="warm-parchment"] [style*="color: white"],
+html[data-theme="warm-parchment"] [style*="color:#fff"] {
+  color: var(--text) !important;
+}
+
+/* ===== v17 等比缩放字体系统（Type Scale）===== */
+:root {
+  /* 行高配合 */
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  
+  /* 基础7档字体变量 - v17大号方案 (销冠Skills标准) */
+  --text-h1:   56.9px;
+  --text-h2:   42.7px;
+  --text-h3:   32px;
+  --text-h4:   24px;
+  --text-lead: 20px;
+  --text-body: 18px;
+  --text-sm:   16px;
+  
+  /* 12档兼容层映射 */
+  --font-xs:   var(--text-sm);
+  --font-sm:   var(--text-sm);
+  --font-base: var(--text-body);
+  --font-md:   var(--text-body);
+  --font-lg:   var(--text-h4);
+  --font-xl:   var(--text-h3);
+  --font-2xl:  var(--text-h2);
+  --font-2xl2: var(--text-h2);
+  --font-3xl:  var(--text-h1);
+  --font-3xl2: var(--text-h1);
+  --font-4xl:  var(--text-h1);
+  --font-hero: var(--text-h1);
+  
+  /* 当前选中档次 */
+  --current-xs:   var(--text-sm);
+  --current-sm:   var(--text-sm);
+  --current-base: var(--text-body);
+  --current-md:   var(--text-body);
+  --current-lg:   var(--text-h4);
+  --current-xl:   var(--text-h3);
+  --current-2xl:  var(--text-h2);
+  --current-2xl2: var(--text-h2);
+  --current-3xl:  var(--text-h1);
+  --current-3xl2: var(--text-h1);
+  --current-4xl:  var(--text-h1);
+  --current-hero: var(--text-h1);
+}
+
+/* 小号方案 (1.200) */
+html[data-font-level="small"] {
+  --text-h1: 39.8px; --text-h2: 33.2px; --text-h3: 27.6px; --text-h4: 23.0px;
+  --text-lead: 19.2px; --text-body: 16.0px; --text-sm: 13.3px;
+}
+/* 中号方案 (1.250) - 默认 */
+html[data-font-level="medium"] {
+  --text-h1: 48.8px; --text-h2: 39.1px; --text-h3: 31.3px; --text-h4: 25.0px;
+  --text-lead: 20.0px; --text-body: 16.0px; --text-sm: 12.8px;
+}
+/* 大号方案 (1.333) */
+html[data-font-level="large"] {
+  --text-h1: 75.9px; --text-h2: 56.9px; --text-h3: 42.7px; --text-h4: 32.0px;
+  --text-lead: 24.0px; --text-body: 18.0px; --text-sm: 13.5px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+}
+
+/* ===== CANVAS BG ===== */
+#bgCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* ===== LAYOUT ===== */
+.page {
+  position: relative; z-index: 10;
+  width: 100vw; height: 100vh;
+  display: grid;
+  grid-template-rows: 72px 1fr 58px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink:0;
+}
+.h-label { font-size: var(--text-sm); color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
+.h-title { font-size: var(--text-h3); color: var(--gold); font-weight: 700; margin-top: 2px; }
+.h-title em { font-style: normal; color: var(--text); font-weight: 400; }
+
+.step-tabs { display:flex; gap:8px; margin-left:auto; }
+.step-tab {
+  padding: 6px 18px; border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.2);
+  font-size: var(--text-sm); color: #888; cursor: pointer;
+  transition: all 0.3s;
+}
+.step-tab.active {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold); color: var(--gold);
+}
+
+/* ===== MAIN: 三栏布局 ===== */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 380px 280px;
+  overflow: hidden;
+}
+
+/* ===== WORKSPACE (LEFT) ===== */
+.workspace {
+  position: relative;
+  overflow: hidden;
+}
+
+.step-scene {
+  position: absolute; inset: 0;
+  display: none; flex-direction: column;
+  padding: 20px 28px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.step-scene.active { 
+  display: flex; 
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== CHAT PANEL (CENTER) ===== */
+.chat-panel {
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: rgba(0,0,0,0.15);
+}
+.chat-head {
+  padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: var(--text-sm); letter-spacing: 2px; color: var(--gold);
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.online-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.chat-messages {
+  flex: 1; min-height: 0; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.25) transparent;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(201,168,76,0.3); border-radius: 2px;
+}
+
+/* 弹性气泡动画 */
+.bubble {
+  max-width: 300px; padding: 10px 14px;
+  border-radius: 14px; font-size: var(--current-base); line-height: 1.6;
+  animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  word-break: break-word; white-space: pre-line;
+}
+@keyframes bubblePop {
+  0% { opacity:0; transform: scale(0.95); }
+  50% { transform: scale(1.02); }
+  100% { opacity:1; transform: scale(1); }
+}
+
+/* 多角色气泡样式 */
+.bubble.user {
+  background: var(--gold-dim); color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.25);
+  align-self: flex-end; border-bottom-right-radius: 4px;
+}
+.bubble.ai {
+  background: rgba(255,255,255,0.04); color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+  align-self: flex-start; border-bottom-left-radius: 4px;
+}
+.bubble.zhang {
+  background: rgba(96,165,250,0.1); color: var(--blue);
+  border: 1px solid rgba(96,165,250,0.25);
+  align-self: flex-start; border-bottom-left-radius: 4px;
+}
+.bubble.wang {
+  background: rgba(74,222,128,0.1); color: var(--green);
+  border: 1px solid rgba(74,222,128,0.25);
+  align-self: flex-start; border-bottom-left-radius: 4px;
+}
+.bubble.ai-gold {
+  background: rgba(201,168,76,0.12); color: var(--gold-bright);
+  border: 1px solid rgba(201,168,76,0.3);
+  align-self: flex-start; border-bottom-left-radius: 4px;
+}
+
+.bubble.ai.typing, .bubble.zhang.typing, .bubble.wang.typing, .bubble.ai-gold.typing { color: transparent; }
+.bubble.ai.typing::after, .bubble.zhang.typing::after, .bubble.wang.typing::after, .bubble.ai-gold.typing::after {
+  content: '●●●'; letter-spacing: 3px; color: var(--text-dim);
+  animation: dots 1.2s infinite;
+}
+@keyframes dots { 0%{opacity:1;} 50%{opacity:0.3;} 100%{opacity:1;} }
+
+.chat-input-area {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+.chat-input-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; transition: all 0.3s;
+}
+.chat-input-box:hover { border-color: rgba(201,168,76,0.3); }
+.chat-input-text {
+  flex: 1; font-size: var(--current-base); color: #888;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+.chat-send {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: var(--text-sm); cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== KPI PANEL (RIGHT) ===== */
+.kpi-panel {
+  padding: 18px 16px;
+  display: flex; flex-direction: column; gap: 14px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.25) transparent;
+}
+.kpi-panel::-webkit-scrollbar { width: 4px; }
+.kpi-panel::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+.kpi-title {
+  font-size: var(--text-sm); letter-spacing: 2px; color: var(--gold);
+  padding-bottom: 8px; border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.kpi-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px; padding: 14px 16px;
+  transition: all 0.4s;
+}
+.kpi-card.highlight {
+  background: rgba(74,222,128,0.06);
+  border-color: rgba(74,222,128,0.25);
+}
+.kpi-label { font-size: var(--text-sm); color: #888; margin-bottom: 6px; }
+.kpi-val { font-size: var(--text-h3); font-weight: 200; color: var(--gold); }
+.kpi-val.green { color: var(--green); }
+.kpi-sub { font-size: var(--current-base); color: #666; margin-top: 4px; }
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 0 56px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ctrl-btn {
+  padding: 7px 18px; border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent; color: var(--gold); font-size: var(--text-sm);
+  cursor: pointer; transition: all 0.3s; font-family: inherit;
+}
+.ctrl-btn:hover { background: rgba(201,168,76,0.1); }
+.ctrl-btn.primary { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+.prog-track { flex: 1; max-width: 200px; height: 2px; background: rgba(255,255,255,0.05); border-radius: 1px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); transition: width 0.5s; }
+.footer-info { margin-left: auto; font-size: var(--text-sm); color: #555; letter-spacing: 2px; }
+
+/* ============================================================
+   SCENE 0: PROJECT INIT - 发起任务（增强版）
+   ============================================================ */
+
+.s0-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.s0-project-title {
+  font-size: var(--text-h4); color: var(--gold); font-weight: 600;
+}
+.s0-project-status {
+  font-size: var(--text-sm); padding: 4px 12px;
+  border-radius: 20px; background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25); color: var(--green);
+}
+
+/* 项目卡片 - 渐变边框 + shimmer */
+.s0-project-card {
+  background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.02));
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.s0-project-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--gold), transparent, var(--gold-bright));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* shimmer效果 */
+.s0-project-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.s0-card-content { position: relative; z-index: 1; }
+.s0-card-title {
+  font-size: var(--text-body); color: var(--gold); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.s0-card-desc {
+  font-size: var(--current-base); color: var(--text-dim); line-height: 1.6;
+}
+
+/* 团队成员区域 */
+.s0-team-section { margin-bottom: 20px; }
+.s0-section-title {
+  font-size: var(--text-sm); letter-spacing: 2px; color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+/* 团队成员卡片 */
+.s0-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.s0-member-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; transform: translateY(15px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.s0-member-card.show {
+  opacity: 1; transform: translateY(0);
+}
+.s0-member-card.online {
+  border-color: rgba(74,222,128,0.3);
+  background: rgba(74,222,128,0.03);
+}
+.s0-member-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-h4);
+  position: relative;
+}
+.s0-member-card.human .s0-member-avatar {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+}
+.s0-member-card.ai .s0-member-avatar {
+  background: rgba(96,165,250,0.1);
+  border: 1px solid rgba(96,165,250,0.25);
+}
+/* 在线状态点 */
+.s0-member-avatar::after {
+  content: '';
+  position: absolute; bottom: 2px; right: 2px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--green); border: 2px solid var(--bg);
+  opacity: 0; transform: scale(0);
+  transition: all 0.3s;
+}
+.s0-member-card.online .s0-member-avatar::after {
+  opacity: 1; transform: scale(1);
+}
+.s0-member-info { flex: 1; }
+.s0-member-name { font-size: var(--current-base); font-weight: 500; }
+.s0-member-role { font-size: var(--text-sm); color: #777; margin-top: 2px; }
+
+/* AI智能体区域 */
+.s0-ai-section { position: relative; }
+.s0-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.s0-ai-card {
+  background: rgba(96,165,250,0.03);
+  border: 1px solid rgba(96,165,250,0.1);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  opacity: 0; transform: scale(0.8);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.s0-ai-card.show {
+  opacity: 1; transform: scale(1);
+}
+.s0-ai-card.active {
+  border-color: rgba(96,165,250,0.4);
+  background: rgba(96,165,250,0.08);
+  box-shadow: 0 0 20px rgba(96,165,250,0.15);
+}
+.s0-ai-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(96,165,250,0.1);
+  border: 1px solid rgba(96,165,250,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-lg);
+  margin: 0 auto 8px;
+}
+.s0-ai-name { font-size: var(--text-sm); color: var(--blue); }
+
+/* 电流连线Canvas */
+#connectionCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 资源对比条 */
+.s0-resource-section { margin-top: 20px; }
+.s0-bar-group { margin-bottom: 16px; }
+.s0-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: var(--current-base); color: #999;
+  margin-bottom: 6px;
+}
+.s0-bar-track {
+  height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+  position: relative;
+}
+.s0-bar-fill {
+  height: 100%; border-radius: 8px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 12px;
+  font-size: var(--current-base); font-weight: 600;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.s0-bar-fill::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+.s0-bar-fill.old { background: linear-gradient(90deg, rgba(248,113,113,0.15), rgba(248,113,113,0.35)); color: var(--red); }
+.s0-bar-fill.new { background: linear-gradient(90deg, rgba(74,222,128,0.15), rgba(74,222,128,0.35)); color: var(--green); }
+
+/* ============================================================
+   SCENE 1: BRAINSTORM - 头脑风暴（增强版）
+   ============================================================ */
+
+.s1-header-area {
+  text-align: center; margin-bottom: 16px;
+}
+.s1-title {
+  font-size: var(--text-body); letter-spacing: 3px; color: var(--gold);
+}
+
+/* 便签纸墙 */
+.s1-sticky-wall {
+  background: linear-gradient(135deg, rgba(139,105,20,0.08), rgba(139,105,20,0.03));
+  border: 1px solid rgba(139,105,20,0.15);
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 200px;
+  position: relative;
+  margin-bottom: 20px;
+}
+/* 纸张纹理 */
+.s1-sticky-wall::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 12px;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(139,105,20,0.03) 25px);
+  pointer-events: none;
+}
+
+.s1-sticky-grid {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  justify-content: center;
+  position: relative; z-index: 1;
+}
+.s1-sticky {
+  width: 140px; padding: 16px;
+  border-radius: 4px;
+  font-size: var(--current-base);
+  text-align: center;
+  position: relative;
+  opacity: 0; transform: scale(0.8) rotate(-3deg);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.2);
+}
+.s1-sticky.show {
+  opacity: 1; transform: scale(1) rotate(var(--rotation, 0deg));
+}
+.s1-sticky::before {
+  content: '';
+  position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(200,200,200,0.4));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.s1-sticky.yellow { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; --rotation: -2deg; }
+.s1-sticky.green { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; --rotation: 1deg; }
+.s1-sticky.blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e40af; --rotation: -1deg; }
+.s1-sticky.pink { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9d174d; --rotation: 2deg; }
+
+/* AI生成面板 */
+.s1-generation-panel {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 旋转能量环 */
+.s1-energy-ring {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 30px;
+}
+.s1-energy-ring::before {
+  content: '';
+  position: absolute; inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, var(--blue), transparent, var(--gold), transparent);
+  animation: rotateRing 3s linear infinite;
+}
+.s1-energy-ring::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(96,165,250,0.3), rgba(96,165,250,0.05));
+  border: 2px solid rgba(96,165,250,0.4);
+}
+@keyframes rotateRing {
+  to { transform: rotate(360deg); }
+}
+.s1-ai-core-icon {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: var(--text-h2); z-index: 1;
+}
+
+/* 方案网格 */
+.s1-scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  max-width: 500px;
+  position: relative;
+}
+.s1-scheme-cell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-lg);
+  opacity: 0; transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.s1-scheme-cell.show {
+  opacity: 1; transform: scale(1);
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.2);
+}
+/* 脉冲波纹 */
+.s1-scheme-cell.show::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 6px;
+  border: 2px solid var(--gold);
+  opacity: 0;
+  animation: ripple 0.6s ease-out;
+}
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* 翻页计数器 */
+.s1-counter {
+  margin-top: 24px;
+  text-align: center;
+}
+.s1-counter-label {
+  font-size: var(--text-sm); color: #888; margin-bottom: 8px;
+}
+.s1-counter-value {
+  font-size: var(--text-h2); font-weight: 200; color: var(--green);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.s1-counter-digit {
+  display: inline-block;
+  width: 40px; height: 56px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  line-height: 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.s1-counter-digit::before {
+  content: attr(data-prev);
+  position: absolute; top: 0; left: 0; right: 0;
+  animation: flipOut 0.3s ease-in forwards;
+}
+.s1-counter-digit::after {
+  content: attr(data-value);
+  position: absolute; top: 100%; left: 0; right: 0;
+  animation: flipIn 0.3s ease-out 0.15s forwards;
+}
+@keyframes flipOut {
+  to { top: -100%; }
+}
+@keyframes flipIn {
+  to { top: 0; }
+}
+
+/* 完成闪烁 */
+.s1-scheme-grid.complete .s1-scheme-cell {
+  animation: flashAll 0.5s ease;
+}
+@keyframes flashAll {
+  0%, 100% { background: rgba(201,168,76,0.08); }
+  50% { background: rgba(201,168,76,0.3); box-shadow: 0 0 10px var(--gold); }
+}
+
+/* ============================================================
+   SCENE 2: AI SELECTION - AI海选（增强版）
+   ============================================================ */
+
+.s2-header {
+  text-align: center; margin-bottom: 16px;
+}
+.s2-title {
+  font-size: var(--text-body); letter-spacing: 3px; color: var(--gold);
+}
+
+/* SVG漏斗容器 */
+.s2-funnel-container {
+  display: flex; justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+.s2-funnel-svg {
+  width: 200px; height: 280px;
+}
+
+/* 方案点动画 */
+.s2-scheme-dot {
+  fill: var(--green);
+  opacity: 0;
+}
+.s2-scheme-dot.show {
+  animation: dropThrough 2s ease forwards;
+}
+@keyframes dropThrough {
+  0% { opacity: 1; transform: translateY(0); }
+  25% { transform: translateY(60px); }
+  50% { transform: translateY(120px); }
+  75% { transform: translateY(180px); }
+  100% { opacity: 1; transform: translateY(220px); fill: var(--gold); }
+}
+
+/* 筛选层 */
+.s2-filter-layer {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+.s2-filter-layer.show {
+  animation: drawLayer 0.8s ease forwards;
+}
+@keyframes drawLayer {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Top 10卡片区 */
+.s2-top10-area {
+  flex: 1;
+  overflow-y: auto;
+}
+.s2-top10-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.s2-top-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex; gap: 12px;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.s2-top-card.show {
+  opacity: 1; transform: translateY(0);
+}
+.s2-top-card.highlight {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  box-shadow: 0 0 20px rgba(201,168,76,0.15);
+}
+
+/* 聚光灯效果 */
+.s2-spotlight-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s;
+  z-index: 100;
+}
+.s2-spotlight-overlay.active {
+  opacity: 1;
+}
+.s2-top-card.spotlight {
+  position: relative; z-index: 101;
+  transform: scale(1.05);
+  border-color: var(--gold);
+  box-shadow: 0 0 30px rgba(201,168,76,0.4);
+}
+
+/* 迷你雷达图 */
+.s2-radar {
+  width: 60px; height: 60px;
+  flex-shrink: 0;
+}
+.s2-radar-bg { fill: rgba(255,255,255,0.05); stroke: rgba(255,255,255,0.1); }
+.s2-radar-fill { fill: rgba(201,168,76,0.3); stroke: var(--gold); stroke-width: 1.5; }
+.s2-radar-axis { stroke: rgba(255,255,255,0.1); stroke-width: 0.5; }
+
+.s2-card-info { flex: 1; }
+.s2-card-title { font-size: var(--current-base); font-weight: 500; margin-bottom: 4px; }
+.s2-card-score { font-size: var(--text-sm); color: var(--gold); }
+.s2-card-dims { font-size: var(--text-sm); color: #666; margin-top: 4px; }
+
+/* 终选区域 */
+.s2-final-area {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0; transform: scale(0.95);
+  transition: all 0.6s;
+}
+.s2-final-area.show {
+  opacity: 1; transform: scale(1);
+}
+.s2-final-title {
+  font-size: var(--text-h4); color: var(--gold); margin-bottom: 16px;
+}
+.s2-final-cards {
+  display: flex; justify-content: center; gap: 16px;
+}
+.s2-final-card {
+  width: 100px; padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+}
+/* 金色边框绘制动画 */
+.s2-final-card.selected {
+  animation: drawBorder 0.8s ease forwards;
+}
+@keyframes drawBorder {
+  0% { border-color: transparent; }
+  100% { 
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    box-shadow: 0 0 20px rgba(201,168,76,0.3);
+  }
+}
+.s2-final-card-num {
+  font-size: var(--text-h3); color: var(--gold); font-weight: 200;
+}
+.s2-final-card-label {
+  font-size: var(--text-sm); color: #888; margin-top: 4px;
+}
+
+/* ============================================================
+   SCENE 3: DELIVERY - 最终交付（增强版）
+   ============================================================ */
+
+.s3-header {
+  text-align: center; margin-bottom: 16px;
+}
+.s3-title {
+  font-size: var(--text-body); letter-spacing: 3px; color: var(--gold);
+}
+
+/* 交付卡片 - 展开折叠动画 */
+.s3-delivery-cards {
+  display: flex; flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.s3-delivery-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0; transform: perspective(800px) rotateX(-15deg) translateY(-20px);
+  transform-origin: top center;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.s3-delivery-card.show {
+  opacity: 1; transform: perspective(800px) rotateX(0) translateY(0);
+}
+.s3-card-header {
+  padding: 14px 18px;
+  background: rgba(201,168,76,0.05);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer;
+}
+.s3-card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--current-lg);
+}
+.s3-card-title { font-size: var(--current-base); font-weight: 500; }
+.s3-card-body {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.s3-delivery-card.expanded .s3-card-body {
+  padding: 14px 18px;
+  max-height: 200px;
+}
+
+/* 物料清单 */
+.s3-checklist {
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+.s3-check-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: var(--current-base);
+  color: var(--text-dim);
+}
+.s3-check-box {
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.s3-check-item.checked .s3-check-box {
+  border-color: var(--green);
+  background: rgba(74,222,128,0.1);
+}
+/* SVG手写勾 */
+.s3-check-svg {
+  width: 14px; height: 14px;
+  position: absolute;
+}
+.s3-check-path {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+}
+.s3-check-item.checked .s3-check-path {
+  animation: drawCheck 0.4s ease forwards;
+}
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+.s3-check-item.checked {
+  color: var(--text);
+}
+
+/* 仪表盘 */
+.s3-dashboard {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.s3-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.s3-dash-item {
+  text-align: center;
+}
+.s3-dash-value {
+  font-size: var(--text-h2); font-weight: 700;
+  color: var(--gold);
+  filter: blur(4px);
+  opacity: 0.5;
+  transition: all 0.8s ease;
+}
+.s3-dash-value.revealed {
+  filter: blur(0);
+  opacity: 1;
+}
+.s3-dash-label {
+  font-size: var(--text-sm); color: #888; margin-top: 6px;
+}
+
+/* 千里挑一揭幕 */
+.s3-reveal-section {
+  text-align: center;
+  padding: 30px;
+  position: relative;
+}
+.s3-reveal-text {
+  font-size: var(--text-h1); font-weight: 100;
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--gold));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 8px;
+  opacity: 0; transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: metalShine 3s ease-in-out infinite;
+}
+.s3-reveal-text.show {
+  opacity: 1; transform: scale(1);
+}
+@keyframes metalShine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.s3-reveal-sub {
+  font-size: var(--current-lg); color: #888; margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.5s 0.3s;
+}
+.s3-reveal-sub.show {
+  opacity: 1;
+}
+
+/* 粒子爆发Canvas */
+#particleCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1100px) {
+  .main { grid-template-columns: 1fr 320px 240px; }
+  .chat-panel { width: 320px; }
+  .kpi-panel { width: 240px; }
+}
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; overflow-y: auto; }
+  .chat-panel, .kpi-panel { display: none; }
+  .step-scene { position: relative; min-height: 500px; }
+}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<div class="page" id="pageRoot">
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <div class="h-label">SCENE 06 · SOP INTELLIGENT UPGRADE</div>
+      <div class="h-title">SOP智能升级 <em>千里挑一·创意生产线</em></div>
+    </div>
+    <div class="step-tabs">
+      <div class="step-tab active" id="tab0" onclick="goStep(0)">① 发起任务</div>
+      <div class="step-tab" id="tab1" onclick="goStep(1)">② 头脑风暴</div>
+      <div class="step-tab" id="tab2" onclick="goStep(2)">③ AI海选</div>
+      <div class="step-tab" id="tab3" onclick="goStep(3)">④ 最终交付</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- WORKSPACE (LEFT) -->
+    <div class="workspace">
+
+      <!-- Scene 0: 发起任务 -->
+      <div class="step-scene active" id="stepScene0">
+        <div class="s0-header">
+          <div class="s0-project-title">春季理财推广项目</div>
+          <div class="s0-project-status">进行中</div>
+        </div>
+        
+        <div class="s0-project-card" id="s0ProjectCard">
+          <div class="s0-card-content">
+            <div class="s0-card-title">📋 项目需求</div>
+            <div class="s0-card-desc">下周上线春季理财推广，需要一整套创意物料：海报、推文、短视频脚本</div>
+          </div>
+        </div>
+
+        <div class="s0-team-section">
+          <div class="s0-section-title">TEAM MEMBERS · 团队成员</div>
+          <div class="s0-team-grid" id="s0TeamGrid">
+            <div class="s0-member-card human" data-idx="0">
+              <div class="s0-member-avatar">张</div>
+              <div class="s0-member-info">
+                <div class="s0-member-name">张工</div>
+                <div class="s0-member-role">美术总监</div>
+              </div>
+            </div>
+            <div class="s0-member-card human" data-idx="1">
+              <div class="s0-member-avatar">王</div>
+              <div class="s0-member-info">
+                <div class="s0-member-name">王策</div>
+                <div class="s0-member-role">资深策划</div>
+              </div>
+            </div>
+            <div class="s0-member-card human" data-idx="2">
+              <div class="s0-member-avatar">李</div>
+              <div class="s0-member-info">
+                <div class="s0-member-name">李总监</div>
+                <div class="s0-member-role">项目负责人</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s0-ai-section">
+          <div class="s0-section-title">AI AGENTS · 智能体阵列</div>
+          <canvas id="connectionCanvas"></canvas>
+          <div class="s0-ai-grid" id="s0AiGrid">
+            <div class="s0-ai-card" data-idx="0"><div class="s0-ai-icon">🖼️</div><div class="s0-ai-name">视觉</div></div>
+            <div class="s0-ai-card" data-idx="1"><div class="s0-ai-icon">✍️</div><div class="s0-ai-name">文案</div></div>
+            <div class="s0-ai-card" data-idx="2"><div class="s0-ai-icon">🔍</div><div class="s0-ai-name">评审</div></div>
+            <div class="s0-ai-card" data-idx="3"><div class="s0-ai-icon">📊</div><div class="s0-ai-name">数据</div></div>
+            <div class="s0-ai-card" data-idx="4"><div class="s0-ai-icon">⚡</div><div class="s0-ai-name">迭代</div></div>
+          </div>
+        </div>
+
+        <div class="s0-resource-section">
+          <div class="s0-section-title">RESOURCE COMPARISON · 资源对比</div>
+          <div class="s0-bar-group">
+            <div class="s0-bar-label"><span>传统方案成本</span><span style="color:var(--red)">320万/年</span></div>
+            <div class="s0-bar-track"><div class="s0-bar-fill old" id="s0BarOld" data-w="95"></div></div>
+          </div>
+          <div class="s0-bar-group">
+            <div class="s0-bar-label"><span>AI方案成本</span><span style="color:var(--green)">80万/年</span></div>
+            <div class="s0-bar-track"><div class="s0-bar-fill new" id="s0BarNew" data-w="24"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 1: 头脑风暴 -->
+      <div class="step-scene" id="stepScene1">
+        <div class="s1-header-area">
+          <div class="s1-title">BRAINSTORMING · 创意头脑风暴</div>
+        </div>
+        
+        <div class="s1-sticky-wall" id="s1StickyWall">
+          <div class="s1-sticky-grid" id="s1StickyGrid">
+            <div class="s1-sticky yellow" data-idx="0">春日焕新<br><small style="opacity:0.7">清新风</small></div>
+            <div class="s1-sticky green" data-idx="1">家庭理财<br><small style="opacity:0.7">温馨风</small></div>
+            <div class="s1-sticky blue" data-idx="2">年轻投资<br><small style="opacity:0.7">潮流风</small></div>
+            <div class="s1-sticky pink" data-idx="3">养老规划<br><small style="opacity:0.7">热门主题</small></div>
+          </div>
+        </div>
+
+        <div class="s1-generation-panel" id="s1GenPanel" style="display:none;">
+          <div class="s1-energy-ring">
+            <div class="s1-ai-core-icon">🤖</div>
+          </div>
+          <div class="s1-scheme-grid" id="s1SchemeGrid"></div>
+          <div class="s1-counter">
+            <div class="s1-counter-label">已生成方案数</div>
+            <div class="s1-counter-value" id="s1Counter">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 2: AI海选 -->
+      <div class="step-scene" id="stepScene2">
+        <div class="s2-header">
+          <div class="s2-title">AI SELECTION · 智能海选</div>
+        </div>
+        
+        <div class="s2-funnel-container">
+          <svg class="s2-funnel-svg" viewBox="0 0 200 280" id="s2FunnelSvg">
+            <defs>
+              <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(201,168,76,0.3)"/>
+                <stop offset="100%" style="stop-color:rgba(201,168,76,0.05)"/>
+              </linearGradient>
+            </defs>
+            <!-- 漏斗形状 -->
+            <polygon points="20,20 180,20 140,240 60,240" fill="url(#funnelGrad)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+            <!-- 筛选层 -->
+            <line class="s2-filter-layer" x1="30" y1="80" x2="170" y2="80"/>
+            <line class="s2-filter-layer" x1="45" y1="140" x2="155" y2="140"/>
+            <line class="s2-filter-layer" x1="55" y1="200" x2="145" y2="200"/>
+            <!-- 方案点将由JS动态添加 -->
+            <g id="s2DotsGroup"></g>
+          </svg>
+        </div>
+
+        <div class="s2-top10-area" id="s2Top10Area" style="display:none;">
+          <div class="s0-section-title">TOP 10 SELECTED · 精选方案</div>
+          <div class="s2-top10-grid" id="s2Top10Grid"></div>
+        </div>
+
+        <div class="s2-final-area" id="s2FinalArea" style="display:none;">
+          <div class="s2-final-title">终选方案</div>
+          <div class="s2-final-cards" id="s2FinalCards">
+            <div class="s2-final-card" data-idx="1"><div class="s2-final-card-num">1</div><div class="s2-final-card-label">春日焕新</div></div>
+            <div class="s2-final-card" data-idx="3"><div class="s2-final-card-num">3</div><div class="s2-final-card-label">家庭理财</div></div>
+            <div class="s2-final-card" data-idx="5"><div class="s2-final-card-num">5</div><div class="s2-final-card-label">养老规划</div></div>
+            <div class="s2-final-card" data-idx="7"><div class="s2-final-card-num">7</div><div class="s2-final-card-label">年轻投资</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: 最终交付 -->
+      <div class="step-scene" id="stepScene3">
+        <div class="s3-header">
+          <div class="s3-title">DELIVERY · 最终交付</div>
+        </div>
+        
+        <div class="s3-delivery-cards" id="s3DeliveryCards">
+          <div class="s3-delivery-card" data-idx="0">
+            <div class="s3-card-header">
+              <div class="s3-card-icon">🎯</div>
+              <div class="s3-card-title">方案1号「春日焕新」</div>
+            </div>
+            <div class="s3-card-body">
+              <div class="s3-checklist">
+                <div class="s3-check-item" data-item="0"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>海报3张</div>
+                <div class="s3-check-item" data-item="1"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>推文2篇</div>
+                <div class="s3-check-item" data-item="2"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>短视频脚本1个</div>
+              </div>
+            </div>
+          </div>
+          <div class="s3-delivery-card" data-idx="1">
+            <div class="s3-card-header">
+              <div class="s3-card-icon">👨‍👩‍👧</div>
+              <div class="s3-card-title">方案3号「家庭理财」</div>
+            </div>
+            <div class="s3-card-body">
+              <div class="s3-checklist">
+                <div class="s3-check-item" data-item="0"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>海报3张</div>
+                <div class="s3-check-item" data-item="1"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>推文2篇</div>
+                <div class="s3-check-item" data-item="2"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>短视频脚本1个</div>
+              </div>
+            </div>
+          </div>
+          <div class="s3-delivery-card" data-idx="2">
+            <div class="s3-card-header">
+              <div class="s3-card-icon">🚀</div>
+              <div class="s3-card-title">方案7号「年轻投资」</div>
+            </div>
+            <div class="s3-card-body">
+              <div class="s3-checklist">
+                <div class="s3-check-item" data-item="0"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>海报3张</div>
+                <div class="s3-check-item" data-item="1"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>推文2篇</div>
+                <div class="s3-check-item" data-item="2"><div class="s3-check-box"><svg class="s3-check-svg" viewBox="0 0 14 14"><path class="s3-check-path" d="M2 7 L5.5 10.5 L12 3.5"/></svg></div>短视频脚本1个</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s3-dashboard" id="s3Dashboard">
+          <div class="s3-dash-grid">
+            <div class="s3-dash-item">
+              <div class="s3-dash-value" id="dashTime">1.5天</div>
+              <div class="s3-dash-label">总耗时</div>
+            </div>
+            <div class="s3-dash-item">
+              <div class="s3-dash-value" id="dashSave">75%</div>
+              <div class="s3-dash-label">成本节省</div>
+            </div>
+            <div class="s3-dash-item">
+              <div class="s3-dash-value" id="dashFinal">3</div>
+              <div class="s3-dash-label">终选方案</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s3-reveal-section" id="s3RevealSection">
+          <canvas id="particleCanvas"></canvas>
+          <div class="s3-reveal-text" id="s3RevealText">千里挑一</div>
+          <div class="s3-reveal-sub" id="s3RevealSub">从1087个方案中精选3个最优解</div>
+        </div>
+      </div>
+
+    </div><!-- /workspace -->
+
+    <!-- CHAT PANEL (CENTER) -->
+    <div class="chat-panel">
+      <div class="chat-head">
+        <div class="online-dot"></div>
+        CLAW AI · 创意生产助手
+      </div>
+      <div class="chat-messages" id="chatMsgs"></div>
+      <div class="chat-input-area">
+        <div class="chat-input-box" id="chatInputBox">
+          <div class="chat-input-text" id="chatInputPreview">接到总行通知，下周要上线一波春季理财推广</div>
+          <div class="chat-send" id="chatSendBtn">↑</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI PANEL (RIGHT) -->
+    <div class="kpi-panel">
+      <div class="kpi-title">PROJECT METRICS</div>
+      <div class="kpi-card" id="kpiCard0">
+        <div class="kpi-label">项目状态</div>
+        <div class="kpi-val" id="kpiStatus">待创建</div>
+        <div class="kpi-sub">等待启动</div>
+      </div>
+      <div class="kpi-card" id="kpiCard1">
+        <div class="kpi-label">团队配置</div>
+        <div class="kpi-val" id="kpiTeam">-</div>
+        <div class="kpi-sub">人员+AI</div>
+      </div>
+      <div class="kpi-card" id="kpiCard2">
+        <div class="kpi-label">方案数量</div>
+        <div class="kpi-val" id="kpiSchemes">-</div>
+        <div class="kpi-sub">生成/筛选</div>
+      </div>
+      <div class="kpi-card" id="kpiCard3">
+        <div class="kpi-label">项目耗时</div>
+        <div class="kpi-val" id="kpiTime">-</div>
+        <div class="kpi-sub">从启动到交付</div>
+      </div>
+      <div class="kpi-card" id="kpiCard4">
+        <div class="kpi-label">成本节省</div>
+        <div class="kpi-val" id="kpiSave">-</div>
+        <div class="kpi-sub">较传统方案</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <button class="ctrl-btn" onclick="prevStep()">← 上一步</button>
+    <button class="ctrl-btn primary" id="playBtn" onclick="togglePlay()">▶ 自动演示</button>
+    <button class="ctrl-btn" onclick="resetAll()" id="resetBtn">↺ 重置</button>
+    <button class="ctrl-btn" onclick="nextStep()">下一步 →</button>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:25%"></div></div>
+    <div class="footer-info" id="footerInfo">第1步 / 共4步</div>
+  </footer>
+</div>
+
+<script>
+// ===== STATE VARIABLES =====
+let currentStep = 0;
+let autoPlay = false;
+let autoTimer = null;
+let chatAnimating = false;
+let isPaused = false;
+let rafId = null;
+
+// ===== CHAT CONVERSATIONS =====
+const chatConvos = [
+  // Scene 0: 发起任务
+  [
+    {role:'user', text:'接到总行通知，下周要上线一波春季理财推广，需要一整套创意物料，海报、推文、短视频脚本都要。'},
+    {role:'ai', text:'收到！我来帮你快速拉起这个项目。让我先看看当前团队资源配置...'},
+    {role:'ai', text:'团队资源已就绪 ── 美术总监张工、策划王策在线，加上5个AI智能体，随时可以启动。左边是当前的团队配置概览。', trigger: () => animScene0()}
+  ],
+  // Scene 1: 头脑风暴
+  [
+    {role:'user', text:'@张工 @王策 你们先提几个创意方向，我们讨论一下'},
+    {role:'zhang', text:'我觉得可以走三个方向 ── 春日焕新（清新风）、家庭理财（温馨风）、年轻投资（潮流风）', trigger: () => showSticky(0,1,2)},
+    {role:'wang', text:'同意，另外加一个养老规划的方向，最近这个主题很热', trigger: () => showSticky(3)},
+    {role:'user', text:'好，四个方向定了。CLAW，基于这四个方向，批量生成创意方案吧'},
+    {role:'ai', text:'明白！四个创意方向已接收，AI创意引擎启动中... 预计生成1000+方案', trigger: () => startGeneration()}
+  ],
+  // Scene 2: AI海选
+  [
+    {role:'ai', text:'1000+方案已生成完毕！现在启动AI评审智能体进行海选...', trigger: () => startFunnel()},
+    {role:'ai', text:'评审维度：品牌调性匹配度、目标受众契合度、创意新颖度、执行可行性，四维评分。'},
+    {role:'ai', text:'海选完成！从1087个方案中筛选出Top 10，请查看左侧结果。', trigger: () => showTop10()},
+    {role:'user', text:'不错，把Top 10发给张工和王策看看'},
+    {role:'zhang', text:'这几个质量都很高，我推荐1号、3号和7号，视觉冲击力最强', trigger: () => highlightCards([1,3,7])},
+    {role:'wang', text:'同意，另外5号的文案角度很特别，也值得考虑'},
+    {role:'user', text:'行，就1、3、5、7这四个进终选，CLAW帮我出详细对比', trigger: () => showFinalPicks()}
+  ],
+  // Scene 3: 最终交付
+  [
+    {role:'user', text:'最终确认1号、3号、7号。CLAW，出完整的执行方案'},
+    {role:'ai', text:'收到！正在生成完整物料包...', trigger: () => showDeliveryCards()},
+    {role:'ai', text:'执行方案已就绪！\n• 1号方案「春日焕新」：海报3张、推文2篇、短视频脚本1个\n• 3号方案「家庭理财」：海报3张、推文2篇、短视频脚本1个\n• 7号方案「年轻投资」：海报3张、推文2篇、短视频脚本1个\n全部物料已进入终审队列，预计明天下午可交付。', trigger: () => startChecklist()},
+    {role:'user', text:'千里挑一，从1000+到3个，效率太高了'},
+    {role:'ai', text:'本次项目小结：1087个初始方案 → 10个精选 → 3个终选，总耗时1.5天，节省成本约75%。这就是AI赋能的创意生产力！', trigger: () => showSummaryAndReveal()}
+  ]
+];
+
+const stepInputs = [
+  '接到总行通知，下周要上线一波春季理财推广',
+  '@张工 @王策 你们先提几个创意方向',
+  '查看AI海选结果',
+  '最终确认方案，生成执行计划'
+];
+
+// ===== BACKGROUND PARTICLES WITH CONNECTIONS =====
+const bgCanvas = document.getElementById('bgCanvas');
+const bgCtx = bgCanvas.getContext('2d');
+let bgParts = [];
+
+function initBg() {
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
+  bgParts = [];
+  for (let i = 0; i < 60; i++) {
+    bgParts.push({
+      x: Math.random() * bgCanvas.width,
+      y: Math.random() * bgCanvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      a: Math.random() * 0.25 + 0.05
+    });
+  }
+}
+
+function drawBg() {
+  if (!isPaused) {
+    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    
+    // Draw connections
+    bgParts.forEach((p1, i) => {
+      bgParts.slice(i + 1).forEach(p2 => {
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) {
+          bgCtx.beginPath();
+          bgCtx.moveTo(p1.x, p1.y);
+          bgCtx.lineTo(p2.x, p2.y);
+          bgCtx.strokeStyle = `rgba(201,168,76,${0.1 * (1 - dist / 100)})`;
+          bgCtx.lineWidth = 0.5;
+          bgCtx.stroke();
+        }
+      });
+    });
+    
+    // Draw particles
+    bgParts.forEach(p => {
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0) p.x = bgCanvas.width; if (p.x > bgCanvas.width) p.x = 0;
+      if (p.y < 0) p.y = bgCanvas.height; if (p.y > bgCanvas.height) p.y = 0;
+      bgCtx.beginPath();
+      bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      bgCtx.fillStyle = `rgba(201,168,76,${p.a})`;
+      bgCtx.fill();
+    });
+  }
+  rafId = requestAnimationFrame(drawBg);
+}
+
+function pauseAnimations() { isPaused = true; if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+function resumeAnimations() { isPaused = false; drawBg(); }
+
+// ===== SCENE MANAGEMENT =====
+function goStep(n) {
+  if (n < 0 || n > 3) return;
+  
+  const oldScene = document.getElementById('stepScene' + currentStep);
+  const newScene = document.getElementById('stepScene' + n);
+  
+  // Fade out old
+  oldScene.style.opacity = '0';
+  oldScene.style.transform = 'scale(0.98)';
+  
+  setTimeout(() => {
+    oldScene.classList.remove('active');
+    document.getElementById('tab' + currentStep).classList.remove('active');
+    resetScene(currentStep);
+    
+    currentStep = n;
+    
+    // Show new with fade in
+    newScene.classList.add('active');
+    document.getElementById('tab' + n).classList.add('active');
+    
+    setTimeout(() => {
+      newScene.style.opacity = '1';
+      newScene.style.transform = 'scale(1)';
+    }, 50);
+    
+    document.getElementById('progFill').style.width = ((n + 1) / 4 * 100) + '%';
+    document.getElementById('footerInfo').textContent = `第${n + 1}步 / 共4步`;
+    document.getElementById('chatInputPreview').textContent = stepInputs[n];
+    
+    document.getElementById('chatMsgs').innerHTML = '';
+    chatAnimating = false;
+  }, 300);
+}
+
+function nextStep() { if (currentStep < 3) goStep(currentStep + 1); }
+function prevStep() { if (currentStep > 0) goStep(currentStep - 1); }
+
+function resetScene(idx) {
+  if (idx === 0) {
+    document.querySelectorAll('.s0-member-card').forEach(c => c.classList.remove('show', 'online'));
+    document.querySelectorAll('.s0-ai-card').forEach(c => c.classList.remove('show', 'active'));
+    document.getElementById('s0BarOld').style.width = '0';
+    document.getElementById('s0BarNew').style.width = '0';
+  } else if (idx === 1) {
+    document.querySelectorAll('.s1-sticky').forEach(s => s.classList.remove('show'));
+    document.getElementById('s1GenPanel').style.display = 'none';
+    document.getElementById('s1StickyWall').style.display = 'block';
+  } else if (idx === 2) {
+    document.getElementById('s2DotsGroup').innerHTML = '';
+    document.querySelectorAll('.s2-filter-layer').forEach(l => l.classList.remove('show'));
+    document.getElementById('s2Top10Area').style.display = 'none';
+    document.getElementById('s2FinalArea').style.display = 'none';
+  } else if (idx === 3) {
+    document.querySelectorAll('.s3-delivery-card').forEach(c => c.classList.remove('show', 'expanded'));
+    document.querySelectorAll('.s3-check-item').forEach(i => i.classList.remove('checked'));
+    document.querySelectorAll('.s3-dash-value').forEach(v => v.classList.remove('revealed'));
+    document.getElementById('s3RevealText').classList.remove('show');
+    document.getElementById('s3RevealSub').classList.remove('show');
+  }
+}
+
+function resetAll() {
+  autoPlay = false;
+  clearTimeout(autoTimer);
+  document.getElementById('playBtn').textContent = '▶ 自动演示';
+  chatAnimating = false;
+  for (let i = 0; i < 4; i++) resetScene(i);
+  goStep(0);
+}
+
+// ===== CHAT FUNCTIONS =====
+function sendChat() {
+  if (chatAnimating) return;
+  chatAnimating = true;
+  pushChat(chatConvos[currentStep]);
+}
+
+function pushChat(convos) {
+  const container = document.getElementById('chatMsgs');
+  container.innerHTML = '';
+  
+  let totalDelay = 0;
+  convos.forEach((msg, i) => {
+    totalDelay = i * 1400;
+    if (msg.a) totalDelay += (msg.u ? 400 : 0) + 800;
+  });
+  const workspaceTriggerDelay = totalDelay + 500;
+  
+  convos.forEach((msg, i) => {
+    setTimeout(() => {
+      if (msg.text) {
+        const b = document.createElement('div');
+        b.className = 'bubble ' + msg.role;
+        b.textContent = msg.text;
+        container.appendChild(b);
+        container.scrollTop = container.scrollHeight;
+      }
+      if (msg.trigger) {
+        setTimeout(() => msg.trigger(), 400);
+      }
+    }, i * 1400);
+  });
+  
+  setTimeout(() => {
+    updateKPI(currentStep);
+    chatAnimating = false;
+  }, workspaceTriggerDelay);
+}
+
+// ===== KPI UPDATE =====
+function updateKPI(step) {
+  const status = document.getElementById('kpiStatus');
+  const team = document.getElementById('kpiTeam');
+  const schemes = document.getElementById('kpiSchemes');
+  const time = document.getElementById('kpiTime');
+  const save = document.getElementById('kpiSave');
+  
+  document.querySelectorAll('.kpi-card').forEach(c => c.classList.remove('highlight'));
+  
+  if (step === 0) {
+    status.textContent = '已创建';
+    team.textContent = '2人+5AI';
+    document.getElementById('kpiCard0').classList.add('highlight');
+    document.getElementById('kpiCard1').classList.add('highlight');
+  } else if (step === 1) {
+    status.textContent = '生成中';
+    schemes.textContent = '1087';
+    document.getElementById('kpiCard2').classList.add('highlight');
+  } else if (step === 2) {
+    status.textContent = '海选中';
+    schemes.textContent = 'Top10→终选4';
+    document.getElementById('kpiCard2').classList.add('highlight');
+  } else if (step === 3) {
+    status.textContent = '已交付';
+    schemes.textContent = '3';
+    time.textContent = '1.5天';
+    save.textContent = '75%';
+    document.querySelectorAll('.kpi-card').forEach(c => c.classList.add('highlight'));
+  }
+}
+
+// ===== AUTO PLAY =====
+function togglePlay() {
+  autoPlay = !autoPlay;
+  document.getElementById('playBtn').textContent = autoPlay ? '⏸ 暂停' : '▶ 自动演示';
+  if (autoPlay) {
+    if (!chatAnimating) sendChat();
+    runAuto();
+  } else {
+    clearTimeout(autoTimer);
+  }
+}
+
+function runAuto() {
+  if (!autoPlay) return;
+  if (currentStep < 3) {
+    autoTimer = setTimeout(() => { nextStep(); sendChat(); runAuto(); }, 8000);
+  } else {
+    autoTimer = setTimeout(() => { goStep(0); sendChat(); runAuto(); }, 10000);
+  }
+}
+
+// ===== SCENE 0 ANIMATIONS =====
+function animScene0() {
+  // Team members appear with particle burst
+  const members = document.querySelectorAll('.s0-member-card');
+  members.forEach((m, i) => {
+    setTimeout(() => {
+      m.classList.add('show');
+      setTimeout(() => m.classList.add('online'), 300);
+    }, i * 200);
+  });
+  
+  // AI cards appear
+  const aiCards = document.querySelectorAll('.s0-ai-card');
+  aiCards.forEach((c, i) => {
+    setTimeout(() => {
+      c.classList.add('show');
+      setTimeout(() => c.classList.add('active'), 200);
+    }, 600 + i * 150);
+  });
+  
+  // Electric connections
+  setTimeout(() => drawConnections(), 1500);
+  
+  // Resource bars
+  setTimeout(() => {
+    document.getElementById('s0BarOld').style.width = '95%';
+    setTimeout(() => {
+      document.getElementById('s0BarNew').style.width = '24%';
+    }, 400);
+  }, 1000);
+}
+
+function drawConnections() {
+  const canvas = document.getElementById('connectionCanvas');
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  
+  const cards = document.querySelectorAll('.s0-ai-card');
+  const positions = [];
+  cards.forEach(c => {
+    const r = c.getBoundingClientRect();
+    positions.push({
+      x: r.left - rect.left + r.width / 2,
+      y: r.top - rect.top + r.height / 2
+    });
+  });
+  
+  let lineIdx = 0;
+  function drawLine() {
+    if (lineIdx >= positions.length - 1) return;
+    
+    const start = positions[lineIdx];
+    const end = positions[lineIdx + 1];
+    let progress = 0;
+    
+    function animateLine() {
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      const currX = start.x + (end.x - start.x) * progress;
+      const currY = start.y + (end.y - start.y) * progress;
+      ctx.lineTo(currX, currY);
+      ctx.strokeStyle = 'rgba(96,165,250,0.6)';
+      ctx.lineWidth = 2;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(96,165,250,0.5)';
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      
+      progress += 0.05;
+      if (progress <= 1) {
+        requestAnimationFrame(animateLine);
+      } else {
+        lineIdx++;
+        drawLine();
+      }
+    }
+    animateLine();
+  }
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawLine();
+}
+
+// ===== SCENE 1 ANIMATIONS =====
+function showSticky(...indices) {
+  indices.forEach((idx, i) => {
+    setTimeout(() => {
+      const sticky = document.querySelector(`.s1-sticky[data-idx="${idx}"]`);
+      if (sticky) sticky.classList.add('show');
+    }, i * 200);
+  });
+}
+
+function startGeneration() {
+  document.getElementById('s1StickyWall').style.display = 'none';
+  document.getElementById('s1GenPanel').style.display = 'flex';
+  
+  const grid = document.getElementById('s1SchemeGrid');
+  grid.innerHTML = '';
+  
+  const icons = ['📝', '🎨', '📊', '🎯', '💡', '📱', '🌟', '🔥'];
+  
+  for (let i = 0; i < 40; i++) {
+    const cell = document.createElement('div');
+    cell.className = 's1-scheme-cell';
+    cell.textContent = icons[i % icons.length];
+    grid.appendChild(cell);
+  }
+  
+  const cells = grid.querySelectorAll('.s1-scheme-cell');
+  let count = 0;
+  
+  cells.forEach((cell, i) => {
+    setTimeout(() => {
+      cell.classList.add('show');
+      count++;
+      document.getElementById('s1Counter').textContent = count + '+';
+    }, i * 50);
+  });
+  
+  setTimeout(() => {
+    grid.classList.add('complete');
+    document.getElementById('s1Counter').textContent = '1087';
+  }, cells.length * 50 + 500);
+}
+
+// ===== SCENE 2 ANIMATIONS =====
+function startFunnel() {
+  const svg = document.getElementById('s2FunnelSvg');
+  const dotsGroup = document.getElementById('s2DotsGroup');
+  
+  // Show filter layers
+  document.querySelectorAll('.s2-filter-layer').forEach((l, i) => {
+    setTimeout(() => l.classList.add('show'), i * 300);
+  });
+  
+  // Create and animate dots
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', 30 + Math.random() * 140);
+      dot.setAttribute('cy', 20);
+      dot.setAttribute('r', 3);
+      dot.setAttribute('class', 's2-scheme-dot');
+      dotsGroup.appendChild(dot);
+      
+      setTimeout(() => dot.classList.add('show'), 50);
+      
+      // Remove after animation
+      setTimeout(() => dot.remove(), 2000);
+    }, i * 100);
+  }
+  
+  setTimeout(() => {
+    document.getElementById('s2Top10Area').style.display = 'block';
+  }, 2500);
+}
+
+function showTop10() {
+  const grid = document.getElementById('s2Top10Grid');
+  grid.innerHTML = '';
+  
+  const schemes = [
+    {name: '春日焕新', score: 96, dims: [95, 92, 94, 90]},
+    {name: '家庭理财', score: 93, dims: [90, 95, 88, 92]},
+    {name: '年轻投资', score: 91, dims: [88, 90, 95, 88]},
+    {name: '养老规划', score: 89, dims: [92, 88, 85, 90]},
+    {name: '数字银行', score: 87, dims: [85, 85, 90, 85]},
+    {name: '绿色金融', score: 85, dims: [82, 88, 82, 88]},
+    {name: '智能投顾', score: 84, dims: [80, 82, 88, 85]},
+    {name: '财富传承', score: 82, dims: [85, 80, 78, 85]},
+    {name: '消费分期', score: 80, dims: [78, 78, 82, 80]},
+    {name: '保险规划', score: 78, dims: [75, 80, 75, 82]}
+  ];
+  
+  schemes.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 's2-top-card';
+    card.dataset.idx = i + 1;
+    card.innerHTML = `
+      <svg class="s2-radar" viewBox="0 0 60 60">
+        <polygon class="s2-radar-bg" points="30,5 55,20 55,45 30,55 5,45 5,20"/>
+        ${[0,1,2,3,4].map(j => `<line class="s2-radar-axis" x1="30" y1="30" x2="${30 + 25 * Math.cos(j * Math.PI * 2 / 5 - Math.PI/2)}" y2="${30 + 25 * Math.sin(j * Math.PI * 2 / 5 - Math.PI/2)}"/>`).join('')}
+        <polygon class="s2-radar-fill" points="${s.dims.map((d, j) => {
+          const r = d / 100 * 25;
+          const angle = j * Math.PI * 2 / 5 - Math.PI/2;
+          return `${30 + r * Math.cos(angle)},${30 + r * Math.sin(angle)}`;
+        }).join(' ')}"/>
+      </svg>
+      <div class="s2-card-info">
+        <div class="s2-card-title">${i+1}. ${s.name}</div>
+        <div class="s2-card-score">AI评分: ${s.score}分</div>
+        <div class="s2-card-dims">品牌·受众·创意·执行</div>
+      </div>
+    `;
+    grid.appendChild(card);
+    
+    setTimeout(() => card.classList.add('show'), i * 150);
+  });
+}
+
+function highlightCards(indices) {
+  indices.forEach(idx => {
+    const card = document.querySelector(`.s2-top-card[data-idx="${idx}"]`);
+    if (card) card.classList.add('highlight');
+  });
+}
+
+function showFinalPicks() {
+  document.getElementById('s2FinalArea').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('s2FinalArea').classList.add('show');
+    
+    const cards = document.querySelectorAll('.s2-final-card');
+    cards.forEach((c, i) => {
+      setTimeout(() => c.classList.add('selected'), i * 300);
+    });
+  }, 100);
+}
+
+// ===== SCENE 3 ANIMATIONS =====
+function showDeliveryCards() {
+  const cards = document.querySelectorAll('.s3-delivery-card');
+  cards.forEach((c, i) => {
+    setTimeout(() => {
+      c.classList.add('show');
+      setTimeout(() => c.classList.add('expanded'), 400);
+    }, i * 200);
+  });
+}
+
+function startChecklist() {
+  const items = document.querySelectorAll('.s3-check-item');
+  items.forEach((item, i) => {
+    setTimeout(() => {
+      item.classList.add('checked');
+    }, i * 150);
+  });
+  
+  // Reveal dashboard numbers
+  setTimeout(() => {
+    document.querySelectorAll('.s3-dash-value').forEach(v => v.classList.add('revealed'));
+  }, items.length * 150 + 300);
+}
+
+function showSummaryAndReveal() {
+  document.getElementById('s3RevealText').classList.add('show');
+  document.getElementById('s3RevealSub').classList.add('show');
+  
+  // Particle burst
+  spawnParticles();
+}
+
+function spawnParticles() {
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  
+  const particles = [];
+  const centerX = rect.width / 2;
+  const centerY = 60;
+  
+  for (let i = 0; i < 50; i++) {
+    const angle = (Math.PI * 2 * i) / 50;
+    const speed = 2 + Math.random() * 3;
+    particles.push({
+      x: centerX,
+      y: centerY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 1,
+      r: 2 + Math.random() * 3,
+      a: 1,
+      color: `hsl(${40 + Math.random() * 20}, 80%, 60%)`
+    });
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.1;
+      p.a -= 0.015;
+      
+      if (p.a > 0) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.a;
+        ctx.fill();
+      }
+    });
+    
+    ctx.globalAlpha = 1;
+    
+    if (particles.some(p => p.a > 0)) {
+      requestAnimationFrame(animate);
+    }
+  }
+  
+  animate();
+}
+
+// ===== KEYBOARD EVENTS =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
+    try { window.parent.postMessage({ type: 'iframeKeydown', key: e.key }, '*'); } catch (err) {}
+  }
+  if (e.key === 'ArrowRight') nextStep();
+  if (e.key === 'ArrowLeft') prevStep();
+  if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+});
+
+// ===== EVENT BINDINGS =====
+document.getElementById('chatSendBtn').addEventListener('click', sendChat);
+document.getElementById('chatInputBox').addEventListener('click', sendChat);
+
+// ===== POSTMESSAGE =====
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'fontSize') {
+    document.documentElement.setAttribute('data-font-level', e.data.size || 'medium');
+  }
+  if (e.data && e.data.type === 'visibility') {
+    if (e.data.visible) resumeAnimations();
+    else pauseAnimations();
+  }
+});
+
+// ===== INIT =====
+window.addEventListener('resize', () => {
+  initBg();
+});
+
+initBg();
+drawBg();
+goStep(0);
+
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script>
+
+<script src="theme-config.js"></script>
+<script>
+parent.postMessage({ type: 'iframeReady' }, '*');
+</script>
+</body>
+</html>

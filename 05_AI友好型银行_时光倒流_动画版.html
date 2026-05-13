@@ -63,80 +63,61 @@
     --card-bg:        #04335A;
   }
 
-  /* ─── 暖米白 ─── */
-  html[data-theme="warm-parchment"] {
-    --bg:             #F5F0E8;
-    --bg2:            #EDE6D6;
-    --bg3:            #E0D5C0;
-    --gold:           #8B6914;
-    --gold-bright:    #B8890A;
-    --gold-dim:       rgba(139,105,20,0.12);
-    --text:           #2D2410;
-    --text-dim:       #7A6840;
-    --border:         rgba(139,105,20,0.25);
+  /* ─── 冰川蓝 ─── */
+  html[data-theme="glacier-blue"] {
+    --bg:             #F5F1EC;
+    --bg2:            #EAE4DD;
+    --bg3:            #A8B5C2;
+    --gold:           #2E4265;
+    --gold-bright:    #1D3354;
+    --gold-dim:       rgba(46,66,101,0.12);
+    --text:           #2E4265;
+    --text-dim:       #8599AB;
+    --border:         rgba(46,66,101,0.2);
     --red:            #C0392B;
     --green:          #27AE60;
-    --sidebar-bg:     #EDE6D6;
-    --sidebar-text:   #2D2410;
-    --sidebar-active: rgba(139,105,20,0.1);
-    --card-bg:        #EDE6D6;
+    --sidebar-bg:     #EAE4DD;
+    --sidebar-text:   #2E4265;
+    --sidebar-active: rgba(46,66,101,0.1);
+    --card-bg:        #EAE4DD;
   }
 
-  /* ─── 暗夜绿 ─── */
-  html[data-theme="forest-night"] {
-    --bg:             #0D1F1A;
-    --bg2:            #142B22;
-    --bg3:            #1C3A2E;
-    --gold:           #7ECBA1;
-    --gold-bright:    #A8DFC0;
-    --gold-dim:       rgba(126,203,161,0.15);
-    --text:           #C8E6D8;
-    --text-dim:       #6A9E84;
-    --border:         rgba(126,203,161,0.2);
-    --red:            #FF7B6B;
-    --green:          #4FC08D;
-    --sidebar-bg:     #0A1814;
-    --sidebar-text:   #C8E6D8;
-    --sidebar-active: rgba(126,203,161,0.15);
-    --card-bg:        #142B22;
+  /* ─── 秋暮 ─── */
+  html[data-theme="autumn-dusk"] {
+    --bg:             #151D2B;
+    --bg2:            #25344F;
+    --bg3:            #617891;
+    --gold:           #D5B893;
+    --gold-bright:    #E8D4B8;
+    --gold-dim:       rgba(213,184,147,0.15);
+    --text:           #E8D4B8;
+    --text-dim:       #D5B893;
+    --border:         rgba(213,184,147,0.2);
+    --red:            #C04048;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #111828;
+    --sidebar-text:   #E8D4B8;
+    --sidebar-active: rgba(213,184,147,0.12);
+    --card-bg:        #25344F;
   }
 
-  /* ─── 暮光玫瑰 ─── */
-  html[data-theme="dusk-rose"] {
-    --bg:             #1A0F14;
-    --bg2:            #2A1520;
-    --bg3:            #3D2030;
-    --gold:           #E8A0B0;
-    --gold-bright:    #F0C4CC;
-    --gold-dim:       rgba(232,160,176,0.15);
-    --text:           #F0D8E0;
-    --text-dim:       #C090A0;
-    --border:         rgba(232,160,176,0.2);
-    --red:            #FF6B8A;
-    --green:          #6ECFA4;
-    --sidebar-bg:     #120A0F;
-    --sidebar-text:   #F0D8E0;
-    --sidebar-active: rgba(232,160,176,0.12);
-    --card-bg:        #2A1520;
-  }
-
-  /* ─── 星云紫 ─── */
-  html[data-theme="nebula-purple"] {
-    --bg:             #0C0A1A;
-    --bg2:            #16103A;
-    --bg3:            #241858;
-    --gold:           #A78BFA;
-    --gold-bright:    #C4B5FD;
-    --gold-dim:       rgba(167,139,250,0.15);
-    --text:           #E8E0FF;
-    --text-dim:       #9D8FD0;
-    --border:         rgba(167,139,250,0.2);
-    --red:            #F87171;
-    --green:          #34D399;
-    --sidebar-bg:     #080618;
-    --sidebar-text:   #E8E0FF;
-    --sidebar-active: rgba(167,139,250,0.12);
-    --card-bg:        #16103A;
+  /* ─── 落日余烬 ─── */
+  html[data-theme="sunset-ember"] {
+    --bg:             #1A1814;
+    --bg2:            #2A261E;
+    --bg3:            #74601B;
+    --gold:           #FF971E;
+    --gold-bright:    #FFB347;
+    --gold-dim:       rgba(255,151,30,0.15);
+    --text:           #F0E8DC;
+    --text-dim:       #A8A7A3;
+    --border:         rgba(255,151,30,0.2);
+    --red:            #DB4600;
+    --green:          #6FCFA0;
+    --sidebar-bg:     #151210;
+    --sidebar-text:   #F0E8DC;
+    --sidebar-active: rgba(255,151,30,0.12);
+    --card-bg:        #2A261E;
   }
 
   /* Legacy fallback */
@@ -150,18 +131,53 @@
   /* ===== 暖米白/浅色主题安全覆盖 =====
      防止浅色背景下出现白字看不见的情况
   ===== */
-  html[data-theme="warm-parchment"] body,
-  html[data-theme="warm-parchment"] .scene,
-  html[data-theme="warm-parchment"] .content-bg,
-  html[data-theme="warm-parchment"] .slide,
-  html[data-theme="warm-parchment"] .container {
+  html[data-theme="glacier-blue"] body,
+  html[data-theme="glacier-blue"] .scene,
+  html[data-theme="glacier-blue"] .content-bg,
+  html[data-theme="glacier-blue"] .slide,
+  html[data-theme="glacier-blue"] .container {
     color: var(--text) !important;
   }
   /* 强制白字元素在浅色主题下用深色 */
-  html[data-theme="warm-parchment"] [style*="color: white"],
-  html[data-theme="warm-parchment"] [style*="color:#fff"] {
+  html[data-theme="glacier-blue"] [style*="color: white"],
+  html[data-theme="glacier-blue"] [style*="color:#fff"] {
     color: var(--text) !important;
   }
+
+  /* ===== 冰川蓝主题额外修复：浅色文字和线条 ===== */
+  /* 修复硬编码浅色文字 */
+  html[data-theme="glacier-blue"] .status-indicator { background: rgba(46,66,101,0.08) !important; border-color: rgba(46,66,101,0.2) !important; color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .card-title { color: var(--text) !important; }
+  html[data-theme="glacier-blue"] .card-subtitle { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .hint-text { color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .click-hint { color: var(--gold) !important; }
+  html[data-theme="glacier-blue"] .reset-btn { border-color: rgba(46,66,101,0.3) !important; color: var(--text-dim) !important; }
+  html[data-theme="glacier-blue"] .reset-btn:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
+  html[data-theme="glacier-blue"] .scene-label-item.reality { background: rgba(192,57,43,0.08) !important; border-color: rgba(192,57,43,0.25) !important; }
+  html[data-theme="glacier-blue"] .scene-label-item.alternate { background: rgba(39,174,96,0.08) !important; border-color: rgba(39,174,96,0.25) !important; }
+  html[data-theme="glacier-blue"] .timeline-track { background: linear-gradient(90deg, rgba(192,57,43,0.25) 0%, rgba(192,57,43,0.25) 45%, transparent 45%, transparent 55%, rgba(39,174,96,0.25) 55%, rgba(39,174,96,0.25) 100%) !important; }
+  html[data-theme="glacier-blue"] .flow-card { background: rgba(46,66,101,0.06) !important; border-color: rgba(46,66,101,0.2) !important; }
+  html[data-theme="glacier-blue"] .flow-card.reality-card { border-color: rgba(192,57,43,0.15) !important; }
+  html[data-theme="glacier-blue"] .flow-card.reality-card.missing { border-color: rgba(192,57,43,0.3) !important; background: rgba(192,57,43,0.04) !important; }
+  html[data-theme="glacier-blue"] .flow-card.alternate-card { border-color: rgba(39,174,96,0.25) !important; background: rgba(39,174,96,0.04) !important; }
+  html[data-theme="glacier-blue"] .flow-card.alternate-card.highlight { border-color: var(--gold) !important; background: linear-gradient(135deg, rgba(46,66,101,0.1), rgba(46,66,101,0.02)) !important; }
+  html[data-theme="glacier-blue"] .timeline-node.reality-node { border-color: rgba(192,57,43,0.5) !important; }
+  html[data-theme="glacier-blue"] .timeline-node.reality-node.inactive { border-color: rgba(192,57,43,0.2) !important; }
+  html[data-theme="glacier-blue"] .timeline-node.alternate-node { border-color: rgba(39,174,96,0.5) !important; }
+  html[data-theme="glacier-blue"] .vortex-ring { border-color: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .clock-face { border-color: rgba(46,66,101,0.25) !important; background: radial-gradient(circle at center, rgba(46,66,101,0.08), transparent 70%) !important; }
+  html[data-theme="glacier-blue"] .clock-tick { background: rgba(46,66,101,0.3) !important; }
+  html[data-theme="glacier-blue"] .time-warp-overlay { background: radial-gradient(circle at center, transparent 0%, rgba(245,241,236,0.6) 100%) !important; }
+  html[data-theme="glacier-blue"] .bg-gradient { background: radial-gradient(ellipse at 20% 80%, rgba(46,66,101,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(192,57,43,0.04) 0%, transparent 40%), radial-gradient(ellipse at 50% 50%, rgba(39,174,96,0.02) 0%, transparent 60%) !important; }
+  
+  /* 修复背景透明度过高 - 主要卡片/面板 */
+  html[data-theme="glacier-blue"] .status-indicator { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .scene-label-item.reality { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .scene-label-item.alternate { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .flow-card { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .flow-card.reality-card.missing { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .flow-card.alternate-card { background: rgba(234,228,221,0.95) !important; }
+  html[data-theme="glacier-blue"] .flow-card.alternate-card.highlight { background: linear-gradient(135deg, rgba(234,228,221,0.95), rgba(234,228,221,0.85)) !important; }
 
   /* ===== v17 等比缩放字体系统（Type Scale）===== */
   :root {
@@ -170,14 +186,14 @@
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
     
-    /* 基础7档字体变量 - 默认中号方案 (1.250) */
-    --text-h1:   48.8px;
-    --text-h2:   39.1px;
-    --text-h3:   31.3px;
-    --text-h4:   25.0px;
-    --text-lead: 20.0px;
-    --text-body: 16.0px;
-    --text-sm:   12.8px;
+    /* 基础7档字体变量 - 销冠Skills v17大号方案 (1.200比例，18px基准) */
+    --text-h1:   56.9px;
+    --text-h2:   42.7px;
+    --text-h3:   32px;
+    --text-h4:   24px;
+    --text-lead: 20px;
+    --text-body: 18px;
+    --text-sm:   16px;
     
     /* 12档兼容层映射 */
     --font-xs:   var(--text-sm);

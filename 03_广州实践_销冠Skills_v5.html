@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>东明 - 销冠Skills 智能销售助手 v3</title>
+  <title>东明 - 销冠Skills 智能销售助手 v5</title>
   <style>
+    /* ===== CLAW v8 颜色主题系统（3套，由 theme-config.js 统一管理） =====
+       修改颜色请编辑 theme-config.js，无需改动此文件
+       ====================================================================== */
+    
+    /* ─── 默认主题：黑金 ─── */
     :root {
-      /* 黑金配色系统 */
       --bg: #0a0a0a;
       --bg-elevated: #141414;
       --bg-card: #1c1c1c;
@@ -23,7 +27,252 @@
       --accent-dim: rgba(212,175,55,0.15);
       --gold-dark: #b8941f;
       --gold-bright: #f4d03f;
+    }
+    
+    /* ─── 黑金（与默认一致） ─── */
+    html[data-theme="black-gold"] {
+      --bg: #0a0a0a;
+      --bg-elevated: #141414;
+      --bg-card: #1c1c1c;
+      --bg-hover: #2a2a2a;
+      --border: rgba(212,175,55,0.12);
+      --border-strong: rgba(212,175,55,0.25);
+      --text: #fafafa;
+      --text-secondary: #b0b0b0;
+      --text-tertiary: #707070;
+      --accent: #d4af37;
+      --accent-light: #e8c547;
+      --accent-dim: rgba(212,175,55,0.15);
+      --gold-dark: #b8941f;
+      --gold-bright: #f4d03f;
+    }
+    
+    /* ─── 深海蓝 ─── */
+    html[data-theme="deep-ocean"] {
+      --bg: #031E36;
+      --bg-elevated: #04335A;
+      --bg-card: #0a4a7a;
+      --bg-hover: #0d5a94;
+      --border: rgba(154,188,224,0.2);
+      --border-strong: rgba(154,188,224,0.35);
+      --text: #C4D4E6;
+      --text-secondary: #9ABCE0;
+      --text-tertiary: #6a8cb0;
+      --accent: #9ABCE0;
+      --accent-light: #C4D4E6;
+      --accent-dim: rgba(154,188,224,0.15);
+      --gold-dark: #7a9bc0;
+      --gold-bright: #b8d4f0;
+    }
+    
+    /* ─── 冰川蓝 ─── */
+    html[data-theme="glacier-blue"] {
+      --bg: #F5F1EC;
+      --bg-elevated: #EAE4DD;
+      --bg-card: #A8B5C2;
+      --bg-hover: #98a8b8;
+      --border: rgba(46,66,101,0.2);
+      --border-strong: rgba(46,66,101,0.35);
+      --text: #2E4265;
+      --text-secondary: #8599AB;
+      --text-tertiary: #5a6a85;
+      --accent: #2E4265;
+      --accent-light: #1D3354;
+      --accent-dim: rgba(46,66,101,0.12);
+      --gold-dark: #1D3354;
+      --gold-bright: #3d5275;
       
+      --success: #27AE60;
+      --warning: #f59e0b;
+      --danger: #C0392B;
+      --info: #3b82f6;
+    }
+    
+    /* ─── 秋暮 ─── */
+    html[data-theme="autumn-dusk"] {
+      --bg: #151D2B;
+      --bg-elevated: #25344F;
+      --bg-card: #617891;
+      --bg-hover: #3a4a65;
+      --border: rgba(213,184,147,0.2);
+      --border-strong: rgba(213,184,147,0.35);
+      --text: #E8D4B8;
+      --text-secondary: #D5B893;
+      --text-tertiary: #a08060;
+      --accent: #D5B893;
+      --accent-light: #E8D4B8;
+      --accent-dim: rgba(213,184,147,0.15);
+      --gold-dark: #b09070;
+      --gold-bright: #f0d4a8;
+      
+      --success: #6FCFA0;
+      --warning: #f59e0b;
+      --danger: #C04048;
+      --info: #3b82f6;
+    }
+
+    /* ─── 落日余烬 ─── */
+    html[data-theme="sunset-ember"] {
+      --bg: #1A1814;
+      --bg-elevated: #2A261E;
+      --bg-card: #74601B;
+      --bg-hover: #3a3530;
+      --border: rgba(255,151,30,0.2);
+      --border-strong: rgba(255,151,30,0.35);
+      --text: #F0E8DC;
+      --text-secondary: #A8A7A3;
+      --text-tertiary: #7a7570;
+      --accent: #FF971E;
+      --accent-light: #FFB347;
+      --accent-dim: rgba(255,151,30,0.15);
+      --gold-dark: #DB4600;
+      --gold-bright: #FFB347;
+      
+      --success: #6FCFA0;
+      --warning: #f59e0b;
+      --danger: #DB4600;
+      --info: #3b82f6;
+    }
+    
+    /* 浅色主题安全覆盖 */
+    html[data-theme="glacier-blue"] body {
+      color: var(--text) !important;
+    }
+
+    /* 冰川蓝主题：硬编码颜色修复 */
+    html[data-theme="glacier-blue"] .ai-insight-type.summary {
+      background: rgba(59,130,246,0.15) !important;
+      color: #2563eb !important;
+      border-color: rgba(59,130,246,0.3) !important;
+    }
+    html[data-theme="glacier-blue"] .ai-insight-type.customer {
+      background: rgba(168,85,247,0.15) !important;
+      color: #7c3aed !important;
+      border-color: rgba(168,85,247,0.3) !important;
+    }
+    html[data-theme="glacier-blue"] .ai-insight-type.skill {
+      background: rgba(34,197,94,0.15) !important;
+      color: #16a34a !important;
+      border-color: rgba(34,197,94,0.3) !important;
+    }
+    html[data-theme="glacier-blue"] .ai-insight-type.issue {
+      background: rgba(239,68,68,0.15) !important;
+      color: #dc2626 !important;
+      border-color: rgba(239,68,68,0.3) !important;
+    }
+    html[data-theme="glacier-blue"] .ai-insight-type.excellent {
+      background: rgba(46,66,101,0.12) !important;
+      color: #2E4265 !important;
+      border-color: rgba(46,66,101,0.25) !important;
+    }
+
+    /* 冰川蓝主题：按钮文字颜色 */
+    html[data-theme="glacier-blue"] .ai-popup-btn.primary,
+    html[data-theme="glacier-blue"] .quick-action.primary {
+      color: #F5F1EC !important;
+    }
+
+    /* 冰川蓝主题：深色文字元素改为浅色 */
+    html[data-theme="glacier-blue"] .brand-icon,
+    html[data-theme="glacier-blue"] .ai-review-badge,
+    html[data-theme="glacier-blue"] .btn-primary,
+    html[data-theme="glacier-blue"] .replay-item-avatar,
+    html[data-theme="glacier-blue"] .btn-header-replay,
+    html[data-theme="glacier-blue"] .btn-confirm-tags {
+      color: #F5F1EC !important;
+    }
+
+    /* 冰川蓝主题：标签样式修复 */
+    html[data-theme="glacier-blue"] .tag-new {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+      border-color: #86efac !important;
+      color: #166534 !important;
+    }
+    html[data-theme="glacier-blue"] .tag-updated {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+      border-color: #93c5fd !important;
+      color: #1e40af !important;
+    }
+    html[data-theme="glacier-blue"] .tag-deleted {
+      background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%) !important;
+      border-color: #f87171 !important;
+      color: #991b1b !important;
+    }
+
+    /* 冰川蓝主题：操作标签颜色 */
+    html[data-theme="glacier-blue"] .tag-action-add {
+      background: rgba(34,197,94,0.15) !important;
+      border-color: #16a34a !important;
+      color: #16a34a !important;
+    }
+    html[data-theme="glacier-blue"] .tag-action-update {
+      background: rgba(59,130,246,0.15) !important;
+      border-color: #2563eb !important;
+      color: #2563eb !important;
+    }
+    html[data-theme="glacier-blue"] .tag-action-delete {
+      background: rgba(239,68,68,0.15) !important;
+      border-color: #dc2626 !important;
+      color: #dc2626 !important;
+    }
+    html[data-theme="glacier-blue"] .badge-add {
+      background: rgba(34,197,94,0.15) !important;
+      color: #16a34a !important;
+    }
+    html[data-theme="glacier-blue"] .badge-update {
+      background: rgba(59,130,246,0.15) !important;
+      color: #2563eb !important;
+    }
+    html[data-theme="glacier-blue"] .badge-delete {
+      background: rgba(239,68,68,0.15) !important;
+      color: #dc2626 !important;
+    }
+    html[data-theme="glacier-blue"] .badge-accepted {
+      background: rgba(34,197,94,0.2) !important;
+      color: #16a34a !important;
+    }
+
+    /* 冰川蓝主题：接受/拒绝按钮 */
+    html[data-theme="glacier-blue"] .tag-accept-btn {
+      color: #16a34a !important;
+      border-color: #16a34a !important;
+    }
+    html[data-theme="glacier-blue"] .tag-reject-btn {
+      color: #dc2626 !important;
+      border-color: #dc2626 !important;
+    }
+
+    /* 冰川蓝主题：分组标签颜色 */
+    html[data-theme="glacier-blue"] .tag-group-add {
+      color: #16a34a !important;
+    }
+    html[data-theme="glacier-blue"] .tag-group-update {
+      color: #2563eb !important;
+    }
+    html[data-theme="glacier-blue"] .tag-group-delete {
+      color: #dc2626 !important;
+    }
+
+    /* ===== 冰川蓝主题：卡片背景透明度修复 ===== */
+    html[data-theme="glacier-blue"] .skill-card,
+    html[data-theme="glacier-blue"] .insight-card,
+    html[data-theme="glacier-blue"] .review-card,
+    html[data-theme="glacier-blue"] .replay-card,
+    html[data-theme="glacier-blue"] .action-panel,
+    html[data-theme="glacier-blue"] .info-panel,
+    html[data-theme="glacier-blue"] .detail-panel,
+    html[data-theme="glacier-blue"] .modal-content,
+    html[data-theme="glacier-blue"] .popup-content {
+      background: rgba(234,228,221,0.95) !important;
+    }
+
+    /* ===== 冰川蓝主题：次要区域背景 ===== */
+    html[data-theme="glacier-blue"] .secondary-info,
+    html[data-theme="glacier-blue"] .helper-text {
+      background: rgba(234,228,221,0.85) !important;
+    }
+    
+    :root {
       --success: #22c55e;
       --warning: #f59e0b;
       --danger: #ef4444;
@@ -39,18 +288,17 @@
       --shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
       --shadow-glow: 0 0 40px rgba(212,175,55,0.25);
       
-      /* 字体大小系统 - 大号方案 (Perfect Fourth 1.333)
-       * 基于18px基准，实现强烈的视觉层级和呼吸感
-       * 比例: 12.75 → 14 → 18 → 24 → 32 → 42.7 → 56.9 → 75.9
+      /* v17 等比缩放字体系统 - 基于18px基准，Perfect Fourth (1.333) 比例
+       * 适配投影演示场景，确保10米外观众可清晰阅读
        */
-      --text-xs:   13.5px;   /* 最小辅助文字 */
-      --text-sm:   14px;     /* 次要说明文字 */
-      --text-base: 18px;     /* 标准正文（基准）*/
+      --text-xs:   16px;     /* 最小辅助文字 */
+      --text-sm:   16px;     /* 辅助标注/页脚 */
+      --text-base: 18px;     /* 标准正文（基准）- 最低正文标准 */
       --text-lg:   24px;     /* 突出正文/前言 */
-      --text-xl:   32px;     /* 小组/卡片标题 */
+      --text-xl:   32px;     /* 卡片标题 */
       --text-2xl:  42.7px;   /* 模块标题 */
-      --text-3xl:  56.9px;   /* 栏位大标题 */
-      --text-hero: 75.9px;   /* 页面主标题 */
+      --text-3xl:  56.9px;   /* 大标题 */
+      --text-hero: 75.9px;   /* 主标题/数字强调 */
     }
 
     * {
@@ -59,55 +307,60 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
+      height: 100vh;
+      max-height: 1080px;
+      overflow: hidden;
+      line-height: 1.5;
       font-size: var(--text-base);
     }
 
     /* Header - Minimal */
     .header {
-      position: fixed;
+      position: relative;
       top: 0;
       left: 0;
       right: 0;
-      height: 64px;
+      height: 48px;
       background: rgba(10,10,15,0.9);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 16px;
       z-index: 100;
-      position: relative;
+      flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 101;
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       background: linear-gradient(135deg, var(--accent), var(--gold-bright));
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-base);
       color: #0a0a0a;
-      box-shadow: 0 0 20px rgba(212,175,55,0.3);
+      box-shadow: 0 0 12px rgba(212,175,55,0.3);
     }
 
     .brand-text {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-lg);
       font-weight: 600;
     }
 
@@ -119,28 +372,33 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      font-size: var(--text-lg);
-      font-weight: 700;
-      color: var(--accent-light);
-      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .h-title { font-size: var(--text-xl); font-weight: 700; color: var(--accent-light); letter-spacing: 1px; }
 
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 101;
     }
 
     .status-indicator {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+      gap: 6px;
+      padding: 6px 10px;
       background: var(--accent-dim);
-      border-radius: 20px;
-      font-size: 14px;
+      border-radius: 16px;
+      font-size: var(--text-sm);
       color: var(--accent-light);
       border: 1px solid var(--border-strong);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .status-dot {
@@ -156,30 +414,66 @@
       50% { opacity: 0.5; }
     }
 
+    /* 一键复盘按钮 */
+    .btn-header-replay {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, var(--accent), var(--gold-dark));
+      color: #0a0a0a;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 12px rgba(212,175,55,0.2);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-header-replay:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 4px 30px rgba(212,175,55,0.4);
+    }
+    .btn-header-replay:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .btn-header-replay.completed {
+      background: linear-gradient(135deg, var(--success), #16a34a);
+      box-shadow: 0 0 20px rgba(34,197,94,0.2);
+    }
+    .btn-header-replay.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
     /* Main Layout */
     .main {
-      padding-top: 64px;
       display: grid;
-      grid-template-columns: 320px 1fr 400px;
-      min-height: 100vh;
+      grid-template-columns: 260px 1fr 380px;
+      height: calc(1080px - 48px);
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
     }
 
     /* Left Sidebar - Timeline */
     .sidebar-left {
       background: var(--bg-elevated);
       border-right: 1px solid var(--border);
-      padding: 24px;
+      padding: 12px;
       overflow-y: auto;
-      max-height: calc(100vh - 64px);
+      height: 100%;
     }
 
     .section-title {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -190,7 +484,7 @@
       color: var(--accent-light);
       padding: 3px 10px;
       border-radius: 10px;
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       border: 1px solid var(--border-strong);
     }
 
@@ -210,13 +504,14 @@
 
     .timeline-item {
       position: relative;
-      padding-left: 40px;
-      padding-bottom: 20px;
+      padding-left: 32px;
+      padding-bottom: 8px;
       cursor: pointer;
       transition: all 0.3s;
-      border-radius: var(--radius-md);
-      padding: 12px 12px 12px 40px;
-      margin-left: -8px;
+      border-radius: var(--radius-sm);
+      padding: 8px 8px 8px 32px;
+      margin-left: -4px;
+      margin-bottom: 4px;
     }
 
     .timeline-item:hover {
@@ -230,10 +525,10 @@
 
     .timeline-dot {
       position: absolute;
-      left: 8px;
-      top: 16px;
-      width: 16px;
-      height: 16px;
+      left: 6px;
+      top: 12px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--bg-card);
       border: 2px solid var(--border-strong);
@@ -243,7 +538,7 @@
     .timeline-item.active .timeline-dot {
       background: var(--accent);
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-dim), 0 0 15px rgba(212,175,55,0.4);
+      box-shadow: 0 0 0 3px var(--accent-dim), 0 0 10px rgba(212,175,55,0.4);
     }
 
     .timeline-item.processed .timeline-dot {
@@ -257,35 +552,35 @@
     }
 
     .timeline-time {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       color: var(--text-tertiary);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .timeline-content {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       color: var(--text);
       font-weight: 500;
     }
 
     .timeline-meta {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-sm);
       color: var(--text-secondary);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .timeline-tags {
       display: flex;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 4px;
+      margin-top: 4px;
       flex-wrap: wrap;
     }
 
     .timeline-tag {
-      font-size: var(--text-xs); /* 13.5px */
-      padding: 3px 8px;
+      font-size: var(--text-xs);
+      padding: 2px 6px;
       background: var(--bg-hover);
-      border-radius: 4px;
+      border-radius: 3px;
       color: var(--text-secondary);
       border: 1px solid var(--border);
     }
@@ -307,13 +602,13 @@
 
     /* Center - Chat Analysis */
     .center-panel {
-      padding: 24px;
+      padding: 12px 16px;
       overflow-y: auto;
-      max-height: calc(100vh - 64px);
+      height: 100%;
     }
 
     .chat-container {
-      max-width: 520px;
+      max-width: 100%;
       margin: 0 auto;
     }
 
@@ -321,25 +616,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
 
     .chat-info {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .chat-avatar {
-      width: 44px;
-      height: 44px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-base);
       font-weight: 600;
     }
 
@@ -350,13 +645,13 @@
     .chat-avatar.type-e { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
 
     .chat-details h2 {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-lg);
       font-weight: 600;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .chat-details p {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-sm);
       color: var(--text-secondary);
     }
 
@@ -366,9 +661,9 @@
     }
 
     .btn-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-secondary);
@@ -377,7 +672,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
-      font-size: 14px;
+      font-size: var(--text-sm);
     }
 
     .btn-icon:hover {
@@ -385,17 +680,36 @@
       color: var(--text);
     }
 
+    .btn-subtle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 4px 8px;
+      font-size: var(--text-base);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-subtle:hover {
+      background: var(--bg-hover);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
     /* Messages */
     .messages {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .message {
       display: flex;
-      gap: 10px;
-      max-width: 90%;
+      gap: 8px;
+      max-width: 95%;
       animation: fadeIn 0.3s ease-out;
     }
 
@@ -409,13 +723,13 @@
     }
 
     .message-avatar {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       flex-shrink: 0;
     }
 
@@ -429,10 +743,10 @@
 
     .message-content {
       background: var(--bg-card);
-      padding: 12px 16px;
-      border-radius: var(--radius-lg);
-      font-size: var(--text-base); /* 18px */
-      line-height: 1.6;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      font-size: var(--text-base);
+      line-height: 1.5;
       position: relative;
       border: 1px solid var(--border);
     }
@@ -448,18 +762,18 @@
     }
 
     .message-time {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-xs);
       color: var(--text-tertiary);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     /* AI Insights - 事后复盘型 */
     .ai-insight {
-      margin: 20px 0;
+      margin: 12px 0;
       padding: 0;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       position: relative;
       cursor: pointer;
       transition: all 0.3s;
@@ -469,36 +783,39 @@
     .ai-insight:hover {
       border-color: var(--border-strong);
       box-shadow: var(--shadow-glow);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .ai-insight-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
+      padding: 10px 12px;
       background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
       border-bottom: 1px solid var(--border);
     }
 
     .ai-insight-badge {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-base);
       font-weight: 600;
       color: var(--accent);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .ai-insight-badge::before {
-      content: '📋';
-      font-size: 14px;
+      content: '';
+      display: inline-flex;
+      width: 1em;
+      height: 1em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='8' height='4' x='8' y='2' rx='1' ry='1'/%3E%3Cpath d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/%3E%3Cpath d='m9 14 2 2 4-4'/%3E%3C/svg%3E") center/contain no-repeat;
     }
 
     .ai-insight-type {
-      font-size: var(--text-xs); /* 13.5px */
-      padding: 4px 10px;
-      border-radius: 12px;
+      font-size: var(--text-sm);
+      padding: 3px 8px;
+      border-radius: 10px;
       background: var(--accent-dim);
       color: var(--accent-light);
       border: 1px solid var(--border-strong);
@@ -511,23 +828,23 @@
     .ai-insight-type.excellent { background: rgba(212,175,55,0.15); color: #fbbf24; border-color: rgba(212,175,55,0.25); }
 
     .ai-insight-body {
-      padding: 16px 18px;
+      padding: 10px 12px;
     }
 
     .ai-insight-title {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-lg);
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .ai-insight-content {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
     .ai-insight-content strong {
@@ -535,48 +852,52 @@
     }
 
     .ai-suggestion {
-      margin-top: 14px;
-      padding: 14px;
+      margin-top: 8px;
+      padding: 10px;
       background: var(--bg-elevated);
-      border-radius: var(--radius-md);
-      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--accent);
     }
 
     .ai-suggestion-label {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       font-weight: 600;
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .ai-suggestion-label::before {
-      content: '💡';
+      content: '';
+      display: inline-flex;
+      width: 1em;
+      height: 1em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5'/%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3C/svg%3E") center/contain no-repeat;
     }
 
     /* 洞察详情标签 */
     .ai-insight-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 12px;
+      gap: 4px;
+      margin-top: 8px;
     }
 
     .ai-insight-tag {
-      font-size: var(--text-xs); /* 13.5px */
-      padding: 4px 10px;
+      font-size: var(--text-xs);
+      padding: 2px 6px;
       background: var(--bg);
-      border-radius: 6px;
+      border-radius: 4px;
       color: var(--text-tertiary);
       border: 1px solid var(--border);
     }
 
     /* AI Review Section - 事后复盘区域 */
     .ai-review-section {
-      margin-top: 24px;
-      padding-top: 24px;
+      margin-top: 12px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
     }
 
@@ -584,26 +905,30 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border-strong);
     }
 
     .ai-review-title {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-base);
       font-weight: 600;
       color: var(--accent);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .ai-review-title::before {
-      content: '🤖';
+      content: '';
+      display: inline-flex;
+      width: 1em;
+      height: 1em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='10' x='3' y='11' rx='2'/%3E%3Ccircle cx='12' cy='5' r='2'/%3E%3Cpath d='M12 7v4'/%3E%3Cline x1='8' y1='16' x2='8' y2='16'/%3E%3Cline x1='16' y1='16' x2='16' y2='16'/%3E%3C/svg%3E") center/contain no-repeat;
     }
 
     .ai-review-badge {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       padding: 4px 12px;
       background: linear-gradient(135deg, var(--accent), var(--gold-dark));
       color: #0a0a0a;
@@ -656,12 +981,12 @@
     }
 
     .ai-popup-title {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-base);
       font-weight: 600;
     }
 
     .ai-popup-content {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-base);
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 12px;
@@ -676,7 +1001,7 @@
       flex: 1;
       padding: 8px 12px;
       border-radius: var(--radius-sm);
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       font-weight: 500;
       cursor: pointer;
       border: none;
@@ -697,16 +1022,16 @@
     .sidebar-right {
       background: var(--bg-elevated);
       border-left: 1px solid var(--border);
-      padding: 20px;
+      padding: 10px 12px;
       overflow-y: auto;
-      max-height: calc(100vh - 64px);
+      height: 100%;
     }
 
     .insight-card {
       background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      margin-bottom: 16px;
+      border-radius: var(--radius-md);
+      padding: 12px;
+      margin-bottom: 10px;
       border: 1px solid var(--border);
     }
 
@@ -714,67 +1039,67 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     .insight-card-title {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .insight-card-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-sm);
       background: var(--accent-dim);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-sm);
       border: 1px solid var(--border-strong);
     }
 
     .insight-score {
-      font-size: var(--text-2xl); /* 42.7px */
+      font-size: var(--text-xl);
       font-weight: 700;
       color: var(--accent);
     }
 
     .progress-bar {
-      height: 6px;
+      height: 4px;
       background: var(--bg-hover);
-      border-radius: 3px;
+      border-radius: 2px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--gold-bright));
-      border-radius: 3px;
+      border-radius: 2px;
       transition: width 0.5s ease;
-      box-shadow: 0 0 10px rgba(212,175,55,0.3);
+      box-shadow: 0 0 6px rgba(212,175,55,0.3);
     }
 
     .insight-metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 8px;
     }
 
     .metric {
       text-align: center;
-      padding: 12px;
+      padding: 8px 4px;
       background: var(--bg-elevated);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border);
     }
 
     .metric-value {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-base);
       font-weight: 700;
       color: var(--text);
     }
@@ -784,17 +1109,17 @@
     .metric-value.danger { color: var(--danger); }
 
     .metric-label {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-xs);
       color: var(--text-secondary);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     /* Review Progress */
     .review-progress {
       background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      margin-bottom: 16px;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 10px;
       border: 1px solid var(--border);
     }
 
@@ -802,7 +1127,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-base);
       color: var(--text-secondary);
     }
 
@@ -813,13 +1138,13 @@
 
     /* Tags Section */
     .tags-section {
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .tags-section-title {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-base);
       color: var(--text-secondary);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -828,18 +1153,19 @@
     .tags-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .tag {
-      padding: 6px 12px;
+      padding: 4px 8px;
       background: var(--bg-hover);
-      border-radius: 16px;
-      font-size: var(--text-sm); /* 14px */
+      border-radius: 12px;
+      font-size: var(--text-base);
       color: var(--text);
       cursor: pointer;
       transition: all 0.2s;
       border: 1px solid var(--border);
+      white-space: nowrap;
     }
 
     .tag:hover {
@@ -858,45 +1184,162 @@
     }
 
     .tag.highlight {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     /* AI Suggested Tags Section */
     .suggested-tags-section {
-      margin-top: 16px;
-      padding: 14px;
+      margin-top: 10px;
+      padding: 10px;
       background: rgba(201,168,76,0.08);
       border: 1px dashed var(--accent);
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
     }
     .suggested-tags-title {
       font-size: var(--text-sm);
       color: var(--accent);
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
     .suggested-tags-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 8px;
     }
     .suggested-tag {
-      padding: 6px 12px;
+      padding: 3px 8px;
       background: rgba(201,168,76,0.12);
-      border-radius: 16px;
-      font-size: var(--text-sm);
+      border-radius: 12px;
+      font-size: var(--text-base);
       color: var(--accent-light);
       border: 1px solid rgba(201,168,76,0.3);
       transition: all 0.25s;
+      white-space: nowrap;
     }
     .suggested-tag:hover {
       background: rgba(201,168,76,0.2);
       border-color: var(--accent);
     }
+
+    /* 标签建议分组标签 */
+    .tag-group-label {
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin: 10px 0 6px 0;
+      padding-left: 2px;
+    }
+    .tag-group-add { color: #4ade80; }
+    .tag-group-update { color: #60a5fa; }
+    .tag-group-delete { color: #f87171; }
+
+    /* 建议标签组 */
+    .suggested-tags-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* 单个建议标签项 */
+    .suggested-tag-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .suggested-tag-item.tag-accepted {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .suggested-tag-item.tag-rejected {
+      border-color: var(--border);
+      opacity: 0.4;
+    }
+
+    /* 标签操作类型样式 */
+    .tag-action-add {
+      background: rgba(74, 222, 128, 0.12) !important;
+      border-color: #4ade80 !important;
+      color: #4ade80 !important;
+    }
+
+    .tag-action-update {
+      background: rgba(96, 165, 250, 0.12) !important;
+      border-color: #60a5fa !important;
+      color: #60a5fa !important;
+    }
+
+    .tag-action-delete {
+      background: rgba(248, 113, 113, 0.12) !important;
+      border-color: #f87171 !important;
+      color: #f87171 !important;
+      text-decoration: line-through;
+    }
+
+    /* 操作类型徽标 */
+    .tag-action-badge {
+      font-size: var(--text-base);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .badge-add { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+    .badge-update { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
+    .badge-delete { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+    .badge-accepted { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+
+    /* 接受/拒绝按钮 */
+    .tag-accept-btn, .tag-reject-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-base);
+      transition: all 0.2s;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .tag-accept-btn {
+      color: #4ade80;
+      border-color: #4ade80;
+    }
+    .tag-accept-btn:hover {
+      background: rgba(74, 222, 128, 0.2);
+    }
+
+    .tag-reject-btn {
+      color: #f87171;
+      border-color: #f87171;
+    }
+    .tag-reject-btn:hover {
+      background: rgba(248, 113, 113, 0.2);
+    }
+
+    .tag-accept-btn:disabled, .tag-reject-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
     .btn-confirm-tags {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       background: linear-gradient(135deg, var(--accent), #b8860b);
       color: #0a0a0a;
       font-size: var(--text-sm);
@@ -906,7 +1349,7 @@
     }
     .btn-confirm-tags:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
     }
     .btn-confirm-tags:disabled {
       opacity: 0.5;
@@ -918,23 +1361,19 @@
       background: linear-gradient(135deg, #22c55e, #16a34a);
       color: white;
     }
-      background: var(--accent-dim);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
 
     /* Action Buttons */
     .actions-section {
-      margin-top: 16px;
-      padding-top: 16px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid var(--border);
     }
 
     .btn {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      font-size: var(--text-base); /* 18px */
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
@@ -942,8 +1381,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-bottom: 10px;
+      gap: 6px;
+      margin-bottom: 6px;
     }
 
     .btn-primary {
@@ -969,17 +1408,63 @@
       border-color: var(--accent);
     }
 
+    /* btn-outline 样式 - 次要按钮 */
+    .btn-outline {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent);
+    }
+
+    /* btn-ghost 样式 - 辅助按钮 */
+    .btn-ghost {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+
     /* Review Cards */
     .review-section {
-      margin-top: 16px;
+      margin-top: 10px;
     }
 
     .review-card {
       background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      margin-bottom: 12px;
-      border-left: 3px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 2px solid var(--border);
       cursor: pointer;
       transition: all 0.2s;
       border: 1px solid var(--border);
@@ -987,7 +1472,7 @@
 
     .review-card:hover {
       background: var(--bg-hover);
-      transform: translateX(4px);
+      transform: translateX(2px);
       border-color: var(--accent-dim);
     }
 
@@ -1003,23 +1488,31 @@
       border-left-color: var(--info);
     }
 
+    .review-card.accent {
+      border-left-color: var(--accent);
+    }
+
+    .review-card.purple {
+      border-left-color: #a78bfa;
+    }
+
     .review-card-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 6px;
+      margin-bottom: 4px;
     }
 
     .review-card-title {
-      font-size: 14px;
+      font-size: var(--text-base);
       font-weight: 600;
       flex: 1;
     }
 
     .review-badge {
-      font-size: var(--text-xs); /* 13.5px */
-      padding: 3px 8px;
-      border-radius: 8px;
+      font-size: var(--text-xs);
+      padding: 2px 6px;
+      border-radius: 6px;
       background: var(--bg-hover);
       color: var(--text-secondary);
       border: 1px solid var(--border);
@@ -1031,23 +1524,23 @@
     }
 
     .review-content {
-      font-size: var(--text-base); /* 18px，和客户聊天记录一致 */
+      font-size: var(--text-base);
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.4;
     }
 
     .insight-tags-inline {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
+      gap: 4px;
+      margin-top: 6px;
     }
 
     .insight-tags-inline .tag.small {
-      font-size: var(--text-xs); /* 13.5px */
-      padding: 2px 8px;
+      font-size: var(--text-xs);
+      padding: 2px 6px;
       background: var(--bg);
-      border-radius: 4px;
+      border-radius: 3px;
       color: var(--text-tertiary);
       border: 1px solid var(--border);
     }
@@ -1056,28 +1549,28 @@
     .stats-overview {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
     .stat-card {
       background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 16px;
+      border-radius: var(--radius-sm);
+      padding: 10px;
       text-align: center;
       border: 1px solid var(--border);
     }
 
     .stat-value {
-      font-size: var(--text-2xl); /* 42.7px */
+      font-size: var(--text-lg);
       font-weight: 700;
       color: var(--accent);
     }
 
     .stat-label {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-xs);
       color: var(--text-secondary);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     /* Empty State */
@@ -1088,68 +1581,68 @@
       justify-content: center;
       height: 100%;
       text-align: center;
-      padding: 48px;
+      padding: 24px;
     }
 
     .empty-icon {
-      width: 64px;
-      height: 64px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: var(--bg-card);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: var(--text-xl); /* 32px */
-      margin-bottom: 16px;
+      font-size: var(--text-lg);
+      margin-bottom: 10px;
       animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
     }
 
     .empty-title {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .empty-desc {
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-sm);
       color: var(--text-secondary);
-      max-width: 260px;
+      max-width: 200px;
     }
 
     /* Review Empty Hint - 复盘区域空状态提示 */
     .review-empty-hint {
       background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
       border: 1px dashed var(--border-strong);
-      border-radius: var(--radius-md);
-      padding: 24px;
+      border-radius: var(--radius-sm);
+      padding: 16px;
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     .hint-icon {
-      font-size: var(--text-2xl); /* 42.7px */
-      margin-bottom: 8px;
+      font-size: var(--text-xl);
+      margin-bottom: 6px;
     }
 
     .hint-text {
-      font-size: 14px;
+      font-size: var(--text-sm);
       color: var(--text-secondary);
     }
 
     /* Quick Actions Bar */
     .quick-actions {
       position: fixed;
-      bottom: 20px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 6px;
-      padding: 6px;
+      gap: 4px;
+      padding: 4px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 100px;
@@ -1158,9 +1651,9 @@
     }
 
     .quick-action {
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 100px;
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-sm);
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
@@ -1188,8 +1681,8 @@
 
     /* Scrollbar */
     ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
     }
 
     ::-webkit-scrollbar-track {
@@ -1245,18 +1738,18 @@
 
     /* Expandable Section */
     .expandable-section {
-      margin-top: 12px;
+      margin-top: 8px;
     }
 
     .expandable-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 12px;
+      padding: 8px 10px;
       background: var(--bg-hover);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-base);
       font-weight: 500;
       transition: all 0.2s;
     }
@@ -1266,10 +1759,10 @@
     }
 
     .expandable-content {
-      padding: 12px;
-      font-size: var(--text-xs); /* 13.5px */
+      padding: 8px 10px;
+      font-size: var(--text-sm);
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.5;
       display: none;
     }
 
@@ -1289,22 +1782,22 @@
     /* Analysis Loading */
     .analysis-loading {
       background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-      border-radius: var(--radius-md);
-      padding: 28px;
+      border-radius: var(--radius-sm);
+      padding: 20px;
       text-align: center;
       border: 1px solid var(--border-strong);
-      margin: 20px 0;
+      margin: 12px 0;
     }
 
     .loading-spinner {
-      width: 48px;
-      height: 48px;
-      border: 3px solid var(--border);
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--border);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-      box-shadow: 0 0 20px rgba(212,175,55,0.3);
+      margin: 0 auto 12px;
+      box-shadow: 0 0 12px rgba(212,175,55,0.3);
     }
 
     @keyframes spin {
@@ -1312,22 +1805,22 @@
     }
 
     .loading-text {
-      font-size: var(--text-lg); /* 24px */
+      font-size: var(--text-base);
       font-weight: 500;
       color: var(--text);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     .loading-steps {
       text-align: left;
-      max-width: 240px;
+      max-width: 200px;
       margin: 0 auto;
     }
 
     .loading-step {
-      font-size: 14px;
+      font-size: var(--text-sm);
       color: var(--text-secondary);
-      padding: 8px 0;
+      padding: 4px 0;
       transition: all 0.3s;
     }
 
@@ -1343,9 +1836,9 @@
     /* Overall Summary */
     .overall-summary {
       background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border-strong);
-      margin-top: 20px;
+      margin-top: 10px;
       overflow: hidden;
     }
 
@@ -1353,7 +1846,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
+      padding: 10px 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -1363,16 +1856,16 @@
     }
 
     .summary-title {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       color: var(--accent);
     }
 
     .summary-content {
-      padding: 0 20px 20px;
+      padding: 0 12px 12px;
       display: none;
     }
 
@@ -1382,7 +1875,7 @@
     }
 
     .summary-section {
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     .summary-section:last-child {
@@ -1390,18 +1883,18 @@
     }
 
     .summary-label {
-      font-size: var(--text-xs); /* 13.5px */
+      font-size: var(--text-xs);
       font-weight: 600;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
     }
 
     .summary-text {
-      font-size: var(--text-base); /* 18px */
+      font-size: var(--text-base);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
     /* Report Modal */
@@ -1428,7 +1921,7 @@
       background: var(--bg-card);
       border-radius: var(--radius-lg);
       width: 90%;
-      max-width: 560px;
+      max-width: 720px;
       max-height: 85vh;
       overflow: hidden;
       border: 1px solid var(--border-strong);
@@ -1476,7 +1969,164 @@
       gap: 12px;
       padding: 20px 24px;
       border-top: 1px solid var(--border);
-      justify-content: flex-end;
+      justify-content: space-between;
+    }
+
+    /* ===== 复盘总览面板 ===== */
+    .replay-overview {
+      padding: 0;
+    }
+    .replay-overview-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .replay-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .replay-stat-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+    .replay-stat-value {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--accent-light);
+      line-height: 1.2;
+    }
+    .replay-stat-value.success { color: var(--success); }
+    .replay-stat-value.warning { color: var(--warning); }
+    .replay-stat-value.info { color: var(--info); }
+    .replay-stat-label {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .replay-overview-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .replay-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .replay-item:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-hover);
+    }
+    .replay-item-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--text-sm);
+      color: #0a0a0a;
+      flex-shrink: 0;
+    }
+    .replay-item-info {
+      flex: 1;
+      min-width: 80px;
+      overflow: hidden;
+    }
+    .replay-item-name {
+      font-weight: 600;
+      font-size: var(--text-base);
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .replay-item-meta {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .replay-status-badge {
+      font-size: var(--text-sm);
+      padding: 1px 6px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+    }
+    .replay-status-badge.reviewed {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+    .replay-status-badge.pending {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .replay-item-tags {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .replay-item-tags::-webkit-scrollbar {
+      height: 3px;
+    }
+    .replay-item-score {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      min-width: 48px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .replay-item-score.high { color: var(--success); }
+    .replay-item-score.medium { color: var(--warning); }
+    .replay-item-score.low { color: var(--danger); }
+
+    /* AI建议标签样式 - 新标签（绿色） */
+    .tag-new {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+      border: 1px solid #86efac !important;
+      color: #166534 !important;
+      font-weight: 600 !important;
+    }
+
+    /* AI建议标签样式 - 更新标签（蓝色） */
+    .tag-updated {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+      border: 1px solid #93c5fd !important;
+      color: #1e40af !important;
+      font-weight: 600 !important;
+    }
+
+    /* AI建议标签样式 - 删除标签（红色） */
+    .tag-deleted {
+      background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%) !important;
+      border: 1px solid #f87171 !important;
+      color: #991b1b !important;
+      font-weight: 600 !important;
+      text-decoration: line-through;
     }
 
     .report-section {
@@ -1515,7 +2165,7 @@
       padding: 6px 0;
       padding-left: 16px;
       position: relative;
-      font-size: var(--text-sm); /* 14px */
+      font-size: var(--text-base);
     }
 
     .report-list li::before {
@@ -1524,20 +2174,82 @@
       left: 0;
       color: var(--accent);
     }
+    /* ===== SVG 图标系统 ===== */
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      vertical-align: middle;
+    }
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-sm { font-size: 0.85em; }
+    .icon-md { font-size: 1.1em; }
+    .icon-lg { font-size: 1.4em; }
+    .icon-xl { font-size: 2em; }
+    .icon-fill svg { fill: currentColor; stroke: none; }
+
+    /* 洞察类型图标颜色 */
+    .icon-summary { color: #60a5fa; }
+    .icon-customer { color: #c084fc; }
+    .icon-skill { color: #4ade80; }
+    .icon-issue { color: #f87171; }
+    .icon-excellent { color: #fbbf24; }
   </style>
 </head>
 <body>
+  <!-- SVG Sprite: 所有图标定义 -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-bar-chart" viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></symbol>
+    <symbol id="i-clipboard-check" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+    <symbol id="i-notebook-pen" viewBox="0 0 24 24"><path d="M13 4v16"/><path d="M17 4v16"/><path d="M13 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M5 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="m21 19-2.8-2.8"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-alert-triangle" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-list-checks" viewBox="0 0 24 24"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><line x1="13" y1="6" x2="21" y2="6"/><line x1="13" y1="12" x2="21" y2="12"/><line x1="13" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-circle-check-big" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  </svg>
   <!-- Header -->
   <header class="header">
       <div class="brand">
       <div class="brand-icon">东</div>
       <div class="brand-text">东明</div>
     </div>
-    <div class="header-center-title">销冠Skills</div>
+    <div class="header-center-title">
+      <div class="h-title">销冠Skills</div>
+      <button class="btn-header-replay" id="batchReplayBtn" onclick="batchReplay()">
+        <span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span>
+        一键复盘
+      </button>
+    </div>
     <div class="header-actions">
-      <div class="status-indicator">
+      <div class="status-indicator" id="statusIndicator">
         <span class="status-dot"></span>
-        <span>今日对话已归档 · 可生成复盘</span>
+        <span id="statusText">今日对话已归档 · 可生成复盘</span>
       </div>
     </div>
   </header>
@@ -1567,8 +2279,8 @@
             </div>
           </div>
           <div class="chat-actions">
-            <button class="btn-icon" title="客户档案">👤</button>
-            <button class="btn-icon" title="生成复盘" onclick="startAnalysis()">✨</button>
+            <button class="btn-icon" title="客户档案"><span class="icon icon-md"><svg viewBox="0 0 24 24"><use href="#i-user"/></svg></span></button>
+            <button class="btn-subtle" title="AI复盘" onclick="startAnalysis()"><span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span> AI复盘</button>
           </div>
         </div>
         <div class="messages" id="messages">
@@ -1579,7 +2291,7 @@
 
     <!-- Right: Insights -->
     <aside class="sidebar-right">
-      <!-- Review Progress -->
+      <!-- 1. 复盘进度条 -->
       <div class="review-progress" id="reviewProgress">
         <div class="progress-label">
           <span>复盘进度</span>
@@ -1590,11 +2302,11 @@
         </div>
       </div>
 
-      <!-- Score Card -->
+      <!-- 2. 对话质量评分卡 -->
       <div class="insight-card">
         <div class="insight-card-header">
           <div class="insight-card-title">
-            <div class="insight-card-icon">📊</div>
+            <div class="insight-card-icon"><span class="icon icon-lg" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-bar-chart"/></svg></span></div>
             对话质量评分
           </div>
           <div class="insight-score" id="insightScore">82</div>
@@ -1622,23 +2334,32 @@
         </div>
       </div>
 
-      <!-- Tags - 始终显示客户标签 -->
+      <!-- 3. 客户标签区域 -->
       <div class="tags-section">
         <div class="tags-section-title">
           客户标签
-          <span id="newTagCount" style="font-size: var(--text-xs); color: var(--accent-light);"></span>
+          <span id="newTagCount" style="font-size: var(--text-sm); color: var(--accent-light);"></span>
         </div>
         <div class="tags-grid" id="tagsGrid">
           <!-- Tags populated by JS -->
         </div>
       </div>
 
-      <!-- Review Section - AI 复盘分析区域 -->
+      <!-- 4. AI建议标签区域 -->
+      <div class="suggested-tags-section" id="suggestedTagsSection" style="display: none;">
+        <div class="suggested-tags-title">AI 建议添加标签</div>
+        <div class="suggested-tags-list" id="suggestedTagsList"></div>
+        <button class="btn btn-confirm-tags" id="confirmTagsBtn" onclick="confirmSuggestedTags()">
+          <span class="icon icon-sm" style="color:var(--success)"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg></span> 确认添加
+        </button>
+      </div>
+
+      <!-- 5. AI复盘分析区域 -->
       <div class="review-section" id="reviewSection">
         <!-- 空状态提示 -->
         <div class="review-empty-hint" id="reviewEmptyHint">
-          <div class="hint-icon">💡</div>
-          <div class="hint-text">点击下方按钮，生成 AI 复盘分析</div>
+          <div class="hint-icon"><span class="icon icon-xl" style="color:var(--accent-dim)"><svg viewBox="0 0 24 24"><use href="#i-lightbulb"/></svg></span></div>
+          <div class="hint-text">选择左侧对话，点击下方「生成复盘分析」开始AI智能复盘 ↓</div>
         </div>
         
         <!-- 复盘洞察卡片 - 点击生成后显示 -->
@@ -1647,23 +2368,7 @@
         </div>
       </div>
 
-      <!-- Re-analysis Button - 生成/重新分析按钮 -->
-      <div class="actions-section" id="analysisBtnSection">
-        <button class="btn btn-primary" onclick="startAnalysis()">
-          <span>✨</span> 生成复盘分析
-        </button>
-      </div>
-
-      <!-- AI 建议标签 - 复盘完成后显示 -->
-      <div class="suggested-tags-section" id="suggestedTagsSection" style="display: none;">
-        <div class="suggested-tags-title">AI 建议添加标签</div>
-        <div class="suggested-tags-list" id="suggestedTagsList"></div>
-        <button class="btn btn-confirm-tags" id="confirmTagsBtn" onclick="confirmSuggestedTags()">
-          <span>✅</span> 确认添加到客户标签
-        </button>
-      </div>
-
-      <!-- Analysis Loading State -->
+      <!-- 6. 加载动画 -->
       <div class="analysis-loading" id="analysisLoading" style="display: none;">
         <div class="loading-spinner"></div>
         <div class="loading-text">AI 正在分析对话...</div>
@@ -1674,15 +2379,15 @@
         </div>
       </div>
 
-      <!-- Overall Summary - 分析完成后的整体总结 -->
+      <!-- 7. 整体总结 - 默认展开 -->
       <div class="overall-summary" id="overallSummary" style="display: none;">
         <div class="summary-header" onclick="toggleSummary()">
           <div class="summary-title">
-            <span>📋</span> 整体总结评价
+            <span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-clipboard-check"/></svg></span> 整体总结评价
           </div>
-          <span class="expandable-arrow" id="summaryArrow">▼</span>
+          <span class="expandable-arrow" id="summaryArrow">▲</span>
         </div>
-        <div class="summary-content" id="summaryContent">
+        <div class="summary-content show" id="summaryContent">
           <div class="summary-section">
             <div class="summary-label">对话亮点</div>
             <div class="summary-text" id="summaryHighlights">-</div>
@@ -1698,10 +2403,10 @@
         </div>
       </div>
 
-      <!-- Expandable: Similar Cases -->
+      <!-- 8. 相似案例 -->
       <div class="expandable-section">
         <div class="expandable-header" onclick="toggleExpand(this)">
-          <span>📚 相似成功案例</span>
+          <span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-book-open"/></svg></span> 相似成功案例
           <span class="expandable-arrow">▼</span>
         </div>
         <div class="expandable-content">
@@ -1710,13 +2415,21 @@
         </div>
       </div>
 
-      <!-- Actions -->
-      <div class="actions-section">
-        <button class="btn btn-primary" onclick="generateCustomerReport()">
-          <span>📄</span> 生成客户跟进报告
+      <!-- 9. 统一操作按钮组 -->
+      <div class="actions-section" id="unifiedActionsSection">
+        <!-- 主按钮：生成复盘分析（最醒目） -->
+        <div id="analysisBtnSection">
+          <button class="btn btn-primary" onclick="startAnalysis()">
+            <span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span> 生成复盘分析
+          </button>
+        </div>
+        <!-- 次按钮：生成客户报告 -->
+        <button class="btn btn-outline" onclick="generateCustomerReport()">
+          <span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-file-text"/></svg></span> 生成客户跟进报告
         </button>
-        <button class="btn btn-secondary" onclick="showDailyWorkReport()">
-          <span>📝</span> 查看今日工作日报
+        <!-- 辅助按钮：查看日报 -->
+        <button class="btn btn-ghost" onclick="showDailyWorkReport()">
+          <span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-calendar"/></svg></span> 查看今日工作日报
         </button>
       </div>
     </aside>
@@ -1727,13 +2440,13 @@
   <!-- Quick Actions -->
   <div class="quick-actions">
     <button class="quick-action" onclick="showDailySummary()">
-      <span>📊</span> 今日总结
+      <span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-bar-chart"/></svg></span> 今日总结
     </button>
     <button class="quick-action primary" onclick="generateDailyReport()">
-      <span>✨</span> 生成日报
+      <span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span> 生成日报
     </button>
     <button class="quick-action" onclick="showAllReviews()">
-      <span>📋</span> 查看全部复盘
+      <span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-clipboard-check"/></svg></span> 查看全部复盘
     </button>
   </div>
 
@@ -1755,6 +2468,18 @@
   </div>
 
   <script>
+    // ===== SVG 图标辅助函数 =====
+    function icon(id, cls = '') {
+      return `<span class="icon icon-sm ${cls}"><svg viewBox="0 0 24 24"><use href="#${id}"/></svg></span>`;
+    }
+    const TYPE_ICONS = {
+      summary: icon('i-bar-chart', 'icon-summary'),
+      customer: icon('i-user', 'icon-customer'),
+      skill: icon('i-crosshair', 'icon-skill'),
+      issue: icon('i-alert-triangle', 'icon-issue'),
+      excellent: icon('i-star', 'icon-excellent')
+    };
+
     // Conversation Data
     const conversations = [
       {
@@ -1775,11 +2500,11 @@
           {type: 'incoming', content: '有的，我之前买过基金，但是最近市场不太好，想找个稳健一点的', time: '10:35'},
           {type: 'outgoing', content: '理解您的想法。稳健型产品确实更适合当前市场环境。方便问一下您的资金大概什么时候会用到吗？', time: '10:36'},
           {type: 'incoming', content: '这笔钱我大概半年后用，收益的话比存款高一些就行，不想承担太大风险', time: '10:38'},
-          {type: 'outgoing', content: '明白，半年期、稳健增值。我们正好有一款结构性存款，保本浮动收益，预期年化2.8-3.5%，您有兴趣了解一下吗？', time: '10:39'},
+          {type: 'outgoing', content: '明白，半年期、稳健增值。我们正好有一款结构性存款，本金保障型浮动收益，预期年化2.8-3.5%，您有兴趣了解一下吗？', time: '10:39'},
           {type: 'incoming', content: '听起来不错，具体怎么买？', time: '10:40'},
-          {type: 'outgoing', content: '好的，我给您发一下产品资料。您这周哪天方便来网点，我们细聊并办理？', time: '10:41'},
+          {type: 'outgoing', content: '好的，我给您发一下产品资料。您这周哪天方便，我们通过企微视频详细聊聊？', time: '10:41'},
           {type: 'incoming', content: '周三下午可以吗？', time: '10:42'},
-          {type: 'outgoing', content: '没问题，周三下午两点我在网点等您。', time: '10:43'}
+          {type: 'outgoing', content: '没问题，周三下午两点我准时在线，到时候给您发视频通话。', time: '10:43'}
         ],
         insights: [
           {type: 'summary', title: '沟通总结', content: '本次沟通用时11分钟，客户主动咨询理财产品，成功识别稳健型投资需求，推荐结构性存款，客户预约周三面签。', tags: ['需求明确', '意向强烈', '待跟进']},
@@ -1787,11 +2512,16 @@
           {type: 'skill', title: '技巧评估', content: '开场寒暄自然，需求挖掘到位（资金期限+风险偏好）。产品推荐时机合适，报价策略得当。成交收尾主动邀约面签，推动销售闭环。', tags: ['需求挖掘', '产品推荐', '成交闭环']},
           {type: 'excellent', title: '优秀话术提炼', content: '"稳健型产品确实更适合当前市场环境" - 这句话先共情客户再切入正题，既专业又亲切，有效建立信任关系。', tags: ['共情技巧', '话术模板']},
           {type: 'issue', title: '问题诊断', content: '第4句到第5句回复间隔3分钟，略长。建议：下次沟通时适当缩短思考间隙，保持对话节奏。', tags: ['节奏优化', '回复时效']},
-          {type: 'excellent', title: '下一步行动计划', content: '1. 发送结构性存款产品PDF资料\n2. 周三前电话确认预约\n3. 准备保本浮动收益对比表\n4. 挖掘客户企业资金管理需求', tags: ['待办事项', '跟进计划']}
+          {type: 'excellent', title: '下一步行动计划', content: '1. 发送结构性存款产品PDF资料\n2. 周三前电话确认预约\n3. 准备结构性存款收益对比表\n4. 挖掘客户企业资金管理需求', tags: ['待办事项', '跟进计划']}
         ],
         tagsList: ['稳健型', '半年期', '企业主', '基金经验', '高净值'],
         newTags: ['企业主', '高净值'],
-        suggestedTags: ['需求明确', '意向强烈', '待面签'],
+        suggestedTags: [
+          { name: '需求明确', action: 'add' },
+          { name: '意向强烈', action: 'add' },
+          { name: '高净值', action: 'update' },
+          { name: '待面签', action: 'delete' }
+        ],
         confirmedSuggestedTags: [],
         reviews: [
           {type: 'warning', title: '跟进节奏过急', content: '第3句回复间隔仅1分钟，建议给客户更多思考时间', badge: '需改进'},
@@ -1828,7 +2558,12 @@
         ],
         tagsList: ['老客户', '定投客户', '追加投资', '风险意识强'],
         newTags: ['追加投资'],
-        suggestedTags: ['交叉销售成功', '长期信任'],
+        suggestedTags: [
+          { name: '交叉销售成功', action: 'add' },
+          { name: '长期信任', action: 'add' },
+          { name: '定投客户', action: 'update' },
+          { name: '追加投资', action: 'delete' }
+        ],
         confirmedSuggestedTags: [],
         reviews: [
           {type: 'success', title: '合规提醒到位', content: '主动确认资金期限，体现专业负责态度', badge: '规范'},
@@ -1867,7 +2602,12 @@
         ],
         tagsList: ['高净值', '大额资金', '短期理财', '风险保守'],
         newTags: ['大额资金', '短期理财'],
-        suggestedTags: ['需深度跟进', '配置方案待定'],
+        suggestedTags: [
+          { name: '需深度跟进', action: 'add' },
+          { name: '超高净值', action: 'add' },
+          { name: '大额资金', action: 'update' },
+          { name: '短期理财', action: 'delete' }
+        ],
         confirmedSuggestedTags: [],
         reviews: [
           {type: 'warning', title: '未深挖需求', content: '客户提到800万时，未询问资金来源和用途细节', badge: '需改进'},
@@ -1892,19 +2632,24 @@
           {type: 'incoming', content: '还没有，我就是觉得收益太高了，想问问你', time: '11:17'},
           {type: 'outgoing', content: '您做得对！这种高息诱惑基本都是骗局。您记住，任何承诺保本高收益的都是骗人的。以后接到这种电话直接挂断', time: '11:18'},
           {type: 'incoming', content: '那我现在手里的钱放哪里安全？', time: '11:20'},
-          {type: 'outgoing', content: '建议您存大额存单或者买国债，虽然收益不高但绝对安全。您要是方便，可以来网点我给您详细规划一下', time: '11:21'},
+          {type: 'outgoing', content: '建议您存大额存单或者买国债，虽然收益不高但绝对安全。您要是方便，我们可以约个视频通话，我给您详细规划一下', time: '11:21'},
           {type: 'incoming', content: '好的，我明天过去找你', time: '11:23'}
         ],
         insights: [
           {type: 'summary', title: '沟通总结', content: '张阿姨咨询诈骗风险防范，用时8分钟。客户成功识别诈骗电话并主动咨询，避免潜在损失。顺势推荐安全理财产品，客户预约次日到访。', tags: ['防骗教育', '信任建立', '待跟进']},
-          {type: 'customer', title: '客户画像洞察', content: '退休阿姨，风险极度保守，有闲置资金。对金融诈骗有一定警惕但需要专业指导。对网点客户经理信任度高。', tags: ['退休客户', '极度保守', '信任度高']},
+          {type: 'customer', title: '客户画像洞察', content: '退休阿姨，风险极度保守，有闲置资金。对金融诈骗有一定警惕但需要专业指导。对企微客户经理信任度高。', tags: ['退休客户', '极度保守', '信任度高']},
           {type: 'skill', title: '技巧评估', content: '诈骗识别反应迅速，保护客户资产意识强。专业解释6%收益警戒线，增强说服力。顺势推荐安全产品，自然过渡到邀约。服务意识优秀。', tags: ['风险识别', '专业解释', '顺势营销']},
           {type: 'excellent', title: '优秀话术提炼', content: '"正规理财产品年化收益超过6%就要特别警惕了" - 用具体数字建立风险认知，比泛泛而谈更有说服力。', tags: ['专业话术', '数字说服']},
           {type: 'excellent', title: '优秀话术提炼', content: '"以后接到这种电话直接挂断" - 给出明确行动指引，简单直接，便于客户记忆和执行。', tags: ['行动指引', '话术模板']}
         ],
         tagsList: ['退休客户', '风险教育', '防骗提醒', '预约到访'],
         newTags: ['风险教育', '预约到访'],
-        suggestedTags: ['防骗教育成功', '社区影响力客户'],
+        suggestedTags: [
+          { name: '防骗教育成功', action: 'add' },
+          { name: '社区影响力客户', action: 'add' },
+          { name: '风险教育', action: 'update' },
+          { name: '防骗提醒', action: 'delete' }
+        ],
         confirmedSuggestedTags: [],
         reviews: [
           {type: 'success', title: '风险意识强', content: '及时识别诈骗风险，有效保护客户资产', badge: '优秀'},
@@ -1931,11 +2676,11 @@
           {type: 'incoming', content: '20%？那也太多了，我可能会睡不着', time: '16:50'},
           {type: 'outgoing', content: '理解理解！那建议您从低风险产品开始。货币基金是不错的选择，随存随取，收益比活期高，基本不会亏', time: '16:52'},
           {type: 'incoming', content: '货币基金听起来不错，怎么买？', time: '16:54'},
-          {type: 'outgoing', content: '很简单，我发您一个链接，下载我们的APP就能买。或者您来网点，我手把手教您', time: '16:55'},
+          {type: 'outgoing', content: '很简单，我发您一个链接，下载我们的APP就能买。或者我通过企微视频通话手把手教您操作', time: '16:55'},
           {type: 'incoming', content: '那我下班过去，大概6点到', time: '16:56'}
         ],
         insights: [
-          {type: 'summary', title: '沟通总结', content: '理财新手客户咨询，用时11分钟。通过风险测试识别保守型投资者，推荐货币基金作为入门产品。客户预约当日下班后到访网点。', tags: ['理财新手', '保守型', '待跟进']},
+          {type: 'summary', title: '沟通总结', content: '理财新手客户咨询，用时11分钟。通过风险测试识别保守型投资者，推荐货币基金作为入门产品。客户预约当日下班后视频沟通。', tags: ['理财新手', '保守型', '待跟进']},
           {type: 'customer', title: '客户画像洞察', content: '年轻职场新人，工作2年积蓄5万。理财知识零基础，风险承受力极低。需要耐心引导和简单易懂的解释。', tags: ['职场新人', '保守型', '零基础']},
           {type: 'skill', title: '技巧评估', content: '用"20%亏损测试"快速定位客户风险偏好，方法科学有效。推荐货币基金作为入门产品，选择合适。从客户角度出发共情"睡不着"，建立信任。', tags: ['需求挖掘', '产品匹配', '共情技巧']},
           {type: 'issue', title: '问题诊断', content: '对话结束未确认客户联系方式（手机号），若客户未按时到访将无法跟进。开场白略显冗长，可更简洁。', tags: ['跟进缺失', '联系方式']},
@@ -1944,7 +2689,12 @@
         ],
         tagsList: ['年轻客户', '首次理财', '保守型', '预约到访'],
         newTags: ['首次理财', '保守型'],
-        suggestedTags: ['需APP指导', '长期培育对象'],
+        suggestedTags: [
+          { name: '需APP指导', action: 'add' },
+          { name: '长期培育对象', action: 'add' },
+          { name: '首次理财', action: 'update' },
+          { name: '年轻客户', action: 'delete' }
+        ],
         confirmedSuggestedTags: [],
         reviews: [
           {type: 'info', title: '教育型销售', content: '针对理财小白耐心讲解，建立信任关系', badge: '良好'},
@@ -2013,6 +2763,20 @@
       // Update insights
       updateInsights(conv);
       
+      // 如果该对话已通过批量复盘完成，显示复盘结果
+      if (reviewedChats.has(index) || batchReplayedSet.has(index)) {
+        // 确保加入已复盘集合
+        reviewedChats.add(index);
+        // 显示复盘结果
+        document.getElementById('analysisBtnSection').style.display = 'none';
+        document.getElementById('reviewEmptyHint').style.display = 'none';
+        populateReviewCards();
+        populateSummary();
+        document.getElementById('reviewCards').style.display = 'block';
+        document.getElementById('overallSummary').style.display = 'block';
+        showSuggestedTags();
+      }
+      
       // Scroll to bottom
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
@@ -2075,9 +2839,9 @@
       document.getElementById('step3').className = 'loading-step';
       document.getElementById('step3').textContent = '○ 提炼优秀话术';
       
-      // Reset summary
-      document.getElementById('summaryContent').classList.remove('show');
-      document.getElementById('summaryArrow').classList.remove('rotated');
+      // Reset summary - 默认展开状态
+      document.getElementById('summaryContent').classList.add('show');
+      document.getElementById('summaryArrow').classList.add('rotated');
     }
 
     function getScoreClass(score) {
@@ -2137,7 +2901,7 @@
         // Show summary and update button to "重新生成"
         document.getElementById('overallSummary').style.display = 'block';
         document.getElementById('analysisBtnSection').style.display = 'block';
-        document.querySelector('#analysisBtnSection .btn').innerHTML = '<span>🔄</span> 重新生成复盘';
+        document.querySelector('#analysisBtnSection .btn').innerHTML = '<span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></span> 重新生成复盘';
         
         // 自动展开总结
         setTimeout(() => {
@@ -2155,59 +2919,218 @@
       const conv = conversations[currentChat];
       if (!conv.suggestedTags || conv.suggestedTags.length === 0) return;
       // 如果已全部确认，不再显示
-      if (conv.confirmedSuggestedTags.length > 0) return;
+      if (conv.confirmedSuggestedTags && conv.confirmedSuggestedTags.length === conv.suggestedTags.length) return;
 
       const section = document.getElementById('suggestedTagsSection');
       const list = document.getElementById('suggestedTagsList');
       const btn = document.getElementById('confirmTagsBtn');
 
-      list.innerHTML = conv.suggestedTags.map(tag =>
-        `<span class="suggested-tag">${tag}</span>`
-      ).join('');
+      // 按类型分组
+      const addTags = conv.suggestedTags.filter(t => t.action === 'add');
+      const updateTags = conv.suggestedTags.filter(t => t.action === 'update');
+      const deleteTags = conv.suggestedTags.filter(t => t.action === 'delete');
 
-      btn.textContent = '';
-      btn.innerHTML = '<span>✅</span> 确认添加到客户标签';
+      let html = '';
+
+      if (addTags.length > 0) {
+        html += '<div class="tag-group-label tag-group-add">建议新增</div>';
+        html += '<div class="suggested-tags-group">';
+        addTags.forEach((tag, i) => {
+          const tagId = `add-${i}`;
+          html += `<div class="suggested-tag-item" id="tag-${tagId}">
+            <span class="suggested-tag tag-action-add">${tag.name}</span>
+            <span class="tag-action-badge badge-add">新增</span>
+            <button class="tag-accept-btn" onclick="acceptTag('${tagId}', '${tag.name}', 'add')" title="接受">✓</button>
+            <button class="tag-reject-btn" onclick="rejectTag('${tagId}')" title="拒绝">✗</button>
+          </div>`;
+        });
+        html += '</div>';
+      }
+
+      if (updateTags.length > 0) {
+        html += '<div class="tag-group-label tag-group-update">建议更新</div>';
+        html += '<div class="suggested-tags-group">';
+        updateTags.forEach((tag, i) => {
+          const tagId = `update-${i}`;
+          html += `<div class="suggested-tag-item" id="tag-${tagId}">
+            <span class="suggested-tag tag-action-update">${tag.name}</span>
+            <span class="tag-action-badge badge-update">更新</span>
+            <button class="tag-accept-btn" onclick="acceptTag('${tagId}', '${tag.name}', 'update')" title="接受">✓</button>
+            <button class="tag-reject-btn" onclick="rejectTag('${tagId}')" title="拒绝">✗</button>
+          </div>`;
+        });
+        html += '</div>';
+      }
+
+      if (deleteTags.length > 0) {
+        html += '<div class="tag-group-label tag-group-delete">建议删除</div>';
+        html += '<div class="suggested-tags-group">';
+        deleteTags.forEach((tag, i) => {
+          const tagId = `delete-${i}`;
+          html += `<div class="suggested-tag-item" id="tag-${tagId}">
+            <span class="suggested-tag tag-action-delete">${tag.name}</span>
+            <span class="tag-action-badge badge-delete">删除</span>
+            <button class="tag-accept-btn" onclick="acceptTag('${tagId}', '${tag.name}', 'delete')" title="接受">✓</button>
+            <button class="tag-reject-btn" onclick="rejectTag('${tagId}')" title="拒绝">✗</button>
+          </div>`;
+        });
+        html += '</div>';
+      }
+
+      list.innerHTML = html;
+
+      // 更新按钮为"全部接受"
+      btn.innerHTML = '<span class="icon icon-sm" style="color:var(--success)"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg></span> 全部接受';
       btn.className = 'btn-confirm-tags';
       btn.disabled = false;
 
       section.style.display = 'block';
     }
 
-    // 确认AI建议标签
+    // 接受单个标签
+    function acceptTag(tagId, tagName, action) {
+      const el = document.getElementById('tag-' + tagId);
+      if (!el) return;
+
+      const conv = conversations[currentChat];
+
+      if (action === 'add') {
+        // 新增标签到 tagsList
+        if (!conv.tagsList.includes(tagName)) {
+          conv.tagsList.push(tagName);
+          if (!conv.newTags) conv.newTags = [];
+          conv.newTags.push(tagName);
+        }
+      } else if (action === 'update') {
+        // 标记为已更新（可以添加视觉效果）
+        // tagsList中已存在，标记更新状态
+        if (!conv.updatedTags) conv.updatedTags = [];
+        conv.updatedTags.push(tagName);
+      } else if (action === 'delete') {
+        // 从 tagsList 中移除
+        conv.tagsList = conv.tagsList.filter(t => t !== tagName);
+        if (conv.tags) conv.tags = conv.tags.filter(t => t !== tagName);
+      }
+
+      // 添加到已确认列表
+      if (!conv.confirmedSuggestedTags) conv.confirmedSuggestedTags = [];
+      const tagObj = conv.suggestedTags.find(t => t.name === tagName && t.action === action);
+      if (tagObj && !conv.confirmedSuggestedTags.find(t => t.name === tagName && t.action === action)) {
+        conv.confirmedSuggestedTags.push(tagObj);
+      }
+
+      // 更新标签显示
+      el.classList.add('tag-accepted');
+      el.innerHTML = `<span class="suggested-tag tag-action-${action}" style="opacity:0.6">${tagName}</span>
+        <span class="tag-action-badge badge-accepted">已接受</span>`;
+
+      // 刷新客户标签显示
+      updateTagsDisplay(conv);
+    }
+
+    // 拒绝单个标签
+    function rejectTag(tagId) {
+      const el = document.getElementById('tag-' + tagId);
+      if (!el) return;
+
+      el.classList.add('tag-rejected');
+      // 添加划线和淡出效果
+      el.style.opacity = '0.4';
+      el.style.textDecoration = 'line-through';
+      // 禁用按钮
+      el.querySelectorAll('button').forEach(btn => btn.disabled = true);
+    }
+
+    // 更新客户标签显示
+    function updateTagsDisplay(conv) {
+      const tagsGrid = document.getElementById('tagsGrid');
+      if (!tagsGrid) return;
+      tagsGrid.innerHTML = conv.tagsList.map((tag) => {
+        const isNew = conv.newTags && conv.newTags.includes(tag);
+        const isUpdated = conv.updatedTags && conv.updatedTags.includes(tag);
+        let className = 'tag';
+        if (isNew) className += ' new';
+        if (isUpdated) className += ' updated';
+        return `<span class="${className}">${tag}</span>`;
+      }).join('');
+
+      const newTagCount = document.getElementById('newTagCount');
+      if (newTagCount && conv.newTags) {
+        newTagCount.textContent = conv.newTags.length > 0 ? `+${conv.newTags.length} 新增` : '';
+      }
+    }
+
+    // 确认AI建议标签（全部接受）
     function confirmSuggestedTags() {
       const conv = conversations[currentChat];
       if (!conv.suggestedTags || conv.suggestedTags.length === 0) return;
 
-      // 添加到已确认列表
-      conv.confirmedSuggestedTags = [...conv.suggestedTags];
+      // 遍历所有建议标签并执行接受操作
+      conv.suggestedTags.forEach(tag => {
+        // 查找对应的DOM元素
+        const tagElements = document.querySelectorAll('[id^="tag-"]');
+        tagElements.forEach(el => {
+          const tagNameEl = el.querySelector('.suggested-tag');
+          if (tagNameEl && tagNameEl.textContent === tag.name) {
+            // 检查是否已经处理过
+            if (!el.classList.contains('tag-accepted') && !el.classList.contains('tag-rejected')) {
+              // 提取tagId
+              const tagId = el.id.replace('tag-', '');
+              acceptTag(tagId, tag.name, tag.action);
+            }
+          }
+        });
+      });
 
       // 更新按钮状态
       const btn = document.getElementById('confirmTagsBtn');
-      btn.innerHTML = '<span>✅</span> 已添加';
+      btn.innerHTML = '<span class="icon icon-sm" style="color:var(--success)"><svg viewBox="0 0 24 24"><use href="#i-circle-check-big"/></svg></span> 已接受全部';
       btn.className = 'btn-confirm-tags confirmed';
       btn.disabled = true;
-
-      // 更新客户标签区域
-      const allTags = [...conv.tagsList, ...conv.confirmedSuggestedTags];
-      const allNewTags = [...conv.newTags, ...conv.confirmedSuggestedTags];
-      document.getElementById('tagsGrid').innerHTML = allTags.map(tag =>
-        `<span class="tag ${allNewTags.includes(tag) ? 'new' : ''}">${tag}</span>`
-      ).join('');
-      // 更新新增计数
-      const newCount = allNewTags.length;
-      document.getElementById('newTagCount').textContent = newCount > 0 ? `+${newCount} 新增` : '';
     }
     
+    // Highlight Keywords - 文本关键词高亮处理
+    function highlightKeywords(text) {
+      if (!text) return text;
+      
+      // 正面/优秀词汇 - 绿色
+      const positiveWords = ['优秀', '很好', '专业', '到位', '成功', '有效', '精准', '出色', '良好', '科学', '合适', '恰当', '自然', '及时', '迅速', '强', '高', '佳', '棒', '赞'];
+      // 问题/需改进词汇 - 橙色/黄色
+      const negativeWords = ['不足', '缺少', '遗漏', '忽略', '未能', '建议', '需要改进', '可以加强', '有待', '问题', '缺陷', '错误', '严重', '过急', '过快', '过长', '过短', '偏快', '偏慢', '过于'];
+      // 客户相关关键词 - 金色
+      const customerWords = ['客户需求', '购买意向', '风险偏好', '客户画像', '信任', '共情', '客户资产', '客户体验', '客户背景', '客户资金', '投资者'];
+      
+      let highlighted = text;
+      
+      // 高亮客户相关关键词（优先处理，避免被其他规则覆盖）
+      customerWords.forEach(word => {
+        const regex = new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+        highlighted = highlighted.replace(regex, `<span style="color: var(--accent-light); font-weight: 600;">${word}</span>`);
+      });
+      
+      // 高亮正面词汇
+      positiveWords.forEach(word => {
+        const regex = new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+        highlighted = highlighted.replace(regex, `<span style="color: #4ade80; font-weight: 600;">${word}</span>`);
+      });
+      
+      // 高亮问题词汇
+      negativeWords.forEach(word => {
+        const regex = new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+        highlighted = highlighted.replace(regex, `<span style="color: #fbbf24; font-weight: 600;">${word}</span>`);
+      });
+      
+      // 高亮关键数据/指标 - 蓝色（匹配数字+单位/百分号）
+      // 匹配模式：数字+单位（万、元、%、分钟、小时、分、秒、点等）
+      highlighted = highlighted.replace(/(\d+(?:\.\d+)?)\s*(万|元|%|分钟|小时|分|秒|点|位|次|笔|款|个)/g, 
+        '<span style="color: #60a5fa; font-weight: 600;">$1$2</span>');
+      
+      return highlighted;
+    }
+
     // Populate Review Cards - 填充复盘洞察卡片
     function populateReviewCards() {
       const conv = conversations[currentChat];
-      const typeIcons = {
-        summary: '📊',
-        customer: '👤',
-        skill: '🎯',
-        issue: '⚠️',
-        excellent: '✨'
-      };
       const typeLabels = {
         summary: '总结',
         customer: '画像',
@@ -2216,14 +3139,26 @@
         excellent: '亮点'
       };
       
+      // 根据类型确定卡片样式类
+      const getCardClass = (type) => {
+        switch(type) {
+          case 'issue': return 'warning';
+          case 'excellent': return 'success';
+          case 'skill': return 'info';
+          case 'summary': return 'accent';
+          case 'customer': return 'purple';
+          default: return 'skill';
+        }
+      };
+      
       if (conv.insights && conv.insights.length > 0) {
         document.getElementById('reviewCards').innerHTML = conv.insights.map(insight => `
-          <div class="review-card ${insight.type === 'issue' ? 'warning' : insight.type === 'excellent' ? 'success' : 'skill'}">
+          <div class="review-card ${getCardClass(insight.type)}">
             <div class="review-card-header">
-              <span class="review-card-title">${typeIcons[insight.type]} ${insight.title}</span>
+              <span class="review-card-title">${TYPE_ICONS[insight.type] || ''} ${insight.title}</span>
               <span class="review-badge ${insight.type === 'issue' ? 'urgent' : insight.type === 'excellent' ? '' : ''}">${typeLabels[insight.type]}</span>
             </div>
-            <div class="review-content">${insight.content}</div>
+            <div class="review-content">${highlightKeywords(insight.content)}</div>
             ${insight.tags ? `
               <div class="insight-tags-inline">
                 ${insight.tags.slice(0, 4).map(tag => `<span class="tag small">${tag}</span>`).join('')}
@@ -2256,17 +3191,17 @@
       
       // Generate summary based on score
       if (conv.score >= 85) {
-        highlights.textContent = '需求挖掘深入，能够准确把握客户资金期限和风险偏好；话术专业规范，体现了良好的产品知识储备；跟进节奏把握得当，既不过于急切也不拖沓。';
-        improvements.textContent = '可在交叉销售方面进一步加强，适时推荐配套产品；建议增加客户背景信息的收集深度。';
-        suggestions.textContent = '建议24小时内发送产品资料并确认客户到访时间；可邀请客户参加理财沙龙，增强粘性；将此案例作为优秀案例在团队内部分享。';
+        highlights.innerHTML = highlightKeywords('需求挖掘深入，能够准确把握客户资金期限和风险偏好；话术专业规范，体现了良好的产品知识储备；跟进节奏把握得当，既不过于急切也不拖沓。');
+        improvements.innerHTML = highlightKeywords('可在交叉销售方面进一步加强，适时推荐配套产品；建议增加客户背景信息的收集深度。');
+        suggestions.innerHTML = highlightKeywords('建议24小时内发送产品资料并确认客户到访时间；可邀请客户参加理财沙龙，增强粘性；将此案例作为优秀案例在团队内部分享。');
       } else if (conv.score >= 70) {
-        highlights.textContent = '专业度表现良好，能够用市场数据回应客户质疑；对客户需求的理解基本准确。';
-        improvements.textContent = '跟进节奏需要优化，部分回复间隔过短；需求挖掘深度不足，未充分了解客户资金来源和用途细节。';
-        suggestions.textContent = '建议加强客户需求挖掘训练，特别是大额资金客户的背景了解；调整回复节奏，给客户更多思考空间；下次对话前做好充分准备。';
+        highlights.innerHTML = highlightKeywords('专业度表现良好，能够用市场数据回应客户质疑；对客户需求的理解基本准确。');
+        improvements.innerHTML = highlightKeywords('跟进节奏需要优化，部分回复间隔过短；需求挖掘深度不足，未充分了解客户资金来源和用途细节。');
+        suggestions.innerHTML = highlightKeywords('建议加强客户需求挖掘训练，特别是大额资金客户的背景了解；调整回复节奏，给客户更多思考空间；下次对话前做好充分准备。');
       } else {
-        highlights.textContent = '能够主动识别客户需求，并给出相应的产品建议。';
-        improvements.textContent = '需求挖掘严重不足，未询问关键信息；话术规范性有待提高；跟进节奏过快，可能影响客户体验。';
-        suggestions.textContent = '建议重新学习客户需求挖掘话术模板；加强产品知识学习；在下次对话前做好充分准备，列出需要了解的关键问题清单。';
+        highlights.innerHTML = highlightKeywords('能够主动识别客户需求，并给出相应的产品建议。');
+        improvements.innerHTML = highlightKeywords('需求挖掘严重不足，未询问关键信息；话术规范性有待提高；跟进节奏过快，可能影响客户体验。');
+        suggestions.innerHTML = highlightKeywords('建议重新学习客户需求挖掘话术模板；加强产品知识学习；在下次对话前做好充分准备，列出需要了解的关键问题清单。');
       }
     }
 
@@ -2282,7 +3217,7 @@
     function showDailySummary() {
       showModal('今日工作总结', `
         <div class="report-section">
-          <div class="report-section-title">📊 数据统计</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-bar-chart"/></svg></span> 数据统计</div>
           <div class="report-content">
             <ul class="report-list">
               <li>完成客户对话：5 次</li>
@@ -2294,13 +3229,13 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">⭐ 今日亮点</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-star"/></svg></span> 今日亮点</div>
           <div class="report-content">
             成功识别并阻止一起针对老年客户的诈骗行为，体现了高度的责任心和专业素养。李女士追加定投20万，展现了良好的客户维护能力。
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">📈 改进建议</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--success)"><svg viewBox="0 0 24 24"><use href="#i-trending-up"/></svg></span> 改进建议</div>
           <div class="report-content">
             建议加强对企业客户资金需求的挖掘深度，提升大额资金客户的转化率。今日有2位高净值客户的跟进节奏偏快，需要优化。
           </div>
@@ -2311,7 +3246,7 @@
     function generateDailyReport() {
       showModal('生成日报', `
         <div class="report-section">
-          <div class="report-section-title">📝 日报内容预览</div>
+          <div class="report-section-title"><span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-notebook-pen"/></svg></span> 日报内容预览</div>
           <div class="report-content">
             <strong>李东明 - 2026年4月8日工作日报</strong><br><br>
             <strong>一、今日工作完成情况</strong><br>
@@ -2326,7 +3261,7 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">✅ 生成状态</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--success)"><svg viewBox="0 0 24 24"><use href="#i-circle-check-big"/></svg></span> 生成状态</div>
           <div class="report-content" style="color: var(--success);">
             日报已生成完毕，可直接导出或复制使用。
           </div>
@@ -2338,7 +3273,7 @@
       const conv = conversations[currentChat];
       showModal(`客户跟进报告 - ${conv.name}`, `
         <div class="report-section">
-          <div class="report-section-title">👤 客户信息</div>
+          <div class="report-section-title"><span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-user"/></svg></span> 客户信息</div>
           <div class="report-content">
             <ul class="report-list">
               <li>客户姓名：${conv.name}</li>
@@ -2350,7 +3285,7 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">💬 对话摘要</div>
+          <div class="report-section-title"><span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-notebook-pen"/></svg></span> 对话摘要</div>
           <div class="report-content">
             ${conv.messages.filter(m => m.type !== 'ai-insight').slice(0, 4).map(m => 
               m.type === 'incoming' ? `客户：${m.content}` : `销售：${m.content}`
@@ -2358,7 +3293,7 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">🎯 跟进建议</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-crosshair"/></svg></span> 跟进建议</div>
           <div class="report-content">
             ${conv.score >= 85 ? '客户意向强烈，建议24小时内跟进并安排面签。准备好产品资料和合同，确认客户到访时间。' : 
               conv.score >= 70 ? '客户需求明确，但需要更多信任建立。建议发送详细产品资料，并邀请参加理财沙龙。' : 
@@ -2371,7 +3306,7 @@
     function showDailyWorkReport() {
       showModal('今日工作日报', `
         <div class="report-section">
-          <div class="report-section-title">📊 工作概览</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-bar-chart"/></svg></span> 工作概览</div>
           <div class="report-content">
             <ul class="report-list">
               <li>总对话次数：5 次</li>
@@ -2383,7 +3318,7 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">📋 客户跟进明细</div>
+          <div class="report-section-title"><span class="icon icon-sm"><svg viewBox="0 0 24 24"><use href="#i-clipboard-check"/></svg></span> 客户跟进明细</div>
           <div class="report-content">
             <strong>陈先生</strong> - 高意向，已预约到访<br>
             <strong>李女士</strong> - 已成交，追加定投20万<br>
@@ -2393,7 +3328,7 @@
           </div>
         </div>
         <div class="report-section">
-          <div class="report-section-title">🎯 明日待办</div>
+          <div class="report-section-title"><span class="icon icon-sm" style="color:var(--accent)"><svg viewBox="0 0 24 24"><use href="#i-crosshair"/></svg></span> 明日待办</div>
           <div class="report-content">
             <ul class="report-list">
               <li>确认陈先生上午到访，准备签约材料</li>
@@ -2422,19 +3357,144 @@
       closeModal();
     }
 
+    // ===== 一键复盘功能 =====
+    let isBatchReplaying = false;
+    let batchReplayedSet = new Set();
+
+    function batchReplay() {
+      if (isBatchReplaying) return;
+      isBatchReplaying = true;
+
+      const btn = document.getElementById('batchReplayBtn');
+      const statusText = document.getElementById('statusText');
+
+      btn.classList.add('loading');
+      btn.innerHTML = '<span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span> 复盘中...';
+      statusText.textContent = '正在批量复盘全部对话...';
+
+      // 模拟逐个复盘（每个500ms）
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index >= conversations.length) {
+          clearInterval(interval);
+          isBatchReplaying = false;
+          btn.classList.remove('loading');
+          btn.classList.add('completed');
+          btn.innerHTML = '<span class="icon icon-sm" style="color:#fbbf24"><svg viewBox="0 0 24 24"><use href="#i-sparkles"/></svg></span> 查看复盘总览';
+          btn.onclick = function() { showReplayOverview(); };
+          btn.disabled = false;
+          statusText.textContent = '全部对话复盘已完成';
+          document.getElementById('reviewedCount').textContent = conversations.length;
+          document.getElementById('reviewProgressBar').style.width = '100%';
+
+          // 如果当前选中的对话也完成了复盘，自动更新右侧面板显示复盘结果
+          if (reviewedChats.has(currentChat)) {
+            // 隐藏生成按钮和空提示
+            document.getElementById('analysisBtnSection').style.display = 'none';
+            document.getElementById('reviewEmptyHint').style.display = 'none';
+            // 显示复盘卡片和总结
+            populateReviewCards();
+            populateSummary();
+            document.getElementById('reviewCards').style.display = 'block';
+            document.getElementById('overallSummary').style.display = 'block';
+            // 显示AI建议标签
+            showSuggestedTags();
+          }
+
+          // 弹出复盘总览
+          setTimeout(() => showReplayOverview(), 500);
+          return;
+        }
+        // 将对话加入已复盘集合
+        reviewedChats.add(index);
+        batchReplayedSet.add(index);
+        const progress = Math.round((index + 1) / conversations.length * 100);
+        document.getElementById('reviewedCount').textContent = index + 1;
+        document.getElementById('reviewProgressBar').style.width = progress + '%';
+        index++;
+      }, 500);
+    }
+
+    function showReplayOverview() {
+      const totalScore = conversations.reduce((s, c) => s + c.score, 0);
+      const avgScore = Math.round(totalScore / conversations.length);
+      const highIntent = conversations.filter(c => c.score >= 85).length;
+      const closed = conversations.filter(c => c.status === 'processed' || c.score >= 90).length;
+      const issues = conversations.reduce((s, c) => s + (c.insights?.filter(i => i.type === 'issue').length || 0), 0);
+      const highlights = conversations.reduce((s, c) => s + (c.insights?.filter(i => i.type === 'excellent').length || 0), 0);
+
+      const overviewHTML = `
+        <div class="replay-overview">
+          <div class="replay-overview-stats">
+            <div class="replay-stat-card">
+              <div class="replay-stat-value">${conversations.length}</div>
+              <div class="replay-stat-label">对话总数</div>
+            </div>
+            <div class="replay-stat-card">
+              <div class="replay-stat-value success">${highIntent}</div>
+              <div class="replay-stat-label">高意向客户</div>
+            </div>
+            <div class="replay-stat-card">
+              <div class="replay-stat-value info">${avgScore}</div>
+              <div class="replay-stat-label">平均评分</div>
+            </div>
+            <div class="replay-stat-card">
+              <div class="replay-stat-value warning">${issues}</div>
+              <div class="replay-stat-label">待改进项</div>
+            </div>
+          </div>
+          <div class="replay-overview-list">
+            ${conversations.map((conv, i) => {
+              const avatarColors = { 'type-a': '#d4af37', 'type-b': '#22c55e', 'type-c': '#3b82f6', 'type-d': '#ef4444', 'type-e': '#c084fc' };
+              const bgc = avatarColors[conv.avatarType] || '#d4af37';
+              const scoreClass = conv.score >= 85 ? 'high' : conv.score >= 70 ? 'medium' : 'low';
+              
+              // 处理AI建议标签
+              let suggestedTagsHTML = '';
+              if (conv.suggestedTags && conv.suggestedTags.length > 0) {
+                conv.suggestedTags.forEach(tag => {
+                  if (tag.action === 'add') {
+                    suggestedTagsHTML += `<span class="tag small tag-new">${tag.name}【新】</span>`;
+                  } else if (tag.action === 'update') {
+                    suggestedTagsHTML += `<span class="tag small tag-updated">${tag.name}【更新】</span>`;
+                  } else if (tag.action === 'delete') {
+                    suggestedTagsHTML += `<span class="tag small tag-deleted">${tag.name}【删除】</span>`;
+                  }
+                });
+              }
+              
+              const isReviewed = reviewedChats.has(i) || batchReplayedSet.has(i);
+              const statusBadge = isReviewed 
+                ? `<span class="replay-status-badge reviewed">已复盘</span>`
+                : `<span class="replay-status-badge pending">待复盘</span>`;
+              
+              return `
+                <div class="replay-item" onclick="selectChat(${i}); closeModal();">
+                  <div class="replay-item-avatar" style="background:${bgc}">${conv.avatar}</div>
+                  <div class="replay-item-info">
+                    <div class="replay-item-name">${conv.name}</div>
+                    <div class="replay-item-meta">${conv.time} · ${conv.meta.match(/对话时长\s*(\d+)分钟/)?.[1] || '15'}分钟 ${statusBadge}</div>
+                  </div>
+                  <div class="replay-item-score ${scoreClass}">${conv.score}</div>
+                  <div class="replay-item-tags">
+                    ${conv.tags.slice(0, 2).map(t => `<span class="tag small">${t}</span>`).join('')}
+                    ${suggestedTagsHTML}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+
+      showModal('今日对话复盘总览', overviewHTML);
+    }
+
     function showAllReviews() {
       // 生成所有对话的复盘概览
       let allReviewsHTML = '';
       
       conversations.forEach((conv, index) => {
-        const typeIcons = {
-          summary: '📊',
-          customer: '👤',
-          skill: '🎯',
-          issue: '⚠️',
-          excellent: '✨'
-        };
-        
         // 找出最关键的洞察
         const excellentInsight = conv.insights?.find(i => i.type === 'excellent');
         const issueInsight = conv.insights?.find(i => i.type === 'issue');
@@ -2443,7 +3503,7 @@
           <div class="report-section" style="margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
             <div class="report-section-title">
               ${conv.avatar} ${conv.name}
-              <span style="font-size: var(--text-xs); /* 13.5px */ font-weight: 400; color: var(--text-secondary); margin-left: 8px;">${conv.time} · ${conv.score}分</span>
+              <span style="font-size: var(--text-sm); font-weight: 400; color: var(--text-secondary); margin-left: 8px;">${conv.time} · ${conv.score}分</span>
             </div>
             <div class="report-content" style="margin-top: 12px;">
               <div style="margin-bottom: 8px;"><strong>总结：</strong>${conv.insights?.[0]?.content || '暂无'}</div>
@@ -2468,5 +3528,22 @@
     // Start
     init();
   </script>
+
+<script src="theme-config.js"></script>
+<script>
+// ★ v8：子页面主题同步
+// theme-config.js 已自动监听 postMessage({ type:'themeChange',theme:xxx })
+// 并在加载时应用 localStorage 中的已存主题
+// 如需手动切换：window.CLAW_applyTheme('deep-ocean')
+parent.postMessage({ type: 'iframeReady' }, '*');
+
+// 接收父页面字体大小切换消息
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'fontSize') {
+    const size = e.data.size || 'medium';
+    document.documentElement.setAttribute('data-font-level', size);
+  }
+});
+</script>
 </body>
 </html>
